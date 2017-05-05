@@ -3,7 +3,7 @@
 namespace Maruko.Domain.Entities.Auditing
 {
     /// <summary>
-    /// 审计抽象
+    ///     审计抽象
     /// </summary>
     public abstract class FullAuditedEntity : Entity, IEntity, IHasCreationTime, IHasModificationTime, ISoftDelete
     {

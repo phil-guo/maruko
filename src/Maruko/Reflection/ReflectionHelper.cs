@@ -7,7 +7,7 @@ namespace Maruko.Reflection
     public class ReflectionHelper
     {
         /// <summary>
-        /// 获取所有的程序集
+        ///     获取所有的程序集
         /// </summary>
         public static IEnumerable<Assembly> GetAssemblies()
         {
@@ -15,7 +15,7 @@ namespace Maruko.Reflection
 
             var libs = DependencyContext.Default.CompileLibraries;
 
-            foreach (CompilationLibrary lib in libs)
+            foreach (var lib in libs)
             {
                 if (lib.Serviceable)
                     continue;

@@ -1,6 +1,6 @@
 ﻿namespace Maruko.Domain.Entities
 {
-    /// <summary>     
+    /// <summary>
     ///     long类型的主键
     /// </summary>
     public interface IEntity : IEntity<long>

@@ -8,12 +8,12 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Maruko.Dependency.Installers
 {
     /// <summary>
-    /// 自动进行依赖注入
+    ///     自动进行依赖注入
     /// </summary>
     public static class DependencyInstall
     {
         /// <summary>
-        /// 对三种生命周期的DI进行依赖注入注册
+        ///     对三种生命周期的DI进行依赖注入注册
         /// </summary>
         public static void AddDependencyRegister(this IServiceCollection service)
         {
@@ -21,9 +21,8 @@ namespace Maruko.Dependency.Installers
             service.AddServiceByLifetime(DependencyLifetime.Scoped);
             service.AddServiceByLifetime(DependencyLifetime.Transient);
         }
-       
+
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="services">服务的注册与提供</param>
         /// <param name="lifetime">生命周期</param>
@@ -42,19 +41,17 @@ namespace Maruko.Dependency.Installers
 
             var assemblies = ReflectionHelper.GetAssemblies();
 
-            List<TypeInfo> definedTypes = new List<TypeInfo>();
+            var definedTypes = new List<TypeInfo>();
 
             foreach (var assembly in assemblies)
             {
                 var definedType = assembly.DefinedTypes.ToList();
 
                 foreach (var typeInfo in definedType)
-                {
                     definedTypes.Add(typeInfo);
-                }
             }
 
-            var types = (IEnumerable<TypeInfo>)definedTypes.Where(typeInfo => baseType.IsAssignableFrom(typeInfo.AsType()));
+            var types = definedTypes.Where(typeInfo => baseType.IsAssignableFrom(typeInfo.AsType()));
             var interfaceTypeInfos = types.Where(t => t.IsInterface && t.AsType() != baseType);
             var implTypeInfos = types.Where(t => t.IsClass && !t.IsAbstract);
 
@@ -63,19 +60,16 @@ namespace Maruko.Dependency.Installers
                 var interfaceType = interfaceTypeInfo.AsType();
                 Type implType = null;
                 if (!interfaceTypeInfo.IsGenericType)
-                {
                     implType = implTypeInfos.FirstOrDefault(t => interfaceTypeInfo.IsAssignableFrom(t))?.AsType();
-                }
                 else
-                {
                     implType = implTypeInfos.FirstOrDefault(t =>
-                        t.ImplementedInterfaces.Any(x =>
-                        {
-                            var typeInfo = x.GetTypeInfo();
-                            return typeInfo.Namespace == interfaceTypeInfo.Namespace
-                                   && typeInfo.Name == interfaceTypeInfo.Name;
-                        }))?.AsType();
-                }
+                            t.ImplementedInterfaces.Any(x =>
+                            {
+                                var typeInfo = x.GetTypeInfo();
+                                return typeInfo.Namespace == interfaceTypeInfo.Namespace
+                                       && typeInfo.Name == interfaceTypeInfo.Name;
+                            }))
+                        ?.AsType();
 
                 if (implType == null)
                     continue;
