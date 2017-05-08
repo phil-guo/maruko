@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.6</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Maruko\Maruko.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UnitOfWork\" />
+    <Folder Include="Repository\" />
+  </ItemGroup>
+
+</Project>
