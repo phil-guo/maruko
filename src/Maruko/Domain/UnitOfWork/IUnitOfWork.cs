@@ -5,7 +5,7 @@ namespace Maruko.Domain.UnitOfWork
     /// <summary>
     ///     工作单元
     /// </summary>
-    public interface IUnitOfWork : /*ISql, */IDisposable
+    public interface IUnitOfWork : IDisposable
     {
         /// <summary>
         ///     提交请求

@@ -15,6 +15,6 @@
         /// </param>
         ///  <param name="parameters">A vector of parameters values</param>
         ///  <returns>The number of affected records</returns>
-        int ExecuteCommand(ContextType contextType, string sqlCommand, params object[] parameters);
+        int ExecuteCommand( string sqlCommand, ContextType contextType = ContextType.DefaultContextType, params object[] parameters);
     }
 }
