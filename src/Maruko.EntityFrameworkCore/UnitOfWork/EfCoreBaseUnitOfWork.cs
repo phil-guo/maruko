@@ -5,19 +5,19 @@ using Maruko.Domain.UnitOfWork;
 using Maruko.EntityFrameworkCore.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace Maruko.EntityFrameworkCore.Repository
+namespace Maruko.EntityFrameworkCore.UnitOfWork
 {
     /// <summary>
     /// ef core 的工作单元具体实现
     /// </summary>
     public abstract class EfCoreBaseUnitOfWork : IDataBaseUnitOfWork
     {
-        public DefaultDbContext _defaultDbContext;
+        public DefaultDbContext DefaultDbContext;
 
         public void Dispose()
         {
-            if (_defaultDbContext != null)
-                _defaultDbContext.Dispose();
+            if (DefaultDbContext != null)
+                DefaultDbContext.Dispose();
         }
 
         public void Commit()
@@ -25,9 +25,9 @@ namespace Maruko.EntityFrameworkCore.Repository
             try
             {
                 //这里如果没有调用过createset方法就会报错，如果没有调用认为没有任何改变直接跳出来
-                if (_defaultDbContext == null)
+                if (DefaultDbContext == null)
                     return;
-                _defaultDbContext.SaveChanges();
+                DefaultDbContext.SaveChanges();
             }
             catch (DbUpdateException ex)
             {
@@ -42,7 +42,7 @@ namespace Maruko.EntityFrameworkCore.Repository
             {
                 try
                 {
-                    _defaultDbContext.SaveChanges();
+                    DefaultDbContext.SaveChanges();
                     saveFailed = false;
                 }
                 catch (DbUpdateConcurrencyException ex)
@@ -62,8 +62,8 @@ namespace Maruko.EntityFrameworkCore.Repository
         {
             // set all entities in change tracker
             // as 'unchanged state'
-            if (_defaultDbContext != null)
-                _defaultDbContext.ChangeTracker.Entries()
+            if (DefaultDbContext != null)
+                DefaultDbContext.ChangeTracker.Entries()
                     .ToList()
                     .ForEach(entry =>
                     {
@@ -79,8 +79,8 @@ namespace Maruko.EntityFrameworkCore.Repository
 
         public void SetModify<TEntity>(TEntity entity) where TEntity : class, IEntity
         {
-            if (_defaultDbContext != null)
-                _defaultDbContext.Entry(entity).State = EntityState.Modified;
+            if (DefaultDbContext != null)
+                DefaultDbContext.Entry(entity).State = EntityState.Modified;
         }
 
 
@@ -96,9 +96,9 @@ namespace Maruko.EntityFrameworkCore.Repository
 
         private int GeneralDbContext(string sqlCommand, params object[] parameters)
         {
-            if (_defaultDbContext == null)
+            if (DefaultDbContext == null)
                 return -1;
-            return _defaultDbContext.Database.ExecuteSqlCommand(sqlCommand, parameters);
+            return DefaultDbContext.Database.ExecuteSqlCommand(sqlCommand, parameters);
         }
 
         #endregion
