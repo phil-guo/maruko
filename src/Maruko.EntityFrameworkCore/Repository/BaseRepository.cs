@@ -14,7 +14,7 @@ namespace Maruko.EntityFrameworkCore.Repository
     /// <typeparam name="TEntity"></typeparam>
     /// <typeparam name="TPrimaryKey"></typeparam>
     public class BaseRepository<TEntity, TPrimaryKey> : MarukoRepositoryBase<TEntity, TPrimaryKey>, IRepository<TEntity, TPrimaryKey>
-        where TEntity : class, IEntity<TPrimaryKey>
+        where TEntity : class, IEntity, IEntity<TPrimaryKey>
     {
         private readonly IDataBaseUnitOfWork _unitOfWork;
 
