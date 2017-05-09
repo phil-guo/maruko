@@ -1,5 +1,6 @@
 ﻿using Maruko.Dependency;
 using Maruko.Domain.Entities;
+using Maruko.Domain.UnitOfWork;
 
 namespace Maruko.Domain.Repositories
 {

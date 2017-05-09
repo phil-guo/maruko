@@ -25,6 +25,7 @@ namespace Maruko.EntityFrameworkCore.Repository
             if (unitOfWork == null)
                 throw new ArgumentNullException("unitOfWork is null");
 
+            UnitOfWork = unitOfWork;
             _unitOfWork = unitOfWork;
             _contextType = contextType;
         }
@@ -34,11 +35,14 @@ namespace Maruko.EntityFrameworkCore.Repository
             if (unitOfWork == null)
                 throw new ArgumentNullException("unitOfWork is null");
 
+            UnitOfWork = unitOfWork;
             _unitOfWork = unitOfWork;
             _contextType = AttributeExtension.GetContextAttributeValue<TEntity>();
         }
 
-        public IUnitOfWork UnitOfWork => _unitOfWork;
+        //public IUnitOfWork UnitOfWork => _unitOfWork;
+
+
 
         #region IReposotpry
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Maruko.Domain.Entities;
+using Maruko.Domain.UnitOfWork;
 
 namespace Maruko.Domain.Repositories
 {
@@ -14,9 +15,9 @@ namespace Maruko.Domain.Repositories
     public abstract class MarukoRepositoryBase<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>
         where TEntity : class, IEntity<TPrimaryKey>
     {
-
         public abstract IQueryable<TEntity> GetAll();
 
+        public IUnitOfWork UnitOfWork { get; set; }
 
         public virtual List<TEntity> GetAllList()
         {
@@ -37,6 +38,9 @@ namespace Maruko.Domain.Repositories
         {
             return GetAll().FirstOrDefault(predicate);
         }
+
+
+        
 
         public abstract TEntity Insert(TEntity entity);
 

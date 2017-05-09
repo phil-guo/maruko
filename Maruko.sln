@@ -13,6 +13,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maruko.Redis", "src\Maruko.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maruko.Hangfire", "src\Maruko.Hangfire\Maruko.Hangfire.csproj", "{29CFAEA0-AEE9-446B-998F-8442BE91C20D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{A69CBED9-CE0A-432D-A7B8-0538F97C43A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demo", "demo", "{87DC3CE3-DA28-46D3-AF1F-9B33BBA21CA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maruko.Demo.Core", "test\demo\Maruko.Demo.Core\Maruko.Demo.Core.csproj", "{6BA7EA39-A26B-486D-B41B-28704C7B373C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maruko.Demo.Application", "test\demo\Maruko.Demo.Application\Maruko.Demo.Application.csproj", "{D57A4DC6-1B2F-4675-8451-73CF46FC0C20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maruko.Demo.WebApi", "test\demo\Maruko.Demo.WebApi\Maruko.Demo.WebApi.csproj", "{C6327A61-8949-43F9-9C49-412D8372CEEC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,8 +49,26 @@ Global
 		{29CFAEA0-AEE9-446B-998F-8442BE91C20D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29CFAEA0-AEE9-446B-998F-8442BE91C20D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29CFAEA0-AEE9-446B-998F-8442BE91C20D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BA7EA39-A26B-486D-B41B-28704C7B373C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BA7EA39-A26B-486D-B41B-28704C7B373C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BA7EA39-A26B-486D-B41B-28704C7B373C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BA7EA39-A26B-486D-B41B-28704C7B373C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D57A4DC6-1B2F-4675-8451-73CF46FC0C20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D57A4DC6-1B2F-4675-8451-73CF46FC0C20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D57A4DC6-1B2F-4675-8451-73CF46FC0C20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D57A4DC6-1B2F-4675-8451-73CF46FC0C20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6327A61-8949-43F9-9C49-412D8372CEEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6327A61-8949-43F9-9C49-412D8372CEEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6327A61-8949-43F9-9C49-412D8372CEEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6327A61-8949-43F9-9C49-412D8372CEEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{87DC3CE3-DA28-46D3-AF1F-9B33BBA21CA6} = {A69CBED9-CE0A-432D-A7B8-0538F97C43A9}
+		{6BA7EA39-A26B-486D-B41B-28704C7B373C} = {87DC3CE3-DA28-46D3-AF1F-9B33BBA21CA6}
+		{D57A4DC6-1B2F-4675-8451-73CF46FC0C20} = {87DC3CE3-DA28-46D3-AF1F-9B33BBA21CA6}
+		{C6327A61-8949-43F9-9C49-412D8372CEEC} = {87DC3CE3-DA28-46D3-AF1F-9B33BBA21CA6}
 	EndGlobalSection
 EndGlobal
