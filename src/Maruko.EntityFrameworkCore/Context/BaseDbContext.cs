@@ -3,21 +3,19 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
+using Maruko.Configuration;
+using Microsoft.Extensions.Configuration;
 using MySQL.Data.EntityFrameworkCore.Extensions;
 
 namespace Maruko.EntityFrameworkCore.Context
 {
-    
+
     public abstract class BaseDbContext : DbContext
     {
         private readonly ConcurrentDictionary<string, object> _allSet = new ConcurrentDictionary<string, object>();
 
-        public string ConnStr { get; }
+        public  string ConnStr { get; set; }
 
-        protected BaseDbContext(string connStr)
-        {
-            ConnStr = connStr;
-        }
 
         public virtual DbSet<TEntity> CreateSet<TEntity>()
             where TEntity : class
@@ -38,5 +36,7 @@ namespace Maruko.EntityFrameworkCore.Context
             //Data Source=192.168.26.203;port=3306;user id=root;password=qwe123QWE;database=bill;Charset=utf8;
             optionsBuilder.UseMySQL(ConnStr);
         }
+
+        
     }
 }

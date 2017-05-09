@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Maruko.Dependency;
 using Maruko.Domain.Entities;
 
 namespace Maruko.Domain.Repositories
 {
-    public interface IRepository<TEntity, TPrimaryKey> : IRepository
+    public interface IRepository<TEntity, in TPrimaryKey> : IRepository, IDependencyScoped
         where TEntity : class, IEntity<TPrimaryKey>
     {
         #region Insert

@@ -12,8 +12,9 @@ namespace Maruko.EntityFrameworkCore.Repository
     /// ef core 仓储具体实现
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public class BaseRepository<TEntity> : MarukoRepositoryBase<TEntity, long>, IRepository<TEntity>
-        where TEntity : class, IEntity
+    /// <typeparam name="TPrimaryKey"></typeparam>
+    public class BaseRepository<TEntity, TPrimaryKey> : MarukoRepositoryBase<TEntity, TPrimaryKey>, IRepository<TEntity, TPrimaryKey>
+        where TEntity : class, IEntity<TPrimaryKey>
     {
         private readonly IDataBaseUnitOfWork _unitOfWork;
 
@@ -72,8 +73,7 @@ namespace Maruko.EntityFrameworkCore.Repository
             }
         }
 
-
-        public override void Delete(long id)
+        public override void Delete(TPrimaryKey id)
         {
             var entity = FirstOrDefault(id);
 

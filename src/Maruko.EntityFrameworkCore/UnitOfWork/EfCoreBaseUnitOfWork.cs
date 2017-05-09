@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Linq;
+using log4net;
+using log4net.Core;
 using Maruko.Domain.Entities;
 using Maruko.Domain.UnitOfWork;
 using Maruko.EntityFrameworkCore.Context;
+using Maruko.Logger;
 using Microsoft.EntityFrameworkCore;
 
 namespace Maruko.EntityFrameworkCore.UnitOfWork
@@ -10,9 +13,16 @@ namespace Maruko.EntityFrameworkCore.UnitOfWork
     /// <summary>
     /// ef core 的工作单元具体实现
     /// </summary>
-    public abstract class EfCoreBaseUnitOfWork : IDataBaseUnitOfWork
+    public class EfCoreBaseUnitOfWork : IDataBaseUnitOfWork
     {
         public DefaultDbContext DefaultDbContext;
+
+        public ILog Logger { get; }
+
+        public EfCoreBaseUnitOfWork()
+        {
+            Logger = LogHelper.Log4NetInstance.LogFactory(typeof(EfCoreBaseUnitOfWork));
+        }
 
         public void Dispose()
         {
@@ -31,6 +41,7 @@ namespace Maruko.EntityFrameworkCore.UnitOfWork
             }
             catch (DbUpdateException ex)
             {
+                Logger.Debug("DbUpdateException:" + ex.Message);
                 throw new Exception(ex.Message);
             }
         }
@@ -53,6 +64,7 @@ namespace Maruko.EntityFrameworkCore.UnitOfWork
                 }
                 catch (DbUpdateException ex)
                 {
+                    Logger.Debug("DbUpdateException:" + ex.Message);
                     throw new Exception(ex.Message);
                 }
             } while (saveFailed);
@@ -74,7 +86,19 @@ namespace Maruko.EntityFrameworkCore.UnitOfWork
 
         }
 
-        public abstract DbSet<TEntity> CreateSet<TEntity>(ContextType contextType) where TEntity : class, IEntity;
+        public DbSet<TEntity> CreateSet<TEntity>(ContextType contextType) where TEntity : class, IEntity
+        {
+            if (contextType == ContextType.DefaultContextType)
+            {
+                DefaultDbContext = new DefaultDbContext();
+                return DefaultDbContext.CreateSet<TEntity>();
+            }
+            else
+            {
+                Logger.Debug("不存在这样的ContextType");
+                return null;
+            }
+        }
 
 
         public void SetModify<TEntity>(TEntity entity) where TEntity : class, IEntity
@@ -97,7 +121,11 @@ namespace Maruko.EntityFrameworkCore.UnitOfWork
         private int GeneralDbContext(string sqlCommand, params object[] parameters)
         {
             if (DefaultDbContext == null)
+            {
+                Logger.Debug("DefaultDbContext 创建失败");
                 return -1;
+            }
+
             return DefaultDbContext.Database.ExecuteSqlCommand(sqlCommand, parameters);
         }
 
