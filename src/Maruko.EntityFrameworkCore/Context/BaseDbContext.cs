@@ -14,7 +14,7 @@ namespace Maruko.EntityFrameworkCore.Context
     {
         private readonly ConcurrentDictionary<string, object> _allSet = new ConcurrentDictionary<string, object>();
 
-        public  string ConnStr { get; set; }
+        public virtual string ConnStr { get; set; }
 
 
         public virtual DbSet<TEntity> CreateSet<TEntity>()

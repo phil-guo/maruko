@@ -1,4 +1,4 @@
-﻿namespace Maruko.Application.Dto
+﻿namespace Maruko.Application.Servers.Dto
 {
     public abstract class EntityDto<TPrimaryKey>
     {

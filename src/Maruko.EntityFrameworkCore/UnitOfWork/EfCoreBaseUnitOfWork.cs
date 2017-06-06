@@ -120,13 +120,10 @@ namespace Maruko.EntityFrameworkCore.UnitOfWork
 
         private int GeneralDbContext(string sqlCommand, params object[] parameters)
         {
-            if (DefaultDbContext == null)
-            {
-                Logger.Debug("DefaultDbContext 创建失败");
-                return -1;
-            }
-
-            return DefaultDbContext.Database.ExecuteSqlCommand(sqlCommand, parameters);
+            if (DefaultDbContext != null)
+                return DefaultDbContext.Database.ExecuteSqlCommand(sqlCommand, parameters);
+            Logger.Debug("DefaultDbContext 创建失败");
+            return -1;
         }
 
         #endregion
