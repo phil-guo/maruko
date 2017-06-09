@@ -17,7 +17,6 @@ namespace Maruko.Application.Servers
     /// <typeparam name="TPrimaryKey"></typeparam>
     public abstract class CurdAppService<TEntity, TPrimaryKey> : ICurdAppService<TEntity, TPrimaryKey>
         where TEntity : FullAuditedEntity<TPrimaryKey>
-
     {
         public readonly IRepository<TEntity, TPrimaryKey> Repository;
         public ILog Logger { get; set; }

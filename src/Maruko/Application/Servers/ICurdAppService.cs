@@ -6,7 +6,7 @@ using Maruko.Domain.Entities.Auditing;
 
 namespace Maruko.Application.Servers
 {
-    public interface ICurdAppService<TEntity, in TPrimaryKey> : IDependencyTransient
+    public interface ICurdAppService<TEntity, in TPrimaryKey>
         where TEntity : FullAuditedEntity<TPrimaryKey>
     {
         /// <summary>
