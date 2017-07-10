@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Linq;
 using log4net;
-using log4net.Core;
 using Maruko.Domain.Entities;
 using Maruko.Domain.UnitOfWork;
-using Maruko.EntityFrameworkCore.Context;
 using Maruko.Logger;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,15 +11,16 @@ namespace Maruko.EntityFrameworkCore.UnitOfWork
     /// <summary>
     /// ef core 的工作单元具体实现
     /// </summary>
-    public class EfCoreBaseUnitOfWork : IDataBaseUnitOfWork
+    public class EfCoreBaseUnitOfWork<TContext> : IDataBaseUnitOfWork
+        where TContext : DbContext
     {
-        public DefaultDbContext DefaultDbContext;
+        public TContext DefaultDbContext;
 
         public ILog Logger { get; }
 
         public EfCoreBaseUnitOfWork()
         {
-            Logger = LogHelper.Log4NetInstance.LogFactory(typeof(EfCoreBaseUnitOfWork));
+            Logger = LogHelper.Log4NetInstance.LogFactory(typeof(EfCoreBaseUnitOfWork<>));
         }
 
         public void Dispose()
@@ -88,16 +87,7 @@ namespace Maruko.EntityFrameworkCore.UnitOfWork
 
         public DbSet<TEntity> CreateSet<TEntity>(ContextType contextType) where TEntity : class, IEntity
         {
-            if (contextType == ContextType.DefaultContextType)
-            {
-                DefaultDbContext = new DefaultDbContext();
-                return DefaultDbContext.CreateSet<TEntity>();
-            }
-            else
-            {
-                Logger.Debug("不存在这样的ContextType");
-                return null;
-            }
+            throw new NotImplementedException();
         }
 
 
@@ -106,7 +96,6 @@ namespace Maruko.EntityFrameworkCore.UnitOfWork
             if (DefaultDbContext != null)
                 DefaultDbContext.Entry(entity).State = EntityState.Modified;
         }
-
 
         #region Isql
         public int ExecuteCommand(string sqlCommand, ContextType contextType = ContextType.DefaultContextType, params object[] parameters)
@@ -122,12 +111,10 @@ namespace Maruko.EntityFrameworkCore.UnitOfWork
         {
             if (DefaultDbContext != null)
                 return DefaultDbContext.Database.ExecuteSqlCommand(sqlCommand, parameters);
-            Logger.Debug("DefaultDbContext 创建失败");
+            Logger.Debug($"DbContext 上下文创建失败");
             return -1;
         }
 
         #endregion
-
-
     }
 }
