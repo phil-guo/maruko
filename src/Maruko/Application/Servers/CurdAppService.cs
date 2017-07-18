@@ -29,12 +29,12 @@ namespace Maruko.Application.Servers
             Repository = repository;
         }
 
-        public TEntity Insert(TCreateEntityDto dto)
+        public virtual TEntity Insert(TCreateEntityDto dto)
         {
             throw new NotImplementedException();
         }
 
-        public TEntity Update(TUpdateEntityDto dto)
+        public virtual TEntity Update(TUpdateEntityDto dto)
         {
             throw new NotImplementedException();
         }
