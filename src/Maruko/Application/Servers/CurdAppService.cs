@@ -15,8 +15,11 @@ namespace Maruko.Application.Servers
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
     /// <typeparam name="TPrimaryKey"></typeparam>
-    public abstract class CurdAppService<TEntity, TPrimaryKey> : ICurdAppService<TEntity, TPrimaryKey>
+    /// <typeparam name="TCreateEntityDto"></typeparam>
+    /// <typeparam name="TUpdateEntityDto"></typeparam>
+    public abstract class CurdAppService<TEntity, TPrimaryKey, TCreateEntityDto, TUpdateEntityDto> : ICurdAppService<TEntity, TPrimaryKey, TCreateEntityDto, TUpdateEntityDto>
         where TEntity : FullAuditedEntity<TPrimaryKey>
+        where TUpdateEntityDto : EntityDto<TPrimaryKey>
     {
         public readonly IRepository<TEntity, TPrimaryKey> Repository;
         public ILog Logger { get; set; }
@@ -26,13 +29,12 @@ namespace Maruko.Application.Servers
             Repository = repository;
         }
 
-        public virtual TEntity Insert<TCreateEntityDto>(TCreateEntityDto dto)
+        public TEntity Insert(TCreateEntityDto dto)
         {
             throw new NotImplementedException();
         }
 
-        public virtual TEntity Update<TUpdateEntityDto>(TUpdateEntityDto dto)
-            where TUpdateEntityDto : EntityDto
+        public TEntity Update(TUpdateEntityDto dto)
         {
             throw new NotImplementedException();
         }
@@ -82,13 +84,17 @@ namespace Maruko.Application.Servers
         }
     }
 
-    public abstract class CurdAppService<TEntity> : CurdAppService<TEntity, long>, ICurdAppService<TEntity>
+    public abstract class CurdAppService<TEntity, TCreateEntityDto, TUpdateEntityDto> :
+        CurdAppService<TEntity, long, TCreateEntityDto, TUpdateEntityDto>,
+        ICurdAppService<TEntity, TCreateEntityDto, TUpdateEntityDto>
         where TEntity : FullAuditedEntity<long>
+        where TUpdateEntityDto : EntityDto
     {
         protected CurdAppService(IRepository<TEntity, long> repository)
             : base(repository)
         {
-            Logger= LogHelper.Log4NetInstance.LogFactory(typeof(CurdAppService<TEntity>));
+            Logger = LogHelper.Log4NetInstance.LogFactory(
+                typeof(CurdAppService<TEntity, TCreateEntityDto, TUpdateEntityDto>));
         }
     }
 }
