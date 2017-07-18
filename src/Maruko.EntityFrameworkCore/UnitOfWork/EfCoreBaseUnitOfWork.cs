@@ -11,14 +11,14 @@ namespace Maruko.EntityFrameworkCore.UnitOfWork
     /// <summary>
     /// ef core 的工作单元具体实现
     /// </summary>
-    public class EfCoreBaseUnitOfWork<TContext> : IDataBaseUnitOfWork
+    public abstract class EfCoreBaseUnitOfWork<TContext> : IDataBaseUnitOfWork
         where TContext : DbContext
     {
         public TContext DefaultDbContext;
 
         public ILog Logger { get; }
 
-        public EfCoreBaseUnitOfWork()
+        protected EfCoreBaseUnitOfWork()
         {
             Logger = LogHelper.Log4NetInstance.LogFactory(typeof(EfCoreBaseUnitOfWork<>));
         }
@@ -85,7 +85,7 @@ namespace Maruko.EntityFrameworkCore.UnitOfWork
 
         }
 
-        public DbSet<TEntity> CreateSet<TEntity>(ContextType contextType) where TEntity : class, IEntity
+        public virtual DbSet<TEntity> CreateSet<TEntity>(ContextType contextType) where TEntity : class, IEntity
         {
             throw new NotImplementedException();
         }
