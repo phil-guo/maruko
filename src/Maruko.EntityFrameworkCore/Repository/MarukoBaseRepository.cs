@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Maruko.Domain.Entities;
+using Maruko.Domain.Entities.Auditing;
 using Maruko.Domain.Repositories;
 using Maruko.Domain.UnitOfWork;
 using Maruko.Extensions;
@@ -13,14 +14,14 @@ namespace Maruko.EntityFrameworkCore.Repository
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
     /// <typeparam name="TPrimaryKey"></typeparam>
-    public class BaseRepository<TEntity, TPrimaryKey> : MarukoRepositoryBase<TEntity, TPrimaryKey>, IRepository<TEntity, TPrimaryKey>
-        where TEntity : class, IEntity, IEntity<TPrimaryKey>
+    public abstract class MarukoBaseRepository<TEntity, TPrimaryKey> : MarukoRepositoryBase<TEntity, TPrimaryKey>
+        where TEntity : FullAuditedEntity<TPrimaryKey>
     {
         private readonly IDataBaseUnitOfWork _unitOfWork;
 
         private readonly ContextType _contextType;
 
-        public BaseRepository(IDataBaseUnitOfWork unitOfWork, ContextType contextType)
+        protected MarukoBaseRepository(IDataBaseUnitOfWork unitOfWork, ContextType contextType)
         {
             if (unitOfWork == null)
                 throw new ArgumentNullException("unitOfWork is null");
@@ -30,7 +31,7 @@ namespace Maruko.EntityFrameworkCore.Repository
             _contextType = contextType;
         }
 
-        public BaseRepository(IDataBaseUnitOfWork unitOfWork)
+        protected MarukoBaseRepository(IDataBaseUnitOfWork unitOfWork)
         {
             if (unitOfWork == null)
                 throw new ArgumentNullException("unitOfWork is null");
@@ -40,10 +41,7 @@ namespace Maruko.EntityFrameworkCore.Repository
             _contextType = AttributeExtension.GetContextAttributeValue<TEntity>();
         }
 
-        //public IUnitOfWork UnitOfWork => _unitOfWork;
-
-
-
+       
         #region IReposotpry
 
         public override IQueryable<TEntity> GetAll()
@@ -68,7 +66,7 @@ namespace Maruko.EntityFrameworkCore.Repository
         {
             try
             {
-                _unitOfWork.SetModify(entity);
+                _unitOfWork.SetModify<TEntity, TPrimaryKey>(entity);
                 return entity;
             }
             catch (Exception e)
@@ -112,7 +110,7 @@ namespace Maruko.EntityFrameworkCore.Repository
         /// <returns></returns>
         protected virtual DbSet<TEntity> GetSet()
         {
-            return _entities ?? (_entities = _unitOfWork.CreateSet<TEntity>(_contextType));
+            return _entities ?? (_entities = _unitOfWork.CreateSet<TEntity, TPrimaryKey>(_contextType));
         }
 
         #endregion

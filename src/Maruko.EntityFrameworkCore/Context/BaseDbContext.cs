@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Concurrent;
+using Maruko.Domain.Entities.Auditing;
 using MySQL.Data.EntityFrameworkCore.Extensions;
 
 namespace Maruko.EntityFrameworkCore.Context
@@ -12,8 +13,8 @@ namespace Maruko.EntityFrameworkCore.Context
         public virtual string ConnStr { get; set; }
 
 
-        public virtual DbSet<TEntity> CreateSet<TEntity>()
-            where TEntity : class
+        public virtual DbSet<TEntity> CreateSet<TEntity, TPrimaryKey>()
+            where TEntity : FullAuditedEntity<TPrimaryKey>
         {
             var key = typeof(TEntity).FullName;
             object result;
@@ -28,7 +29,6 @@ namespace Maruko.EntityFrameworkCore.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //Data Source=192.168.26.203;port=3306;user id=root;password=qwe123QWE;database=bill;Charset=utf8;
             optionsBuilder.UseMySQL(ConnStr);
         }
     }

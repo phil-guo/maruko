@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Maruko.Domain.Entities;
+using Maruko.Domain.Entities.Auditing;
 using Maruko.Domain.UnitOfWork;
 
 namespace Maruko.Domain.Repositories
@@ -13,7 +14,7 @@ namespace Maruko.Domain.Repositories
     /// <typeparam name="TEntity">实体</typeparam>
     /// <typeparam name="TPrimaryKey">主键</typeparam>
     public abstract class MarukoRepositoryBase<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>
-        where TEntity : class, IEntity<TPrimaryKey>
+        where TEntity : FullAuditedEntity<TPrimaryKey>
     {
         public abstract IQueryable<TEntity> GetAll();
 

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Maruko.Dependency;
-using Maruko.Domain.Entities;
+using Maruko.Domain.Entities.Auditing;
 using Maruko.Domain.UnitOfWork;
 
 namespace Maruko.Domain.Repositories
 {
     public interface IRepository<TEntity, in TPrimaryKey> : IRepository, IDependencyScoped
-        where TEntity : class, IEntity<TPrimaryKey>
+        where TEntity : FullAuditedEntity<TPrimaryKey>
     {
         IUnitOfWork UnitOfWork { get; set; }
 

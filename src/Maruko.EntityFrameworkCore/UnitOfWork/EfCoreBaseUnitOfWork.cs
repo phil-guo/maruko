@@ -2,6 +2,7 @@
 using System.Linq;
 using log4net;
 using Maruko.Domain.Entities;
+using Maruko.Domain.Entities.Auditing;
 using Maruko.Domain.UnitOfWork;
 using Maruko.Logger;
 using Microsoft.EntityFrameworkCore;
@@ -85,13 +86,13 @@ namespace Maruko.EntityFrameworkCore.UnitOfWork
 
         }
 
-        public virtual DbSet<TEntity> CreateSet<TEntity>(ContextType contextType) where TEntity : class, IEntity
+        public virtual DbSet<TEntity> CreateSet<TEntity, TPrimaryKey>(ContextType contextType) where TEntity : FullAuditedEntity<TPrimaryKey>
         {
             throw new NotImplementedException();
         }
 
 
-        public void SetModify<TEntity>(TEntity entity) where TEntity : class, IEntity
+        public void SetModify<TEntity, TPrimaryKey>(TEntity entity) where TEntity : FullAuditedEntity<TPrimaryKey>
         {
             if (DefaultDbContext != null)
                 DefaultDbContext.Entry(entity).State = EntityState.Modified;
