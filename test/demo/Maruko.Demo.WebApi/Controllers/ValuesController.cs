@@ -2,13 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Maruko.Demo.Application;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Maruko.Demo.WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     public class ValuesController : Controller
     {
+        private readonly IUserAppService _app;
+
+        public ValuesController(IUserAppService app)
+        {
+            _app = app;
+        }
+
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()

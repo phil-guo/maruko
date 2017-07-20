@@ -60,10 +60,4 @@ namespace Maruko.Application.Servers
         /// <returns></returns>
         PagedResultDto GetAllByPageList(int skipCount = 0, int maxResultCount = 10);
     }
-
-    public interface ICurdAppService<TEntity, in TCreateEntityDto, in TUpdateEntityDto> : ICurdAppService<TEntity, long, TCreateEntityDto,TUpdateEntityDto>
-        where TEntity : FullAuditedEntity<long>
-        where TUpdateEntityDto : EntityDto
-    {
-    }
 }

@@ -39,10 +39,7 @@ namespace Maruko.Domain.Repositories
         {
             return GetAll().FirstOrDefault(predicate);
         }
-
-
         
-
         public abstract TEntity Insert(TEntity entity);
 
         public abstract TEntity Update(TEntity entity);

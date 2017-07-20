@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.6</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Maruko.EntityFrameworkCore\Maruko.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\..\..\src\Maruko\Maruko.csproj" />
+    <ProjectReference Include="..\Maruko.Demo.Core\Maruko.Demo.Core.csproj" />
+  </ItemGroup>
+
+</Project>

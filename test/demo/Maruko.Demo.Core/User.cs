@@ -8,11 +8,10 @@ namespace Maruko.Demo.Core
     /// <summary>
     /// 用户表
     /// </summary>
-    public class User : FullAuditedEntity
+    public class User : FullAuditedEntity<long>
     {
         public string Email { get; set; }
 
         public string Password { get; set; }
-
     }
 }

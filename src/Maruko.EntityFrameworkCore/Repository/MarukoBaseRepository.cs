@@ -40,8 +40,7 @@ namespace Maruko.EntityFrameworkCore.Repository
             _unitOfWork = unitOfWork;
             _contextType = AttributeExtension.GetContextAttributeValue<TEntity>();
         }
-
-       
+        
         #region IReposotpry
 
         public override IQueryable<TEntity> GetAll()

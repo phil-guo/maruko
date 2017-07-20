@@ -27,6 +27,8 @@ namespace Maruko.Application.Servers
         protected CurdAppService(IRepository<TEntity, TPrimaryKey> repository)
         {
             Repository = repository;
+            Logger = LogHelper.Log4NetInstance.LogFactory(
+                typeof(CurdAppService<TEntity, TPrimaryKey, TCreateEntityDto, TUpdateEntityDto>));
         }
 
         public virtual TEntity Insert(TCreateEntityDto dto)
@@ -81,20 +83,6 @@ namespace Maruko.Application.Servers
             query = query.PageBy(skipCount, maxResultCount);
 
             return new PagedResultDto(count, query.ToList());
-        }
-    }
-
-    public abstract class CurdAppService<TEntity, TCreateEntityDto, TUpdateEntityDto> :
-        CurdAppService<TEntity, long, TCreateEntityDto, TUpdateEntityDto>,
-        ICurdAppService<TEntity, TCreateEntityDto, TUpdateEntityDto>
-        where TEntity : FullAuditedEntity<long>
-        where TUpdateEntityDto : EntityDto
-    {
-        protected CurdAppService(IRepository<TEntity, long> repository)
-            : base(repository)
-        {
-            Logger = LogHelper.Log4NetInstance.LogFactory(
-                typeof(CurdAppService<TEntity, TCreateEntityDto, TUpdateEntityDto>));
         }
     }
 }
