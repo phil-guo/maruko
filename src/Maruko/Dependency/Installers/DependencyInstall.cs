@@ -17,16 +17,21 @@ namespace Maruko.Dependency.Installers
         /// </summary>
         public static void AddDependencyRegister(this IServiceCollection service)
         {
-            service.AddServiceByLifetime(DependencyLifetime.Singleton);
-            service.AddServiceByLifetime(DependencyLifetime.Scoped);
-            service.AddServiceByLifetime(DependencyLifetime.Transient);
+            var assemblies = ReflectionHelper.GetAssembliyList();
+
+            service.AddServiceByLifetime(DependencyLifetime.Singleton, assemblies);
+            service.AddServiceByLifetime(DependencyLifetime.Scoped, assemblies);
+            service.AddServiceByLifetime(DependencyLifetime.Transient, assemblies);
         }
 
         /// <summary>
         /// </summary>
         /// <param name="services">服务的注册与提供</param>
         /// <param name="lifetime">生命周期</param>
-        private static void AddServiceByLifetime(this IServiceCollection services, DependencyLifetime lifetime)
+        /// <param name="assemblies"></param>
+        private static void AddServiceByLifetime(this IServiceCollection services, 
+            DependencyLifetime lifetime,
+            IEnumerable<Assembly> assemblies)
         {
             var baseType = lifetime == DependencyLifetime.Singleton
                 ? typeof(IDependencySingleton)
@@ -39,7 +44,7 @@ namespace Maruko.Dependency.Installers
             if (baseType == null)
                 throw new ArgumentException("lifetime error");
 
-            var assemblies = ReflectionHelper.GetAssemblies();
+            //var assemblies = ReflectionHelper.GetAssemblies();
 
             var definedTypes = new List<TypeInfo>();
 

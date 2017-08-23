@@ -9,4 +9,8 @@
     <PackageReference Include="Hangfire.MemoryStorage" Version="1.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Maruko\Maruko.csproj" />
+  </ItemGroup>
+
 </Project>
