@@ -3,7 +3,7 @@ using Maruko.Demo.EntityFrameworkCore.Config;
 using Maruko.EntityFrameworkCore.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using MySQL.Data.EntityFrameworkCore.Extensions;
+
 
 namespace Maruko.Demo.EntityFrameworkCore
 {
@@ -18,7 +18,7 @@ namespace Maruko.Demo.EntityFrameworkCore
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL(ConnStr);
+            optionsBuilder.UseMySql(ConnStr);
         }
     }
 }

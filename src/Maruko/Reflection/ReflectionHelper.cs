@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using log4net;
+using Maruko.Logger;
 using Maruko.Modules;
 using Microsoft.Extensions.DependencyModel;
 
@@ -8,6 +10,13 @@ namespace Maruko.Reflection
 {
     public class ReflectionHelper
     {
+        protected static ILog Logger { get; set; }
+
+        public ReflectionHelper()
+        {
+            Logger = LogHelper.Log4NetInstance.LogFactory(typeof(ReflectionHelper));
+        }
+
         /// <summary>
         ///     获取所有的程序集
         /// </summary>
@@ -68,6 +77,11 @@ namespace Maruko.Reflection
 
                 typeStr.AddRange(typeAttribute.DependedModuleTypes.Select(moduleName => moduleName.ToLower()));
             }
+
+            typeStr.ForEach(item =>
+            {
+                Logger.Debug($"typestr :{item}");
+            });
 
             return typeStr;
         }

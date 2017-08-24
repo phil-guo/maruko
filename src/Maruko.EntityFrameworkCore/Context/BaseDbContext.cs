@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Concurrent;
 using Maruko.Domain.Entities.Auditing;
-using MySQL.Data.EntityFrameworkCore.Extensions;
 
 namespace Maruko.EntityFrameworkCore.Context
 {
@@ -29,7 +28,7 @@ namespace Maruko.EntityFrameworkCore.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL(ConnStr);
+            optionsBuilder.UseMySql(ConnStr);
         }
     }
 }

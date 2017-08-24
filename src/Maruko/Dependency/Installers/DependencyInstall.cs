@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using log4net;
+using Maruko.Logger;
 using Maruko.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,12 +14,21 @@ namespace Maruko.Dependency.Installers
     /// </summary>
     public static class DependencyInstall
     {
+        private static ILog Logger { get; set; }
+
+        static DependencyInstall()
+        {
+            Logger = LogHelper.Log4NetInstance.LogFactory(typeof(DependencyInstall));
+        }
+
         /// <summary>
         ///     对三种生命周期的DI进行依赖注入注册
         /// </summary>
         public static void AddDependencyRegister(this IServiceCollection service)
         {
             var assemblies = ReflectionHelper.GetAssembliyList();
+
+            Logger.Debug($"asscemy count : {assemblies.Count()}");
 
             service.AddServiceByLifetime(DependencyLifetime.Singleton, assemblies);
             service.AddServiceByLifetime(DependencyLifetime.Scoped, assemblies);
