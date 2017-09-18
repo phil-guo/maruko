@@ -36,6 +36,7 @@ namespace Maruko.Dependency.Installers
         }
 
         /// <summary>
+        ///  依赖注入
         /// </summary>
         /// <param name="services">服务的注册与提供</param>
         /// <param name="lifetime">生命周期</param>
@@ -54,8 +55,6 @@ namespace Maruko.Dependency.Installers
 
             if (baseType == null)
                 throw new ArgumentException("lifetime error");
-
-            //var assemblies = ReflectionHelper.GetAssemblies();
 
             var definedTypes = new List<TypeInfo>();
 

@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="apache-thrift-netcore" Version="0.9.3.1" />
+    <PackageReference Include="Rabbit.Zookeeper" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\src\Maruko\Maruko.csproj" />
   </ItemGroup>
 

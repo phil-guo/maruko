@@ -8,6 +8,11 @@ using Maruko.Domain.UnitOfWork;
 
 namespace Maruko.Domain.Repositories
 {
+    /// <summary>
+    /// 仓储接口
+    /// </summary>
+    /// <typeparam name="TEntity"></typeparam>
+    /// <typeparam name="TPrimaryKey"></typeparam>
     public interface IRepository<TEntity, in TPrimaryKey> : IRepository, IDependencyScoped
         where TEntity : FullAuditedEntity<TPrimaryKey>
     {

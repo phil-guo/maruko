@@ -4,6 +4,10 @@ using System.Text;
 
 namespace Maruko.Domain.Entities.Auditing
 {
+    /// <summary>
+    /// 审计抽象
+    /// </summary>
+    /// <typeparam name="TTPrimaryKey">主键</typeparam>
     public abstract class FullAuditedEntity<TTPrimaryKey> : IEntity<TTPrimaryKey>, IHasCreationTime,
         IHasModificationTime, ISoftDelete
     {
