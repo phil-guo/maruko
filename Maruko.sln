@@ -1,29 +1,31 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.0
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maruko", "src\Maruko\Maruko.csproj", "{1F84AC16-2532-4D57-933A-B1DEC0B96FE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko", "src\Maruko\Maruko.csproj", "{1F84AC16-2532-4D57-933A-B1DEC0B96FE4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maruko.AutoMapper", "src\Maruko.AutoMapper\Maruko.AutoMapper.csproj", "{6CAE4580-CEFD-455B-AD52-5BAE1BC4A94A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.AutoMapper", "src\Maruko.AutoMapper\Maruko.AutoMapper.csproj", "{6CAE4580-CEFD-455B-AD52-5BAE1BC4A94A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maruko.EntityFrameworkCore", "src\Maruko.EntityFrameworkCore\Maruko.EntityFrameworkCore.csproj", "{E0461677-C798-47CE-8A57-8022EAC70403}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.EntityFrameworkCore", "src\Maruko.EntityFrameworkCore\Maruko.EntityFrameworkCore.csproj", "{E0461677-C798-47CE-8A57-8022EAC70403}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maruko.Redis", "src\Maruko.Redis\Maruko.Redis.csproj", "{8A71D3D2-3570-415C-AFF0-F639E264847C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.Redis", "src\Maruko.Redis\Maruko.Redis.csproj", "{8A71D3D2-3570-415C-AFF0-F639E264847C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maruko.Hangfire", "src\Maruko.Hangfire\Maruko.Hangfire.csproj", "{29CFAEA0-AEE9-446B-998F-8442BE91C20D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.Hangfire", "src\Maruko.Hangfire\Maruko.Hangfire.csproj", "{29CFAEA0-AEE9-446B-998F-8442BE91C20D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{A69CBED9-CE0A-432D-A7B8-0538F97C43A9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demo", "demo", "{87DC3CE3-DA28-46D3-AF1F-9B33BBA21CA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maruko.Demo.Core", "test\demo\Maruko.Demo.Core\Maruko.Demo.Core.csproj", "{6BA7EA39-A26B-486D-B41B-28704C7B373C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.Demo.Core", "test\demo\Maruko.Demo.Core\Maruko.Demo.Core.csproj", "{6BA7EA39-A26B-486D-B41B-28704C7B373C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maruko.Demo.Application", "test\demo\Maruko.Demo.Application\Maruko.Demo.Application.csproj", "{D57A4DC6-1B2F-4675-8451-73CF46FC0C20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.Demo.Application", "test\demo\Maruko.Demo.Application\Maruko.Demo.Application.csproj", "{D57A4DC6-1B2F-4675-8451-73CF46FC0C20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maruko.Demo.EntityFrameworkCore", "test\demo\Maruko.Demo.EntityFrameworkCore\Maruko.Demo.EntityFrameworkCore.csproj", "{B3E36DF2-6499-48CE-B64A-9E8542796A95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.Demo.EntityFrameworkCore", "test\demo\Maruko.Demo.EntityFrameworkCore\Maruko.Demo.EntityFrameworkCore.csproj", "{B3E36DF2-6499-48CE-B64A-9E8542796A95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maruko.Demo.Web", "test\demo\Maruko.Demo.Web\Maruko.Demo.Web.csproj", "{E3DA129C-A07E-4B7E-BFBA-E728AAC3BBEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.Demo.Web", "test\demo\Maruko.Demo.Web\Maruko.Demo.Web.csproj", "{E3DA129C-A07E-4B7E-BFBA-E728AAC3BBEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maruko.Thrift", "Maruko.Thrift\Maruko.Thrift.csproj", "{F5EE052A-5488-4A2B-A50F-CBBEC3DA1CC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +69,10 @@ Global
 		{E3DA129C-A07E-4B7E-BFBA-E728AAC3BBEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3DA129C-A07E-4B7E-BFBA-E728AAC3BBEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3DA129C-A07E-4B7E-BFBA-E728AAC3BBEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5EE052A-5488-4A2B-A50F-CBBEC3DA1CC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5EE052A-5488-4A2B-A50F-CBBEC3DA1CC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5EE052A-5488-4A2B-A50F-CBBEC3DA1CC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5EE052A-5488-4A2B-A50F-CBBEC3DA1CC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -77,5 +83,8 @@ Global
 		{D57A4DC6-1B2F-4675-8451-73CF46FC0C20} = {87DC3CE3-DA28-46D3-AF1F-9B33BBA21CA6}
 		{B3E36DF2-6499-48CE-B64A-9E8542796A95} = {87DC3CE3-DA28-46D3-AF1F-9B33BBA21CA6}
 		{E3DA129C-A07E-4B7E-BFBA-E728AAC3BBEF} = {87DC3CE3-DA28-46D3-AF1F-9B33BBA21CA6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {17B06909-4D98-465A-815D-F0EDDCE602DA}
 	EndGlobalSection
 EndGlobal
