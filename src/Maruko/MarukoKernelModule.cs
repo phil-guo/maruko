@@ -2,7 +2,7 @@
 
 namespace Maruko
 {
-    [LoadOn(true, nameof(Maruko))]
+    [LoadOn(false, nameof(Maruko))]
     public class MarukoKernelModule
     {
     }

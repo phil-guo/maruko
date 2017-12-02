@@ -5,7 +5,7 @@ using Maruko.Modules;
 
 namespace Maruko.AutoMapper
 {
-    [LoadOn(true, @"Maruko.AutoMapper")]
+    [LoadOn(false, @"Maruko.AutoMapper")]
     public class AutoMapperModule
     {
     }

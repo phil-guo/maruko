@@ -5,7 +5,7 @@ using Maruko.Modules;
 
 namespace Maruko.EntityFrameworkCore
 {
-    [LoadOn(true, @"Maruko.EntityFrameworkCore")]
+    [LoadOn(false, @"Maruko.EntityFrameworkCore")]
     public class EntityFrameworkCoreModule
     {
     }

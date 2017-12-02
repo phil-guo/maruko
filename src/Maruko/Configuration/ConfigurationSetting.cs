@@ -10,6 +10,6 @@ namespace Maruko.Configuration
         /// <summary>
         /// 配置管理上下文
         /// </summary>
-        public static IConfigurationRoot DefaultConfiguration { get; set; }
+        public static IConfiguration DefaultConfiguration { get; set; }
     }
 }
