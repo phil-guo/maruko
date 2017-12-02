@@ -11,9 +11,8 @@ namespace Maruko.MongoDB.MongoDBRepos
     /// <summary>
     /// mongodb 仓储
     /// </summary>
-    /// <typeparam name="TEntity"></typeparam>
-    public class MongoDbBaseRepository<TEntity>
-        where TEntity : Entity<Guid>, IHasCreationTime, IHasModificationTime
+    public class MongoDbBaseRepository<TEntity,TKey>
+        where TEntity : Entity<TKey>, IHasCreationTime, IHasModificationTime
     {
         private readonly IMongoCollection<TEntity> _collection;
         public MongoDbBaseRepository(MongoDbContext mongoDatabase)
@@ -65,7 +64,7 @@ namespace Maruko.MongoDB.MongoDBRepos
         /// <summary>
         /// 根据主键获取
         /// </summary>
-        public async Task<TEntity> GetByIdAsync(Guid id)
+        public async Task<TEntity> GetByIdAsync(TKey id)
         {
             var filter = Builders<TEntity>.Filter.Eq(x => x.Id, id);
             return await SigleOrDefault(filter);
