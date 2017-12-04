@@ -24,10 +24,10 @@ namespace Maruko.MongoDB.MongoDBRepos
         /// <summary>
         /// 添加
         /// </summary>
-        public void Insert(TEntity entity)
+        public void InsertAsync(TEntity entity)
         {
-            entity.CreateTime = DateTime.UtcNow;
-            _collection.InsertOne(entity);
+            entity.CreateTime = DateTime.UtcNow;          
+            _collection.InsertOneAsync(entity);
         }
 
         /// <summary>
@@ -44,9 +44,9 @@ namespace Maruko.MongoDB.MongoDBRepos
         }
 
         /// <summary>
-        /// 修改
+        /// 批量修改
         /// </summary>
-        public async Task<bool> UpdateAsync(Expression<Func<TEntity, bool>> expression, UpdateDefinition<TEntity> updateDefinition)
+        public async Task<bool> UpdateManyAsync(Expression<Func<TEntity, bool>> expression, UpdateDefinition<TEntity> updateDefinition)
         {
             var result = await _collection.UpdateManyAsync<TEntity>(expression, updateDefinition);
             return result.ModifiedCount > 0;
@@ -67,13 +67,13 @@ namespace Maruko.MongoDB.MongoDBRepos
         public async Task<TEntity> GetByIdAsync(TKey id)
         {
             var filter = Builders<TEntity>.Filter.Eq(x => x.Id, id);
-            return await SigleOrDefault(filter);
+            return await SigleOrDefaultAsync(filter);
         }
 
         /// <summary>
         /// 获取单个实体
         /// </summary>
-        public async Task<TEntity> SigleOrDefault(FilterDefinition<TEntity> filter)
+        public async Task<TEntity> SigleOrDefaultAsync(FilterDefinition<TEntity> filter)
         {
             return await _collection.Find(filter).SingleOrDefaultAsync();
         }
@@ -92,13 +92,13 @@ namespace Maruko.MongoDB.MongoDBRepos
         {
             await _collection.DeleteManyAsync(Builders<TEntity>.Filter.Empty);
         }
-        /// <summary>
-        /// 根据条件查询
-        /// </summary>
-        public IList<TEntity> Search(Expression<Func<TEntity, bool>> predicate)
-        {
-            return _collection.AsQueryable<TEntity>().Where(predicate.Compile()).ToList();
-        }
+        ///// <summary>
+        ///// 根据条件查询
+        ///// </summary>
+        //public IList<TEntity> Search(Expression<Func<TEntity, bool>> predicate)
+        //{
+        //    return _collection.AsQueryable<TEntity>().Where(predicate.Compile()).ToList();
+        //}
 
         /// <summary>
         /// 根据条件查询
