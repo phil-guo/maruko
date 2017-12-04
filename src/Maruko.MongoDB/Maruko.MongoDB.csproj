@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.0.1</Version>
+    <Authors>simple</Authors>
+    <Company />
+    <Description>asp.net core ,net core,mongodb</Description>
   </PropertyGroup>
 
   <ItemGroup>
