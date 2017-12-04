@@ -22,6 +22,14 @@ namespace Maruko.MongoDB.MongoDBRepos
         }
 
         /// <summary>
+        /// Represents a typed collection in MongoDB.
+        /// </summary>
+        /// <returns></returns>
+        public IMongoCollection<TEntity> GetCollection() {
+            return _collection;
+        }
+
+        /// <summary>
         /// 添加
         /// </summary>
         public void InsertAsync(TEntity entity)
