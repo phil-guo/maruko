@@ -11,7 +11,7 @@ namespace Maruko.MongoDB.MongoDBRepos
     /// <summary>
     /// mongodb 仓储
     /// </summary>
-    public class MongoDbBaseRepository<TEntity,TKey>
+    public class MongoDbBaseRepository<TEntity, TKey>
         where TEntity : Entity<TKey>, IHasCreationTime, IHasModificationTime
     {
         private readonly IMongoCollection<TEntity> _collection;
@@ -25,17 +25,18 @@ namespace Maruko.MongoDB.MongoDBRepos
         /// Represents a typed collection in MongoDB.
         /// </summary>
         /// <returns></returns>
-        public IMongoCollection<TEntity> GetCollection() {
+        public IMongoCollection<TEntity> GetCollection()
+        {
             return _collection;
         }
 
         /// <summary>
         /// 添加
         /// </summary>
-        public void InsertAsync(TEntity entity)
+        public async Task InsertAsync(TEntity entity)
         {
-            entity.CreateTime = DateTime.UtcNow;          
-            _collection.InsertOneAsync(entity);
+            entity.CreateTime = DateTime.UtcNow;
+            await _collection.InsertOneAsync(entity);
         }
 
         /// <summary>
