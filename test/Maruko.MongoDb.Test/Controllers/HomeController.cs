@@ -14,14 +14,14 @@ namespace Maruko.MongoDb.Test.Controllers
             //var user = new User()
             //{
             //    Id = Guid.NewGuid(),
-            //    Name = "alangur",
-            //    Password = "654321",
-            //    Address = "重庆渝中"
+            //    Name = "simple",
+            //    Password = "qwe123QWE",
+            //    Address = "重庆江北"
             //};
 
             //await server.InsertAsync(user);
 
-            var user = await server.GetByIdAsync(new Guid("b787fabf-337d-4bcd-92ec-8571905c87d1"));
+            var user = await server.GetByIdAsync(new Guid("d06fe44f-d603-4e7b-a4cb-080fd181ab3a"));
 
             var userList = await server.SearchAsync(Builders<User>.Filter.Empty);
 
