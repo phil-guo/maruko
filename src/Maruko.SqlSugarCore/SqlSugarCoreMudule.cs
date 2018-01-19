@@ -2,7 +2,7 @@
 
 namespace Maruko.SqlSugarCore
 {
-    [LoadOn(true, @"Maruko.SqlSugarCore")]
+    [LoadOn(false, @"Maruko.SqlSugarCore")]
     public class SqlSugarCoreMudule
     {
     }
