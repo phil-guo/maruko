@@ -10,6 +10,5 @@ namespace Maruko.SqlSugarCore.Reponsitory
         where TEntity : FullAuditedEntity<TPrimaryKey>
     {
         ISugarUnitOfWork SugarUnitOfWork { get; }
-        //ISugarQueryable<TEntity> SugarQuery();
     }
 }
