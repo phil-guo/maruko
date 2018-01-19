@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Maruko.Domain.Entities;
 using Maruko.Domain.Entities.Auditing;
 using Maruko.Domain.UnitOfWork;
 

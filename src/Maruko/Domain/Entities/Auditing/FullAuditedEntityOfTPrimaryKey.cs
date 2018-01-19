@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Maruko.Domain.Entities.Auditing
 {
@@ -17,7 +15,7 @@ namespace Maruko.Domain.Entities.Auditing
         }
         public TTPrimaryKey Id { get; set; }
         public DateTime CreateTime { get; set; }
-        public DateTime? LastModificationTime { get; set; }
-        public bool IsDeleted { get; set; }
+        public virtual DateTime? LastModificationTime { get; set; }
+        public virtual bool IsDeleted { get; set; }
     }
 }
