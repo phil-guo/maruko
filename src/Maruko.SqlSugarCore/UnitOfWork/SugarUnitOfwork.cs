@@ -9,7 +9,8 @@ namespace Maruko.SqlSugarCore.UnitOfWork
     {
         public void Dispose()
         {
-            throw new NotImplementedException();
+            if (SqlSugarClient() != null)
+                SqlSugarClient().Dispose();
         }
 
         public void Commit()
