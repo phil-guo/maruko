@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\Maruko.AutoMapper\Maruko.AutoMapper.csproj" />
-    <ProjectReference Include="..\..\..\src\Maruko.Redis\Maruko.Redis.csproj" />
     <ProjectReference Include="..\..\..\src\Maruko\Maruko.csproj" />
     <ProjectReference Include="..\Maruko.Demo.Core\Maruko.Demo.Core.csproj" />
   </ItemGroup>
