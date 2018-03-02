@@ -11,7 +11,7 @@ using Maruko.Logger;
 namespace Maruko.Application.Servers
 {
     /// <summary>
-    /// 增删改查基础实现
+    /// 增删改查基础实现 
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
     /// <typeparam name="TPrimaryKey"></typeparam>

@@ -5,6 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="EventHandlerModel\**" />
+    <Compile Remove="Servers\**" />
+    <EmbeddedResource Remove="EventHandlerModel\**" />
+    <EmbeddedResource Remove="Servers\**" />
+    <None Remove="EventHandlerModel\**" />
+    <None Remove="Servers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="ThriftModule.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="apache-thrift-netcore" Version="0.9.3.1" />
     <PackageReference Include="Rabbit.Zookeeper" Version="1.0.0" />
   </ItemGroup>
