@@ -1,14 +1,14 @@
 ﻿using Maruko.Dependency;
-using Maruko.Domain.Entities;
 using Maruko.Domain.Entities.Auditing;
+using Maruko.Domain.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 
-namespace Maruko.Domain.UnitOfWork
+namespace Maruko.EntityFrameworkCore.UnitOfWork
 {
     /// <summary>
     /// 创建上下文当中的实体的扩展工作单元
     /// </summary>
-    public interface IDataBaseUnitOfWork : IUnitOfWork, ISql, IDependencySingleton
+    public interface IEfUnitOfWork : IUnitOfWork, ISql, IDependencySingleton
     {
         /// <summary>
         ///     返回在上下文中访问给定类型的实体的IDbSet实例，对象管理状态和底层存储

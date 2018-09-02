@@ -4,6 +4,7 @@ using Maruko.Domain.Entities;
 using Maruko.Domain.Entities.Auditing;
 using Maruko.Domain.Repositories;
 using Maruko.Domain.UnitOfWork;
+using Maruko.EntityFrameworkCore.UnitOfWork;
 using Maruko.Extensions;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,11 +18,11 @@ namespace Maruko.EntityFrameworkCore.Repository
     public abstract class MarukoBaseRepository<TEntity, TPrimaryKey> : MarukoRepositoryBase<TEntity, TPrimaryKey>
         where TEntity : FullAuditedEntity<TPrimaryKey>
     {
-        private readonly IDataBaseUnitOfWork _unitOfWork;
+        private readonly IEfUnitOfWork _unitOfWork;
 
         private readonly ContextType _contextType;
 
-        protected MarukoBaseRepository(IDataBaseUnitOfWork unitOfWork, ContextType contextType)
+        protected MarukoBaseRepository(IEfUnitOfWork unitOfWork, ContextType contextType)
         {
             if (unitOfWork == null)
                 throw new ArgumentNullException("unitOfWork is null");
@@ -31,7 +32,7 @@ namespace Maruko.EntityFrameworkCore.Repository
             _contextType = contextType;
         }
 
-        protected MarukoBaseRepository(IDataBaseUnitOfWork unitOfWork)
+        protected MarukoBaseRepository(IEfUnitOfWork unitOfWork)
         {
             if (unitOfWork == null)
                 throw new ArgumentNullException("unitOfWork is null");
@@ -65,8 +66,11 @@ namespace Maruko.EntityFrameworkCore.Repository
         {
             try
             {
-                _unitOfWork.SetModify<TEntity, TPrimaryKey>(entity);
-                return entity;
+                using (_unitOfWork)
+                {
+                    _unitOfWork.SetModify<TEntity, TPrimaryKey>(entity);
+                    return entity;
+                }
             }
             catch (Exception e)
             {

@@ -12,7 +12,7 @@ namespace Maruko.EntityFrameworkCore.UnitOfWork
     /// <summary>
     /// ef core 的工作单元具体实现
     /// </summary>
-    public abstract class EfCoreBaseUnitOfWork<TContext> : IDataBaseUnitOfWork
+    public abstract class EfCoreBaseUnitOfWork<TContext> : IEfUnitOfWork
         where TContext : DbContext
     {
         public TContext DefaultDbContext;

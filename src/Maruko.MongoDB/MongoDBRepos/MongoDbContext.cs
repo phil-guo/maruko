@@ -16,9 +16,9 @@ namespace Maruko.MongoDB.MongoDBRepos
             Client = new MongoClient(mongoClientSettings);
         }
 
-        public MongoClient Client { get; private set; }
+        private MongoClient Client { get; set; }
 
-        public MongodbSettings MongoSettings { get; private set; }
+        private MongodbSettings MongoSettings { get; set; }
 
         public IMongoDatabase GetDateBase()
         {
