@@ -10,7 +10,7 @@ namespace Maruko.Hangfire
     //[LoadOn(true, "Maruko.Hangfire")]
     public class HangfireModule : MarukoModule
     {
-        public override double Order { get; set; } = 5;
+        public override double Order { get; set; } = 0.4;
     }
 
 }

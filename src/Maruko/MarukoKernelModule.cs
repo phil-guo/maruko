@@ -8,6 +8,6 @@ namespace Maruko
 {
     public class MarukoKernelModule : MarukoModule
     {
-        public override double Order { get; set; } = 1;
+        public override double Order { get; set; } = 0.1;
     }
 }
