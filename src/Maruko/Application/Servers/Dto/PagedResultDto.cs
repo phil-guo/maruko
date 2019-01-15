@@ -13,12 +13,12 @@
         /// <summary>
         /// 数据
         /// </summary>
-        public object Data { get; set; }
+        public object Datas { get; set; }
 
-        public PagedResultDto(int total, object data)
+        public  PagedResultDto(int total, object data)
         {
             TotalCount = total;
-            Data = data;
+            Datas = data;
         }
     }
 }

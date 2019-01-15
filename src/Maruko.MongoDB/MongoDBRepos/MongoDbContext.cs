@@ -10,9 +10,8 @@ namespace Maruko.MongoDB.MongoDBRepos
             MongoSettings = settings.Value;
             MongoClientSettings mongoClientSettings = MongoClientSettings.FromUrl(new MongoUrl(MongoSettings.ConnectionString));
             //mongoClientSettings.SslSettings = new SslSettings() { EnabledSslProtocols = SslProtocols.Tls12 };
-
-            var credential = MongoCredential.CreateCredential(MongoSettings.LoginDatabase, MongoSettings.UserName, MongoSettings.Password);
-            mongoClientSettings.Credentials = new[] { credential };
+            
+            mongoClientSettings.Credential = MongoCredential.CreateCredential(MongoSettings.LoginDatabase, MongoSettings.UserName, MongoSettings.Password);
             Client = new MongoClient(mongoClientSettings);
         }
 

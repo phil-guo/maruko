@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Maruko.Dependency;
+using Maruko.Domain.Entities;
 using Maruko.Domain.Entities.Auditing;
 using Maruko.Domain.UnitOfWork;
 
@@ -13,13 +14,12 @@ namespace Maruko.Domain.Repositories
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
     /// <typeparam name="TPrimaryKey"></typeparam>
-    public interface IRepository<TEntity, in TPrimaryKey> : IRepository, IDependencyScoped
-        where TEntity : FullAuditedEntity<TPrimaryKey>
+    public interface IRepository<TEntity, in TPrimaryKey> : IRepository
+        where TEntity : class, IEntity<TPrimaryKey>
     {
         IUnitOfWork UnitOfWork { get; set; }
 
         #region Insert
-
         /// <summary>
         ///     Inserts a new entity.
         /// </summary>
@@ -36,6 +36,13 @@ namespace Maruko.Domain.Repositories
         /// <param name="entity">Entity</param>
         TEntity Update(TEntity entity);
 
+        /// <summary>
+        /// 更新指定列
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="funcColums"></param>
+        /// <returns></returns>
+        TEntity UpdateColumn(TEntity entity, Func<TEntity, string[]> funcColums);
         #endregion
 
         #region Select/Get/Query
@@ -44,7 +51,7 @@ namespace Maruko.Domain.Repositories
         ///     Used to get a IQueryable that is used to retrieve entities from entire table.
         /// </summary>
         /// <returns>IQueryable to be used to select entities from database</returns>
-        IQueryable<TEntity> GetAll();
+        IQueryable<TEntity> GetAll(bool isMaster = false);
 
         /// <summary>
         ///     Used to get all entities.
@@ -71,6 +78,13 @@ namespace Maruko.Domain.Repositories
         /// </summary>
         /// <param name="predicate">Predicate to filter entities</param>
         TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate);
+
+        /// <summary>
+        ///     Single an entity with given given predicate or null if not found.
+        /// </summary>
+        /// <param name="predicate">Predicate to filter entities</param>
+        /// <returns></returns>
+        TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate);
 
         #endregion
 

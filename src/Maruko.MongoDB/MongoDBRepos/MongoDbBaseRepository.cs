@@ -12,7 +12,7 @@ namespace Maruko.MongoDB.MongoDBRepos
     /// mongodb 仓储
     /// </summary>
     public class MongoDbBaseRepository<TEntity, TKey>
-        where TEntity : Entity<TKey>, IHasCreationTime, IHasModificationTime
+        where TEntity : Entity<TKey>, IHasCreationTime
     {
         private readonly IMongoCollection<TEntity> _collection;
         public MongoDbBaseRepository(MongoDbContext mongoDatabase)
@@ -66,7 +66,6 @@ namespace Maruko.MongoDB.MongoDBRepos
         public bool Update(TEntity entity)
         {
             var filter = Builders<TEntity>.Filter.Eq(x => x.Id, entity.Id);
-            entity.LastModificationTime = DateTime.UtcNow;
             return _collection.ReplaceOne(filter, entity).ModifiedCount == 1;
         }
 

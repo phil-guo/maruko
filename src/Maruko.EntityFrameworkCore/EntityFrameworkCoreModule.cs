@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Autofac;
 using Maruko.Modules;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Maruko.EntityFrameworkCore
 {
-    [LoadOn(false, @"Maruko.EntityFrameworkCore")]
-    public class EntityFrameworkCoreModule
+    //[LoadOn(true, @"Maruko.EntityFrameworkCore")]
+    public class EntityFrameworkCoreModule : MarukoModule
     {
+        public override double Order { get; set; } = 4;
     }
 }

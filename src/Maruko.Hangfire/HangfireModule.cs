@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Hangfire;
+using Hangfire.Dashboard;
+using Hangfire.MemoryStorage;
 using Maruko.Modules;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Maruko.Hangfire
 {
-    [LoadOn(false, @"Maruko.Hangfire")]
-    public class HangfireModule
+    //[LoadOn(true, "Maruko.Hangfire")]
+    public class HangfireModule : MarukoModule
     {
+        public override double Order { get; set; } = 5;
     }
+
 }

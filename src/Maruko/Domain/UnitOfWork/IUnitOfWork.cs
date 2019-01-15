@@ -1,16 +1,17 @@
 ﻿using System;
+using Maruko.Dependency;
 
 namespace Maruko.Domain.UnitOfWork
 {
     /// <summary>
     ///     工作单元
     /// </summary>
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork : IDisposable, IDependencyTransient
     {
         /// <summary>
         ///     提交请求
         /// </summary>
-        void Commit();
+        int Commit();
 
         /// <summary>
         ///     提交所有请求并处理乐观锁的问题

@@ -1,12 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Autofac;
+using AutoMapper;
+using Maruko.AutoMapper.AutoMapper;
 using Maruko.Modules;
+using IObjectMapper = Maruko.ObjectMapping.IObjectMapper;
 
 namespace Maruko.AutoMapper
 {
-    [LoadOn(false, @"Maruko.AutoMapper")]
-    public class AutoMapperModule
+    public class AutoMapperModule : MarukoModule
     {
+        public override double Order { get; set; } = 3;
+
+        protected override void Load(ContainerBuilder builder)
+        {
+            base.Load(builder);
+            MapperInitialize.CreateMappings();
+            builder.RegisterType<AutoMapperObjectMapper>().As<IObjectMapper>().SingleInstance();
+            //builder.RegisterType<Mapper>().As<IMapper>().SingleInstance();
+        }
     }
 }

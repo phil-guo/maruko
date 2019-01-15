@@ -1,63 +1,69 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using Maruko.Application.Servers.Dto;
-using Maruko.Dependency;
-using Maruko.Domain.Entities.Auditing;
+using Maruko.Domain.Entities;
 
 namespace Maruko.Application.Servers
 {
-    public interface ICurdAppService<TEntity, in TPrimaryKey, in TCreateEntityDto, in TUpdateEntityDto>
-        where TEntity : FullAuditedEntity<TPrimaryKey>
+    public interface ICurdAppService<TEntity, in TPrimaryKey, out TEntityDto, in TCreateEntityDto, in TUpdateEntityDto>
+        where TEntity : class, IEntity<TPrimaryKey>
         where TUpdateEntityDto : EntityDto<TPrimaryKey>
+        where TEntityDto : EntityDto<TPrimaryKey>
     {
         /// <summary>
-        ///   添加
+        ///     添加
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        TEntity Insert(TCreateEntityDto dto);
+        TEntityDto Insert(TCreateEntityDto dto);
 
         /// <summary>
-        ///   修改
+        ///     修改
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        TEntity Update(TUpdateEntityDto dto);
-
-
-        /// <summary>
-        ///   软删除
-        /// </summary>
-        /// <param name="id"></param>
-        void SoftDelete(TPrimaryKey id);
+        TEntityDto Update(TUpdateEntityDto dto);
 
         /// <summary>
-        ///   物理删除
+        ///     物理删除
         /// </summary>
         /// <param name="id"></param>
         void Delete(TPrimaryKey id);
 
         /// <summary>
-        ///   根据id 获取一个实体
+        ///     根据id 获取一个实体
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         TEntity FirstOrDefault(TPrimaryKey id);
 
         /// <summary>
-        ///   根据条件获取一个实体
+        ///     根据条件获取一个实体
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
         TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate);
+    }
+
+    public interface ICurdAppService<TEntity, TEntityDto, TCreateEntityDto, in TUpdateEntityDto>
+        : ICurdAppService<TEntity, int, TEntityDto, TCreateEntityDto, TUpdateEntityDto>
+        where TEntity : class, IEntity<int>
+        where TUpdateEntityDto : EntityDto<int>
+        where TEntityDto : EntityDto<int>
+    {
+        /// <summary>
+        /// 批量提交
+        /// </summary>
+        /// <param name="dtos"></param>
+        /// <returns></returns>
+        bool BatchInsert(List<TCreateEntityDto> dtos);
 
         /// <summary>
-        ///   分页查询
-        ///   默认倒序，根据创建时间
+        /// 批量修改
         /// </summary>
-        /// <param name="skipCount"></param>
-        /// <param name="maxResultCount"></param>
+        /// <param name="dtos"></param>
         /// <returns></returns>
-        PagedResultDto GetAllByPageList(int skipCount = 0, int maxResultCount = 10);
+        bool BatchUpdate(List<TEntityDto> dtos);
     }
 }

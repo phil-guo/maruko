@@ -4,6 +4,7 @@ using log4net;
 using Maruko.Domain.Entities;
 using Maruko.Domain.Entities.Auditing;
 using Maruko.Domain.UnitOfWork;
+using Maruko.EntityFrameworkCore.Context;
 using Maruko.Logger;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,31 +14,32 @@ namespace Maruko.EntityFrameworkCore.UnitOfWork
     /// ef core 的工作单元具体实现
     /// </summary>
     public abstract class EfCoreBaseUnitOfWork<TContext> : IEfUnitOfWork
-        where TContext : DbContext
+        where TContext : BaseDbContext
     {
-        public TContext DefaultDbContext;
+        public readonly TContext _defaultDbContext;
 
         public ILog Logger { get; }
 
-        protected EfCoreBaseUnitOfWork()
+        public EfCoreBaseUnitOfWork(TContext defaultDbContext)
         {
+            _defaultDbContext = defaultDbContext;
             Logger = LogHelper.Log4NetInstance.LogFactory(typeof(EfCoreBaseUnitOfWork<>));
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
-            if (DefaultDbContext != null)
-                DefaultDbContext.Dispose();
+            if (_defaultDbContext != null)
+                _defaultDbContext.Dispose();
         }
 
-        public void Commit()
+        public virtual int Commit()
         {
             try
             {
                 //这里如果没有调用过createset方法就会报错，如果没有调用认为没有任何改变直接跳出来
-                if (DefaultDbContext == null)
-                    return;
-                DefaultDbContext.SaveChanges();
+                if (_defaultDbContext == null)
+                    return 0;
+                return _defaultDbContext.SaveChanges();
             }
             catch (DbUpdateException ex)
             {
@@ -46,14 +48,17 @@ namespace Maruko.EntityFrameworkCore.UnitOfWork
             }
         }
 
-        public void CommitAndRefreshChanges()
+        public virtual void CommitAndRefreshChanges()
         {
             bool saveFailed;
             do
             {
                 try
                 {
-                    DefaultDbContext.SaveChanges();
+                    if (_defaultDbContext == null)
+                        return;
+
+                    _defaultDbContext.SaveChanges();
                     saveFailed = false;
                 }
                 catch (DbUpdateConcurrencyException ex)
@@ -70,36 +75,46 @@ namespace Maruko.EntityFrameworkCore.UnitOfWork
             } while (saveFailed);
         }
 
-        public void RollbackChanges()
+        public virtual void RollbackChanges()
         {
             // set all entities in change tracker
             // as 'unchanged state'
-            if (DefaultDbContext != null)
-                DefaultDbContext.ChangeTracker.Entries()
+            if (_defaultDbContext != null)
+                _defaultDbContext.ChangeTracker.Entries()
                     .ToList()
                     .ForEach(entry =>
                     {
                         if (entry.State != EntityState.Unchanged)
                             entry.State = EntityState.Detached;
                     });
-
-
         }
 
-        public virtual DbSet<TEntity> CreateSet<TEntity, TPrimaryKey>(ContextType contextType) where TEntity : FullAuditedEntity<TPrimaryKey>
+        public virtual DbSet<TEntity> CreateSet<TEntity, TPrimaryKey>(ContextType contextType)
+            where TEntity : FullAuditedEntity<TPrimaryKey>
         {
             throw new NotImplementedException();
         }
 
-
-        public void SetModify<TEntity, TPrimaryKey>(TEntity entity) where TEntity : FullAuditedEntity<TPrimaryKey>
+        public DbSet<TEntity> WriteCreateSet<TEntity, TPrimaryKey>(ContextType contextType) where TEntity : FullAuditedEntity<TPrimaryKey>
         {
-            if (DefaultDbContext != null)
-                DefaultDbContext.Entry(entity).State = EntityState.Modified;
+            throw new NotImplementedException();
+        }
+
+        public virtual void SetModify<TEntity, TPrimaryKey>(TEntity entity) where TEntity : FullAuditedEntity<TPrimaryKey>
+        {
+            if (_defaultDbContext != null)
+                _defaultDbContext.Entry(entity).State = EntityState.Modified;
+        }
+
+        public virtual void SetModify<TEntity, TPrimaryKey>(TEntity entity, string[] inCludeColums) where TEntity : FullAuditedEntity<TPrimaryKey>
+        {
+            throw new NotImplementedException();
         }
 
         #region Isql
-        public int ExecuteCommand(string sqlCommand, ContextType contextType = ContextType.DefaultContextType, params object[] parameters)
+
+        public virtual int ExecuteCommand(string sqlCommand, ContextType contextType = ContextType.DefaultContextType,
+            params object[] parameters)
         {
             switch (contextType)
             {
@@ -110,8 +125,8 @@ namespace Maruko.EntityFrameworkCore.UnitOfWork
 
         private int GeneralDbContext(string sqlCommand, params object[] parameters)
         {
-            if (DefaultDbContext != null)
-                return DefaultDbContext.Database.ExecuteSqlCommand(sqlCommand, parameters);
+            if (_defaultDbContext != null)
+                return _defaultDbContext.Database.ExecuteSqlCommand(sqlCommand, parameters);
             Logger.Debug($"DbContext 上下文创建失败");
             return -1;
         }

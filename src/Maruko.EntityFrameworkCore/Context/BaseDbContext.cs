@@ -7,11 +7,15 @@ namespace Maruko.EntityFrameworkCore.Context
 
     public abstract class BaseDbContext : DbContext
     {
+        public BaseDbContext(DbContextOptions options)
+            : base(options)
+        {
+        }
+
         private readonly ConcurrentDictionary<string, object> _allSet = new ConcurrentDictionary<string, object>();
 
         public virtual string ConnStr { get; set; }
-
-
+        
         public virtual DbSet<TEntity> CreateSet<TEntity, TPrimaryKey>()
             where TEntity : FullAuditedEntity<TPrimaryKey>
         {
@@ -24,11 +28,6 @@ namespace Maruko.EntityFrameworkCore.Context
                 _allSet.TryAdd(key, result);
             }
             return Set<TEntity>();
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseMySql(ConnStr);
         }
     }
 }

@@ -8,6 +8,17 @@ namespace Maruko.Reflection
 {
     public static class TypeFindExtensions
     {
+        public static Dictionary<string, List<Assembly>> DictionaryAssembly;
+
+        public static void AddAssmbly(Assembly assembly)
+        {
+            if (DictionaryAssembly == null)
+                DictionaryAssembly = new Dictionary<string, List<Assembly>>();
+            if (!DictionaryAssembly.ContainsKey("Assembly"))
+                DictionaryAssembly.Add("Assembly", new List<Assembly>());
+            DictionaryAssembly["Assembly"].Add(assembly);
+        }
+
         private static readonly object SyncObj = new object();
         private static Type[] _types;
 

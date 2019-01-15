@@ -6,8 +6,18 @@ using Microsoft.Extensions.DependencyModel;
 
 namespace Maruko.Reflection
 {
-    public class ReflectionHelper
+    public static class ReflectionHelper
     {
+        public static List<Assembly> Assemblies { get; set; }
+
+        public static void GetAssemblyArray(Assembly assembly)
+        {
+            if (Assemblies == null)
+                Assemblies = new List<Assembly>();
+
+            Assemblies.Add(assembly);
+        }
+
         /// <summary>
         ///     获取所有的程序集
         /// </summary>
@@ -61,7 +71,7 @@ namespace Maruko.Reflection
 
             foreach (var type in types)
             {
-                var typeAttribute = type.GetTypeInfo().GetCustomAttribute<LoadOnAttribute>();
+                var typeAttribute = type.GetTypeInfo().GetCustomAttribute<LoadOnAttribute>();//LoadOnAttribute
 
                 if (!typeAttribute.IsAuto)
                     continue;

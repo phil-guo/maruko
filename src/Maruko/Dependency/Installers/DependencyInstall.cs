@@ -6,6 +6,7 @@ using log4net;
 using Maruko.Logger;
 using Maruko.Reflection;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Maruko.Dependency.Installers
 {
@@ -21,14 +22,21 @@ namespace Maruko.Dependency.Installers
             Logger = LogHelper.Log4NetInstance.LogFactory(typeof(DependencyInstall));
         }
 
+        public static void AddDependencyRegister(this IServiceCollection service, IEnumerable<Assembly> assemblies)
+        {
+            service.AddServiceByLifetime(DependencyLifetime.Singleton, assemblies);
+            service.AddServiceByLifetime(DependencyLifetime.Scoped, assemblies);
+            service.AddServiceByLifetime(DependencyLifetime.Transient, assemblies);
+        }
+
         /// <summary>
         ///     对三种生命周期的DI进行依赖注入注册
         /// </summary>
         public static void AddDependencyRegister(this IServiceCollection service)
         {
-            var assemblies = ReflectionHelper.GetAssembliyList();
+            var assemblies = ReflectionHelper.GetAssembliyList();//ReflectionHelper.Assemblies ?? new List<Assembly>();
 
-            Logger.Debug($"asscemy count : {assemblies.Count()}");
+            //Logger.Debug($"asscemy count : {assemblies.Count()}");
 
             service.AddServiceByLifetime(DependencyLifetime.Singleton, assemblies);
             service.AddServiceByLifetime(DependencyLifetime.Scoped, assemblies);
@@ -41,7 +49,7 @@ namespace Maruko.Dependency.Installers
         /// <param name="services">服务的注册与提供</param>
         /// <param name="lifetime">生命周期</param>
         /// <param name="assemblies"></param>
-        private static void AddServiceByLifetime(this IServiceCollection services, 
+        private static void AddServiceByLifetime(this IServiceCollection services,
             DependencyLifetime lifetime,
             IEnumerable<Assembly> assemblies)
         {
@@ -56,49 +64,45 @@ namespace Maruko.Dependency.Installers
             if (baseType == null)
                 throw new ArgumentException("lifetime error");
 
-            var definedTypes = new List<TypeInfo>();
-
-            foreach (var assembly in assemblies)
-            {
-                var definedType = assembly.DefinedTypes.ToList();
-
-                foreach (var typeInfo in definedType)
-                    definedTypes.Add(typeInfo);
-            }
+            var definedTypes = assemblies.SelectMany(assembly => assembly.DefinedTypes.ToList()).ToList();
 
             var types = definedTypes.Where(typeInfo => baseType.IsAssignableFrom(typeInfo.AsType()));
             var interfaceTypeInfos = types.Where(t => t.IsInterface && t.AsType() != baseType);
             var implTypeInfos = types.Where(t => t.IsClass && !t.IsAbstract);
 
+            //改造为一个接口对应多个类型的依赖注入逻辑
             foreach (var interfaceTypeInfo in interfaceTypeInfos)
             {
                 var interfaceType = interfaceTypeInfo.AsType();
-                Type implType = null;
+                List<Type> implTypes = null;//Type implType = null;
                 if (!interfaceTypeInfo.IsGenericType)
-                    implType = implTypeInfos.FirstOrDefault(t => interfaceTypeInfo.IsAssignableFrom(t))?.AsType();
+                    implTypes = implTypeInfos?.Where(t => interfaceTypeInfo.IsAssignableFrom(t)).Select(it => it.AsType()).ToList();
                 else
-                    implType = implTypeInfos.FirstOrDefault(t =>
+                    implTypes = implTypeInfos?.Where(t =>
                             t.ImplementedInterfaces.Any(x =>
                             {
                                 var typeInfo = x.GetTypeInfo();
                                 return typeInfo.Namespace == interfaceTypeInfo.Namespace
                                        && typeInfo.Name == interfaceTypeInfo.Name;
                             }))
-                        ?.AsType();
+                        .Select(it => it.AsType()).ToList();
 
-                if (implType == null)
+                if ((implTypes?.Count ?? 0) <= 0)
                     continue;
 
                 switch (lifetime)
                 {
                     case DependencyLifetime.Singleton:
-                        services.AddSingleton(interfaceType, implType);
+                        implTypes.ForEach(it => { services.TryAddSingleton(interfaceType, it); });
+                        //services.AddSingleton(interfaceType, implTypes);
                         break;
                     case DependencyLifetime.Scoped:
-                        services.AddScoped(interfaceType, implType);
+                        implTypes.ForEach(it => { services.TryAddScoped(interfaceType, it); });
+                        //services.AddScoped(interfaceType, implTypes);
                         break;
                     case DependencyLifetime.Transient:
-                        services.AddTransient(interfaceType, implType);
+                        implTypes.ForEach(it => { services.AddTransient(interfaceType, it); });
+                        //services.AddTransient(interfaceType, implTypes);
                         break;
                     default:
                         throw new ArgumentException("Error Lifetime");
