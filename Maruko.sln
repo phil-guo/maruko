@@ -13,13 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.Hangfire", "src\Maru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{A69CBED9-CE0A-432D-A7B8-0538F97C43A9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demo", "demo", "{87DC3CE3-DA28-46D3-AF1F-9B33BBA21CA6}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.MongoDB", "src\Maruko.MongoDB\Maruko.MongoDB.csproj", "{ED4B007E-8EC8-4BB7-BDEC-2023758382B4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.AspNetMvc", "src\Maruko.AspNetMvc\Maruko.AspNetMvc.csproj", "{56EACDB8-F06B-41DF-AA9F-7234DBCA23AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maruko.SqlSugarCore", "src\Maruko.SqlSugarCore\Maruko.SqlSugarCore.csproj", "{6DA6785D-6452-4776-8451-56D85EE9E550}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.SqlSugarCore", "src\Maruko.SqlSugarCore\Maruko.SqlSugarCore.csproj", "{6DA6785D-6452-4776-8451-56D85EE9E550}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,9 +56,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{87DC3CE3-DA28-46D3-AF1F-9B33BBA21CA6} = {A69CBED9-CE0A-432D-A7B8-0538F97C43A9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {17B06909-4D98-465A-815D-F0EDDCE602DA}
