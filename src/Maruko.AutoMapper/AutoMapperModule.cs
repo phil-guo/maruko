@@ -8,7 +8,7 @@ namespace Maruko.AutoMapper
 {
     public class AutoMapperModule : MarukoModule
     {
-        public override double Order { get; set; } = 0.2;
+        public override double Order { get; set; } = 3;
 
         protected override void Load(ContainerBuilder builder)
         {

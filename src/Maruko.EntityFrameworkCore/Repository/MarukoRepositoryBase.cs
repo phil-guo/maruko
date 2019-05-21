@@ -16,7 +16,7 @@ namespace Maruko.EntityFrameworkCore.Repository
     public abstract class MarukoRepositoryBase<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>
         where TEntity : FullAuditedEntity<TPrimaryKey>
     {
-        public abstract IQueryable<TEntity> GetAll(bool isMaster = false);
+        public abstract IQueryable<TEntity> GetAll();
 
         public IUnitOfWork UnitOfWork { get; set; }
 
@@ -48,10 +48,6 @@ namespace Maruko.EntityFrameworkCore.Repository
         public abstract TEntity Insert(TEntity entity);
 
         public abstract TEntity Update(TEntity entity);
-
-        public abstract TEntity UpdateColumn(TEntity entity, Func<TEntity, string[]> funcColums);
-
-
 
         public abstract void Delete(TPrimaryKey id);
 

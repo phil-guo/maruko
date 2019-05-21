@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using log4net;
-using Maruko.Domain.Entities;
 using Maruko.Domain.Entities.Auditing;
 using Maruko.Domain.UnitOfWork;
 using Maruko.EntityFrameworkCore.Context;
@@ -88,27 +87,11 @@ namespace Maruko.EntityFrameworkCore.UnitOfWork
                             entry.State = EntityState.Detached;
                     });
         }
-
-        public virtual DbSet<TEntity> CreateSet<TEntity, TPrimaryKey>(ContextType contextType)
-            where TEntity : FullAuditedEntity<TPrimaryKey>
-        {
-            throw new NotImplementedException();
-        }
-
-        public DbSet<TEntity> WriteCreateSet<TEntity, TPrimaryKey>(ContextType contextType) where TEntity : FullAuditedEntity<TPrimaryKey>
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public virtual void SetModify<TEntity, TPrimaryKey>(TEntity entity) where TEntity : FullAuditedEntity<TPrimaryKey>
         {
             if (_defaultDbContext != null)
                 _defaultDbContext.Entry(entity).State = EntityState.Modified;
-        }
-
-        public virtual void SetModify<TEntity, TPrimaryKey>(TEntity entity, string[] inCludeColums) where TEntity : FullAuditedEntity<TPrimaryKey>
-        {
-            throw new NotImplementedException();
         }
 
         #region Isql
@@ -129,6 +112,12 @@ namespace Maruko.EntityFrameworkCore.UnitOfWork
                 return _defaultDbContext.Database.ExecuteSqlCommand(sqlCommand, parameters);
             Logger.Debug($"DbContext 上下文创建失败");
             return -1;
+        }
+
+        public DbSet<TEntity> CreateSet<TEntity, TPrimaryKey>()
+            where TEntity : FullAuditedEntity<TPrimaryKey>
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

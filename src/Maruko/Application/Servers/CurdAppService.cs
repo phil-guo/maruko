@@ -22,6 +22,7 @@ namespace Maruko.Application.Servers
         where TEntity : class, IEntity<TPrimaryKey>
         where TUpdateEntityDto : EntityDto<TPrimaryKey>
         where TEntityDto : EntityDto<TPrimaryKey>
+        //where TCreateEntityDto: EntityDto<TPrimaryKey>
     {
         public readonly IRepository<TEntity, TPrimaryKey> Repository;
 
@@ -39,7 +40,7 @@ namespace Maruko.Application.Servers
         /// <returns>实体</returns>
         public virtual TEntityDto Insert(TCreateEntityDto dto)
         {
-            var entity = MapToEntity(dto);
+            var entity = MapCreateToEntity(dto);
             entity = Repository.Insert(entity);
             return entity == null ? null : MapToEntityDto(entity);
         }
@@ -118,7 +119,7 @@ namespace Maruko.Application.Servers
 
         public virtual TEntityDto Insert(TCreateEntityDto dto)
         {
-            var entity = MapToEntity(dto);
+            var entity = MapCreateToEntity(dto);
             entity = Repository.Insert(entity);
             return entity == null ? null : MapToEntityDto(entity);
         }
@@ -136,7 +137,7 @@ namespace Maruko.Application.Servers
             var entities = new List<TEntity>();
             dtos.ForEach(dto =>
             {
-                entities.Add(MapToEntity(dto));
+                entities.Add(MapCreateToEntity(dto));
             });
             return Repository.BatchInsert(entities);
         }

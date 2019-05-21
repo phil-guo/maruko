@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace Maruko.Domain.Specification
 {
-    
+
     /// <summary>
     /// Represents the extender for Expression[Func[T, bool]] type.
     /// This is part of the solution which solves

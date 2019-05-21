@@ -20,17 +20,17 @@ namespace Maruko.EntityFrameworkCore.Repository
     {
         protected readonly IEfUnitOfWork _unitOfWork;
 
-        private readonly ContextType _contextType;
+        //private readonly ContextType _contextType;
 
-        protected MarukoBaseRepository(IEfUnitOfWork unitOfWork, ContextType contextType)
-        {
-            if (unitOfWork == null)
-                throw new ArgumentNullException("unitOfWork is null");
+        //protected MarukoBaseRepository(IEfUnitOfWork unitOfWork, ContextType contextType)
+        //{
+        //    if (unitOfWork == null)
+        //        throw new ArgumentNullException("unitOfWork is null");
 
-            UnitOfWork = unitOfWork;
-            _unitOfWork = unitOfWork;
-            _contextType = contextType;
-        }
+        //    UnitOfWork = unitOfWork;
+        //    _unitOfWork = unitOfWork;
+        //    _contextType = contextType;
+        //}
 
         protected MarukoBaseRepository(IEfUnitOfWork unitOfWork)
         {
@@ -39,15 +39,13 @@ namespace Maruko.EntityFrameworkCore.Repository
 
             UnitOfWork = unitOfWork;
             _unitOfWork = unitOfWork;
-            _contextType = AttributeExtension.GetContextAttributeValue<TEntity>();
+            //_contextType = AttributeExtension.GetContextAttributeValue<TEntity>();
         }
 
         #region IReposotpry
 
-        public override IQueryable<TEntity> GetAll(bool isMaster = false)
+        public override IQueryable<TEntity> GetAll()
         {
-            if (isMaster)
-                return WriteGetSet();
             return GetSet();
         }
 
@@ -55,7 +53,7 @@ namespace Maruko.EntityFrameworkCore.Repository
         {
             try
             {
-                WriteGetSet().Add(entity);
+                GetSet().Add(entity);
                 return _unitOfWork.Commit() <= 0 ? null : entity;
             }
             catch (Exception e)
@@ -77,18 +75,18 @@ namespace Maruko.EntityFrameworkCore.Repository
             }
         }
 
-        public override TEntity UpdateColumn(TEntity entity, Func<TEntity, string[]> funcColums)
-        {
-            try
-            {
-                _unitOfWork.SetModify<TEntity, TPrimaryKey>(entity, funcColums(entity));
-                return _unitOfWork.Commit() <= 0 ? null : entity;
-            }
-            catch (Exception e)
-            {
-                throw new Exception("ef core modify error:" + e.Message);
-            }
-        }
+        //public override TEntity UpdateColumn(TEntity entity, Func<TEntity, string[]> funcColums)
+        //{
+        //    try
+        //    {
+        //        _unitOfWork.SetModify<TEntity, TPrimaryKey>(entity, funcColums(entity));
+        //        return _unitOfWork.Commit() <= 0 ? null : entity;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw new Exception("ef core modify error:" + e.Message);
+        //    }
+        //}
 
         public override void Delete(TPrimaryKey id)
         {
@@ -101,7 +99,7 @@ namespace Maruko.EntityFrameworkCore.Repository
 
         public override void Delete(TEntity entity)
         {
-            WriteGetSet().Remove(entity);
+            GetSet().Remove(entity);
             _unitOfWork.Commit();
         }
 
@@ -119,7 +117,7 @@ namespace Maruko.EntityFrameworkCore.Repository
         #region Private Methods
 
         private DbSet<TEntity> _entities;
-        private DbSet<TEntity> _writeEntities;
+        //private DbSet<TEntity> _writeEntities;
 
         /// <summary>
         /// 创建上下文的实体对象
@@ -127,13 +125,13 @@ namespace Maruko.EntityFrameworkCore.Repository
         /// <returns></returns>
         protected virtual DbSet<TEntity> GetSet()
         {
-            return _entities ?? (_entities = _unitOfWork.CreateSet<TEntity, TPrimaryKey>(_contextType));
+            return _entities ?? (_entities = _unitOfWork.CreateSet<TEntity, TPrimaryKey>());
         }
 
-        protected virtual DbSet<TEntity> WriteGetSet()
-        {
-            return _writeEntities ?? (_writeEntities = _unitOfWork.WriteCreateSet<TEntity, TPrimaryKey>(_contextType));
-        }
+        //protected virtual DbSet<TEntity> WriteGetSet()
+        //{
+        //    return _writeEntities ?? (_writeEntities = _unitOfWork.WriteCreateSet<TEntity, TPrimaryKey>(_contextType));
+        //}
 
         #endregion
     }

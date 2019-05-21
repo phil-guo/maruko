@@ -7,13 +7,7 @@ namespace Maruko.SqlSugarCore.UnitOfWork
 {
     public class SugarUnitOfwork : InstallSqlSugar, ISugarUnitOfWork
     {
-        public void Dispose()
-        {
-            if (SqlSugarClient() != null)
-                SqlSugarClient().Dispose();
-        }
-
-        public void Commit()
+        public int Commit()
         {
             throw new NotImplementedException();
         }
@@ -21,6 +15,12 @@ namespace Maruko.SqlSugarCore.UnitOfWork
         public void CommitAndRefreshChanges()
         {
             throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            if (SqlSugarClient() != null)
+                SqlSugarClient().Dispose();
         }
 
         public void RollbackChanges()

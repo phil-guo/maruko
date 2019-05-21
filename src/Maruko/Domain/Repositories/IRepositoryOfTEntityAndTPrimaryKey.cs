@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Maruko.Dependency;
 using Maruko.Domain.Entities;
-using Maruko.Domain.Entities.Auditing;
 using Maruko.Domain.UnitOfWork;
 
 namespace Maruko.Domain.Repositories
@@ -36,13 +34,13 @@ namespace Maruko.Domain.Repositories
         /// <param name="entity">Entity</param>
         TEntity Update(TEntity entity);
 
-        /// <summary>
-        /// 更新指定列
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <param name="funcColums"></param>
-        /// <returns></returns>
-        TEntity UpdateColumn(TEntity entity, Func<TEntity, string[]> funcColums);
+        ///// <summary>
+        ///// 更新指定列
+        ///// </summary>
+        ///// <param name="entity"></param>
+        ///// <param name="funcColums"></param>
+        ///// <returns></returns>
+        //TEntity UpdateColumn(TEntity entity, Func<TEntity, string[]> funcColums);
         #endregion
 
         #region Select/Get/Query
@@ -51,7 +49,7 @@ namespace Maruko.Domain.Repositories
         ///     Used to get a IQueryable that is used to retrieve entities from entire table.
         /// </summary>
         /// <returns>IQueryable to be used to select entities from database</returns>
-        IQueryable<TEntity> GetAll(bool isMaster = false);
+        IQueryable<TEntity> GetAll();
 
         /// <summary>
         ///     Used to get all entities.

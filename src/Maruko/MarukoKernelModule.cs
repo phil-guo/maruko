@@ -6,8 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Maruko
 {
+    //[LoadOn(true, nameof(Maruko))]
     public class MarukoKernelModule : MarukoModule
     {
-        public override double Order { get; set; } = 0.1;
+        public override double Order { get; set; } = 1;
     }
 }

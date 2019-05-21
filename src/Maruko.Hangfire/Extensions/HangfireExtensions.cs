@@ -10,18 +10,21 @@ namespace Maruko.Hangfire.Extensions
 {
     public static class HangfireExtensions
     {
-        public static void AddHangfire(this IServiceCollection services)
+        public static IServiceCollection AddHangfire(this IServiceCollection services)
         {
             services.AddHangfire(x => x.UseMemoryStorage());
+            return services;
         }
 
-        public static void UseHangfire(this IApplicationBuilder app)
+        public static IApplicationBuilder UseHangfire(this IApplicationBuilder app)
         {
             app.UseHangfireServer();
             app.UseHangfireDashboard("/hangfire", new DashboardOptions()
             {
                 Authorization = new[] { new CustomAuthorizeFilter(), }
             });
+
+            return app;
         }
     }
 }

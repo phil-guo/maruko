@@ -18,7 +18,7 @@ namespace Maruko.EntityFrameworkCore.UnitOfWork
         /// <typeparam name="TEntity">实体</typeparam>
         /// <typeparam name="TPrimaryKey">主键</typeparam>
         /// <returns></returns>
-        DbSet<TEntity> CreateSet<TEntity, TPrimaryKey>(ContextType contextType)
+        DbSet<TEntity> CreateSet<TEntity, TPrimaryKey>()
             where TEntity : FullAuditedEntity<TPrimaryKey>;
 
         /// <summary>

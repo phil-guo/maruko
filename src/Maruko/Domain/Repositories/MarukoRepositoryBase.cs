@@ -69,17 +69,26 @@ namespace Maruko.Domain.Repositories
         }
 
         public abstract void Delete(TEntity entity);
+        
+        public TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate)
+        {
+            return GetAll().SingleOrDefault(predicate);
+        }
+
+        #region protected Methods
 
         protected static Expression<Func<TEntity, bool>> CreateEqualityExpressionForId(TPrimaryKey id)
         {
-            var lambdaParam = Expression.Parameter(typeof (TEntity));
+            var lambdaParam = Expression.Parameter(typeof(TEntity));
 
             var lambdaBody = Expression.Equal(
                 Expression.PropertyOrField(lambdaParam, "Id"),
-                Expression.Constant(id, typeof (TPrimaryKey))
-                );
+                Expression.Constant(id, typeof(TPrimaryKey))
+            );
 
             return Expression.Lambda<Func<TEntity, bool>>(lambdaBody, lambdaParam);
         }
+
+        #endregion
     }
 }

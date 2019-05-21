@@ -5,8 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\Maruko.AutoMapper\Maruko.AutoMapper.csproj" />
-    <ProjectReference Include="..\..\..\src\Maruko\Maruko.csproj" />
     <ProjectReference Include="..\Maruko.Demo.Core\Maruko.Demo.Core.csproj" />
   </ItemGroup>
 

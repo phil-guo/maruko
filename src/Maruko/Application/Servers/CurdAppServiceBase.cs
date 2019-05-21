@@ -10,6 +10,7 @@ namespace Maruko.Application.Servers
         where TEntity : class, IEntity<TPrimaryKey>
         where TUpdateEntityDto : EntityDto<TPrimaryKey>
         where TEntityDto : EntityDto<TPrimaryKey>
+        //where TCreateEntityDto : EntityDto<TPrimaryKey>
     {
         public readonly IObjectMapper ObjectMapper;
 
@@ -23,7 +24,7 @@ namespace Maruko.Application.Servers
                 typeof(CurdAppService<TEntity, TPrimaryKey, TEntityDto, TCreateEntityDto, TUpdateEntityDto>));
         }
 
-        protected virtual TEntity MapToEntity(TCreateEntityDto createInput)
+        protected virtual TEntity MapCreateToEntity(TCreateEntityDto createInput)
         {
             return ObjectMapper.Map<TEntity>(createInput);
         }

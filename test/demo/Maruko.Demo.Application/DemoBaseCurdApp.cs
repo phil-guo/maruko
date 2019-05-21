@@ -10,10 +10,10 @@ namespace Maruko.Demo.Application
         where TEntity : FullAuditedEntity<long>
         where TUpdateEntityDto : EntityDto
     {
-        public DemoBaseCurdApp(IRepository<TEntity, long> repository)
-            : base(repository)
-        {
-        }
+        //public DemoBaseCurdApp(IRepository<TEntity, long> repository)
+        //    : base(repository)
+        //{
+        //}
 
         /// <summary>
         /// 添加一条数据

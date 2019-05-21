@@ -4,8 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Maruko.EntityFrameworkCore
 {
+    //[LoadOn(true, @"Maruko.EntityFrameworkCore")]
     public class EntityFrameworkCoreModule : MarukoModule
     {
-        public override double Order { get; set; } = 0.3;
+        public override double Order { get; set; } = 4;
     }
 }
