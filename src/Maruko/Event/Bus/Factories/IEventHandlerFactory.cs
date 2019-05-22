@@ -20,10 +20,10 @@ namespace Maruko.Event.Bus.Factories
         /// <returns></returns>
         Type GetHandlerType();
 
-        ///// <summary>
-        ///// Releases an event handler.
-        ///// </summary>
-        ///// <param name="handler">Handle to be released</param>
-        //void ReleaseHandler(IEventHandler handler);
+        /// <summary>
+        /// Releases an event handler.
+        /// </summary>
+        /// <param name="handler">Handle to be released</param>
+        void ReleaseHandler(IEventHandler handler);
     }
 }
