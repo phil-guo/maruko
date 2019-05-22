@@ -1,6 +1,5 @@
 using System;
 using Maruko.Dependency;
-using Maruko.Events.Bus.Handlers;
 
 namespace Maruko.Event.Bus.Handlers.Internals
 {
@@ -33,6 +32,15 @@ namespace Maruko.Event.Bus.Handlers.Internals
         public void HandleEvent(TEventData eventData)
         {
             Action(eventData);
+        }
+
+        public void Dispose()
+        {
+        }
+
+        public void AddInstanceForDisposal(IDisposable instance)
+        {
+            instance.Dispose();
         }
     }
 }

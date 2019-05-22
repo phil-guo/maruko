@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Maruko.Events.Bus.Handlers;
+using Maruko.Event.Bus.Handlers;
 
 namespace Maruko.Event.Bus
 {

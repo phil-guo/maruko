@@ -3,10 +3,13 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Maruko.Events.Bus.Handlers;
+using Maruko.Event.Bus.Handlers;
 
 namespace Maruko.Event.Bus
 {
+    /// <summary>
+    /// 实现IEventStore，这里将事件处理对象与事件源映射信息存储在内存中(无需持久化)
+    /// </summary>
     public class InMemoryEventStore : IEventStore
     {
         /// <summary>

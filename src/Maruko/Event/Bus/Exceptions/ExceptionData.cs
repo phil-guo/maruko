@@ -1,7 +1,6 @@
 ﻿using System;
-using Maruko.Event.Bus;
 
-namespace Maruko.Events.Bus.Exceptions
+namespace Maruko.Event.Bus.Exceptions
 {
     /// <summary>
     /// This type of events can be used to notify for an exception.

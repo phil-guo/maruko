@@ -1,7 +1,7 @@
 using System;
-using Maruko.Events.Bus.Handlers;
+using Maruko.Event.Bus.Handlers;
 
-namespace Maruko.Events.Bus.Factories.Internals
+namespace Maruko.Event.Bus.Factories.Internals
 {
     /// <summary>
     /// This <see cref="IEventHandlerFactory"/> implementation is used to handle events

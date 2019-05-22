@@ -2,9 +2,9 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using Autofac;
 using Maruko.AspNetMvc.Cache;
+using Maruko.Utils;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
@@ -26,7 +26,7 @@ namespace Maruko.AspNetMvc.Jwt
                 validatedToken = null;
 
 
-                var cache = AutofacContainer.WLContainer.Resolve<IMarukoCache>();
+                var cache = ContainerManager.Current.Resolve<IMarukoCache>();
 
 
                 var token = new JwtSecurityToken(securityToken);

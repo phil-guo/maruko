@@ -1,8 +1,7 @@
 using System;
-using Maruko.Events.Bus.Handlers;
-using Maruko.Reflection;
+using Maruko.Event.Bus.Handlers;
 
-namespace Maruko.Events.Bus.Factories.Internals
+namespace Maruko.Event.Bus.Factories.Internals
 {
     /// <summary>
     /// This <see cref="IEventHandlerFactory"/> implementation is used to handle events
@@ -34,7 +33,8 @@ namespace Maruko.Events.Bus.Factories.Internals
 
         public Type GetHandlerType()
         {
-            return ProxyHelper.UnProxy(HandlerInstance).GetType();
+            //return ProxyHelper.UnProxy(HandlerInstance).GetType();
+            return null;
         }
 
         public void ReleaseHandler(IEventHandler handler)

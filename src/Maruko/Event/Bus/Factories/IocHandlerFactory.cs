@@ -1,8 +1,8 @@
 using System;
-using Maruko.Dependency;
-using Maruko.Events.Bus.Handlers;
+using Autofac;
+using Maruko.Event.Bus.Handlers;
 
-namespace Maruko.Events.Bus.Factories
+namespace Maruko.Event.Bus.Factories
 {
     /// <summary>
     /// This <see cref="IEventHandlerFactory"/> implementation is used to get/release
@@ -15,14 +15,14 @@ namespace Maruko.Events.Bus.Factories
         /// </summary>
         public Type HandlerType { get; }
 
-        private readonly IIocResolver _iocResolver;
+        private readonly IContainer _iocResolver;
 
         /// <summary>
         /// Creates a new instance of <see cref="IocHandlerFactory"/> class.
         /// </summary>
         /// <param name="iocResolver"></param>
         /// <param name="handlerType">Type of the handler</param>
-        public IocHandlerFactory(IIocResolver iocResolver, Type handlerType)
+        public IocHandlerFactory(IContainer iocResolver, Type handlerType)
         {
             _iocResolver = iocResolver;
             HandlerType = handlerType;
@@ -48,7 +48,7 @@ namespace Maruko.Events.Bus.Factories
         /// <param name="handler">Handler to be released</param>
         public void ReleaseHandler(IEventHandler handler)
         {
-            _iocResolver.Release(handler);
+            //_iocResolver
         }
     }
 }

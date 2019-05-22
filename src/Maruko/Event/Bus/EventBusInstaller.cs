@@ -1,62 +1,28 @@
 ﻿using System.Reflection;
-using Maruko.Configuration.Startup;
-using Maruko.Dependency;
-using Maruko.Events.Bus.Factories;
-using Maruko.Events.Bus.Handlers;
-using Castle.MicroKernel;
-using Castle.MicroKernel.Registration;
-using Castle.MicroKernel.SubSystems.Configuration;
-using Castle.Windsor;
-using Maruko.Event.Bus;
+using Autofac;
+using Maruko.Event.Bus.Factories;
+using Maruko.Event.Bus.Handlers;
+using Maruko.Utils;
 
-namespace Maruko.Events.Bus
+namespace Maruko.Event.Bus
 {
     /// <summary>
     /// Installs event bus system and registers all handlers automatically.
     /// </summary>
-    internal class EventBusInstaller : IWindsorInstaller
+    internal class EventBusInstaller
     {
-        private readonly IIocResolver _iocResolver;
-        private readonly IEventBusConfiguration _eventBusConfiguration;
-        private IEventBus _eventBus;
 
-        public EventBusInstaller(IIocResolver iocResolver)
+        private IEventStore _eventStore;
+        
+        public void Install()
         {
-            _iocResolver = iocResolver;
-            _eventBusConfiguration = iocResolver.Resolve<IEventBusConfiguration>();
+            Kernel_ComponentRegistered();
         }
 
-        public void Install(IWindsorContainer container, IConfigurationStore store)
+        private void Kernel_ComponentRegistered()
         {
-            if (_eventBusConfiguration.UseDefaultEventBus)
-            {
-                container.Register(
-                    Component.For<IEventBus>().UsingFactoryMethod(() => EventBus.Default).LifestyleSingleton()
-                    );
-            }
-            else
-            {
-                container.Register(
-                    Component.For<IEventBus>().ImplementedBy<EventBus>().LifestyleSingleton()
-                    );
-            }
-
-            _eventBus = container.Resolve<IEventBus>();
-
-            container.Kernel.ComponentRegistered += Kernel_ComponentRegistered;
-        }
-
-        private void Kernel_ComponentRegistered(string key, IHandler handler)
-        {
-            /* This code checks if registering component implements any IEventHandler<TEventData> interface, if yes,
-             * gets all event handler interfaces and registers type to Event Bus for each handling event.
-             */
-            if (!typeof(IEventHandler).GetTypeInfo().IsAssignableFrom(handler.ComponentModel.Implementation))
-            {
-                return;
-            }
-
-            var interfaces = handler.ComponentModel.Implementation.GetTypeInfo().GetInterfaces();
+            _eventStore = ContainerManager.Current.Resolve<IEventStore>();
+            var interfaces = typeof(IEventHandler).GetTypeInfo().GetInterfaces();
             foreach (var @interface in interfaces)
             {
                 if (!typeof(IEventHandler).GetTypeInfo().IsAssignableFrom(@interface))
@@ -67,7 +33,7 @@ namespace Maruko.Events.Bus
                 var genericArgs = @interface.GetGenericArguments();
                 if (genericArgs.Length == 1)
                 {
-                    _eventBus.Register(genericArgs[0], new IocHandlerFactory(_iocResolver, handler.ComponentModel.Implementation));
+                    //_eventStore.AddRegister(@interface,)
                 }
             }
         }

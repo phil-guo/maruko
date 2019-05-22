@@ -1,4 +1,4 @@
-﻿namespace Maruko.Events.Bus.Handlers
+﻿namespace Maruko.Event.Bus.Handlers
 {
     /// <summary>
     ///泛型事件处理器接口 <see cref="IEventHandler{TEventData}"/>.

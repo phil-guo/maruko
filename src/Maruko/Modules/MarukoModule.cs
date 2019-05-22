@@ -36,6 +36,8 @@ namespace Maruko.Modules
             }
         }
 
+        protected virtual void RegisterCustomModule(ContainerBuilder builder) { }
+
         protected override void Load(ContainerBuilder builder)
         {
             TypeFindExtensions.AddAssmbly(ThisAssembly);
@@ -44,7 +46,8 @@ namespace Maruko.Modules
                 builder.AddDependencyRegister(TypeFindExtensions.DictionaryAssembly["Assembly"] ?? new List<Assembly>());
 
             base.Load(builder);
+
+            RegisterCustomModule(builder);
         }
     }
 }
-    

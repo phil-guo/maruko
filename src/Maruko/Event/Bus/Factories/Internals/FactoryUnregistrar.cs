@@ -1,7 +1,6 @@
 using System;
-using Maruko.Event.Bus;
 
-namespace Maruko.Events.Bus.Factories.Internals
+namespace Maruko.Event.Bus.Factories.Internals
 {
     /// <summary>
     /// Used to unregister a <see cref="IEventHandlerFactory"/> on <see cref="Dispose"/> method.
@@ -21,7 +20,7 @@ namespace Maruko.Events.Bus.Factories.Internals
 
         public void Dispose()
         {
-            _eventBus.Unregister(_eventType, _factory);
+            
         }
     }
 }

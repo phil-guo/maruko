@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.ExceptionServices;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Maruko.Extensions
 {
@@ -10,7 +12,7 @@ namespace Maruko.Extensions
     public static class ExceptionExtensions
     {
         /// <summary>
-        /// Uses <see cref="ExceptionDispatchInfo.Capture"/> method to re-throws exception
+        /// Uses <see cref="Capture"/> method to re-throws exception
         /// while preserving stack trace.
         /// </summary>
         /// <param name="exception">Exception to be re-thrown</param>

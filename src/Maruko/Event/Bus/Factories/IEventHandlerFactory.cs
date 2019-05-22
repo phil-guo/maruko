@@ -1,7 +1,7 @@
 using System;
-using Maruko.Events.Bus.Handlers;
+using Maruko.Event.Bus.Handlers;
 
-namespace Maruko.Events.Bus.Factories
+namespace Maruko.Event.Bus.Factories
 {
     /// <summary>
     /// Defines an interface for factories those are responsible to create/get and release of event handlers.
@@ -20,10 +20,10 @@ namespace Maruko.Events.Bus.Factories
         /// <returns></returns>
         Type GetHandlerType();
 
-        /// <summary>
-        /// Releases an event handler.
-        /// </summary>
-        /// <param name="handler">Handle to be released</param>
-        void ReleaseHandler(IEventHandler handler);
+        ///// <summary>
+        ///// Releases an event handler.
+        ///// </summary>
+        ///// <param name="handler">Handle to be released</param>
+        //void ReleaseHandler(IEventHandler handler);
     }
 }

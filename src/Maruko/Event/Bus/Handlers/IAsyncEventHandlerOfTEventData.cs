@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Maruko.Events.Bus.Handlers
+namespace Maruko.Event.Bus.Handlers
 {
     /// <summary>
     /// 异步泛型事件处理器接口 <see cref="IAsyncEventHandler{TEventData}"/>.

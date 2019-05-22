@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using Maruko.Dependency;
-using Maruko.Events.Bus.Handlers;
 
 namespace Maruko.Event.Bus.Handlers.Internals
 {
