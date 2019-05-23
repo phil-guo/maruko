@@ -9,6 +9,14 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.2.1</Version>
+    <Authors>simple</Authors>
+    <PackageId>Maruko.AutoMapper</PackageId>
+    <PackageTags>maruko;.NET Core</PackageTags>
+    <PackageProjectUrl>https://github.com/SkipperGuo/maruko</PackageProjectUrl>
+    <Description>数据传输对象转换工具</Description>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
