@@ -9,7 +9,7 @@ namespace Maruko.AspNetMvc.Filters
     {
         public void OnException(ExceptionContext context)
         {
-            var exception = (context.Exception as PaymentException) ?? new PaymentException(context.Exception.Message, ServiceEnum.Failure);
+            var exception = (context.Exception as MarukoException) ?? new MarukoException(context.Exception.Message, ServiceEnum.Failure);
 
             var response = new ApiReponse<object>
             {

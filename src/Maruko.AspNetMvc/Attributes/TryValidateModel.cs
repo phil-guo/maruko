@@ -7,7 +7,7 @@ namespace Maruko.AspNetMvc.Attributes
         public override bool IsValid(object value)
         {
             if (value == null || string.IsNullOrEmpty(value.ToString()))
-                throw new PaymentException(ErrorMessage);
+                throw new MarukoException(ErrorMessage);
             return true;
         }
     }
