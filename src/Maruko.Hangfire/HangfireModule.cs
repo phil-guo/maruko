@@ -4,7 +4,7 @@ namespace Maruko.Hangfire
 {
     public class HangfireModule : MarukoModule
     {
-        public override double Order { get; set; } = 5;
+        public override double Order { get; set; } = 0.5;
     }
 
 }

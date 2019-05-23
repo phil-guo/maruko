@@ -1,4 +1,6 @@
-﻿namespace Maruko.AspNetMvc.Service
+﻿using Maruko.Application;
+
+namespace Maruko.AspNetMvc.Service
 {
     public class ApiReponse<T>
     {

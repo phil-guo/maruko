@@ -1,4 +1,5 @@
 ﻿using System;
+using Maruko.Application;
 using Maruko.AspNetMvc.Service;
 
 namespace Maruko.AspNetMvc

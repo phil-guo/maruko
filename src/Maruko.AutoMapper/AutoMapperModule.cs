@@ -8,14 +8,13 @@ namespace Maruko.AutoMapper
 {
     public class AutoMapperModule : MarukoModule
     {
-        public override double Order { get; set; } = 3;
+        public override double Order { get; set; } = 0.3;
 
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);
             MapperInitialize.CreateMappings();
             builder.RegisterType<AutoMapperObjectMapper>().As<IObjectMapper>().SingleInstance();
-            //builder.RegisterType<Mapper>().As<IMapper>().SingleInstance();
         }
     }
 }

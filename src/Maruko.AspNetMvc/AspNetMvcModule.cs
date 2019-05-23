@@ -5,6 +5,6 @@ namespace Maruko.AspNetMvc
     //[LoadOn(true, "Maruko.AspNetMvc")]
     public class AspNetMvcModule : MarukoModule
     {
-        public override double Order { get; set; } = 2;
+        public override double Order { get; set; } = 0.2;
     }
 }
