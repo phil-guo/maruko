@@ -8,8 +8,7 @@ namespace Maruko.Event.Bus.Handlers.Internals
     /// </summary>
     /// <typeparam name="TEventData">Event type</typeparam>
     internal class ActionEventHandler<TEventData> :
-        IEventHandler<TEventData>,
-        IDependencyTransient
+        IEventHandler<TEventData>
     {
         /// <summary>
         /// Action to handle the event.

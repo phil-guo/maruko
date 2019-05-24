@@ -33,14 +33,7 @@ namespace Maruko.Domain.Repositories
         /// </summary>
         /// <param name="entity">Entity</param>
         TEntity Update(TEntity entity);
-
-        ///// <summary>
-        ///// 更新指定列
-        ///// </summary>
-        ///// <param name="entity"></param>
-        ///// <param name="funcColums"></param>
-        ///// <returns></returns>
-        //TEntity UpdateColumn(TEntity entity, Func<TEntity, string[]> funcColums);
+       
         #endregion
 
         #region Select/Get/Query
