@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.Extensions.Caching.Memory;
 
-namespace Maruko.AspNetMvc.Cache.Imp
+namespace Maruko.Runtime.Cache.Imp
 {
-    public class MarukoMemoryCahce : IMarukoCache
+    public class MarukoMemoryCahce : IMkoCache
     {
         private IMemoryCache _cache;
 

@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Maruko.Dependency;
 using Microsoft.Extensions.Caching.Memory;
 
-namespace Maruko.AspNetMvc.Cache
+namespace Maruko.Runtime.Cache
 {
-    public interface IMarukoCache : IDependencySingleton
+    public interface IMkoCache : IDependencySingleton
     {
         T Set<T>(string cacheKey, T cachevalue);
         T Set<T>(string cacheKey, T cachevalue, DateTimeOffset absoluteExpiration);

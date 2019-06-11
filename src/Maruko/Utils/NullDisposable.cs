@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Maruko.Utils.Etc
+namespace Maruko.Utils
 {
     /// <summary>
     /// This class is used to simulate a Disposable that does nothing.
