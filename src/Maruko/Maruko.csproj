@@ -10,7 +10,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.2.2</Version>
+    <Version>0.2.3</Version>
     <Authors>simple</Authors>
     <PackageId>maruko</PackageId>
     <PackageTags>maruko;.NET Core</PackageTags>
