@@ -10,7 +10,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.2.1</Version>
+    <Version>0.2.2</Version>
     <Authors>simple</Authors>
     <PackageId>Maruko.AutoMapper</PackageId>
     <PackageTags>maruko;.NET Core</PackageTags>
