@@ -25,15 +25,15 @@ namespace Maruko.Reflection
         {
             var assemblies = new List<Assembly>();
 
-            var libs = DependencyContext.Default.CompileLibraries;
+            var libs = Assembly.GetEntryAssembly().GetReferencedAssemblies();
 
             foreach (var lib in libs)
             {
-                if (lib.Serviceable)
-                    continue;
+                //if (lib.Serviceable)
+                //    continue;
 
-                if (lib.Type == "package")
-                    continue;
+                //if (lib.Type == "package")
+                //    continue;
 
                 var assembly = Assembly.Load(new AssemblyName(lib.Name));
 
