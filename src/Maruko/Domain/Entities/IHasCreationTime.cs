@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Maruko.Domain.Entities
+namespace Maruko.Core.Domain.Entities
 {
     /// <summary>
     ///     创建时间

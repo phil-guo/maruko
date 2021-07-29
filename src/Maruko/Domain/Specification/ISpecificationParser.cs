@@ -1,4 +1,6 @@
-﻿namespace Maruko.Domain.Specification
+﻿using Maruko.Domain.Specification;
+
+namespace Maruko.Core.Domain.Specification
 {
     /// <summary>
     /// Represents that the implemented classes are specification parsers that

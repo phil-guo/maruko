@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using System.Text.RegularExpressions;
 
-namespace Maruko.Attributes
+namespace Maruko.Core.Attributes
 {
     /// <summary>
     /// 限定最小值

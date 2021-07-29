@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Maruko.Extensions
+namespace Maruko.Core.Extensions
 {
     public static class CollectionExtensions
     {

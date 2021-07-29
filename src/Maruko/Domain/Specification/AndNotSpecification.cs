@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Maruko.Domain.Specification
+namespace Maruko.Core.Domain.Specification
 {
     /// <summary>
     /// Represents the combined specification which indicates that the first specification

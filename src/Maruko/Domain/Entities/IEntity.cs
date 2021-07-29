@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace Maruko.Domain.Entities
+namespace Maruko.Core.Domain.Entities
 {
     /// <summary>
     ///     long类型的主键
     /// </summary>
-    public interface IEntity : IEntity<Guid>
+    public interface IEntity : IEntity<long>
     {
     }
 }

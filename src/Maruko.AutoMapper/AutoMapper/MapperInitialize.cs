@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using AutoMapper;
-using Maruko.Reflection;
+using Maruko.Core.Reflection;
 
 namespace Maruko.AutoMapper.AutoMapper
 {

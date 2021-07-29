@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Maruko.Attributes
+namespace Maruko.Core.Attributes
 {
     public class StringNotEmptyAttribute : RequiredAttribute {
         public override bool IsValid(object value)

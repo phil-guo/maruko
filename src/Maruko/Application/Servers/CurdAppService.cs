@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Maruko.Application.Servers.Dto;
+using Maruko.Core.Application.Servers.Dto;
+using Maruko.Core.Domain.Entities;
+using Maruko.Core.Domain.Repositories;
+using Maruko.Core.ObjectMapping;
 using Maruko.Domain.Entities;
-using Maruko.Domain.Repositories;
-using Maruko.ObjectMapping;
 
-namespace Maruko.Application.Servers
+namespace Maruko.Core.Application.Servers
 {
     /// <summary>
     ///     增删改查基础实现
@@ -22,7 +23,6 @@ namespace Maruko.Application.Servers
         where TEntity : class, IEntity<TPrimaryKey>
         where TUpdateEntityDto : EntityDto<TPrimaryKey>
         where TEntityDto : EntityDto<TPrimaryKey>
-        //where TCreateEntityDto: EntityDto<TPrimaryKey>
     {
         public readonly IRepository<TEntity, TPrimaryKey> Repository;
 
@@ -89,11 +89,10 @@ namespace Maruko.Application.Servers
     }
 
     public abstract class CurdAppService<TEntity, TEntityDto, TCreateEntityDto, TUpdateEntityDto> :
-        CurdAppServiceBase<TEntity, int, TEntityDto, TCreateEntityDto, TUpdateEntityDto>,
-        ICurdAppService<TEntity, TEntityDto, TCreateEntityDto, TUpdateEntityDto>
-        where TEntity : class, IEntity<int>
-        where TUpdateEntityDto : EntityDto<int>
-        where TEntityDto : EntityDto<int>
+        CurdAppServiceBase<TEntity, long, TEntityDto, TCreateEntityDto, TUpdateEntityDto>, ICurdAppService<TEntity, TEntityDto, TCreateEntityDto, TUpdateEntityDto>
+        where TEntity : class, IEntity<long>
+        where TUpdateEntityDto : EntityDto<long>
+        where TEntityDto : EntityDto<long>
     {
         public readonly IRepository<TEntity> Repository;
 
@@ -102,12 +101,12 @@ namespace Maruko.Application.Servers
             Repository = repository;
         }
 
-        public virtual void Delete(int id)
+        public virtual void Delete(long id)
         {
             Repository.Delete(id);
         }
 
-        public virtual TEntity FirstOrDefault(int id)
+        public virtual TEntity FirstOrDefault(long id)
         {
             return Repository.FirstOrDefault(id);
         }

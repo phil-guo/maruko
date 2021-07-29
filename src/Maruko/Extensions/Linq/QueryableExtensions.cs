@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
-namespace Maruko.Extensions.Linq
+namespace Maruko.Core.Extensions.Linq
 {
     public static class QueryableExtensions
     {

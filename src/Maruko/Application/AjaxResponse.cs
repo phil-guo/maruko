@@ -1,10 +1,10 @@
-﻿namespace Maruko.Application
+﻿namespace Maruko.Core.Application
 {
     /// <summary>
     /// API 返回对象
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class ApiReponse<T>
+    public class AjaxResponse<T>
     {
         /// <summary>
         /// 构造函数
@@ -12,7 +12,7 @@
         /// <param name="datas"></param>
         /// <param name="msg"></param>
         /// <param name="status"></param>
-        public ApiReponse(T datas, string msg = "", ServiceEnum status = ServiceEnum.Success)
+        public AjaxResponse(T datas, string msg = "", int status = 200)
         {
             Result = datas;
             Status = status;
@@ -24,7 +24,7 @@
         /// </summary>
         /// <param name="msg"></param>
         /// <param name="status"></param>
-        public ApiReponse(string msg, ServiceEnum status = ServiceEnum.Success)
+        public AjaxResponse(string msg, int status = 200)
         {
             Msg = msg;
             Status = status;
@@ -33,7 +33,7 @@
         /// <summary>
         /// 构造函数
         /// </summary>
-        public ApiReponse()
+        public AjaxResponse()
         {
         }
 
@@ -50,6 +50,6 @@
         /// <summary>
         /// 返回业务状态
         /// </summary>
-        public ServiceEnum Status { get; set; }
+        public int Status { get; set; }
     }
 }

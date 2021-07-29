@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Maruko.Extensions
+namespace Maruko.Core.Extensions
 {
     public static class LockExtensions
     {

@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Maruko.Core.Domain.Entities;
 using Maruko.Domain.Entities;
 
-namespace Maruko.Domain.Repositories
+namespace Maruko.Core.Domain.Repositories
 {
     /// <summary>
     ///     A shortcut of <see cref="IRepository{TEntity,TPrimaryKey}" /> for most used primary key type (<see cref="Guid" />).
     /// </summary>
     /// <typeparam name="TEntity">Entity type</typeparam>
-    public interface IRepository<TEntity> : IRepository<TEntity, int>
-        where TEntity : class, IEntity<int>
+    public interface IRepository<TEntity> : IRepository<TEntity, long>
+        where TEntity : class, IEntity<long>
     {
         /// <summary>
         /// 分页查询

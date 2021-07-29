@@ -1,4 +1,4 @@
-﻿namespace Maruko.Domain.Entities
+﻿namespace Maruko.Core.Domain.Entities
 {
     /// <summary>
     ///     软删除接口

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Maruko.Extensions;
+using Maruko.Core.Extensions;
 
-namespace Maruko.Reflection
+namespace Maruko.Core.Reflection
 {
     public static class TypeFindExtensions
     {

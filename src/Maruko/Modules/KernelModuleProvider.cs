@@ -7,7 +7,7 @@ namespace Maruko.Core.Modules
 {
     public class KernelModuleProvider : IKernelModuleProvider
     {
-        private List<KernelModule> _modules;
+        private readonly List<KernelModule> _modules;
 
         public KernelModuleProvider(List<KernelModule> modules)
         {
@@ -16,7 +16,7 @@ namespace Maruko.Core.Modules
 
         public void Initialize()
         {
-            this.TryCatch(() => { _modules.ForEach(item => { item.Initialize(AutofacExtensions.Current, AutofacExtensions.Services); }); }, "模块初始化错误");
+            this.TryCatch(() => { _modules.ForEach(item => { item.Initialize(AutofacExtensions.Current); }); }, "模块初始化错误");
         }
     }
 }

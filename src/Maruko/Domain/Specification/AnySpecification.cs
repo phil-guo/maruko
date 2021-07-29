@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Maruko.Domain.Specification
+namespace Maruko.Core.Domain.Specification
 {
     /// <summary>
     /// Represents the specification that can be satisfied by the given object

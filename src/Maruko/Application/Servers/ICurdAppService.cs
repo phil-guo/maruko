@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Maruko.Application.Servers.Dto;
+using Maruko.Core.Application.Servers.Dto;
+using Maruko.Core.Domain.Entities;
 using Maruko.Domain.Entities;
 
-namespace Maruko.Application.Servers
+namespace Maruko.Core.Application.Servers
 {
     public interface ICurdAppService<TEntity, in TPrimaryKey, out TEntityDto, in TCreateEntityDto, in TUpdateEntityDto>
         where TEntity : class, IEntity<TPrimaryKey>
@@ -47,10 +48,10 @@ namespace Maruko.Application.Servers
     }
 
     public interface ICurdAppService<TEntity, TEntityDto, TCreateEntityDto, in TUpdateEntityDto>
-        : ICurdAppService<TEntity, int, TEntityDto, TCreateEntityDto, TUpdateEntityDto>
-        where TEntity : class, IEntity<int>
-        where TUpdateEntityDto : EntityDto<int>
-        where TEntityDto : EntityDto<int>
+        : ICurdAppService<TEntity, long, TEntityDto, TCreateEntityDto, TUpdateEntityDto>
+        where TEntity : class, IEntity<long>
+        where TUpdateEntityDto : EntityDto<long>
+        where TEntityDto : EntityDto<long>
     {
         /// <summary>
         /// 批量提交

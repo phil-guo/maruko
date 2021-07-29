@@ -1,5 +1,5 @@
 ﻿
-namespace Maruko.Domain.Specification
+namespace Maruko.Core.Domain.Specification
 {
     /// <summary>
     /// Represents that the implemented classes are composite specifications.

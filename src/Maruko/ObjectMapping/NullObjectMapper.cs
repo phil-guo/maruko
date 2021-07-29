@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Maruko.ObjectMapping
+namespace Maruko.Core.ObjectMapping
 {
     public sealed class NullObjectMapper : IObjectMapper
     {

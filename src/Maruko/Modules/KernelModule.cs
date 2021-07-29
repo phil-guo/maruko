@@ -23,7 +23,7 @@ namespace Maruko.Core.Modules
             }
         }
 
-        public virtual void Initialize(ILifetimeScope scope, IServiceCollection service)
+        public virtual void Initialize(ILifetimeScope scope)
         {
 
         }

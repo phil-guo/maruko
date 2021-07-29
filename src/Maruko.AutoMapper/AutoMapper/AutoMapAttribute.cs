@@ -1,6 +1,6 @@
 ﻿using System;
 using AutoMapper;
-using Maruko.Extensions;
+using Maruko.Core.Extensions;
 
 namespace Maruko.AutoMapper.AutoMapper
 {

@@ -1,4 +1,4 @@
-﻿namespace Maruko.Application.Servers.Dto
+﻿namespace Maruko.Core.Application.Servers.Dto
 {
     /// <summary>
     /// 分页返回结果

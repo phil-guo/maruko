@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.Core", "src\Maruko\M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.AutoMapper", "src\Maruko.AutoMapper\Maruko.AutoMapper.csproj", "{6CAE4580-CEFD-455B-AD52-5BAE1BC4A94A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.EntityFrameworkCore", "src\Maruko.EntityFrameworkCore\Maruko.EntityFrameworkCore.csproj", "{E0461677-C798-47CE-8A57-8022EAC70403}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{6CAE4580-CEFD-455B-AD52-5BAE1BC4A94A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CAE4580-CEFD-455B-AD52-5BAE1BC4A94A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CAE4580-CEFD-455B-AD52-5BAE1BC4A94A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E0461677-C798-47CE-8A57-8022EAC70403}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E0461677-C798-47CE-8A57-8022EAC70403}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E0461677-C798-47CE-8A57-8022EAC70403}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E0461677-C798-47CE-8A57-8022EAC70403}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Maruko.Extensions
+namespace Maruko.Core.Extensions
 {
     public static class IntExtensions
     {
@@ -9,12 +9,12 @@ namespace Maruko.Extensions
         /// </summary>
         /// <param name="length">验证码的长度</param>
         /// <returns></returns>
-        public static string BulidValidateCode(this int length)
+        public static string BuilderValidateCode(this int length)
         {
-            return BulidStr(length, true);
+            return BuilderStr(length, true);
         }
 
-        private static string BulidStr(int length, bool sleep)
+        private static string BuilderStr(int length, bool sleep)
         {
             if (sleep)
                 System.Threading.Thread.Sleep(3);

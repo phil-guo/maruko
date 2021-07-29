@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
+using Maruko.Domain.Specification;
 
-namespace Maruko.Domain.Specification
+namespace Maruko.Core.Domain.Specification
 {
     /// <summary>
     /// Represents the base class for specifications.

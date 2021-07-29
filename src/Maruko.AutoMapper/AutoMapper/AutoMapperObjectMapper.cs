@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using IObjectMapper = Maruko.ObjectMapping.IObjectMapper;
+using IObjectMapper = Maruko.Core.ObjectMapping.IObjectMapper;
 
 namespace Maruko.AutoMapper.AutoMapper
 {
-    public class AutoMapperObjectMapper : IObjectMapper
+    public class AutoMapperObjectMapper : Core.ObjectMapping.IObjectMapper
     {
         //private readonly IMapper _mapper;
 

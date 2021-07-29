@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Maruko.ObjectMapping
+﻿namespace Maruko.Core.ObjectMapping
 {
     public interface IObjectMapper
     {

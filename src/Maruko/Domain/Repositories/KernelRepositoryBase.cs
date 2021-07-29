@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Maruko.Domain.Entities.Auditing;
-using Maruko.Domain.UnitOfWork;
+using Maruko.Core.Domain.Entities.Auditing;
+using Maruko.Core.Domain.UnitOfWork;
 
-namespace Maruko.Domain.Repositories
+namespace Maruko.Core.Domain.Repositories
 {
     /// <summary>
     /// 仓储的抽象实现
     /// </summary>
     /// <typeparam name="TEntity">实体</typeparam>
     /// <typeparam name="TPrimaryKey">主键</typeparam>
-    public abstract class MarukoRepositoryBase<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>
+    public abstract class KernelRepositoryBase<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>
         where TEntity : FullAuditedEntity<TPrimaryKey>
     {
         public abstract IQueryable<TEntity> GetAll();

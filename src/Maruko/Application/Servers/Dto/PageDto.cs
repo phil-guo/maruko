@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Maruko.Application.Servers.Dto
+namespace Maruko.Core.Application.Servers.Dto
 {
     public abstract class PageDto
     {

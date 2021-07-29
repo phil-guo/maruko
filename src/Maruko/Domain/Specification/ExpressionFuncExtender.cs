@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Maruko.Domain.Specification
+namespace Maruko.Core.Domain.Specification
 {
 
     /// <summary>

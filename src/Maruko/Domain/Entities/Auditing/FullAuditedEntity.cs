@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Maruko.Domain.Entities.Auditing
+namespace Maruko.Core.Domain.Entities.Auditing
 {
     /// <summary>
     ///     审计抽象<see cref="Entity{TPrimaryKey}" /> long 类型的主键(<see cref="long" />).
@@ -16,6 +16,4 @@ namespace Maruko.Domain.Entities.Auditing
         public DateTime? LastModificationTime { get; set; }
         public bool IsDeleted { get; set; } = false;
     }
-
-    
 }

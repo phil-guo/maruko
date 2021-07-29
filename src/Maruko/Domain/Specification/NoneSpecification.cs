@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using Maruko.Core.Domain.Specification;
 
 namespace Maruko.Domain.Specification
 {

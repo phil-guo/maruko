@@ -1,11 +1,9 @@
-﻿using Nito.AsyncEx;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
+using Nito.AsyncEx;
 
-namespace Maruko.Async
+namespace Maruko.Core.Async
 {
     public static class AsyncHelper
     {
@@ -19,16 +17,6 @@ namespace Maruko.Async
                 method.ReturnType == typeof(Task) ||
                 (method.ReturnType.GetTypeInfo().IsGenericType && method.ReturnType.GetGenericTypeDefinition() == typeof(Task<>))
             );
-        }
-
-        /// <summary>
-        /// Checks if given method is an async method.
-        /// </summary>
-        /// <param name="method">A method to check</param>
-        [Obsolete("Use MethodInfo.IsAsync() extension method!")]
-        public static bool IsAsyncMethod(MethodInfo method)
-        {
-            return method.IsAsync();
         }
 
         /// <summary>

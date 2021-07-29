@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Microsoft.Extensions.DependencyModel;
 
-namespace Maruko.Reflection
+namespace Maruko.Core.Reflection
 {
     public static class ReflectionHelper
     {
