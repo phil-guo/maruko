@@ -1,12 +1,12 @@
 ﻿using Autofac;
 using AutoMapper;
 using Maruko.AutoMapper.AutoMapper;
-using Maruko.Modules;
+using Maruko.Core.Modules;
 using IObjectMapper = Maruko.ObjectMapping.IObjectMapper;
 
 namespace Maruko.AutoMapper
 {
-    public class AutoMapperModule : MarukoModule
+    public class AutoMapperModule : KernelModule
     {
         public override double Order { get; set; } = 0.3;
 

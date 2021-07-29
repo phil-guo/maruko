@@ -1,19 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Autofac;
-using Maruko.Dependency.Installers;
-using Maruko.Modules;
-using Maruko.Reflection;
+using Maruko.Core.Modules;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Maruko.Extensions
+namespace Maruko.Core.Extensions
 {
     public static class AutofacExtensions
     {
-        public static void RegisterModulesExtension(this ContainerBuilder containerBuilder, Func<MarukoModule[]> func)
-        {
-            func().OrderBy(item=>item.Order).ToList().ForEach(module => { containerBuilder.RegisterModule(module); });
-        }
+        public static ILifetimeScope Current { get; set; }
+        public static IServiceCollection  Services { get; set; }
     }
 }

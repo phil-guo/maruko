@@ -24,7 +24,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Maruko\Maruko.csproj" />
+    <ProjectReference Include="..\Maruko\Maruko.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

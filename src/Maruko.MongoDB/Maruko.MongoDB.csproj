@@ -22,8 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Maruko.AspNetMvc\Maruko.AspNetMvc.csproj" />
-    <ProjectReference Include="..\Maruko\Maruko.csproj" />
+    <ProjectReference Include="..\Maruko\Maruko.Core.csproj" />
   </ItemGroup>
 
 </Project>

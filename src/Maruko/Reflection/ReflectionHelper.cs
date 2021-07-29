@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Maruko.Modules;
 using Microsoft.Extensions.DependencyModel;
 
 namespace Maruko.Reflection

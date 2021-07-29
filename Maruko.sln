@@ -3,21 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.452
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko", "src\Maruko\Maruko.csproj", "{1F84AC16-2532-4D57-933A-B1DEC0B96FE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.Core", "src\Maruko\Maruko.Core.csproj", "{1F84AC16-2532-4D57-933A-B1DEC0B96FE4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.AutoMapper", "src\Maruko.AutoMapper\Maruko.AutoMapper.csproj", "{6CAE4580-CEFD-455B-AD52-5BAE1BC4A94A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.EntityFrameworkCore", "src\Maruko.EntityFrameworkCore\Maruko.EntityFrameworkCore.csproj", "{E0461677-C798-47CE-8A57-8022EAC70403}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.Hangfire", "src\Maruko.Hangfire\Maruko.Hangfire.csproj", "{29CFAEA0-AEE9-446B-998F-8442BE91C20D}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{A69CBED9-CE0A-432D-A7B8-0538F97C43A9}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.MongoDB", "src\Maruko.MongoDB\Maruko.MongoDB.csproj", "{ED4B007E-8EC8-4BB7-BDEC-2023758382B4}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.AspNetMvc", "src\Maruko.AspNetMvc\Maruko.AspNetMvc.csproj", "{56EACDB8-F06B-41DF-AA9F-7234DBCA23AD}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.SqlSugarCore", "src\Maruko.SqlSugarCore\Maruko.SqlSugarCore.csproj", "{6DA6785D-6452-4776-8451-56D85EE9E550}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,22 +27,6 @@ Global
 		{E0461677-C798-47CE-8A57-8022EAC70403}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0461677-C798-47CE-8A57-8022EAC70403}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0461677-C798-47CE-8A57-8022EAC70403}.Release|Any CPU.Build.0 = Release|Any CPU
-		{29CFAEA0-AEE9-446B-998F-8442BE91C20D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{29CFAEA0-AEE9-446B-998F-8442BE91C20D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{29CFAEA0-AEE9-446B-998F-8442BE91C20D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{29CFAEA0-AEE9-446B-998F-8442BE91C20D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ED4B007E-8EC8-4BB7-BDEC-2023758382B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED4B007E-8EC8-4BB7-BDEC-2023758382B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ED4B007E-8EC8-4BB7-BDEC-2023758382B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ED4B007E-8EC8-4BB7-BDEC-2023758382B4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{56EACDB8-F06B-41DF-AA9F-7234DBCA23AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{56EACDB8-F06B-41DF-AA9F-7234DBCA23AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{56EACDB8-F06B-41DF-AA9F-7234DBCA23AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{56EACDB8-F06B-41DF-AA9F-7234DBCA23AD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6DA6785D-6452-4776-8451-56D85EE9E550}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6DA6785D-6452-4776-8451-56D85EE9E550}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6DA6785D-6452-4776-8451-56D85EE9E550}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6DA6785D-6452-4776-8451-56D85EE9E550}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

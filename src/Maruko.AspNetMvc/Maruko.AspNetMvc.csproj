@@ -32,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Maruko\Maruko.csproj" />
+    <ProjectReference Include="..\Maruko\Maruko.Core.csproj" />
   </ItemGroup>
 
 </Project>
