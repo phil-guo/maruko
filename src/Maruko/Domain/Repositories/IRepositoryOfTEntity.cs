@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using Maruko.Core.Domain.Entities;
-using Maruko.Domain.Entities;
 
 namespace Maruko.Core.Domain.Repositories
 {

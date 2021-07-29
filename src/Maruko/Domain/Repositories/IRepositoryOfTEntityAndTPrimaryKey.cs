@@ -4,7 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using Maruko.Core.Domain.Entities;
 using Maruko.Core.Domain.UnitOfWork;
-using Maruko.Domain.Entities;
 
 namespace Maruko.Core.Domain.Repositories
 {

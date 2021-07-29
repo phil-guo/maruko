@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FreeSql.Provider.MySql" Version="2.5.200" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Maruko\Maruko.Core.csproj" />
+  </ItemGroup>
+
+</Project>
