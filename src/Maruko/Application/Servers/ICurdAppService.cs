@@ -6,7 +6,7 @@ using Maruko.Core.Domain.Entities;
 
 namespace Maruko.Core.Application.Servers
 {
-    public interface ICurdAppService<TEntity, in TPrimaryKey, out TEntityDto, in TCreateEntityDto, in TUpdateEntityDto>
+    public interface ICurdAppServiceBase<TEntity, in TPrimaryKey, out TEntityDto, in TCreateEntityDto, in TUpdateEntityDto>
         where TEntity : class, IEntity<TPrimaryKey>
         where TUpdateEntityDto : EntityDto<TPrimaryKey>
         where TEntityDto : EntityDto<TPrimaryKey>
@@ -46,8 +46,8 @@ namespace Maruko.Core.Application.Servers
         TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate);
     }
 
-    public interface ICurdAppService<TEntity, TEntityDto, TCreateEntityDto, in TUpdateEntityDto>
-        : ICurdAppService<TEntity, long, TEntityDto, TCreateEntityDto, TUpdateEntityDto>
+    public interface ICurdAppServiceBase<TEntity, TEntityDto, TCreateEntityDto, in TUpdateEntityDto>
+        : ICurdAppServiceBase<TEntity, long, TEntityDto, TCreateEntityDto, TUpdateEntityDto>
         where TEntity : class, IEntity<long>
         where TUpdateEntityDto : EntityDto<long>
         where TEntityDto : EntityDto<long>

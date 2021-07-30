@@ -16,9 +16,9 @@ namespace Maruko.Core.Application.Servers
     /// <typeparam name="TCreateEntityDto"></typeparam>
     /// <typeparam name="TUpdateEntityDto"></typeparam>
     /// <typeparam name="TEntityDto"></typeparam>
-    public abstract class CurdAppService<TEntity, TPrimaryKey, TEntityDto, TCreateEntityDto, TUpdateEntityDto> :
+    public abstract class CurdAppServiceTPrimaryKey<TEntity, TPrimaryKey, TEntityDto, TCreateEntityDto, TUpdateEntityDto> :
         CurdAppServiceBase<TEntity, TPrimaryKey, TEntityDto, TCreateEntityDto, TUpdateEntityDto>,
-        ICurdAppService<TEntity, TPrimaryKey, TEntityDto, TCreateEntityDto, TUpdateEntityDto>
+        ICurdAppServiceBase<TEntity, TPrimaryKey, TEntityDto, TCreateEntityDto, TUpdateEntityDto>
         where TEntity : class, IEntity<TPrimaryKey>
         where TUpdateEntityDto : EntityDto<TPrimaryKey>
         where TEntityDto : EntityDto<TPrimaryKey>
@@ -26,7 +26,7 @@ namespace Maruko.Core.Application.Servers
         public readonly IRepository<TEntity, TPrimaryKey> Repository;
 
 
-        protected CurdAppService(IRepository<TEntity, TPrimaryKey> repository, IObjectMapper objectMapper)
+        protected CurdAppServiceTPrimaryKey(IRepository<TEntity, TPrimaryKey> repository, IObjectMapper objectMapper)
         : base(objectMapper)
         {
             Repository = repository;
@@ -87,15 +87,15 @@ namespace Maruko.Core.Application.Servers
         }
     }
 
-    public abstract class CurdAppService<TEntity, TEntityDto, TCreateEntityDto, TUpdateEntityDto> :
-        CurdAppServiceBase<TEntity, long, TEntityDto, TCreateEntityDto, TUpdateEntityDto>, ICurdAppService<TEntity, TEntityDto, TCreateEntityDto, TUpdateEntityDto>
+    public abstract class CurdAppServiceBase<TEntity, TEntityDto, TCreateEntityDto, TUpdateEntityDto> :
+        CurdAppServiceBase<TEntity, long, TEntityDto, TCreateEntityDto, TUpdateEntityDto>, ICurdAppServiceBase<TEntity, TEntityDto, TCreateEntityDto, TUpdateEntityDto>
         where TEntity : class, IEntity<long>
         where TUpdateEntityDto : EntityDto<long>
         where TEntityDto : EntityDto<long>
     {
         public readonly IRepository<TEntity> Repository;
 
-        protected CurdAppService(IObjectMapper objectMapper, IRepository<TEntity> repository) : base(objectMapper)
+        protected CurdAppServiceBase(IObjectMapper objectMapper, IRepository<TEntity> repository) : base(objectMapper)
         {
             Repository = repository;
         }

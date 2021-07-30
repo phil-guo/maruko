@@ -7,6 +7,7 @@ namespace Maruko.Core.Domain.Entities
     /// </summary>
     public abstract class Entity : Entity<long>
     {
+        public DateTime CreateTime { get; set; }
     }
 
     public abstract class Entity<TPrimaryKey> : IEntity<TPrimaryKey>

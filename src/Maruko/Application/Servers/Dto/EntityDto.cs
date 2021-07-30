@@ -1,4 +1,6 @@
-﻿namespace Maruko.Core.Application.Servers.Dto
+﻿using System;
+
+namespace Maruko.Core.Application.Servers.Dto
 {
     /// <summary>
     /// 抽象的实体数据传输对象
@@ -14,5 +16,6 @@
     /// </summary>
     public abstract class EntityDto : EntityDto<long>
     {
+        public DateTime CreateTime { get; set; }
     }
 }

@@ -8,14 +8,14 @@
         /// <summary>
         /// 总条数
         /// </summary>
-        public int TotalCount { get; set; }
+        public long TotalCount { get; set; }
 
         /// <summary>
         /// 数据
         /// </summary>
         public object Datas { get; set; }
 
-        public  PagedResultDto(int total, object data)
+        public  PagedResultDto(long total, object data)
         {
             TotalCount = total;
             Datas = data;

@@ -12,20 +12,7 @@ namespace Maruko.Core.Domain.Repositories
     public interface IRepository<TEntity> : IRepository<TEntity, long>
         where TEntity : class, IEntity<long>
     {
-        /// <summary>
-        /// 分页查询
-        /// </summary>
-        /// <param name="total">总页数</param>
-        /// <param name="orderSelector"></param>
-        /// <param name="pageIndex">当前页</param>
-        /// <param name="pageMax">当前一页显示条数</param>
-        /// <param name="predicate"></param>
-        /// <returns></returns>
-        List<TEntity> PageSearch(out int total,
-            Expression<Func<TEntity, bool>> predicate = null,
-            Expression<Func<TEntity, int>> orderSelector = null,
-            int pageIndex = 1,
-            int pageMax = 20);
+        
 
         /// <summary>
         /// 批量添加

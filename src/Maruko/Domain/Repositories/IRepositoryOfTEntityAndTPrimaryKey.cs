@@ -15,8 +15,6 @@ namespace Maruko.Core.Domain.Repositories
     public interface IRepository<TEntity, in TPrimaryKey> : IRepository
         where TEntity : class, IEntity<TPrimaryKey>
     {
-        IUnitOfWork UnitOfWork { get; set; }
-
         #region Insert
         /// <summary>
         ///     Inserts a new entity.
@@ -38,12 +36,7 @@ namespace Maruko.Core.Domain.Repositories
 
         #region Select/Get/Query
 
-        /// <summary>
-        ///     Used to get a IQueryable that is used to retrieve entities from entire table.
-        /// </summary>
-        /// <returns>IQueryable to be used to select entities from database</returns>
-        IQueryable<TEntity> GetAll();
-
+      
         /// <summary>
         ///     Used to get all entities.
         /// </summary>
@@ -70,12 +63,6 @@ namespace Maruko.Core.Domain.Repositories
         /// <param name="predicate">Predicate to filter entities</param>
         TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate);
 
-        /// <summary>
-        ///     Single an entity with given given predicate or null if not found.
-        /// </summary>
-        /// <param name="predicate">Predicate to filter entities</param>
-        /// <returns></returns>
-        TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate);
 
         #endregion
 
