@@ -47,14 +47,28 @@ namespace Maruko.Core.FreeSql.Internal.Repos
             return GetAll().Select<TEntity>().Where(predicate).ToOne();
         }
 
-        public void Delete(long id)
+        public void Delete(long id, bool isPhysics = false)
         {
-            GetAll().Delete<TEntity>().Where(CreateEqualityExpressionForId(id)).ExecuteAffrows();
+            if (isPhysics)
+                GetAll().Delete<TEntity>().Where(CreateEqualityExpressionForId(id)).ExecuteAffrows();
+            else
+            {
+                GetAll().Update<TEntity>().Set(item => item.IsDelete, true)
+                    .Where(item => item.Id == id)
+                    .ExecuteAffrows();
+            }
         }
 
-        public void Delete(Expression<Func<TEntity, bool>> predicate)
+        public void Delete(Expression<Func<TEntity, bool>> predicate, bool isPhysics = false)
         {
-            GetAll().Delete<TEntity>().Where(predicate).ExecuteAffrows();
+            if (isPhysics)
+                GetAll().Delete<TEntity>().Where(predicate).ExecuteAffrows();
+            else
+            {
+                GetAll().Update<TEntity>().Set(item => item.IsDelete, true)
+                    .Where(predicate)
+                    .ExecuteAffrows();
+            }
         }
 
         public int Count()

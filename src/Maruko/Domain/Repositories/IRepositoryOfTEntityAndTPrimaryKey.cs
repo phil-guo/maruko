@@ -72,7 +72,8 @@ namespace Maruko.Core.Domain.Repositories
         ///     Deletes an entity by primary key.
         /// </summary>
         /// <param name="id">Primary key of the entity</param>
-        void Delete(TPrimaryKey id);
+        /// <param name="isPhysics">是否物理删除</param>
+        void Delete(TPrimaryKey id, bool isPhysics = false);
 
         /// <summary>
         ///     Deletes many entities by function.
@@ -81,7 +82,8 @@ namespace Maruko.Core.Domain.Repositories
         ///     given predicate.
         /// </summary>
         /// <param name="predicate">A condition to filter entities</param>
-        void Delete(Expression<Func<TEntity, bool>> predicate);
+        /// <param name="isPhysics">是否物理删除</param>
+        void Delete(Expression<Func<TEntity, bool>> predicate, bool isPhysics = false);
 
         #endregion
 

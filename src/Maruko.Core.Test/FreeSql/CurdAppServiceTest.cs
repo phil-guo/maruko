@@ -21,6 +21,16 @@ namespace Maruko.Core.Test.FreeSql
         }
 
         [Fact]
+        public void Delete_Test()
+        {
+            _vehicle.Delete(1);
+
+            var one = _vehicle.FirstOrDefault(1);
+
+            Print(one);
+        }
+
+        [Fact]
         public void PageSearch_Test()
         {
             var one = _vehicle.PageSearch(new SearchVehicle()
