@@ -14,6 +14,6 @@ namespace Maruko.Core.Domain.Entities.Auditing
 
         public DateTime CreateTime { get; set; }
         public DateTime? LastModificationTime { get; set; }
-        public bool IsDeleted { get; set; } = false;
+        public bool IsDelete { get; set; } = false;
     }
 }

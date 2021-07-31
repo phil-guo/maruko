@@ -7,7 +7,7 @@ using Maruko.Core.FreeSql.Internal.Context;
 namespace Maruko.Core.FreeSql.Internal.Repos
 {
     public class FreeSqlRepository<TEntity> : IFreeSqlRepository<TEntity>
-        where TEntity : Entity
+        where TEntity : FreeSqlEntity
     {
         private readonly IFreeSqlContext _context;
 

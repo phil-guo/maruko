@@ -32,5 +32,9 @@
 
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Domain\Specification\SearchFilters\" />
+  </ItemGroup>
+
 
 </Project>

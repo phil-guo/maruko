@@ -4,7 +4,7 @@ using Maruko.Core.Domain.Repositories;
 namespace Maruko.Core.FreeSql.Internal.Repos
 {
     public interface IFreeSqlRepository<TEntity> : IRepository<TEntity>
-        where TEntity : Entity
+        where TEntity : FreeSqlEntity
     {
         IFreeSql GetAll();
     }

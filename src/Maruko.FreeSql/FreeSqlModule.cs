@@ -14,7 +14,7 @@ namespace Maruko.Core.FreeSql
             builder.RegisterType<FreeSqlContext>().As<IFreeSqlContext>().SingleInstance();
             builder.RegisterGeneric(typeof(FreeSqlRepository<>)).As(typeof(IFreeSqlRepository<>))
                 .InstancePerLifetimeScope();
-            //builder.RegisterGeneric(typeof(CurdAppService<,,>)).As(typeof(ICurdAppService<,,>));
+
             
             builder.RegisterAssemblyTypes(ContainerBuilderExtensions.ReferenceAssembly.ToArray())
                 .Where(item => item.Name.EndsWith("Service"))

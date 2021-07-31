@@ -1,9 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Maruko.Core.Application.Servers.Dto
 {
     public abstract class PageDto
     {
+        /// <summary>
+        /// 动态查询条件
+        /// </summary>
+        public List<DynamicFilter> DynamicFilters { get; set; }
+
         /// <summary>
         /// 当前页
         /// </summary>

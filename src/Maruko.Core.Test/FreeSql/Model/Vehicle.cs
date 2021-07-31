@@ -1,10 +1,10 @@
 ﻿using FreeSql.DataAnnotations;
-using Maruko.Core.Domain.Entities;
+using Maruko.Core.FreeSql.Internal;
 
 namespace Maruko.Core.Test.FreeSql.Model
 {
     [Table(Name = "vehicle")]
-    public class Vehicle : Entity
+    public class Vehicle : FreeSqlEntity
     {
         [Column(Name = "vehicle_number", StringLength = 32)]
         public string Number { get; set; }

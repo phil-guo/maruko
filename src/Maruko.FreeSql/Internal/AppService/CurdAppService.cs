@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Maruko.Core.Application.Servers;
 using Maruko.Core.Application.Servers.Dto;
-using Maruko.Core.Domain.Entities;
 using Maruko.Core.FreeSql.Internal.Repos;
 using Maruko.Core.ObjectMapping;
 
 namespace Maruko.Core.FreeSql.Internal.AppService
 {
     public class CurdAppService<TEntity, TEntityDto, TSearch> : CurdAppServiceBase<TEntity, TEntityDto, TEntityDto, TEntityDto>, ICurdAppService<TEntity, TEntityDto, TSearch>
-        where TEntity : Entity
+        where TEntity : FreeSqlEntity
         where TEntityDto : EntityDto
         where TSearch : PageDto
     {
@@ -25,8 +24,7 @@ namespace Maruko.Core.FreeSql.Internal.AppService
         {
             var query = Table.GetAll().Select<TEntity>();
 
-            if (SearchFilter(search) != null)
-                query = query.Where(SearchFilter(search));
+            query = query.Where(ConditionToLambda(search));
 
             query = OrderFilter() != null
                 ? query.OrderByDescending(OrderFilter())
@@ -61,10 +59,38 @@ namespace Maruko.Core.FreeSql.Internal.AppService
                 : ObjectMapper.Map<TEntityDto>(data);
         }
 
-        protected virtual Expression<Func<TEntity, bool>> SearchFilter(TSearch search)
+        protected Expression<Func<TEntity, bool>> ConditionToLambda(TSearch search)
         {
-            return null;
+            Expression<Func<TEntity, bool>> expression = item => true;
+
+            search.DynamicFilters.ForEach(filter =>
+            {
+                var type = typeof(TEntity).GetProperty(filter.Field)?.PropertyType;
+
+                if (filter.Operate == "Equal")
+                    expression = expression.And(CreateExpression(type, filter.Field, filter.Value));
+            });
+
+            return expression;
         }
+
+        protected Expression<Func<TEntity, bool>> CreateExpression(Type fieldType, string fieldName, object value)
+        {
+            var lambdaParam = Expression.Parameter(typeof(TEntity));
+
+            var lambdaBody = Expression.Equal(
+                Expression.PropertyOrField(lambdaParam, fieldName),
+                Expression.Constant(value, fieldType)
+            );
+
+            return Expression.Lambda<Func<TEntity, bool>>(lambdaBody, lambdaParam);
+        }
+
+        //protected virtual Expression<Func<TEntity, bool>> SearchFilter(TSearch search)
+        //{
+        //    Expression<Func<TEntity, bool>> expression = item => true;
+        //    return expression;
+        //}
 
         protected virtual Expression<Func<TEntity, int>> OrderFilter()
         {

@@ -6,7 +6,7 @@ using Maruko.Core.Domain.Entities;
 namespace Maruko.Core.FreeSql.Internal.AppService
 {
     public interface ICurdAppService<TEntity, TEntityDto, in TSearch> : ICurdAppServiceBase<TEntity, TEntityDto, TEntityDto, TEntityDto>
-        where TEntity : Entity
+        where TEntity : FreeSqlEntity
         where TEntityDto : EntityDto
         where TSearch : PageDto
     {

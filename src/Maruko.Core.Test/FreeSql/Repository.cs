@@ -18,6 +18,7 @@ namespace Maruko.Core.Test.FreeSql
             _repository = ServiceLocator.Current.Resolve<IFreeSqlRepository<Vehicle>>();
         }
 
+       
 
         [Fact]
         public void GetAllList_Test()
