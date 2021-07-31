@@ -4,11 +4,10 @@ using System.Linq.Expressions;
 using Maruko.Core.Application.Servers;
 using Maruko.Core.Application.Servers.Dto;
 using Maruko.Core.Domain.Entities;
-using Maruko.Core.Domain.Repositories;
+using Maruko.Core.FreeSql.Internal.Repos;
 using Maruko.Core.ObjectMapping;
-using Maruko.FreeSql.Internal.Repos;
 
-namespace Maruko.FreeSql.Internal.AppService
+namespace Maruko.Core.FreeSql.Internal.AppService
 {
     public class CurdAppService<TEntity, TEntityDto, TSearch> : CurdAppServiceBase<TEntity, TEntityDto, TEntityDto, TEntityDto>, ICurdAppService<TEntity, TEntityDto, TSearch>
         where TEntity : Entity

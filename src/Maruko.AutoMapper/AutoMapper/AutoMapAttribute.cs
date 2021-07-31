@@ -2,7 +2,7 @@
 using AutoMapper;
 using Maruko.Core.Extensions;
 
-namespace Maruko.AutoMapper.AutoMapper
+namespace Maruko.Core.AutoMapper.AutoMapper
 {
     /// <summary>
     /// AutoMap 属性映射

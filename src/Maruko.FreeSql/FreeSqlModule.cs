@@ -1,12 +1,10 @@
-﻿using System;
-using Autofac;
-using Maruko.Core.Application.Servers;
+﻿using Autofac;
+using Maruko.Core.FreeSql.Internal.AppService;
+using Maruko.Core.FreeSql.Internal.Context;
+using Maruko.Core.FreeSql.Internal.Repos;
 using Maruko.Core.Modules;
-using Maruko.FreeSql.Internal.AppService;
-using Maruko.FreeSql.Internal.Context;
-using Maruko.FreeSql.Internal.Repos;
 
-namespace Maruko.FreeSql
+namespace Maruko.Core.FreeSql
 {
     public class FreeSqlModule : KernelModule
     {

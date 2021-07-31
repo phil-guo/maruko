@@ -6,9 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Maruko.Core.Extensions
 {
-    public static class AutofacExtensions
+    public static class ServiceLocator
     {
         public static ILifetimeScope Current { get; set; }
-        public static IServiceCollection  Services { get; set; }
+        public static IServiceCollection ServiceCollection { get; set; }
     }
 }

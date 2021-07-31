@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using Maruko.Core.Application.Servers;
+﻿using Maruko.Core.Application.Servers;
 using Maruko.Core.Application.Servers.Dto;
 using Maruko.Core.Domain.Entities;
 
-namespace Maruko.FreeSql.Internal.AppService
+namespace Maruko.Core.FreeSql.Internal.AppService
 {
     public interface ICurdAppService<TEntity, TEntityDto, in TSearch> : ICurdAppServiceBase<TEntity, TEntityDto, TEntityDto, TEntityDto>
         where TEntity : Entity

@@ -1,7 +1,7 @@
 ﻿using System;
 using AutoMapper;
 
-namespace Maruko.AutoMapper.AutoMapper
+namespace Maruko.Core.AutoMapper.AutoMapper
 {
     public abstract class AutoMapAttributeBase : Attribute
     {

@@ -8,7 +8,7 @@ namespace Maruko.Core.Extensions
     {
         public static IApplicationBuilder UseMaruko(this IApplicationBuilder app)
         {
-            var kernelModule = AutofacExtensions.Current.Resolve<IKernelModuleProvider>();
+            var kernelModule = ServiceLocator.Current.Resolve<IKernelModuleProvider>();
             kernelModule.Initialize();
             return app;
         }

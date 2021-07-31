@@ -16,7 +16,7 @@ namespace Maruko.Core.Modules
 
         public void Initialize()
         {
-            this.TryCatch(() => { _modules.ForEach(item => { item.Initialize(AutofacExtensions.Current); }); }, "模块初始化错误");
+            this.TryCatch(() => { _modules.ForEach(item => { item.Initialize(ServiceLocator.Current); }); }, "模块初始化错误");
         }
     }
 }

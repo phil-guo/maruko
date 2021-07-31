@@ -2,7 +2,7 @@
 using AutoMapper;
 using Maruko.Core.Reflection;
 
-namespace Maruko.AutoMapper.AutoMapper
+namespace Maruko.Core.AutoMapper.AutoMapper
 {
     public static class MapperInitialize
     {
@@ -22,7 +22,7 @@ namespace Maruko.AutoMapper.AutoMapper
                     return;
                 }
 
-                Mapper.Initialize(FindAndAutoMapTypes);
+                //Mapper.Initialize(FindAndAutoMapTypes)
 
                 _createdMappingsBefore = true;
             }

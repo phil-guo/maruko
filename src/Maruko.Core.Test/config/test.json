@@ -1,0 +1,5 @@
+{
+  "FreeSql": {
+    "Connection": "Data Source=120.55.103.91;port=33306;userid=root;password=qwe123QWE;database=wms;Charset=utf8mb4;"
+  }
+}

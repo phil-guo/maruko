@@ -1,20 +1,15 @@
 ﻿using Autofac;
 using AutoMapper;
-using Maruko.AutoMapper.AutoMapper;
+using Maruko.Core.AutoMapper.AutoMapper;
 using Maruko.Core.Modules;
-using IObjectMapper = Maruko.Core.ObjectMapping.IObjectMapper;
 
-namespace Maruko.AutoMapper
+namespace Maruko.Core.AutoMapper
 {
     public class AutoMapperModule : KernelModule
     {
-        
-
-        protected override void Load(ContainerBuilder builder)
+        protected override void RegisterModule(ContainerBuilder builder)
         {
-            base.Load(builder);
-            MapperInitialize.CreateMappings();
-            builder.RegisterType<AutoMapperObjectMapper>().As<IObjectMapper>().SingleInstance();
+            builder.RegisterType<AutoMapperObjectMapper>().As<Maruko.Core.ObjectMapping.IObjectMapper>().SingleInstance();
         }
     }
 }

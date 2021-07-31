@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using FreeSql;
+﻿using FreeSql;
 
-namespace Maruko.FreeSql.Config
+namespace Maruko.Core.FreeSql.Config
 {
     public class FreeSqlOption
     {

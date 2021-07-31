@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 using Maruko.Core.Domain.Entities;
-using Maruko.Core.Domain.UnitOfWork;
-using Maruko.Core.Extensions;
-using Maruko.FreeSql.Internal.Context;
+using Maruko.Core.FreeSql.Internal.Context;
 
-namespace Maruko.FreeSql.Internal.Repos
+namespace Maruko.Core.FreeSql.Internal.Repos
 {
     public class FreeSqlRepository<TEntity> : IFreeSqlRepository<TEntity>
         where TEntity : Entity

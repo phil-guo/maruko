@@ -2,7 +2,7 @@
 using System.Reflection;
 using AutoMapper;
 
-namespace Maruko.AutoMapper.AutoMapper
+namespace Maruko.Core.AutoMapper.AutoMapper
 {
     public static class AutoMapperConfigurationExtensions
     {

@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.28803.452
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.Core", "src\Maruko\Maruko.Core.csproj", "{1F84AC16-2532-4D57-933A-B1DEC0B96FE4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.AutoMapper", "src\Maruko.AutoMapper\Maruko.AutoMapper.csproj", "{6CAE4580-CEFD-455B-AD52-5BAE1BC4A94A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.Core.AutoMapper", "src\Maruko.AutoMapper\Maruko.Core.AutoMapper.csproj", "{6CAE4580-CEFD-455B-AD52-5BAE1BC4A94A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maruko.FreeSql", "src\Maruko.FreeSql\Maruko.FreeSql.csproj", "{C0D2C229-0A70-4805-A5A3-EB5D6EA71A46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.Core.FreeSql", "src\Maruko.FreeSql\Maruko.Core.FreeSql.csproj", "{C0D2C229-0A70-4805-A5A3-EB5D6EA71A46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maruko.Core.Test", "src\Maruko.Core.Test\Maruko.Core.Test.csproj", "{5D0AE250-D9E8-4154-8F4F-410F01C2955D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{C0D2C229-0A70-4805-A5A3-EB5D6EA71A46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0D2C229-0A70-4805-A5A3-EB5D6EA71A46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0D2C229-0A70-4805-A5A3-EB5D6EA71A46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D0AE250-D9E8-4154-8F4F-410F01C2955D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D0AE250-D9E8-4154-8F4F-410F01C2955D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D0AE250-D9E8-4154-8F4F-410F01C2955D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D0AE250-D9E8-4154-8F4F-410F01C2955D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

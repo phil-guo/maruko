@@ -1,4 +1,4 @@
-﻿namespace Maruko.FreeSql.Internal.Context
+﻿namespace Maruko.Core.FreeSql.Internal.Context
 {
     public interface IFreeSqlContext
     {

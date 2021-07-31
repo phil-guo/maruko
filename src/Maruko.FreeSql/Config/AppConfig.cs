@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Autofac;
-using Maruko.Core.Config;
+﻿using Autofac;
 using Maruko.Core.Extensions;
 using Microsoft.Extensions.Configuration;
 
-namespace Maruko.FreeSql.Config
+namespace Maruko.Core.FreeSql.Config
 {
     public class AppConfig
     {
         public FreeSqlOption FreeSql { get; set; }
 
-        private IConfiguration configuration => AutofacExtensions.Current.Resolve<IConfiguration>();
+        private IConfiguration configuration => ServiceLocator.Current.Resolve<IConfiguration>();
 
         public AppConfig()
         {

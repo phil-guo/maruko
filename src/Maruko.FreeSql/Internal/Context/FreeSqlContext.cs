@@ -1,7 +1,7 @@
 ﻿using FreeSql;
-using Maruko.FreeSql.Config;
+using Maruko.Core.FreeSql.Config;
 
-namespace Maruko.FreeSql.Internal.Context
+namespace Maruko.Core.FreeSql.Internal.Context
 {
     public class FreeSqlContext : IFreeSqlContext
     {

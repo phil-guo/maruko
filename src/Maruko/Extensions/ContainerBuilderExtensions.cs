@@ -54,11 +54,11 @@ namespace Maruko.Core.Extensions
 
         private static string[] GetFilterAssemblies(string[] assemblyNames, IConfiguration appConfig)
         {
-            var pattern = string.Empty;
+            var pattern = "^System\\w*|^Quartz\\w*|^Autofac\\w*|^Microsoft.\\w*|^System.\\w*|^AutoMapper\\w*|^Newtonsoft.\\w*|^Autofac.\\w*|^Swashbuckle.\\w*|^FreeSql.\\w*|^FreeSql\\w*|^Nito.\\w*|^xunit.\\w*|^k4os.\\w*|^BouncyCastle.\\w*|^Google.\\w*|^Renci.\\w*|^SshNet.\\w*|^MySql.\\w*|^Ubiety.\\w*|^Zstandard.\\w*|^testhost\\w*|^WindowsBase\\w*|^NuGet.\\w*";
             var app = new AppConfig(appConfig);
             pattern = string.IsNullOrEmpty(app.Core.ExcludeModules)
-                ? "^System\\w*|^Zooyard.\\w*|^Quartz\\w*|^Polly\\w*|^NLog\\w*|^EPPlus\\w*|^Autofac\\w*|^Microsoft.\\w*|^System.\\w*|^runtime.\\w*|^AutoMapper\\w*|^Newtonsoft.\\w*|^Autofac.\\w*|^Castle.\\w*|^EPPlus.\\w*|^NLog.\\w*|^Quartz.\\w*|^Swashbuckle.\\w*|"
-                : app.Core.ExcludeModules;
+                ? pattern
+                : $"{app.Core.ExcludeModules}|{pattern}";
 
             var notRelatedRegex = new Regex(pattern,
                 RegexOptions.Singleline | RegexOptions.Compiled | RegexOptions.IgnoreCase);
