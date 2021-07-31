@@ -31,13 +31,13 @@ namespace Maruko.Core.Reflection
         {
             if (_types == null)
             {
-                lock (SyncObj)
+                SyncObj.Locking(() =>
                 {
                     if (_types == null)
                     {
                         _types = CreateTypeList().ToArray();
                     }
-                }
+                });
             }
 
             return _types;
@@ -82,14 +82,7 @@ namespace Maruko.Core.Reflection
 
         private static List<Assembly> GetAllAssemblies()
         {
-            var assemblies = new List<Assembly>();
-
-            foreach (var assembly in ReflectionHelper.GetAssemblies())
-            {
-                assemblies.Add(assembly);
-            }
-
-            return assemblies.Distinct().ToList();
+            return ContainerBuilderExtensions.ReferenceAssembly;
         }
     }
 }

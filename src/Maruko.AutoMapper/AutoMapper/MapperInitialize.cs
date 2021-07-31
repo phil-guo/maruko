@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using AutoMapper;
+using Maruko.Core.Extensions;
 using Maruko.Core.Reflection;
 
 namespace Maruko.Core.AutoMapper.AutoMapper
@@ -12,9 +13,9 @@ namespace Maruko.Core.AutoMapper.AutoMapper
         /// <summary>
         /// 自动创建映射
         /// </summary>
-        public static void CreateMappings()
+        public static void CreateMappings(this IMapperConfigurationExpression configuration)
         {
-            lock (SyncObj)
+            SyncObj.Locking(() =>
             {
                 //我们应该防止应用程序中的重复映射，因为Mapper是静态的
                 if (_createdMappingsBefore)
@@ -22,10 +23,10 @@ namespace Maruko.Core.AutoMapper.AutoMapper
                     return;
                 }
 
-                //Mapper.Initialize(FindAndAutoMapTypes)
+                FindAndAutoMapTypes(configuration);
 
                 _createdMappingsBefore = true;
-            }
+            });
         }
 
         private static void FindAndAutoMapTypes(IMapperConfigurationExpression configuration)

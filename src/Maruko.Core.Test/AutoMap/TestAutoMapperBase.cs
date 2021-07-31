@@ -12,10 +12,5 @@ namespace Maruko.Core.Test.AutoMap
         public TestAutoMapperBase(ITestOutputHelper outputHelper) : base(outputHelper)
         {
         }
-
-        protected override void RegisterModule(ContainerBuilder builder)
-        {
-            builder.RegisterModule<AutoMapperModule>();
-        }
     }
 }
