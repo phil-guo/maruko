@@ -27,12 +27,31 @@ namespace Maruko.Core.Test.FreeSql
             {
                 DynamicFilters = new List<DynamicFilter>()
                 {
+                    //new DynamicFilter()
+                    //{
+                    //    Field = "Number",
+                    //    Operate = Condition.Equal.ToString(),
+                    //    Value = "渝A·F5671"
+                    //},
+                    //new DynamicFilter()
+                    //{
+                    //    Field = "LoadCapacity",
+                    //    Operate = Condition.Like.ToString(),
+                    //    Value = "200"
+                    //},
+
+                    //new DynamicFilter()
+                    //{
+                    //    Field = "Age",
+                    //    Operate = Condition.Like.ToString(),
+                    //    Value = 20
+                    //},
                     new DynamicFilter()
                     {
-                        Field = "Number",
-                        Operate = Condition.Equal.ToString(),
-                        Value = "渝A·F5671"
-                    }
+                        Field = "CreateTime",
+                        Operate = Condition.GreaterThanOrEqual.ToString(),
+                        Value = DateTime.Now
+                    },
                 }
             });
 

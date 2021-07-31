@@ -65,32 +65,73 @@ namespace Maruko.Core.FreeSql.Internal.AppService
 
             search.DynamicFilters.ForEach(filter =>
             {
+                //filter.Field = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(filter.Field);
+
                 var type = typeof(TEntity).GetProperty(filter.Field)?.PropertyType;
 
-                if (filter.Operate == "Equal")
-                    expression = expression.And(CreateExpression(type, filter.Field, filter.Value));
+                expression = expression.And(CreateExpression(type, filter.Field, filter.Value, filter.Operate));
+
             });
 
             return expression;
         }
 
-        protected Expression<Func<TEntity, bool>> CreateExpression(Type fieldType, string fieldName, object value)
+        protected Expression<Func<TEntity, bool>> CreateExpression(Type fieldType, string fieldName, object value, string operate)
         {
             var lambdaParam = Expression.Parameter(typeof(TEntity));
 
-            var lambdaBody = Expression.Equal(
-                Expression.PropertyOrField(lambdaParam, fieldName),
-                Expression.Constant(value, fieldType)
-            );
+            Expression lambdaBody = default;
+
+            if (operate == Condition.Equal.ToString())
+                lambdaBody = Expression.Equal(
+                   Expression.PropertyOrField(lambdaParam, fieldName),
+                   Expression.Constant(value, fieldType)
+               );
+
+            else if (operate == Condition.NotEqual.ToString())
+                lambdaBody = Expression.NotEqual(
+                    Expression.PropertyOrField(lambdaParam, fieldName),
+                    Expression.Constant(value, fieldType)
+                );
+
+            else if (operate == Condition.Like.ToString())
+            {
+                lambdaBody = Expression.Call(
+                    Expression.PropertyOrField(lambdaParam, fieldName),
+                    fieldType.GetMethod("Contains", new Type[] { fieldType })
+                    , Expression.Constant(value, fieldType));
+            }
+            else if (operate == Condition.GreaterThan.ToString())
+            {
+                lambdaBody = Expression.GreaterThan(
+                    Expression.PropertyOrField(lambdaParam, fieldName),
+                    Expression.Constant(value, fieldType)
+                );
+            }
+            else if (operate == Condition.GreaterThanOrEqual.ToString())
+            {
+                lambdaBody = Expression.GreaterThanOrEqual(
+                    Expression.PropertyOrField(lambdaParam, fieldName),
+                    Expression.Constant(value, fieldType)
+                );
+            }
+            else if (operate == Condition.LessThan.ToString())
+            {
+                lambdaBody = Expression.LessThan(
+                    Expression.PropertyOrField(lambdaParam, fieldName),
+                    Expression.Constant(value, fieldType)
+                );
+            }
+            else if (operate == Condition.LessThanOrEqual.ToString())
+            {
+                lambdaBody = Expression.LessThanOrEqual(
+                    Expression.PropertyOrField(lambdaParam, fieldName),
+                    Expression.Constant(value, fieldType)
+                );
+            }
 
             return Expression.Lambda<Func<TEntity, bool>>(lambdaBody, lambdaParam);
         }
-
-        //protected virtual Expression<Func<TEntity, bool>> SearchFilter(TSearch search)
-        //{
-        //    Expression<Func<TEntity, bool>> expression = item => true;
-        //    return expression;
-        //}
 
         protected virtual Expression<Func<TEntity, int>> OrderFilter()
         {

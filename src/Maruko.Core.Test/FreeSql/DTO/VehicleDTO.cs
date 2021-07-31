@@ -25,5 +25,7 @@ namespace Maruko.Core.Test.FreeSql.DTO
         public string Type { get; set; }
 
         public bool IsComplete { get; set; }
+
+        public int Age { get; set; }
     }
 }

@@ -25,5 +25,8 @@ namespace Maruko.Core.Test.FreeSql.Model
         public string Type { get; set; }
 
         public bool IsComplete { get; set; }
+
+        [Column(Name = "age")]
+        public int Age { get; set; }
     }
 }
