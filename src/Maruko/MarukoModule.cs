@@ -11,7 +11,6 @@ namespace Maruko.Core
         {
             builder.RegisterBuildCallback(lifetimeScopes =>
             {
-                var provider = lifetimeScopes.Resolve<IServiceProvider>();
                 ServiceLocator.Current = lifetimeScopes;
             });
         }

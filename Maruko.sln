@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.Core.AutoMapper", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.Core.FreeSql", "src\Maruko.FreeSql\Maruko.Core.FreeSql.csproj", "{C0D2C229-0A70-4805-A5A3-EB5D6EA71A46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maruko.Core.Test", "src\Maruko.Core.Test\Maruko.Core.Test.csproj", "{5D0AE250-D9E8-4154-8F4F-410F01C2955D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.Core.Test", "src\Maruko.Core.Test\Maruko.Core.Test.csproj", "{5D0AE250-D9E8-4154-8F4F-410F01C2955D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maruko.Core.Web", "src\Maruko.Core.Web\Maruko.Core.Web.csproj", "{F418DE49-0EDD-46B6-B3B3-956A1910D072}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{5D0AE250-D9E8-4154-8F4F-410F01C2955D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D0AE250-D9E8-4154-8F4F-410F01C2955D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D0AE250-D9E8-4154-8F4F-410F01C2955D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F418DE49-0EDD-46B6-B3B3-956A1910D072}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F418DE49-0EDD-46B6-B3B3-956A1910D072}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F418DE49-0EDD-46B6-B3B3-956A1910D072}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F418DE49-0EDD-46B6-B3B3-956A1910D072}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
