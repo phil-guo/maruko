@@ -10,12 +10,12 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.2.6</Version>
+    <Version>1.0.0</Version>
     <Authors>simple</Authors>
-    <PackageId>maruko</PackageId>
-    <PackageTags>maruko;.NET Core</PackageTags>
+    <PackageId>Maruko.Core</PackageId>
+    <PackageTags>maruko;.NET Core;模块化</PackageTags>
     <PackageProjectUrl>https://github.com/SkipperGuo/maruko</PackageProjectUrl>
-    <Description>asp.net core .net core 单体应用快速开发框架</Description>
+    <Description>asp.net core .net core 单体应用快速开发框架。</Description>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
@@ -23,10 +23,7 @@
     <PackageReference Include="Autofac" Version="6.2.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
-    <!--<PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.17" />-->
     <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="3.1.6" />
-    <!--<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.1.17" />-->
-    <!--<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.17" />-->
     <PackageReference Include="Nito.AsyncEx.Context" Version="5.1.0" />
     <PackageReference Include="Nito.AsyncEx.Coordination" Version="5.1.0" />
 
