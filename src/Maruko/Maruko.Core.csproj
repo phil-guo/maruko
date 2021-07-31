@@ -12,7 +12,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>1.0.0</Version>
     <Authors>simple</Authors>
-    <PackageId>Maruko.Core</PackageId>
+    <PackageId>maruko</PackageId>
     <PackageTags>maruko;.NET Core;模块化</PackageTags>
     <PackageProjectUrl>https://github.com/SkipperGuo/maruko</PackageProjectUrl>
     <Description>asp.net core .net core 单体应用快速开发框架。</Description>
