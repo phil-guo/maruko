@@ -29,7 +29,7 @@ namespace Maruko.Core.Test.AutoMap
 
             var modelB = _objectMapper.Map<ModelB>(modelA);
 
-            Print(modelB);
+            Print(modelB); 
         }
     }
 }
