@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Security.Claims;
 using System.Text;
@@ -95,12 +96,13 @@ namespace Maruko.Zero
 
         public override PagedResultDto PageSearch(PageDto search)
         {
-            var searchRequest = (SearchSysUserRequest)search;
+            var searchRequest = search.DynamicFilters.FirstOrDefault(item => item.Field == "name");
+            var value = searchRequest?.Value.ToString();
 
             var query = Table.GetAll()
                 .Select<SysUser, SysRole>()
                 .InnerJoin((u, r) => u.RoleId == r.Id)
-                .WhereIf(!string.IsNullOrEmpty(searchRequest.Name), (u, r) => u.UserName.Contains(searchRequest.Name))
+                .WhereIf(!string.IsNullOrEmpty(value), (u, r) => u.UserName.Contains(value))
                 .OrderByDescending((u, r) => u.Id);
 
             var result = query
