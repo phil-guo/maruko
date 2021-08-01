@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Maruko.Zero</name>
+    </assembly>
+    <members>
+        <member name="P:Maruko.Zero.SearchSysUserRequest.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+    </members>
+</doc>

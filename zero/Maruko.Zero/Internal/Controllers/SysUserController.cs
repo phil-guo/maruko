@@ -6,9 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Maruko.Zero
 {
-    /// <summary>
-    ///     系统用户
-    /// </summary>
     [EnableCors("cors")]
     [Route("api/v1/sysUsers/")]
     public class SysUserController : BaseCurdController<SysUser, SysUserDTO>
