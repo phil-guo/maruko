@@ -11,11 +11,11 @@
         /// </summary>
         /// <param name="datas"></param>
         /// <param name="msg"></param>
-        /// <param name="status"></param>
-        public AjaxResponse(T datas, string msg = "", int status = 200)
+        /// <param name="code"></param>
+        public AjaxResponse(T datas, string msg = "", int code = 200)
         {
-            Result = datas;
-            Status = status;
+            Data = datas;
+            Code = code;
             Msg = msg;
         }
 
@@ -23,11 +23,11 @@
         /// 构造函数
         /// </summary>
         /// <param name="msg"></param>
-        /// <param name="status"></param>
-        public AjaxResponse(string msg, int status = 200)
+        /// <param name="code"></param>
+        public AjaxResponse(string msg, int code = 200)
         {
             Msg = msg;
-            Status = status;
+            Code = code;
         }
 
         /// <summary>
@@ -40,7 +40,7 @@
         /// <summary>
         /// 返回数据 
         /// </summary>
-        public T Result { get; set; }
+        public T Data { get; set; }
 
         /// <summary>
         /// 返回信息描述
@@ -50,6 +50,6 @@
         /// <summary>
         /// 返回业务状态
         /// </summary>
-        public int Status { get; set; }
+        public int Code { get; set; }
     }
 }

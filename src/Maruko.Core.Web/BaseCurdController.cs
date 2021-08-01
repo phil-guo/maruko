@@ -29,9 +29,9 @@ namespace Maruko.Core.Web
         /// <returns></returns>
         [HttpPost("pageSearch")]
         //[Authorize(Roles = "1,3")]//权限角色id
-        public virtual PagedResultDto PageSearch(PageDto search)
+        public virtual AjaxResponse<PagedResultDto> PageSearch(PageDto search)
         {
-            return _curd.PageSearch(search);
+            return new AjaxResponse<PagedResultDto>(_curd.PageSearch(search)); ;
         }
 
         /// <summary>
@@ -43,10 +43,7 @@ namespace Maruko.Core.Web
         //[Authorize(Roles = "1,3")]//权限角色id
         public virtual AjaxResponse<object> CreateOrUpdate(TEntityDto model)
         {
-            return new AjaxResponse<object>
-            {
-                Result = _curd.CreateOrEdit(model)
-            };
+            return new AjaxResponse<object>(_curd.CreateOrEdit(model));
         }
 
         /// <summary>

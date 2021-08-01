@@ -82,18 +82,15 @@ namespace Maruko.Zero
                     SecurityAlgorithms.HmacSha256)
             );
 
-            return new AjaxResponse<object>
+            return new AjaxResponse<object>(new
             {
-                Result = new
-                {
-                    AccessToken = new JwtSecurityTokenHandler().WriteToken(token),
-                    sysUser.UserName,
-                    sysUser.RoleId,
-                    UserId = sysUser.Id,
-                    Expired = config.Zero.AuthExpired,
-                    sysUser.Icon
-                }
-            };
+                AccessToken = new JwtSecurityTokenHandler().WriteToken(token),
+                sysUser.UserName,
+                sysUser.RoleId,
+                UserId = sysUser.Id,
+                Expired = config.Zero.AuthExpired,
+                sysUser.Icon
+            });
         }
 
         public override PagedResultDto PageSearch(PageDto search)
@@ -131,7 +128,7 @@ namespace Maruko.Zero
             user = Repository.Update(user);
 
             return user == null
-                ? new AjaxResponse<object>("系统错误,修改密码失败", 0)
+                ? new AjaxResponse<object>("系统错误,修改密码失败", 500)
                 : new AjaxResponse<object>("重置密码成功");
         }
 
@@ -148,10 +145,7 @@ namespace Maruko.Zero
 
             entity = Repository.Update(entity);
 
-            return entity == null ? new AjaxResponse<object>("系统错误", 0) : new AjaxResponse<object>("更新成功")
-            {
-                Result = entity
-            };
+            return entity == null ? new AjaxResponse<object>("系统错误", 500) : new AjaxResponse<object>(entity, "更新成功");
         }
 
         public SysUserService(IObjectMapper objectMapper, IFreeSqlRepository<SysUser> repository) : base(objectMapper, repository)
