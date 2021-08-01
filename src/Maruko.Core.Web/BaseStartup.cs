@@ -14,6 +14,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
+
 namespace Maruko.Core.Web
 {
     public abstract class BaseStartup
@@ -28,7 +29,7 @@ namespace Maruko.Core.Web
         public void ConfigureServices(IServiceCollection services)
         {
             ServiceLocator.ServiceCollection = services;
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(opt => opt.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss"); ;
 
             services.AddSwaggerGen(option =>
             {
@@ -78,7 +79,7 @@ namespace Maruko.Core.Web
 
             app.UseSwagger();
             app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"); });
-           
+
 
             app.UseMaruko();
         }

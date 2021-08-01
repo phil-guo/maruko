@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.Zero", "zero\Maruko.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.CodeGeneration", "src\Maruko.CodeGeneration\Maruko.CodeGeneration.csproj", "{046083B5-F614-4C9F-BBE7-8BE2AA4E509D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication2", "..\WebApplication2\WebApplication2.csproj", "{61CAE41D-1400-4ABD-B6CC-94BECDE58768}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{046083B5-F614-4C9F-BBE7-8BE2AA4E509D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{046083B5-F614-4C9F-BBE7-8BE2AA4E509D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{046083B5-F614-4C9F-BBE7-8BE2AA4E509D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61CAE41D-1400-4ABD-B6CC-94BECDE58768}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61CAE41D-1400-4ABD-B6CC-94BECDE58768}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61CAE41D-1400-4ABD-B6CC-94BECDE58768}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61CAE41D-1400-4ABD-B6CC-94BECDE58768}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

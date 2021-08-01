@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Maruko.Core.Application.Servers.Dto
 {
-    public abstract class PageDto
+    public class PageDto
     {
         /// <summary>
         /// 动态查询条件
