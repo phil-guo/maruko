@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using Maruko.Core.Application.Servers;
 using Maruko.Core.Application.Servers.Dto;
@@ -8,19 +9,18 @@ using Maruko.Core.ObjectMapping;
 
 namespace Maruko.Core.FreeSql.Internal.AppService
 {
-    public class CurdAppService<TEntity, TEntityDto, TSearch> : CurdAppServiceBase<TEntity, TEntityDto, TEntityDto, TEntityDto>, ICurdAppService<TEntity, TEntityDto, TSearch>
+    public class CurdAppService<TEntity, TEntityDto> : CurdAppServiceBase<TEntity, TEntityDto, TEntityDto, TEntityDto>, ICurdAppService<TEntity, TEntityDto>
         where TEntity : FreeSqlEntity
         where TEntityDto : EntityDto
-        where TSearch : PageDto
     {
-        private readonly IFreeSqlRepository<TEntity> Table;
+        protected readonly IFreeSqlRepository<TEntity> Table;
 
         public CurdAppService(IObjectMapper objectMapper, IFreeSqlRepository<TEntity> repository) : base(objectMapper, repository)
         {
             Table = repository;
         }
 
-        public virtual PagedResultDto PageSearch(TSearch search)
+        public virtual PagedResultDto PageSearch(PageDto search)
         {
             var query = Table.GetAll().Select<TEntity>();
 
@@ -59,13 +59,13 @@ namespace Maruko.Core.FreeSql.Internal.AppService
                 : ObjectMapper.Map<TEntityDto>(data);
         }
 
-        protected Expression<Func<TEntity, bool>> ConditionToLambda(TSearch search)
+        protected Expression<Func<TEntity, bool>> ConditionToLambda(PageDto search)
         {
             Expression<Func<TEntity, bool>> expression = item => true;
 
             search.DynamicFilters.ForEach(filter =>
             {
-                //filter.Field = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(filter.Field);
+                filter.Field = filter.Field.First().ToString().ToUpper() + filter.Field.Substring(1);
 
                 var type = typeof(TEntity).GetProperty(filter.Field)?.PropertyType;
 

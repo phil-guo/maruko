@@ -6,7 +6,7 @@ using Maruko.Core.Test.FreeSql.Model;
 
 namespace Maruko.Core.Test.FreeSql.AppService
 {
-    public class VehicleAppService : CurdAppService<Vehicle, VehicleDTO, SearchVehicle>, IVehicleAppService
+    public class VehicleAppService : CurdAppService<Vehicle, VehicleDTO>, IVehicleAppService
     {
         public VehicleAppService(IObjectMapper objectMapper, IFreeSqlRepository<Vehicle> repository) 
             : base(objectMapper, repository)

@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.Core.Test", "src\Mar
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.Core.Web", "src\Maruko.Core.Web\Maruko.Core.Web.csproj", "{F418DE49-0EDD-46B6-B3B3-956A1910D072}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Zero", "Zero", "{FBAA9A65-C62B-4B4E-BC5F-248C670D397E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maruko.Zero", "zero\Maruko.Zero\Maruko.Zero.csproj", "{1205584A-FBAD-4D98-AF0A-1FA17BB182A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,9 +43,16 @@ Global
 		{F418DE49-0EDD-46B6-B3B3-956A1910D072}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F418DE49-0EDD-46B6-B3B3-956A1910D072}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F418DE49-0EDD-46B6-B3B3-956A1910D072}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1205584A-FBAD-4D98-AF0A-1FA17BB182A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1205584A-FBAD-4D98-AF0A-1FA17BB182A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1205584A-FBAD-4D98-AF0A-1FA17BB182A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1205584A-FBAD-4D98-AF0A-1FA17BB182A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1205584A-FBAD-4D98-AF0A-1FA17BB182A2} = {FBAA9A65-C62B-4B4E-BC5F-248C670D397E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {17B06909-4D98-465A-815D-F0EDDCE602DA}

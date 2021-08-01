@@ -58,7 +58,7 @@ namespace Maruko.Core.Test.FreeSql
                     //},
                     new DynamicFilter()
                     {
-                        Field = "CreateTime",
+                        Field = "createTime",
                         Operate = Condition.GreaterThanOrEqual.ToString(),
                         Value = DateTime.Now
                     },

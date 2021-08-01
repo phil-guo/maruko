@@ -4,7 +4,7 @@ using Maruko.Core.Test.FreeSql.Model;
 
 namespace Maruko.Core.Test.FreeSql.AppService
 {
-    public interface IVehicleAppService : ICurdAppService<Vehicle, VehicleDTO, SearchVehicle>
+    public interface IVehicleAppService : ICurdAppService<Vehicle, VehicleDTO>
     {
     }
 }

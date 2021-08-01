@@ -17,11 +17,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Maruko.FreeSql\Maruko.Core.FreeSql.csproj" />
     <ProjectReference Include="..\Maruko\Maruko.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Internal\" />
+    <Folder Include="Internal\Controllers\" />
   </ItemGroup>
 
 </Project>

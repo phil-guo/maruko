@@ -83,7 +83,7 @@ namespace Maruko.Core.FreeSql.Internal.Repos
 
         public bool BatchInsert(List<TEntity> entities)
         {
-            throw new NotImplementedException();
+            return GetAll().Insert(entities).ExecuteAffrows() > 0;
         }
 
         public bool BatchUpdate(List<TEntity> entities)

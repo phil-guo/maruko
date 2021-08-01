@@ -8,7 +8,6 @@ namespace Maruko.Core.FreeSql.Config
 
         public DataType DbType { get; set; } = DataType.MySql;
 
-        public bool EnableDatabaseMigrate { get; set; } = false;
-        public bool EnableSeedData { get; set; } = false;
+     
     }
 }
