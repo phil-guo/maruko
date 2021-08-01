@@ -1,7 +1,9 @@
-﻿namespace Maruko.Core.Modules
+﻿using Microsoft.AspNetCore.Builder;
+
+namespace Maruko.Core.Modules
 {
     public interface IKernelModuleProvider
     {
-        void Initialize();
+        void Initialize(IApplicationBuilder app);
     }
 }

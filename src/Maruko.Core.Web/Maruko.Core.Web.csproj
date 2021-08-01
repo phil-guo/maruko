@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.0</Version>
+    <Authors>simple</Authors>
+    <PackageId>Maruko.Core.Web</PackageId>
+    <PackageTags>maruko;.NET Core</PackageTags>
+    <PackageProjectUrl>https://github.com/SkipperGuo/maruko</PackageProjectUrl>
+    <Description>maruko web基础类库</Description>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>

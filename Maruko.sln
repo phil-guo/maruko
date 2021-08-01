@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.Core.FreeSql", "src\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.Core.Test", "src\Maruko.Core.Test\Maruko.Core.Test.csproj", "{5D0AE250-D9E8-4154-8F4F-410F01C2955D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maruko.Core.Web", "src\Maruko.Core.Web\Maruko.Core.Web.csproj", "{F418DE49-0EDD-46B6-B3B3-956A1910D072}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.Core.Web", "src\Maruko.Core.Web\Maruko.Core.Web.csproj", "{F418DE49-0EDD-46B6-B3B3-956A1910D072}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

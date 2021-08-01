@@ -15,7 +15,7 @@ namespace Maruko.Core.FreeSql
             builder.RegisterGeneric(typeof(FreeSqlRepository<>)).As(typeof(IFreeSqlRepository<>))
                 .InstancePerLifetimeScope();
 
-            
+
             builder.RegisterAssemblyTypes(ContainerBuilderExtensions.ReferenceAssembly.ToArray())
                 .Where(item => item.Name.EndsWith("Service"))
                 .AsImplementedInterfaces();

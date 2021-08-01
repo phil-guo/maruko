@@ -1,5 +1,6 @@
 ﻿using System;
 using Autofac;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Maruko.Core.Modules
@@ -23,7 +24,7 @@ namespace Maruko.Core.Modules
             }
         }
 
-        public virtual void Initialize(ILifetimeScope scope)
+        public virtual void Initialize(ILifetimeScope scope, IApplicationBuilder app)
         {
 
         }

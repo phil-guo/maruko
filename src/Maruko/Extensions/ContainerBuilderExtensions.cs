@@ -54,7 +54,7 @@ namespace Maruko.Core.Extensions
 
         private static string[] GetFilterAssemblies(string[] assemblyNames, IConfiguration appConfig)
         {
-            var pattern = "^System\\w*|^Quartz\\w*|^Autofac\\w*|^Microsoft.\\w*|^System.\\w*|^AutoMapper\\w*|^Newtonsoft.\\w*|^Autofac.\\w*|^Swashbuckle.\\w*|^FreeSql.\\w*|^FreeSql\\w*|^Nito.\\w*|^xunit.\\w*|^k4os.\\w*|^BouncyCastle.\\w*|^Google.\\w*|^Renci.\\w*|^SshNet.\\w*|^MySql.\\w*|^Ubiety.\\w*|^Zstandard.\\w*|^testhost\\w*|^WindowsBase\\w*|^NuGet.\\w*";
+            var pattern = "^System\\w*|^Quartz\\w*|^Autofac\\w*|^Microsoft.\\w*|^System.\\w*|^AutoMapper\\w*|^Newtonsoft.\\w*|^Autofac.\\w*|^Swashbuckle.\\w*|^FreeSql.\\w*|^FreeSql\\w*|^Nito.\\w*|^xunit.\\w*|^k4os.\\w*|^BouncyCastle.\\w*|^Google.\\w*|^Renci.\\w*|^SshNet.\\w*|^MySql.\\w*|^Ubiety.\\w*|^Zstandard.\\w*|^testhost\\w*|^WindowsBase\\w*|^NuGet.\\w*|^Humanizer.\\w*";
             var app = new AppConfig(appConfig);
             pattern = string.IsNullOrEmpty(app.Core.ExcludeModules)
                 ? pattern
