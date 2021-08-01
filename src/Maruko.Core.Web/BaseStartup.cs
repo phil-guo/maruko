@@ -60,7 +60,7 @@ namespace Maruko.Core.Web
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseCors("cors");
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
@@ -78,7 +78,7 @@ namespace Maruko.Core.Web
 
             app.UseSwagger();
             app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"); });
-            app.UseCors("cors");
+           
 
             app.UseMaruko();
         }

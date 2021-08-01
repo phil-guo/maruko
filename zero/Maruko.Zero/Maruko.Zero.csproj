@@ -3,13 +3,16 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.2</Version>
+    <Version>1.0.6</Version>
     <Authors>simple</Authors>
     <PackageId>Maruko.Zero</PackageId>
     <PackageTags>maruko;.NET Core;基础权限角色模块</PackageTags>
     <PackageProjectUrl>https://github.com/SkipperGuo/maruko</PackageProjectUrl>
     <Description>基于Maruko的基础权限角色模块</Description>
     <RepositoryType>git</RepositoryType>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -25,11 +28,17 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.17" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Maruko.AutoMapper\Maruko.Core.AutoMapper.csproj" />
     <ProjectReference Include="..\..\src\Maruko.Core.Web\Maruko.Core.Web.csproj" />
+    <ProjectReference Include="..\..\src\Maruko.FreeSql\Maruko.Core.FreeSql.csproj" />
   </ItemGroup>
 
 </Project>

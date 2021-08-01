@@ -10,7 +10,7 @@ namespace Maruko.Zero
     [Route("api/v1/sysUsers/")]
     public class SysUserController : BaseCurdController<SysUser, SysUserDTO>
     {
-        private readonly ISysUserServices _user;
+        private readonly ISysUserService _user;
 
         [HttpPost("updatePersonalInfo")]
         public AjaxResponse<object> UpdatePersonalInfo(UpdatePersonalInfoRequest request)
@@ -30,7 +30,7 @@ namespace Maruko.Zero
             return _user.ResetPassword(request);
         }
 
-        public SysUserController(ICurdAppService<SysUser, SysUserDTO> curd, ISysUserServices user) : base(curd)
+        public SysUserController(ICurdAppService<SysUser, SysUserDTO> curd, ISysUserService user) : base(curd)
         {
             _user = user;
         }

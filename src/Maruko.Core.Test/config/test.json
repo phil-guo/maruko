@@ -1,5 +1,16 @@
 {
   "FreeSql": {
-    "Connection": "Data Source=120.55.103.91;port=33306;userid=root;password=qwe123QWE;database=wms;Charset=utf8mb4;"
+    "Connection": "Data Source=120.55.103.91;port=33306;userid=root;password=qwe123QWE;database=cbb;Charset=utf8mb4;"
+  },
+  "Zero": {
+    "EnableDatabaseMigrate": false,
+    "EnableSeedData": false,
+    "Key": "LSyir1XvVA7fJmNjI2Dzxj9sj4JDsakk",
+    "Secret": "ktbN7JdBBUIVm4GIy68EYnc6WQ7Zy2h8",
+    "AuthExpired": 7200
+  },
+  "Swagger": {
+    "Title": "dynamic-config",
+    "Version": "v1"
   }
 }

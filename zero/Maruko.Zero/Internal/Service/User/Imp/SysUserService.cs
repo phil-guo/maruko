@@ -16,7 +16,7 @@ using IObjectMapper = Maruko.Core.ObjectMapping.IObjectMapper;
 
 namespace Maruko.Zero
 {
-    public class SysUserServices : CurdAppService<SysUser, SysUserDTO>, ISysUserServices
+    public class SysUserService : CurdAppService<SysUser, SysUserDTO>, ISysUserService
     {
         public override SysUserDTO CreateOrEdit(SysUserDTO request)
         {
@@ -154,7 +154,7 @@ namespace Maruko.Zero
             };
         }
 
-        public SysUserServices(IObjectMapper objectMapper, IFreeSqlRepository<SysUser> repository) : base(objectMapper, repository)
+        public SysUserService(IObjectMapper objectMapper, IFreeSqlRepository<SysUser> repository) : base(objectMapper, repository)
         {
         }
     }

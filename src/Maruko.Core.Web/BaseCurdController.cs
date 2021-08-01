@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Maruko.Core.Web
 {
+    [ApiController]
     public abstract class BaseCurdController<TEntity, TEntityDto> : ControllerBase
         where TEntity : FreeSqlEntity
         where TEntityDto : EntityDto
