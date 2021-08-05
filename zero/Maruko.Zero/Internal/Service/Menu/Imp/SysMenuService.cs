@@ -29,7 +29,7 @@ namespace Maruko.Zero
             var result = new List<MenusRoleResponse>();
             var tree = GetRoleOfMenus(request.RoleId);
 
-            result.Add(new MenusRoleResponse { Id = 0, Icon = "el-icon-platform-eleme", Title = "首页", Path = "/" });
+            result.Add(new MenusRoleResponse { Id = 0, Icon = "el-icon-platform-eleme", Title = "首页", Path = "/home" });
 
             tree.ForEach(item =>
             {

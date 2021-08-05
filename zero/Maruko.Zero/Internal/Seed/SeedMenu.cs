@@ -17,7 +17,7 @@ namespace Maruko.Zero
                     Name = "基础数据管理",
                     Operates = JsonConvert.SerializeObject(new List<int>()),
                     Sort = 0,
-                    Url = "/",
+                    Url = "/system",
                     Icon = "folder-o"
                 },
                 new SysMenu
@@ -26,7 +26,7 @@ namespace Maruko.Zero
                     ParentId = 1,
                     Level = 2,
                     Name = "按钮管理",
-                    Url = "operate",
+                    Url = "/operate",
                     Operates = JsonConvert.SerializeObject(new List<int> {1, 2, 3, 4}),
                     Sort = 1,
                     Icon = "folder-o"
@@ -37,7 +37,7 @@ namespace Maruko.Zero
                     ParentId = 1,
                     Level = 2,
                     Name = "角色管理",
-                    Url = "role",
+                    Url = "/role",
                     Operates = JsonConvert.SerializeObject(new List<int> {1, 2, 3, 4, 5}),
                     Sort = 2,
                     Icon = "folder-o"
@@ -48,7 +48,7 @@ namespace Maruko.Zero
                     ParentId = 1,
                     Level = 2,
                     Name = "菜单管理",
-                    Url = "menu",
+                    Url = "/menu",
                     Operates = JsonConvert.SerializeObject(new List<int> {1, 2, 3, 4}),
                     Sort = 3,
                     Icon = "folder-o"
@@ -59,7 +59,7 @@ namespace Maruko.Zero
                     ParentId = 1,
                     Level = 2,
                     Name = "系统用户",
-                    Url = "sysUser",
+                    Url = "/sysUser",
                     Operates = JsonConvert.SerializeObject(new List<int> {1, 2, 3, 4}),
                     Sort = 4,
                     Icon = "folder-o"
