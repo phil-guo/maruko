@@ -8,6 +8,14 @@ namespace Maruko.Core.FreeSql.Internal
 {
     public abstract class FreeSqlEntity : Entity, ISoftDelete
     {
+        public FreeSqlEntity()
+        {
+            CreateTime = DateTime.Now;
+        }
+
+        [Column(Name = "id", IsIdentity = true, IsPrimary = true)]
+        public override long Id { get; set; }
+
         [Column(Name = "createTime")]
         public override DateTime CreateTime { get; set; }
 
