@@ -21,8 +21,8 @@ namespace Maruko.Core.Web.Config
                 ? section.Get<WebOption>()
                 : new WebOption();
 
-            Swagger = section.Exists()
-                ? section.Get<SwaggerOption>()
+            Swagger = (configuration?.GetSection(nameof(Swagger))).Exists()
+                ? (configuration?.GetSection(nameof(Swagger))).Get<SwaggerOption>()
                 : new SwaggerOption();
         }
     }

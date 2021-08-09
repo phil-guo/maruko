@@ -1,0 +1,37 @@
+﻿{
+  "Env": [],
+  "IIsConfig": {
+    "SdkType": null,
+    "WebSiteName": "",
+    "LastEnvName": null,
+    "EnvPairList": []
+  },
+  "WindowsServiveConfig": {
+    "ServiceName": "",
+    "SdkType": null,
+    "LastEnvName": null,
+    "EnvPairList": []
+  },
+  "LinuxServiveConfig": {
+    "ServiceName": "",
+    "EnvParam": "",
+    "LastEnvName": null,
+    "EnvPairList": []
+  },
+  "DockerConfig": {
+    "Prot": "",
+    "AspNetCoreEnv": "",
+    "LastEnvName": null,
+    "RemoveDaysFromPublished": "10",
+    "Volume": "",
+    "Other": "",
+    "EnvPairList": []
+  },
+  "DockerRegisterConfig": {
+    "RepositoryUrl": null,
+    "RepositoryUserName": null,
+    "RepositoryUserPwd": null,
+    "RepositoryNameSpace": null,
+    "RepositoryImageName": null
+  }
+}

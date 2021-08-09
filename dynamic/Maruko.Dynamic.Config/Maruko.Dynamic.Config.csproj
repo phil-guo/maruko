@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>Maruko.Dynamic.Config.xml</DocumentationFile>
+    <OutputPath>bin\Debug\</OutputPath>
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>Maruko.Dynamic.Config.xml</DocumentationFile>
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Maruko.AutoMapper\Maruko.Core.AutoMapper.csproj" />
+    <ProjectReference Include="..\..\src\Maruko.Core.Web\Maruko.Core.Web.csproj" />
+    <ProjectReference Include="..\..\src\Maruko.FreeSql\Maruko.Core.FreeSql.csproj" />
+    <ProjectReference Include="..\..\src\Maruko\Maruko.Core.csproj" />
+  </ItemGroup>
+
+</Project>
