@@ -9,13 +9,15 @@ using Maruko.Core.ObjectMapping;
 
 namespace Maruko.Core.FreeSql.Internal.AppService
 {
-    public class CurdAppService<TEntity, TEntityDto> : CurdAppServiceBase<TEntity, TEntityDto, TEntityDto, TEntityDto>, ICurdAppService<TEntity, TEntityDto>
+    public class CurdAppService<TEntity, TEntityDto> : CurdAppServiceBase<TEntity, TEntityDto, TEntityDto, TEntityDto>,
+        ICurdAppService<TEntity, TEntityDto>
         where TEntity : FreeSqlEntity
         where TEntityDto : EntityDto
     {
         protected readonly IFreeSqlRepository<TEntity> Table;
 
-        public CurdAppService(IObjectMapper objectMapper, IFreeSqlRepository<TEntity> repository) : base(objectMapper, repository)
+        public CurdAppService(IObjectMapper objectMapper, IFreeSqlRepository<TEntity> repository) : base(objectMapper,
+            repository)
         {
             Table = repository;
         }
@@ -38,16 +40,26 @@ namespace Maruko.Core.FreeSql.Internal.AppService
             return new PagedResultDto(total, ConvertToEntityDTOs(result));
         }
 
+        protected virtual void BeforeCreate(TEntityDto request)
+        {
+        }
+
+        protected virtual void BeforeEdit(TEntityDto request)
+        {
+        }
+
         public virtual TEntityDto CreateOrEdit(TEntityDto request)
         {
             TEntity data = null;
             if (request.Id == 0)
             {
+                BeforeCreate(request);
                 request.CreateTime = DateTime.Now;
                 data = Table.Insert(MapToEntity(request));
             }
             else
             {
+                BeforeEdit(request);
                 data = Table.FirstOrDefault(item => item.Id == request.Id);
                 data = MapToEntity(request);
                 data.CreateTime = DateTime.Now;
@@ -68,15 +80,17 @@ namespace Maruko.Core.FreeSql.Internal.AppService
                 filter.Field = filter.Field.First().ToString().ToUpper() + filter.Field.Substring(1);
 
                 var type = typeof(TEntity).GetProperty(filter.Field)?.PropertyType;
-
-                expression = expression.And(CreateExpression(type, filter.Field, filter.Value, filter.Operate));
-
+                if (type == null)
+                    return;
+                expression = expression.And(CreateExpression(type, filter.Field, Convert.ChangeType(filter.Value, type),
+                    filter.Operate));
             });
 
             return expression;
         }
 
-        protected Expression<Func<TEntity, bool>> CreateExpression(Type fieldType, string fieldName, object value, string operate)
+        protected Expression<Func<TEntity, bool>> CreateExpression(Type fieldType, string fieldName, object value,
+            string operate)
         {
             var lambdaParam = Expression.Parameter(typeof(TEntity));
 
@@ -84,9 +98,9 @@ namespace Maruko.Core.FreeSql.Internal.AppService
 
             if (operate == Condition.Equal.ToString())
                 lambdaBody = Expression.Equal(
-                   Expression.PropertyOrField(lambdaParam, fieldName),
-                   Expression.Constant(value, fieldType)
-               );
+                    Expression.PropertyOrField(lambdaParam, fieldName),
+                    Expression.Constant(value, fieldType)
+                );
 
             else if (operate == Condition.NotEqual.ToString())
                 lambdaBody = Expression.NotEqual(

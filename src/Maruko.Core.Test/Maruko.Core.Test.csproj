@@ -21,8 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\dynamic\Maruko.Dynamic.Config\Maruko.Dynamic.Config.csproj" />
     <ProjectReference Include="..\..\zero\Maruko.Zero\Maruko.Zero.csproj" />
     <ProjectReference Include="..\Maruko.AutoMapper\Maruko.Core.AutoMapper.csproj" />
+    <ProjectReference Include="..\Maruko.CodeGeneration\Maruko.CodeGeneration.csproj" />
     <ProjectReference Include="..\Maruko.Core.Web\Maruko.Core.Web.csproj" />
     <ProjectReference Include="..\Maruko.FreeSql\Maruko.Core.FreeSql.csproj" />
   </ItemGroup>

@@ -42,7 +42,7 @@ namespace Maruko.Zero
                         {
                             Id = child.Id,
                             Icon = child.Icon ?? "",
-                            Path = child.Path + "?id=" + child.Id,
+                            Path = child.Path, //+ "?id=" + child.Id,
                             Title = child.Title
                         });
                     });
