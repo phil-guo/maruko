@@ -1,0 +1,96 @@
+﻿{
+  "Env": [
+    {
+      "Name": "哈哈哈",
+      "ServerList": [],
+      "LinuxServerList": [
+        {
+          "UserName": "root",
+          "Pwd": "7CB753836DF0A48E9D36268489029E16",
+          "Host": "120.55.103.91",
+          "NickName": "",
+          "IIsFireUrl": null,
+          "DockerFireUrl": "",
+          "WindowsServiceFireUrl": null,
+          "LinuxServiceFireUrl": null
+        }
+      ],
+      "IgnoreList": [],
+      "WindowsBackUpIgnoreList": []
+    }
+  ],
+  "IIsConfig": {
+    "SdkType": null,
+    "WebSiteName": "",
+    "LastEnvName": null,
+    "EnvPairList": [
+      {
+        "EnvName": "哈哈哈",
+        "ConfigName": "",
+        "LinuxEnvParam": null,
+        "DockerPort": null,
+        "DockerEnvName": null,
+        "DockerVolume": null,
+        "DockerOther": null
+      }
+    ]
+  },
+  "WindowsServiveConfig": {
+    "ServiceName": "",
+    "SdkType": null,
+    "LastEnvName": null,
+    "EnvPairList": [
+      {
+        "EnvName": "哈哈哈",
+        "ConfigName": "",
+        "LinuxEnvParam": null,
+        "DockerPort": null,
+        "DockerEnvName": null,
+        "DockerVolume": null,
+        "DockerOther": null
+      }
+    ]
+  },
+  "LinuxServiveConfig": {
+    "ServiceName": "",
+    "EnvParam": "",
+    "LastEnvName": null,
+    "EnvPairList": [
+      {
+        "EnvName": "哈哈哈",
+        "ConfigName": "",
+        "LinuxEnvParam": null,
+        "DockerPort": null,
+        "DockerEnvName": null,
+        "DockerVolume": null,
+        "DockerOther": null
+      }
+    ]
+  },
+  "DockerConfig": {
+    "Prot": "8099:80",
+    "AspNetCoreEnv": "",
+    "LastEnvName": "哈哈哈",
+    "RemoveDaysFromPublished": "10",
+    "Volume": "",
+    "Other": "",
+    "EnvPairList": [
+      {
+        "EnvName": "哈哈哈",
+        "ConfigName": null,
+        "LinuxEnvParam": null,
+        "DockerPort": "8099:80",
+        "DockerEnvName": "",
+        "DockerVolume": "",
+        "DockerOther": ""
+      }
+    ]
+  },
+  "DockerRegisterConfig": {
+    "RepositoryUrl": null,
+    "RepositoryUserName": null,
+    "RepositoryUserPwd": null,
+    "RepositoryNameSpace": null,
+    "RepositoryImageName": null
+  }
+}
