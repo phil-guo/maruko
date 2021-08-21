@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.14</Version>
+    <Version>1.0.16</Version>
     <Authors>simple</Authors>
     <PackageId>Maruko.Zero</PackageId>
     <PackageTags>maruko;.NET Core;基础权限角色模块</PackageTags>

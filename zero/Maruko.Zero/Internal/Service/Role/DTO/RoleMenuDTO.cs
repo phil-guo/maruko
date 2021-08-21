@@ -10,6 +10,7 @@ namespace Maruko.Zero
         public string Icon { get; set; }
 
         public string Path { get; set; }
+        public string Key { get; set; }
 
         public List<RoleMenuDTO> Children { get; set; } = new List<RoleMenuDTO>();
 

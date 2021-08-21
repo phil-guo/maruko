@@ -13,6 +13,7 @@ namespace Maruko.Zero
         public int Level { get; set; } = 1;
         public string Operates { get; set; }
         public string Icon { get; set; }
+        public string Key { get; set; }
         public List<OperateModel> OperateModels { get; set; } = new List<OperateModel>();
     }
 

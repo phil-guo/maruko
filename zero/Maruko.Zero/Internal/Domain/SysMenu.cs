@@ -9,15 +9,15 @@ namespace Maruko.Zero
     {
         [Column(Name = "parentId")]
         public int ParentId { get; set; } = 0;
-        
-        [Column(Name = "name",StringLength = 20)]
+
+        [Column(Name = "name", StringLength = 20)]
         public string Name { get; set; }
 
         [Column(Name = "url", StringLength = 100)]
         public string Url { get; set; }
 
-      
-        [Column(DbType = "tinyint(4)",Name = "level")]
+
+        [Column(DbType = "tinyint(4)", Name = "level")]
         public int Level { get; set; } = 1;
 
 
@@ -28,7 +28,10 @@ namespace Maruko.Zero
 
         [Column(Name = "icon", StringLength = 100)]
         public string Icon { get; set; }
-   
+
+        [Column(Name = "key", StringLength = 50)]
+        public string Key { get; set; }
+
         public int AddOperateSort()
         {
             Sort += 1;

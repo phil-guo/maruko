@@ -43,7 +43,8 @@ namespace Maruko.Zero
                             Id = child.Id,
                             Icon = child.Icon ?? "",
                             Path = child.Path, //+ "?id=" + child.Id,
-                            Title = child.Title
+                            Title = child.Title,
+                            Key = child.Key
                         });
                     });
 
@@ -204,7 +205,8 @@ namespace Maruko.Zero
                     Title = item.Name,
                     Icon = item.Icon,
                     Path = item.Url,
-                    Operates = item.Operates
+                    Operates = item.Operates,
+                    Key = item.Key
                 });
             });
 

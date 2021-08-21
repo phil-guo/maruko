@@ -8,6 +8,7 @@ namespace Maruko.Zero
         public string Title { get; set; }
         public string Icon { get; set; }
         public string Path { get; set; }
+        public string Key { get; set; }
         public List<MenusRoleResponse> Children { get; set; } = new List<MenusRoleResponse>();
     }
 }
