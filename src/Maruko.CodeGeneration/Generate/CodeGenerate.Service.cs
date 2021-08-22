@@ -36,7 +36,7 @@ namespace {solutionName}
 {
     public class {domainName}Service : CurdAppService<{domainName}, {domainName}DTO>, I{domainName}Service
     {
-        public PageService(IObjectMapper objectMapper, IFreeSqlRepository<{domainName}> repository) : base(objectMapper, repository)
+        public {domainName}Service(IObjectMapper objectMapper, IFreeSqlRepository<{domainName}> repository) : base(objectMapper, repository)
         {
         }
     }

@@ -28,7 +28,7 @@ namespace {solutionName}
         [Route(""api/v1/{domainNameLower}s/"")]
         public class {domainName}Controller : BaseCurdController<{domainName}, {domainName}DTO>
         {
-            public PageController(ICurdAppService<{domainName}, {domainName}DTO> curd) : base(curd)
+            public {domainName}Controller(ICurdAppService<{domainName}, {domainName}DTO> curd) : base(curd)
             {
             }
         }

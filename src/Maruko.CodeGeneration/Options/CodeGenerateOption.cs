@@ -12,6 +12,6 @@
         /// 解决方案名称
         /// 格式:.
         /// </summary>
-        public static string SolutionName { get; set; } = "Wl.Station.Baby";
+        public static string SolutionName { get; set; } = "Maruko.Dynamic.Config";
     }
 }

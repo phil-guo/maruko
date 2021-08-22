@@ -33,7 +33,7 @@ namespace Maruko.Zero
 
             tree.ForEach(item =>
             {
-                var model = new MenusRoleResponse { Id = item.Id, Title = item.Title, Icon = item.Icon ?? "", Path = item.Path };
+                var model = new MenusRoleResponse { Id = item.Id, Title = item.Title, Icon = item.Icon ?? "", Path = item.Path, Key = item.Key ?? "" };
 
                 if (item.Children.Count > 0)
                     item.Children.ForEach(child =>
@@ -44,7 +44,7 @@ namespace Maruko.Zero
                             Icon = child.Icon ?? "",
                             Path = child.Path, //+ "?id=" + child.Id,
                             Title = child.Title,
-                            Key = child.Key
+                            Key = child.Key ?? ""
                         });
                     });
 
@@ -139,6 +139,7 @@ namespace Maruko.Zero
                 oldMenu.Level = menu.Level;
                 oldMenu.Url = menu.Url;
                 oldMenu.Icon = menu.Icon;
+                oldMenu.Key = menu.Key;
                 menu = Repository.Update(oldMenu);
             }
             else
@@ -162,18 +163,6 @@ namespace Maruko.Zero
 
             base.Delete(id);
         }
-
-        //protected override Expression<Func<SysMenu, bool>> SearchFilter(SearchSysMenuRequest search)
-        //{
-        //    Expression<Func<SysMenu, bool>> getFilter = item => true;
-        //    if (search.ParentId > 0)
-        //        getFilter = getFilter.And(item => item.ParentId == search.ParentId);
-
-        //    if (!string.IsNullOrEmpty(search.Name))
-        //        getFilter = getFilter.And(item => item.Name.Contains(search.Name));
-
-        //    return getFilter;
-        //}
 
         protected override List<SysMenuDTO> ConvertToEntityDTOs(List<SysMenu> entities)
         {
@@ -206,7 +195,7 @@ namespace Maruko.Zero
                     Icon = item.Icon,
                     Path = item.Url,
                     Operates = item.Operates,
-                    Key = item.Key
+                    Key = item.Key ?? ""
                 });
             });
 
