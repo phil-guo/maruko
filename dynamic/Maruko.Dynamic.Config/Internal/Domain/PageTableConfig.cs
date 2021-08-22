@@ -19,5 +19,7 @@ namespace Maruko.Dynamic.Config
         public bool IsMultiple { get; set; }
         [Column(Name = "rowWith")]
         public int RowWith { get; set; }
+        [Column(Name = "fields",DbType = "text")]
+        public string Fields { get; set; }
     }
 }

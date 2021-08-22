@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.18</Version>
+    <Version>1.0.19</Version>
     <Authors>simple</Authors>
     <PackageId>Maruko.Dynamic.Config</PackageId>
     <PackageTags>maruko;.NET Core;动态配置模块</PackageTags>

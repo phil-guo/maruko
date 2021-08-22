@@ -13,7 +13,8 @@ namespace Maruko.Dynamic.Config
             if (AppConfig.Default.DynamicConfig.EnableDatabaseMigrate)
                 scope.Resolve<IFreeSqlContext>().GetSet().CodeFirst.SyncStructure(
                     typeof(Page),
-                    typeof(PageConfig)
+                    typeof(PageConfig),
+                    typeof(PageTableConfig)
                 );
         }
     }

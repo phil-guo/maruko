@@ -11,5 +11,6 @@ namespace Maruko.Dynamic.Config
         public bool IsRow { get; set; }
         public bool IsMultiple { get; set; }
         public int RowWith { get; set; }
+        public string Fields { get; set; }
     }
 }
