@@ -11,11 +11,19 @@ namespace Maruko.Dynamic.Config
     {
         [Column(Name = "pageId")]
         public long PageId { get; set; }
-        [Column(Name = "fields", StringLength = 1000)]
+        [Column(Name = "url", StringLength = 200)]
+        public string DataUrl { get; set; }
+        [Column(Name = "isRow")]
+        public bool IsRow { get; set; }
+        [Column(Name = "isMultiple")]
+        public bool IsMultiple { get; set; }
+        [Column(Name = "rowWith")]
+        public int RowWith { get; set; }
+        [Column(Name = "fields",DbType = "text")]
         public string Fields { get; set; }
-        [Column(Name = "buttons", StringLength = 1000)]
+        [Column(Name = "buttons",DbType = "text")]
         public string Buttons { get; set; }
-        [Column(Name = "functions", StringLength = 1000)]
+        [Column(Name = "functions",DbType = "text")]
         public string Functions { get; set; }
     }
 }

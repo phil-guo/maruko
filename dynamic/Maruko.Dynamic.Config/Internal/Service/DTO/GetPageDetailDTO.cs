@@ -6,6 +6,6 @@ namespace Maruko.Dynamic.Config
 {
     public class GetPageDetailDTO
     {
-        public PageTableConfig PageTable { get; set; }
+        public PageConfigDTO PageConfigs { get; set; }
     }
 }

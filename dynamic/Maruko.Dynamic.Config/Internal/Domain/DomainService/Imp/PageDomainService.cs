@@ -9,15 +9,15 @@ namespace Maruko.Dynamic.Config.Internal.Domain.DomainService.Imp
     public class PageDomainService : IPageDomainService
     {
         private readonly IFreeSqlRepository<Page> _page;
-        private readonly IFreeSqlRepository<PageTableConfig> _pageTable;
+        private readonly IFreeSqlRepository<PageConfig> _pageConfig;
         private readonly IObjectMapper _objectMapper;
 
         public PageDomainService(IFreeSqlRepository<Page> page,
-            IFreeSqlRepository<PageTableConfig> pageTable,
+            IFreeSqlRepository<PageConfig> pageTable,
             IObjectMapper objectMapper)
         {
             _page = page;
-            _pageTable = pageTable;
+            _pageConfig = pageTable;
             _objectMapper = objectMapper;
         }
 
@@ -27,13 +27,12 @@ namespace Maruko.Dynamic.Config.Internal.Domain.DomainService.Imp
             if (page == null)
                 throw new Exception("page 不存在");
 
-            var pageTable = _pageTable.FirstOrDefault(item => item.PageId == page.Id);
+            var pageConfig = _pageConfig.FirstOrDefault(item => item.PageId == page.Id);
 
             return new GetPageDetailDTO()
             {
-                PageTable = _objectMapper.Map<PageTableConfig>(pageTable)
+                PageConfigs = _objectMapper.Map<PageConfigDTO>(pageConfig)
             };
-
         }
     }
 }
