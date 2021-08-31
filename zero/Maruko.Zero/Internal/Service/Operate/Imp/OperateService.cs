@@ -10,7 +10,7 @@ namespace Maruko.Zero
     public class OperateService : CurdAppService<SysOperate, OperateDTO>, IOperateService
     {
         private readonly IFreeSqlRepository<SysRoleMenu> _roleMenu;
-
+        private readonly IFreeSqlRepository<SysMenu> _menu;
 
 
         public override OperateDTO CreateOrEdit(OperateDTO request)
@@ -52,24 +52,30 @@ namespace Maruko.Zero
             return idNos;
         }
 
-        ///// <summary>
-        ///// 查询条件过滤
-        ///// </summary>
-        ///// <param name="search"></param>
-        ///// <returns></returns>
-        //protected override Expression<Func<SysOperate, bool>> SearchFilter(SearchOperateRequest search)
-        //{
-        //    Expression<Func<SysOperate, bool>> expression = item => true;
+        public GetMenuOfOperateByRoleResponse GetMenuOfOperateByRole(GetMenuOfOperateByRoleRequest request)
+        {
+            var menu = _menu.FirstOrDefault(item => item.Key == request.Key);
+            if (menu == null)
+                throw new Exception($"key{request.Key}没有对应的菜单！");
+            var roleMenu =
+                _roleMenu.FirstOrDefault(item => item.RoleId == request.RoleId && item.MenuId == menu.Id);
+            var result = new GetMenuOfOperateByRoleResponse();
+            JsonConvert.DeserializeObject<List<int>>(roleMenu?.Operates).ForEach(id =>
+            {
+                var operate = Repository.FirstOrDefault(item => item.Id == id);
+                result.Datas.Add(new
+                {
+                    Unique = operate?.Unique.ToString(),
+                    operate?.Name
+                });
+            });
+            return result;
+        }
 
-        //    if (!string.IsNullOrEmpty(search.Name))
-        //        expression = expression.And(item => item.Name.Contains(search.Name));
-
-        //    return expression;
-        //}
-
-        public OperateService(IObjectMapper objectMapper, IFreeSqlRepository<SysOperate> repository, IFreeSqlRepository<SysRoleMenu> roleMenu) : base(objectMapper, repository)
+        public OperateService(IObjectMapper objectMapper, IFreeSqlRepository<SysOperate> repository, IFreeSqlRepository<SysRoleMenu> roleMenu, IFreeSqlRepository<SysMenu> menu) : base(objectMapper, repository)
         {
             _roleMenu = roleMenu;
+            _menu = menu;
         }
     }
 }

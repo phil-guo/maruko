@@ -12,15 +12,21 @@ namespace Maruko.Zero
     {
         private readonly IOperateService _operate;
 
+        public SysOperateController(ICurdAppService<SysOperate, OperateDTO> curd, IOperateService operate) : base(curd)
+        {
+            _operate = operate;
+        }
+
         [HttpPost("getMenuOfOperate")]
         public AjaxResponse<object> GetMenuOfOperate(MenuOfOperateRequest request)
         {
             return new AjaxResponse<object>(_operate.GetMenuOfOperate(request), "ok");
         }
 
-        public SysOperateController(ICurdAppService<SysOperate, OperateDTO> curd, IOperateService operate) : base(curd)
+        [HttpPost("getMenuOfOperateByRole")]
+        public AjaxResponse<object> GetMenuOfOperateByRole(GetMenuOfOperateByRoleRequest request)
         {
-            _operate = operate;
+            return new AjaxResponse<object>(_operate.GetMenuOfOperateByRole(request), "ok");
         }
     }
 }

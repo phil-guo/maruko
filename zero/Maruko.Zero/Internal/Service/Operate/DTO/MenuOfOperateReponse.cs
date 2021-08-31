@@ -6,4 +6,9 @@ namespace Maruko.Zero
     {
         public List<string> Datas { get; set; } = new List<string>();
     }
+
+    public class GetMenuOfOperateByRoleResponse
+    {
+        public List<object> Datas { get; set; } = new List<object>();
+    }
 }

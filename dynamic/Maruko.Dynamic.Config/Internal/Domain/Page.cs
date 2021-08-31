@@ -10,6 +10,5 @@ namespace Maruko.Dynamic.Config
         public string Name { get; set; }
         [Column(Name = "key", StringLength = 200)]
         public string Key { get; set; }
-     
     }
 }
