@@ -31,7 +31,8 @@ namespace Maruko.Core.Web
         //[Authorize(Roles = "1,3")]//权限角色id
         public virtual AjaxResponse<PagedResultDto> PageSearch(PageDto search)
         {
-            return new AjaxResponse<PagedResultDto>(_curd.PageSearch(search)); ;
+            return new AjaxResponse<PagedResultDto>(_curd.PageSearch(search));
+            ;
         }
 
         /// <summary>
@@ -62,7 +63,23 @@ namespace Maruko.Core.Web
             }
             catch (Exception exception)
             {
-                return new AjaxResponse<object>($"{exception.Message}", 500); ;
+                return new AjaxResponse<object>($"{exception.Message}", 500);
+                ;
+            }
+        }
+
+        [HttpPost("removes")]
+        public virtual AjaxResponse<object> Remove(List<int> ids)
+        {
+            try
+            {
+                ids.ForEach(id => { _curd.Delete(id); });
+                return new AjaxResponse<object>("删除成功");
+            }
+            catch (Exception exception)
+            {
+                return new AjaxResponse<object>($"{exception.Message}", 500);
+                ;
             }
         }
     }
