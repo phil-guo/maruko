@@ -6,6 +6,7 @@ using Maruko.Core.Application.Servers.Dto;
 using Maruko.Core.Domain.Entities;
 using Maruko.Core.FreeSql.Internal;
 using Maruko.Core.FreeSql.Internal.AppService;
+using Maruko.Core.Web.Internal.VM;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Maruko.Core.Web
@@ -69,11 +70,11 @@ namespace Maruko.Core.Web
         }
 
         [HttpPost("removes")]
-        public virtual AjaxResponse<object> Remove(List<int> ids)
+        public virtual AjaxResponse<object> Remove(RemovesDTO ids)
         {
             try
             {
-                ids.ForEach(id => { _curd.Delete(id); });
+                ids.Ids.ForEach(id => { _curd.Delete(id); });
                 return new AjaxResponse<object>("删除成功");
             }
             catch (Exception exception)
