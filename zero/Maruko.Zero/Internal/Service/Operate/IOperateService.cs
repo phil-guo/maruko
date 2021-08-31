@@ -5,5 +5,6 @@ namespace Maruko.Zero
     public interface IOperateService : ICurdAppService<SysOperate, OperateDTO>
     {
         MenuOfOperateResponse GetMenuOfOperate(MenuOfOperateRequest request);
+        GetMenuOfOperateByRoleResponse GetMenuOfOperateByRole(GetMenuOfOperateByRoleRequest request);
     }
 }

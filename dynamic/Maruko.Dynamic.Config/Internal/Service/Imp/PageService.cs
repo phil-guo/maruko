@@ -2,7 +2,6 @@
 using Maruko.Core.FreeSql.Internal.AppService;
 using Maruko.Core.FreeSql.Internal.Repos;
 using Maruko.Core.ObjectMapping;
-using Renci.SshNet.Security;
 
 namespace Maruko.Dynamic.Config
 {
