@@ -8,16 +8,34 @@
 //===================================================================================
 
 
+using System.Collections.Generic;
+using Maruko.Core.Application;
 using Maruko.Core.FreeSql.Internal.AppService;
 using Maruko.Core.FreeSql.Internal.Repos;
 using Maruko.Core.ObjectMapping;
 
 namespace Maruko.Zero
 {
-    public class SysDataDictionaryService : CurdAppService<SysDataDictionary, SysDataDictionaryDTO>, ISysDataDictionaryService
+    public class SysDataDictionaryService : CurdAppService<SysDataDictionary, SysDataDictionaryDTO>,
+        ISysDataDictionaryService
     {
-        public SysDataDictionaryService(IObjectMapper objectMapper, IFreeSqlRepository<SysDataDictionary> repository) : base(objectMapper, repository)
+        public SysDataDictionaryService(IObjectMapper objectMapper, IFreeSqlRepository<SysDataDictionary> repository) :
+            base(objectMapper, repository)
         {
+        }
+
+        public AjaxResponse<object> GetDictionaryByGroup(string groupName)
+        {
+            var data = Table
+                .GetAll()
+                .Select<SysDataDictionary>()
+                .Where(item => item.Group == groupName)
+                .ToList(_ => new
+                {
+                    _.Key,
+                    _.Value
+                });
+            return new AjaxResponse<object>(data);
         }
     }
 }
