@@ -28,7 +28,7 @@ namespace Maruko.Core.Modules
         {
         }
 
-        public virtual void ConfigureServices(IServiceCollection collection)
+        public virtual void ConfigureServices(IServiceCollection service)
         {
         }
 

@@ -7,14 +7,12 @@ namespace Maruko.TaskScheduling
 {
     public class TaskSchedulingModule : KernelModule
     {
-        public override void ConfigureServices(IServiceCollection collection)
+        public override void ConfigureServices(IServiceCollection service)
         {
-            base.ConfigureServices(collection);
         }
 
         protected override void RegisterModule(ContainerBuilder builder)
         {
-            base.RegisterModule(builder);
         }
     }
 }

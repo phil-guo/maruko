@@ -18,4 +18,8 @@
     <ProjectReference Include="..\..\src\Maruko\Maruko.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Quartz" Version="3.3.3" />
+  </ItemGroup>
+
 </Project>
