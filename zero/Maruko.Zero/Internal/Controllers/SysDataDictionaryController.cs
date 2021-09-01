@@ -1,3 +1,4 @@
+using Maruko.Core.Application;
 using Maruko.Core.FreeSql.Internal.AppService;
 using Maruko.Core.Web;
 using Microsoft.AspNetCore.Cors;
@@ -9,8 +10,18 @@ namespace Maruko.Zero
     [Route("api/v1/sysDataDictionaries/")]
     public class SysDataDictionaryController : BaseCurdController<SysDataDictionary, SysDataDictionaryDTO>
     {
-        public SysDataDictionaryController(ICurdAppService<SysDataDictionary, SysDataDictionaryDTO> curd) : base(curd)
+        private readonly ISysDataDictionaryService _dictionary;
+
+        public SysDataDictionaryController(ICurdAppService<SysDataDictionary, SysDataDictionaryDTO> curd,
+            ISysDataDictionaryService dictionary) : base(curd)
         {
+            _dictionary = dictionary;
+        }
+
+        [HttpGet("getDictionaryByGroup")]
+        public AjaxResponse<object> GetDictionaryByGroup(string groupName)
+        {
+            return _dictionary.GetDictionaryByGroup(groupName);
         }
     }
 }

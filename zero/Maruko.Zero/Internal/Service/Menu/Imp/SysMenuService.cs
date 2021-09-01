@@ -211,7 +211,7 @@ namespace Maruko.Zero
             var menus = new List<SysMenu>();
             var roleMenusByRole = _roleMenu.GetAll().Select<SysRoleMenu>()
                 .Where(item => item.RoleId == roleId)
-                .OrderByDescending(item => item.MenuId)
+                .OrderBy(item => item.MenuId)
                 .ToList();
 
             if (roleMenusByRole.Count == 0)

@@ -12,7 +12,7 @@ namespace Maruko.Core.Domain.Entities.Auditing
             CreateTime = DateTime.Now;
         }
 
-        public DateTime CreateTime { get; set; }
+        public sealed override DateTime CreateTime { get; set; }
         public DateTime? LastModificationTime { get; set; }
         public bool IsDelete { get; set; } = false;
     }
