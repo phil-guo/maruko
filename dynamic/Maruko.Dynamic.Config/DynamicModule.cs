@@ -3,6 +3,7 @@ using Autofac;
 using Maruko.Core.FreeSql.Internal.Context;
 using Maruko.Core.Modules;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Maruko.Dynamic.Config
 {

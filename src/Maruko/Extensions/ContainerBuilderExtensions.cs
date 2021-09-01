@@ -8,6 +8,7 @@ using Autofac;
 using Maruko.Core.Config;
 using Maruko.Core.Modules;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyModel;
 
 namespace Maruko.Core.Extensions
@@ -15,28 +16,34 @@ namespace Maruko.Core.Extensions
     public static class ContainerBuilderExtensions
     {
         public static readonly List<Assembly> ReferenceAssembly = new List<Assembly>();
-        private static readonly List<KernelModule> Modules = new List<KernelModule>();
+        public static readonly List<KernelModule> Modules = new List<KernelModule>();
 
-        /// <summary>
-        /// 批量注册模块
-        /// </summary>
-        public static void RegisterModules(this ContainerBuilder builder, IConfiguration appConfig)
+        public static void ConfigureMarukoServices(this IServiceCollection service, IConfiguration appConfig)
         {
             var referenceAssemblies = GetAssemblies(appConfig);
             foreach (var moduleAssembly in referenceAssemblies)
             {
                 GetKernelModules(moduleAssembly).ForEach(module =>
                 {
-                    builder.RegisterModule(module);
+                    module.ConfigureServices(service);
                     Modules.Add(module);
                 });
             }
-
+        }
+        
+        /// <summary>
+        /// 批量注册模块
+        /// </summary>
+        public static void RegisterModules(this ContainerBuilder builder, IConfiguration appConfig)
+        {
+            Modules.ForEach(item =>
+            {
+                builder.RegisterModule(item);
+            });
+            
             builder.RegisterType<KernelModuleProvider>().As<IKernelModuleProvider>()
                 .WithParameter(new TypedParameter(typeof(List<KernelModule>), Modules));
         }
-
-
 
         private static List<Assembly> GetAssemblies(IConfiguration appConfig)
         {

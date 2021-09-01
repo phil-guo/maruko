@@ -54,6 +54,8 @@ namespace Maruko.Core.Web
                     policy => policy.SetIsOriginAllowed(origin => true).AllowAnyHeader().AllowAnyMethod()
                         .AllowAnyOrigin());
             });
+
+            services.ConfigureMarukoServices(ServiceLocator.Configuration);
         }
 
         public void ConfigureContainer(ContainerBuilder builder)

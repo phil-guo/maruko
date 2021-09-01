@@ -26,7 +26,10 @@ namespace Maruko.Core.Modules
 
         public virtual void Initialize(ILifetimeScope scope, IApplicationBuilder app)
         {
+        }
 
+        public virtual void ConfigureServices(IServiceCollection collection)
+        {
         }
 
         /// <summary>
