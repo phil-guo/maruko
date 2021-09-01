@@ -30,7 +30,7 @@ namespace Maruko.Dynamic.Config
                 throw new Exception("页面名称不能为空");
 
             var page = FirstOrDefault(item => item.Key == request.Key);
-            if (page != null)
+            if (page != null && request.Id == 0)
                 throw new Exception($"已经存在key:{request.Key},请重新填写");
         }
     }
