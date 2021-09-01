@@ -101,6 +101,15 @@ namespace Maruko.Zero
                                 operateModel.Children.Add(new MenuModel { Id = $"{child.Id}_{op.Id}", Lable = op.Name });
                         });
                     });
+                else
+                {
+                    operates.ForEach(op =>
+                    {
+                        if (JsonConvert.DeserializeObject<List<long>>(item.Operates).Contains(op.Id))
+                            model.Children.Add(new MenuModel { Id = $"{item.Id}_{op.Id}", Lable = op.Name });
+                    });
+
+                }
                 result.List.Add(model);
             });
             var roleMenus = GetRoleOfMenus(request.RoleId);
