@@ -130,6 +130,18 @@ namespace Maruko.Zero
                             });
                         });
                     });
+                else
+                {
+                    JsonConvert.DeserializeObject<List<int>>(item.Operates).ForEach(operateId =>
+                    {
+                        operates.ForEach(op =>
+                        {
+                            if (op.Id != operateId)
+                                return;
+                            result.MenuIds.Add($"{item.Id}_{op.Id}");
+                        });
+                    });
+                }
             });
 
             return result;
