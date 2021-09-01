@@ -29,7 +29,11 @@ namespace Maruko.Core.Web
         public void ConfigureServices(IServiceCollection services)
         {
             ServiceLocator.ServiceCollection = services;
-            services.AddControllers().AddNewtonsoftJson(opt => opt.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss"); ;
+            services.AddControllers(controller =>
+                {
+                    controller.Filters.Add(typeof(GlobalExceptionFilter));
+                })
+                .AddNewtonsoftJson(opt => opt.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss"); ;
 
             services.AddSwaggerGen(option =>
             {
