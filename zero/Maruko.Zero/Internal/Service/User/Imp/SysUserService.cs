@@ -73,11 +73,13 @@ namespace Maruko.Zero
                 {
                     new Claim(ClaimTypes.Sid, sysUser.Id.ToString()),
                     new Claim(ClaimTypes.Name, sysUser.UserName),
-                    new Claim(ClaimTypes.Role, sysUser.RoleId.ToString())
+                    new Claim(ClaimTypes.Role, sysUser.RoleId.ToString()),
+                    new Claim(ClaimTypes.Expired, config.Zero.AuthExpired.ToString()),
+                    new Claim(ClaimTypes.UserData, sysUser.Icon)
                 },
                 issuer: config.Zero.Key,
                 notBefore: DateTime.Now,
-                expires: DateTime.Now.AddSeconds(7200),
+                expires: DateTime.Now.AddSeconds(config.Zero.AuthExpired),
                 signingCredentials: new SigningCredentials(
                     new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.Zero.Secret)),
                     SecurityAlgorithms.HmacSha256)

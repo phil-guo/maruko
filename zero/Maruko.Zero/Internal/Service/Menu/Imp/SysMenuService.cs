@@ -33,7 +33,10 @@ namespace Maruko.Zero
 
             tree.ForEach(item =>
             {
-                var model = new MenusRoleResponse { Id = item.Id, Title = item.Title, Icon = item.Icon ?? "", Path = item.Path, Key = item.Key ?? "" };
+                var model = new MenusRoleResponse
+                {
+                    Id = item.Id, Title = item.Title, Icon = item.Icon ?? "", Path = item.Path, Key = item.Key ?? ""
+                };
 
                 if (item.Children.Count > 0)
                     item.Children.ForEach(child =>
@@ -42,7 +45,7 @@ namespace Maruko.Zero
                         {
                             Id = child.Id,
                             Icon = child.Icon ?? "",
-                            Path = child.Path, //+ "?id=" + child.Id,
+                            Path = $"{child.Path}?id={child.Id}&key={item?.Key ?? ""}",
                             Title = child.Title,
                             Key = child.Key ?? ""
                         });
@@ -98,7 +101,8 @@ namespace Maruko.Zero
                         operates.ForEach(op =>
                         {
                             if (JsonConvert.DeserializeObject<List<long>>(child.Operates).Contains(op.Id))
-                                operateModel.Children.Add(new MenuModel { Id = $"{child.Id}_{op.Id}", Lable = op.Name });
+                                operateModel.Children.Add(new MenuModel
+                                    { Id = $"{child.Id}_{op.Id}", Lable = op.Name });
                         });
                     });
                 else
@@ -108,8 +112,8 @@ namespace Maruko.Zero
                         if (JsonConvert.DeserializeObject<List<long>>(item.Operates).Contains(op.Id))
                             model.Children.Add(new MenuModel { Id = $"{item.Id}_{op.Id}", Lable = op.Name });
                     });
-
                 }
+
                 result.List.Add(model);
             });
             var roleMenus = GetRoleOfMenus(request.RoleId);
@@ -254,7 +258,5 @@ namespace Maruko.Zero
                     currentTree.Children.Add(item);
             });
         }
-
-
     }
 }

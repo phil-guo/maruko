@@ -29,17 +29,16 @@ namespace Maruko.Core.Web
         public void ConfigureServices(IServiceCollection services)
         {
             ServiceLocator.ServiceCollection = services;
-            services.AddControllers(controller =>
-                {
-                    controller.Filters.Add(typeof(GlobalExceptionFilter));
-                })
-                .AddNewtonsoftJson(opt => opt.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss"); ;
+            services.AddControllers(controller => { controller.Filters.Add(typeof(GlobalExceptionFilter)); })
+                .AddNewtonsoftJson(opt => opt.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss");
+            ;
 
             services.AddSwaggerGen(option =>
             {
                 var app = new AppConfig();
 
-                option.SwaggerDoc(app.Swagger.Version, new OpenApiInfo { Title = app.Swagger.Title, Version = app.Swagger.Version });
+                option.SwaggerDoc(app.Swagger.Version,
+                    new OpenApiInfo { Title = app.Swagger.Title, Version = app.Swagger.Version });
 
                 XmlFiles.ForEach(file =>
                 {
@@ -51,7 +50,9 @@ namespace Maruko.Core.Web
 
             services.AddCors(option =>
             {
-                option.AddPolicy("cors", policy => policy.SetIsOriginAllowed(origin => true).AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+                option.AddPolicy("cors",
+                    policy => policy.SetIsOriginAllowed(origin => true).AllowAnyHeader().AllowAnyMethod()
+                        .AllowAnyOrigin());
             });
         }
 
@@ -66,10 +67,7 @@ namespace Maruko.Core.Web
 
             app.UseAuthorization();
             app.UseCors("cors");
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
             var root = Path.Combine(env.ContentRootPath, "uploads");
             if (!Directory.Exists(root))
