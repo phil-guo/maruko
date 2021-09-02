@@ -14,7 +14,8 @@ namespace Maruko.TaskScheduling
         {
             if (AppConfig.Default.Schedule.EnableDatabaseMigrate)
                 scope.Resolve<IFreeSqlContext>().GetSet().CodeFirst.SyncStructure(
-                    typeof(TaskScheduling)
+                    typeof(TaskScheduling),
+                    typeof(AllCountryOilPrice)
                 );
         }
 
@@ -25,6 +26,7 @@ namespace Maruko.TaskScheduling
 
         protected override void RegisterModule(ContainerBuilder builder)
         {
+            builder.RegisterType<OilPriceStrategy>().As<IStrategy>();
         }
     }
 }

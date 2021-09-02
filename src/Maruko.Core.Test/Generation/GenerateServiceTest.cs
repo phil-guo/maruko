@@ -17,7 +17,7 @@ namespace Maruko.Core.Test.Generation
         public void GenerateService_Test()
         {
             var one = ContainerBuilderExtensions.ReferenceAssembly.FirstOrDefault(item =>
-                item.GetName().Name == "Maruko.Zero");
+                item.GetName().Name == "Maruko.TaskScheduling");
             var types = one?.GetTypes().Where(item => item.BaseType == typeof(FreeSqlEntity))
                 .Select(item=>item.Name)
                 .ToList();

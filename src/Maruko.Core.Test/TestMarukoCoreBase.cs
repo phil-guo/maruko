@@ -57,6 +57,7 @@ namespace Maruko.Core.Test
             ServiceLocator.ServiceCollection = services;
             services.AddSingleton<IApplicationBuilder, ApplicationBuilder>();
             services.AddAuthorization();
+            services.ConfigureMarukoServices(ServiceLocator.Configuration);
         }
 
         public void ConfigureContainer(ContainerBuilder builder)

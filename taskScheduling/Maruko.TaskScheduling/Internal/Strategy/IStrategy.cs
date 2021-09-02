@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Maruko.Core.Application;
 using Quartz;
 
-namespace Maruko.TaskScheduling.Internal.Strategy
+namespace Maruko.TaskScheduling
 {
     public interface IStrategy
     {

@@ -12,6 +12,6 @@
         /// 解决方案名称
         /// 格式:.
         /// </summary>
-        public static string SolutionName { get; set; } = "Maruko.Zero";//Maruko.Zero  Maruko.Dynamic.Config
+        public static string SolutionName { get; set; } = "Maruko.TaskScheduling";//Maruko.Zero  Maruko.Dynamic.Config
     }
 }

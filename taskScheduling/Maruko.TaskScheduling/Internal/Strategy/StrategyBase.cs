@@ -4,18 +4,17 @@ using System.Text;
 using System.Threading.Tasks;
 using Maruko.Core.Application;
 using Maruko.Core.FreeSql.Internal.Repos;
-using Maruko.TaskScheduling.Internal.Strategy;
 using Quartz;
 
 namespace Maruko.TaskScheduling
 {
-    public class StrategyBase<TJob> : IStrategy
+    public abstract class StrategyBase<TJob> : IStrategy
         where TJob : IJob
     {
         private readonly ISchedulerFactory _factory;
         private readonly IFreeSqlRepository<TaskScheduling> _taskSchedule;
 
-        protected StrategyBase(ISchedulerFactory factory, IFreeSqlRepository<TaskScheduling> taskSchedule)
+        public StrategyBase(ISchedulerFactory factory, IFreeSqlRepository<TaskScheduling> taskSchedule)
         {
             _factory = factory;
             _taskSchedule = taskSchedule;
@@ -58,7 +57,7 @@ namespace Maruko.TaskScheduling
         {
             IDictionary<string, object> dictionary = new Dictionary<string, object>()
             {
-                {"objectId",objectId}
+                { "objectId", objectId }
             };
             return new JobDataMap(dictionary);
         }
