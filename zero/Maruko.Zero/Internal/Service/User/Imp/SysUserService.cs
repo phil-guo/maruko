@@ -88,11 +88,6 @@ namespace Maruko.Zero
             return new AjaxResponse<object>(new
             {
                 AccessToken = new JwtSecurityTokenHandler().WriteToken(token),
-                //sysUser.UserName,
-                //sysUser.RoleId,
-                //UserId = sysUser.Id,
-                //Expired = config.Zero.AuthExpired,
-                //sysUser.Icon
             });
         }
 

@@ -35,7 +35,11 @@ namespace Maruko.Zero
             {
                 var model = new MenusRoleResponse
                 {
-                    Id = item.Id, Title = item.Title, Icon = item.Icon ?? "", Path = item.Path, Key = item.Key ?? ""
+                    Id = item.Id,
+                    Title = item.Title,
+                    Icon = item.Icon ?? "",
+                    Path = string.IsNullOrEmpty(item.Key) ? item.Path : $"{item.Path}?id={item.Id}&key={item.Key}",
+                    Key = item.Key ?? ""
                 };
 
                 if (item.Children.Count > 0)
@@ -45,7 +49,7 @@ namespace Maruko.Zero
                         {
                             Id = child.Id,
                             Icon = child.Icon ?? "",
-                            Path = $"{child.Path}?id={child.Id}&key={item?.Key ?? ""}",
+                            Path = $"{child.Path}?id={child.Id}&key={child?.Key ?? ""}",
                             Title = child.Title,
                             Key = child.Key ?? ""
                         });
@@ -102,7 +106,7 @@ namespace Maruko.Zero
                         {
                             if (JsonConvert.DeserializeObject<List<long>>(child.Operates).Contains(op.Id))
                                 operateModel.Children.Add(new MenuModel
-                                    { Id = $"{child.Id}_{op.Id}", Lable = op.Name });
+                                { Id = $"{child.Id}_{op.Id}", Lable = op.Name });
                         });
                     });
                 else
