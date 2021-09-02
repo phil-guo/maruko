@@ -7,8 +7,8 @@
   <ItemGroup>
     <Folder Include="Config\" />
     <Folder Include="Internal\Controllers\" />
-    <Folder Include="Internal\Domain\" />
-    <Folder Include="Internal\Service\" />
+    <Folder Include="Internal\Service\Imp\" />
+    <Folder Include="Internal\Service\DTO\" />
   </ItemGroup>
 
   <ItemGroup>
