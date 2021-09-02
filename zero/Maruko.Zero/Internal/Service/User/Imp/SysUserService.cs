@@ -75,7 +75,7 @@ namespace Maruko.Zero
                     new Claim(ClaimTypes.Name, sysUser.UserName),
                     new Claim(ClaimTypes.Role, sysUser.RoleId.ToString()),
                     new Claim(ClaimTypes.Expired, config.Zero.AuthExpired.ToString()),
-                    new Claim(ClaimTypes.UserData, sysUser.Icon)
+                    new Claim(ClaimTypes.UserData, sysUser.Icon ?? "")
                 },
                 issuer: config.Zero.Key,
                 notBefore: DateTime.Now,
@@ -88,11 +88,11 @@ namespace Maruko.Zero
             return new AjaxResponse<object>(new
             {
                 AccessToken = new JwtSecurityTokenHandler().WriteToken(token),
-                sysUser.UserName,
-                sysUser.RoleId,
-                UserId = sysUser.Id,
-                Expired = config.Zero.AuthExpired,
-                sysUser.Icon
+                //sysUser.UserName,
+                //sysUser.RoleId,
+                //UserId = sysUser.Id,
+                //Expired = config.Zero.AuthExpired,
+                //sysUser.Icon
             });
         }
 
