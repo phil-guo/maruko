@@ -27,29 +27,32 @@ namespace Maruko.TaskScheduling
 
         public async Task<AjaxResponse<object>> ExecuteAsync(ExecuteRequest request)
         {
-            var task = _taskSchedule.FirstOrDefault(request.ObjectId);
+            foreach (var objectId in request.ObjectIds)
+            {
+                var task = _taskSchedule.FirstOrDefault(objectId);
 
-            if (task == null)
-                return new AjaxResponse<object>("任务不存在");
+                if (task == null)
+                    return new AjaxResponse<object>("任务不存在");
 
-            var scheduler = await GetSchedulerAsync();
-            await scheduler.Start();
+                var scheduler = await GetSchedulerAsync();
+                await scheduler.Start();
 
-            var job = JobBuilder.Create<TJob>()
-                .WithIdentity($"job_{request.ObjectId}", task.GroupName)
-                .UsingJobData(Map(request.ObjectId))
-                .Build();
+                var job = JobBuilder.Create<TJob>()
+                    .WithIdentity($"job_{objectId}", task.GroupName)
+                    .UsingJobData(Map(objectId))
+                    .Build();
 
-            //创建一个触发器
-            var triggerBuilder = TriggerBuilder.Create()
-                .WithIdentity($"trigger_{request.ObjectId}", task.GroupName)
-                .WithCronSchedule(task.CronExpression)
-                .ForJob(job);
+                //创建一个触发器
+                var triggerBuilder = TriggerBuilder.Create()
+                    .WithIdentity($"trigger_{objectId}", task.GroupName)
+                    .WithCronSchedule(task.CronExpression)
+                    .ForJob(job);
 
-            await scheduler.ScheduleJob(job, triggerBuilder.Build());
+                await scheduler.ScheduleJob(job, triggerBuilder.Build());
 
-            task.StartTime = DateTime.Now;
-            _taskSchedule.Update(task);
+                task.StartTime = DateTime.Now;
+                _taskSchedule.Update(task);
+            }
             return new AjaxResponse<object>("任务执行成功");
         }
 

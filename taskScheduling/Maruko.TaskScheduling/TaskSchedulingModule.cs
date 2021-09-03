@@ -26,7 +26,12 @@ namespace Maruko.TaskScheduling
 
         protected override void RegisterModule(ContainerBuilder builder)
         {
-            builder.RegisterType<OilPriceStrategy>().As<IStrategy>();
+            builder.RegisterType<OilPriceStrategy>().Keyed<IStrategy>(Strategy.Oil);
         }
+    }
+
+    public enum Strategy
+    {
+        Oil
     }
 }

@@ -6,6 +6,6 @@ namespace Maruko.TaskScheduling
 {
     public class ExecuteRequest
     {
-        public long ObjectId { get; set; }
+        public List<long> ObjectIds { get; set; }
     }
 }
