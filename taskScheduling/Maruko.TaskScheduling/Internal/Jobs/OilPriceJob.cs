@@ -39,7 +39,8 @@ namespace Maruko.TaskScheduling
                 .Select<TaskScheduling>()
                 .Where(item => item.Id == taskId)
                 .ToOneAsync();
-            var dto = new OilDTO { };
+            var listOil = new List<OilDTO>();
+            OilDTO dto = null;
             var htmlParser = new HtmlParser();
             var htmlDoc = GetHtmlByUrl("http://www.qiyoujiage.com/");
             //HTML 解析成 IDocument
@@ -48,16 +49,19 @@ namespace Maruko.TaskScheduling
             var data = dom.All.FirstOrDefault(_ => _.Id == "left");
 
             var oilText = data?.Children.FirstOrDefault()?.FirstChild?.Text();
-            dto.NextNotify = oilText;
+            // dto.NextNotify = oilText;
             var oilData = dom.QuerySelectorAll("ul.ylist").FirstOrDefault();
-            var oilPrice = new List<dynamic>();
+            List<dynamic> oilPrice = null;
             var i = 0;
             foreach (var oil in oilData.Children)
             {
                 if (oil.ClassName == "t")
                 {
+                    dto = new OilDTO();
+                    dto.NextNotify = oilText;
                     dto.CityName = oil.TextContent;
                     i = 0;
+                    oilPrice = new List<dynamic>();
                 }
                 else if (string.IsNullOrEmpty(oil.ClassName))
                 {
@@ -87,17 +91,19 @@ namespace Maruko.TaskScheduling
                             name = "98#",
                             price = oil.TextContent
                         });
+                        dto.PriceJson = JsonConvert.SerializeObject(oilPrice);
+                        listOil.Add(dto);
                     }
 
                     if (i == 4)
                         continue;
                 }
             }
-
-            dto.PriceJson = JsonConvert.SerializeObject(oilPrice);
-            await _oil.GetAll().Insert(_objectMapper.Map<AllCountryOilPrice>(dto)).ExecuteAffrowsAsync();
-            task.OverTime = DateTime.Now;
-            await _taskSchedule.GetAll().Update<TaskScheduling>().SetSource(task).ExecuteAffrowsAsync();
+            await _oil.GetAll().Insert(_objectMapper.Map<List<AllCountryOilPrice>>(listOil)).ExecuteAffrowsAsync();
+            await _taskSchedule.GetAll()
+                .Update<TaskScheduling>(taskId)
+                .Set(item => item.OverTime, DateTime.Now)
+                .ExecuteAffrowsAsync();
         }
 
         public string GetHtmlByUrl(string url)

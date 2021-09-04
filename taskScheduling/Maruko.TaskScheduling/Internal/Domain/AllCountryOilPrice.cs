@@ -1,6 +1,7 @@
 ﻿using System;
 using FreeSql.DataAnnotations;
 using Maruko.Core.FreeSql.Internal;
+using Microsoft.VisualBasic.CompilerServices;
 
 namespace Maruko.TaskScheduling
 {
@@ -10,7 +11,7 @@ namespace Maruko.TaskScheduling
         [Column(Name = "city_name", StringLength = 12)]
         public string CityName { get; set; }
 
-        [Column(Name = "price_json", StringLength = 256)]
+        [Column(Name = "price_json",DbType = "text")]
         public string PriceJson { get; set; }
 
         [Column(Name = "notify", StringLength = 56)]

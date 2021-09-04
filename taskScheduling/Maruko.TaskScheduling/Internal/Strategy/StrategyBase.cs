@@ -50,9 +50,12 @@ namespace Maruko.TaskScheduling
 
                 await scheduler.ScheduleJob(job, triggerBuilder.Build());
 
-                task.StartTime = DateTime.Now;
-                _taskSchedule.Update(task);
+                await _taskSchedule.GetAll()
+                    .Update<TaskScheduling>(objectId)
+                    .Set(item => item.StartTime, DateTime.Now)
+                    .ExecuteAffrowsAsync();
             }
+
             return new AjaxResponse<object>("任务执行成功");
         }
 

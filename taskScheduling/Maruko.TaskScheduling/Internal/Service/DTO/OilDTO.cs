@@ -10,5 +10,6 @@ namespace Maruko.TaskScheduling
         public string CityName { get; set; }
         public string PriceJson { get; set; }
         public string NextNotify { get; set; }
+        public DateTime CreateTime { get; set; } = DateTime.Now;
     }
 }
