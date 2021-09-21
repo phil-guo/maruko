@@ -29,7 +29,9 @@ namespace Maruko.TaskScheduling
         {
             foreach (var objectId in request.ObjectIds)
             {
-                var task = _taskSchedule.FirstOrDefault(objectId);
+                var task = await _taskSchedule.GetAll().Select<TaskScheduling>()
+                    .Where(item => item.Id == objectId)
+                    .ToOneAsync();
 
                 if (task == null)
                     return new AjaxResponse<object>("任务不存在");
@@ -53,10 +55,37 @@ namespace Maruko.TaskScheduling
                 await _taskSchedule.GetAll()
                     .Update<TaskScheduling>(objectId)
                     .Set(item => item.StartTime, DateTime.Now)
+                    .Set(item => item.Status, true)
                     .ExecuteAffrowsAsync();
             }
 
             return new AjaxResponse<object>("任务执行成功");
+        }
+
+        public async Task<AjaxResponse<object>> CloseAsync(ExecuteRequest request)
+        {
+            foreach (var objectId in request.ObjectIds)
+            {
+                var task = await _taskSchedule.GetAll().Select<TaskScheduling>()
+                    .Where(item => item.Id == objectId)
+                    .ToOneAsync();
+
+                JobKey existKey = JobKey.Create($"Job_{objectId}", task.GroupName);
+                TriggerKey existTriggerKey = new TriggerKey($"trigger_{objectId}", task.GroupName);
+
+                var _scheduler = await GetSchedulerAsync();
+
+                await _scheduler.PauseJob(existKey);
+                await _scheduler.UnscheduleJob(existTriggerKey);
+                await _scheduler.DeleteJob(existKey);
+
+                await _taskSchedule.GetAll()
+                    .Update<TaskScheduling>(objectId)
+                    .Set(item => item.Status, false)
+                    .ExecuteAffrowsAsync();
+            }
+
+            return new AjaxResponse<object>("任务关闭成功");
         }
 
         protected virtual JobDataMap Map(long objectId)

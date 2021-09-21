@@ -10,5 +10,6 @@ namespace Maruko.TaskScheduling
     public interface IStrategy
     {
         Task<AjaxResponse<object>> ExecuteAsync(ExecuteRequest request);
+        Task<AjaxResponse<object>> CloseAsync(ExecuteRequest request);
     }
 }

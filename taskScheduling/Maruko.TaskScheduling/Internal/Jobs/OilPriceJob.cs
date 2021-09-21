@@ -34,11 +34,6 @@ namespace Maruko.TaskScheduling
         public async Task Execute(IJobExecutionContext context)
         {
             var taskId = context.JobDetail.JobDataMap.GetLongValue("objectId");
-            // var task = await _taskSchedule
-            //     .GetAll()
-            //     .Select<TaskScheduling>()
-            //     .Where(item => item.Id == taskId)
-            //     .ToOneAsync();
             var listOil = new List<OilDTO>();
             OilDTO dto = null;
             var htmlParser = new HtmlParser();

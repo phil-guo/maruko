@@ -54,12 +54,15 @@ namespace Maruko.Zero
 
         public GetMenuOfOperateByRoleResponse GetMenuOfOperateByRole(GetMenuOfOperateByRoleRequest request)
         {
+            var result = new GetMenuOfOperateByRoleResponse();
             var menu = _menu.FirstOrDefault(item => item.Key == request.Key);
             if (menu == null)
                 throw new Exception($"key{request.Key}没有对应的菜单！");
             var roleMenu =
                 _roleMenu.FirstOrDefault(item => item.RoleId == request.RoleId && item.MenuId == menu.Id);
-            var result = new GetMenuOfOperateByRoleResponse();
+            if (roleMenu == null)
+                throw new Exception("你还没有配置该页面的功能权限！");
+
             JsonConvert.DeserializeObject<List<int>>(roleMenu?.Operates).ForEach(id =>
             {
                 var operate = Repository.FirstOrDefault(item => item.Id == id);

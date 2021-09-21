@@ -25,5 +25,11 @@ namespace Maruko.TaskScheduling
         {
             return await _strategy.ExecuteAsync(request);
         }
+
+        [HttpPost("closeAsync")]
+        public async Task<AjaxResponse<object>> CloseAsync(ExecuteRequest request)
+        {
+            return await _strategy.CloseAsync(request);
+        }
     }
 }
