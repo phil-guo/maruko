@@ -1,6 +1,7 @@
 using Maruko.Core.Application;
 using Maruko.Core.FreeSql.Internal.AppService;
 using Maruko.Core.Web;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +19,7 @@ namespace Maruko.Zero
             _dictionary = dictionary;
         }
 
+        [Authorize]
         [HttpGet("getDictionaryByGroup")]
         public AjaxResponse<object> GetDictionaryByGroup(string groupName)
         {

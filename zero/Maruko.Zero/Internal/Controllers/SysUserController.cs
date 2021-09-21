@@ -1,6 +1,7 @@
 ﻿using Maruko.Core.Application;
 using Maruko.Core.FreeSql.Internal.AppService;
 using Maruko.Core.Web;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,7 @@ namespace Maruko.Zero
         }
 
         [HttpPost("auth/token")]
+        [AllowAnonymous]
         public AjaxResponse<object> Login(LoginVM request)
         {
             return _user.Login(request);

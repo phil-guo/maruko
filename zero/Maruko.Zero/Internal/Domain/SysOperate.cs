@@ -12,7 +12,9 @@ namespace Maruko.Zero
         [Column(DbType = "TEXT", Name = "remark")]
         public string Remark { get; set; }
 
-        [Column(Name = "unique", StringLength = 20)]
+        [Column(Name = "unique")]
         public int Unique { get; set; }
+
+        [Column(Name = "isBasicData")] public bool IsBasicData { get; set; }
     }
 }
