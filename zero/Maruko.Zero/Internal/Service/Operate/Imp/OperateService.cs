@@ -25,7 +25,7 @@ namespace Maruko.Zero
                     request.Unique = 10001;
 
                 request.CreateTime = DateTime.Now;
-
+                
                 data = Repository.Insert(ObjectMapper.Map<SysOperate>(request));
             }
             else
@@ -33,6 +33,7 @@ namespace Maruko.Zero
                 data = Table.FirstOrDefault(item => item.Id == request.Id);
                 data.Name = request.Name;
                 data.Remark = request.Remark;
+                data.IsBasicData = request.IsBasicData;
                 data = Repository.Update(data);
             }
 

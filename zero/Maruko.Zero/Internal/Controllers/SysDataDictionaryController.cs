@@ -19,7 +19,6 @@ namespace Maruko.Zero
             _dictionary = dictionary;
         }
 
-        [Authorize]
         [HttpGet("getDictionaryByGroup")]
         public AjaxResponse<object> GetDictionaryByGroup(string groupName)
         {

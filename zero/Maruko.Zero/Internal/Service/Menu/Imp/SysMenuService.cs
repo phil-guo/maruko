@@ -27,7 +27,7 @@ namespace Maruko.Zero
         public List<MenusRoleResponse> GetMenusByRole(MenusRoleRequest request)
         {
             var result = new List<MenusRoleResponse>();
-            var tree = GetRoleOfMenus(request.RoleId);
+            var tree = GetRoleOfMenus(request.RoleId, true);
 
             result.Add(new MenusRoleResponse { Id = 0, Icon = "el-icon-platform-eleme", Title = "首页", Path = "/home" });
 
@@ -106,7 +106,7 @@ namespace Maruko.Zero
                         {
                             if (JsonConvert.DeserializeObject<List<long>>(child.Operates).Contains(op.Id))
                                 operateModel.Children.Add(new MenuModel
-                                { Id = $"{child.Id}_{op.Id}", Lable = op.Name });
+                                    { Id = $"{child.Id}_{op.Id}", Lable = op.Name });
                         });
                     });
                 else
@@ -210,9 +210,9 @@ namespace Maruko.Zero
             return data;
         }
 
-        private List<RoleMenuDTO> GetRoleOfMenus(int roleId)
+        private List<RoleMenuDTO> GetRoleOfMenus(int roleId, bool? isLeftShow = null)
         {
-            var datas = GetRoleMenu(roleId);
+            var datas = GetRoleMenu(roleId, isLeftShow);
 
             var listMenus = new List<RoleMenuDTO>();
             datas.ForEach(item =>
@@ -236,7 +236,8 @@ namespace Maruko.Zero
             return tree;
         }
 
-        private List<SysMenu> GetRoleMenu(int roleId)
+
+        private List<SysMenu> GetRoleMenu(int roleId, bool? isLeftShow = null)
         {
             var menus = new List<SysMenu>();
             var roleMenusByRole = _roleMenu.GetAll().Select<SysRoleMenu>()
@@ -248,7 +249,14 @@ namespace Maruko.Zero
                 return menus;
             roleMenusByRole.ForEach(rm =>
             {
-                var menu = Table.FirstOrDefault(item => item.Id == rm.MenuId && item.IsLeftShow);
+                SysMenu menu = null;
+                if (isLeftShow.HasValue)
+                    menu = Table.FirstOrDefault(item => item.Id == rm.MenuId && item.IsLeftShow == isLeftShow);
+                else
+                {
+                    menu = Table.FirstOrDefault(item => item.Id == rm.MenuId);
+                }
+
                 if (menu == null)
                     return;
                 menu.Operates = rm.Operates;

@@ -9,5 +9,6 @@ namespace Maruko.Zero
         public string Name { get; set; }
         public string Remark { get; set; }
         public int Unique { get; set; }
+        public bool IsBasicData { get; set; }
     }
 }

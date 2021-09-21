@@ -52,7 +52,7 @@ namespace Maruko.Core.Web
 
             services.AddControllers(controller =>
                 {
-                    controller.Filters.Add(new AuthorizeFilter());
+                    // controller.Filters.Add(new AuthorizeFilter());
                     controller.Filters.Add(typeof(GlobalExceptionFilter));
                 })
                 .AddNewtonsoftJson(opt => opt.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss");
