@@ -14,6 +14,7 @@ namespace Maruko.Zero
         public string Operates { get; set; }
         public string Icon { get; set; }
         public string Key { get; set; } = "";
+        public bool IsLeftShow { get; set; }
         public List<OperateModel> OperateModels { get; set; } = new List<OperateModel>();
     }
 

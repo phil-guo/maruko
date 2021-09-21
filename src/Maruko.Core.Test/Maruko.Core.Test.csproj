@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\cbb\Cbb.Application\Cbb.Application.csproj" />
     <ProjectReference Include="..\..\dynamic\Maruko.Dynamic.Config\Maruko.Dynamic.Config.csproj" />
     <ProjectReference Include="..\..\taskScheduling\Maruko.TaskScheduling\Maruko.TaskScheduling.csproj" />
     <ProjectReference Include="..\..\zero\Maruko.Zero\Maruko.Zero.csproj" />

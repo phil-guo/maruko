@@ -169,6 +169,7 @@ namespace Maruko.Zero
                 oldMenu.Url = menu.Url;
                 oldMenu.Icon = menu.Icon;
                 oldMenu.Key = menu.Key;
+                oldMenu.IsLeftShow = menu.IsLeftShow;
                 menu = Repository.Update(oldMenu);
             }
             else
@@ -247,7 +248,9 @@ namespace Maruko.Zero
                 return menus;
             roleMenusByRole.ForEach(rm =>
             {
-                var menu = Table.FirstOrDefault(item => item.Id == rm.MenuId);
+                var menu = Table.FirstOrDefault(item => item.Id == rm.MenuId && item.IsLeftShow);
+                if (menu == null)
+                    return;
                 menu.Operates = rm.Operates;
                 menus.Add(menu);
             });

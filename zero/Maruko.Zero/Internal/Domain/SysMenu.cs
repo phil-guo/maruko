@@ -32,6 +32,9 @@ namespace Maruko.Zero
         [Column(Name = "key", StringLength = 50)]
         public string Key { get; set; }
 
+        [Column(Name = "isLeftShow")]
+        public bool IsLeftShow { get; set; }
+
         public int AddOperateSort()
         {
             Sort += 1;
