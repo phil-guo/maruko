@@ -74,22 +74,8 @@ namespace Maruko.Zero
             return _roleMenu.BatchInsert(list);
         }
 
-        ///// <summary>
-        ///// 查询条件过滤
-        ///// </summary>
-        ///// <param name="search"></param>
-        ///// <returns></returns>
-        //protected override Expression<Func<SysRole, bool>> SearchFilter(SearchRoleRequest search)
-        //{
-        //    Expression<Func<SysRole, bool>> expression = item => true;
-
-        //    if (!string.IsNullOrEmpty(search.Name))
-        //        expression = expression.And(item => item.Name.Contains(search.Name));
-
-        //    return expression;
-        //}
-
-        public RoleService(IObjectMapper objectMapper, IFreeSqlRepository<SysRole> repository, IFreeSqlRepository<SysMenu> menu, IFreeSqlRepository<SysRoleMenu> roleMenu) : base(objectMapper, repository)
+        public RoleService(IObjectMapper objectMapper, IFreeSqlRepository<SysRole> repository,
+            IFreeSqlRepository<SysMenu> menu, IFreeSqlRepository<SysRoleMenu> roleMenu) : base(objectMapper, repository)
         {
             _menu = menu;
             _roleMenu = roleMenu;

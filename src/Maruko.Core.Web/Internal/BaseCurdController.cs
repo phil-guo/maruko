@@ -7,6 +7,7 @@ using Maruko.Core.Domain.Entities;
 using Maruko.Core.FreeSql.Internal;
 using Maruko.Core.FreeSql.Internal.AppService;
 using Maruko.Core.Web.Internal.VM;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Maruko.Core.Web
@@ -33,7 +34,7 @@ namespace Maruko.Core.Web
         public virtual AjaxResponse<PagedResultDto> PageSearch(PageDto search)
         {
             return new AjaxResponse<PagedResultDto>(_curd.PageSearch(search));
-            ;
+            
         }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace Maruko.Core.Web
         /// <param name="id"> 主键</param>
         /// <returns></returns>
         [HttpPost("remove")]
-        //[Authorize(Roles = "1,3")]//权限角色id
+        // [Authorize(Roles = "1,3")]//权限角色id
         public virtual AjaxResponse<object> Remove(int id)
         {
             try
@@ -80,7 +81,6 @@ namespace Maruko.Core.Web
             catch (Exception exception)
             {
                 return new AjaxResponse<object>($"{exception.Message}", 500);
-                ;
             }
         }
     }

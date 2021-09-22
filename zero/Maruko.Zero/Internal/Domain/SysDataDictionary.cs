@@ -11,9 +11,13 @@ namespace Maruko.Zero
     {
         [Column(Name = "key", StringLength = 32)]
         public string Key { get; set; }
+
         [Column(Name = "value", StringLength = 32)]
         public string Value { get; set; }
+
         [Column(Name = "group", StringLength = 32)]
         public string Group { get; set; }
+
+        [Column(Name = "isBasicData")] public bool IsBasicData { get; set; }
     }
 }

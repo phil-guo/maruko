@@ -65,23 +65,23 @@ namespace Maruko.Zero
             if (sysUser == null)
                 throw new Exception("用户名密码错误");
 
-            var config = new AppConfig();
+            var config = new Maruko.Core.Web.Config.AppConfig();
 
             var token = new JwtSecurityToken(
-                audience: config.Zero.Key,
+                audience: config.Web.Key,
                 claims: new[]
                 {
                     new Claim(ClaimTypes.Sid, sysUser.Id.ToString()),
                     new Claim(ClaimTypes.Name, sysUser.UserName),
                     new Claim(ClaimTypes.Role, sysUser.RoleId.ToString()),
-                    new Claim(ClaimTypes.Expired, config.Zero.AuthExpired.ToString()),
+                    new Claim(ClaimTypes.Expired, config.Web.AuthExpired.ToString()),
                     new Claim(ClaimTypes.UserData, sysUser.Icon ?? "")
                 },
-                issuer: config.Zero.Key,
+                issuer: config.Web.Key,
                 notBefore: DateTime.Now,
-                expires: DateTime.Now.AddSeconds(config.Zero.AuthExpired),
+                expires: DateTime.Now.AddSeconds(config.Web.AuthExpired),
                 signingCredentials: new SigningCredentials(
-                    new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.Zero.Secret)),
+                    new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.Web.Secret)),
                     SecurityAlgorithms.HmacSha256)
             );
 
