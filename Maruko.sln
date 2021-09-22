@@ -27,11 +27,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dynamic.Config", "Dynamic.C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TaskScheduling", "TaskScheduling", "{35679782-7A44-422D-A37E-A379409BB358}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maruko.TaskScheduling", "taskScheduling\Maruko.TaskScheduling\Maruko.TaskScheduling.csproj", "{B5604A72-BE7B-4301-B341-FD41E100563D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maruko.TaskScheduling", "taskScheduling\Maruko.TaskScheduling\Maruko.TaskScheduling.csproj", "{B5604A72-BE7B-4301-B341-FD41E100563D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cbb", "Cbb", "{FB9512E0-579D-4A80-829F-A2D314B72511}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cbb.Application", "cbb\Cbb.Application\Cbb.Application.csproj", "{0BB668FF-7193-4497-AFB6-495E2700D39F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cbb.Application", "cbb\Cbb.Application\Cbb.Application.csproj", "{0BB668FF-7193-4497-AFB6-495E2700D39F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maruko.Core.NLog", "src\Maruok.Core.NLog\Maruko.Core.NLog.csproj", "{24E08630-E32C-4B29-A03D-1D257FED0F4F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +85,10 @@ Global
 		{0BB668FF-7193-4497-AFB6-495E2700D39F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BB668FF-7193-4497-AFB6-495E2700D39F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BB668FF-7193-4497-AFB6-495E2700D39F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24E08630-E32C-4B29-A03D-1D257FED0F4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24E08630-E32C-4B29-A03D-1D257FED0F4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24E08630-E32C-4B29-A03D-1D257FED0F4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24E08630-E32C-4B29-A03D-1D257FED0F4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
