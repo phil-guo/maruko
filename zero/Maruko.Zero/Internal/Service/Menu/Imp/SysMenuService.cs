@@ -32,7 +32,13 @@ namespace Maruko.Zero
             var result = new List<MenusRoleResponse>();
             var tree = GetRoleOfMenus(request.RoleId, true);
 
-            result.Add(new MenusRoleResponse { Id = 0, Icon = "el-icon-platform-eleme", Title = "首页", Path = "/home" });
+            result.Add(new MenusRoleResponse
+            {
+                Id = 0,
+                Icon = "el-icon-platform-eleme",
+                Title = "首页",
+                Path = "/home",
+            });
 
             tree.ForEach(item =>
             {
@@ -41,9 +47,12 @@ namespace Maruko.Zero
                     Id = item.Id,
                     Title = item.Title,
                     Icon = item.Icon ?? "",
-                    Path = string.IsNullOrEmpty(item.Key) ? item.Path : $"{item.Path}?id={item.Id}&key={item.Key}",
+                    Path = string.IsNullOrEmpty(item.Key) && item.Children.Count > 0 
+                        ? item.Path 
+                        : $"{item.Path}?id={item.Id}&key={item.Key}",
                     Key = item.Key ?? ""
                 };
+
 
                 if (item.Children.Count > 0)
                     item.Children.ForEach(child =>
@@ -238,7 +247,6 @@ namespace Maruko.Zero
 
             return tree;
         }
-
 
         private List<SysMenu> GetRoleMenu(int roleId, bool? isLeftShow = null)
         {

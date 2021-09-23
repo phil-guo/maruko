@@ -22,7 +22,6 @@ namespace Maruko.Core.NLog
         {
             service.AddLogging(logger =>
             {
-                logger.ClearProviders();
                 logger.AddNLog();
             });
         }
