@@ -46,16 +46,19 @@ namespace Maruko.TaskScheduling
 
                 //创建一个触发器
                 var triggerBuilder = TriggerBuilder.Create()
-                    .WithIdentity($"trigger_{objectId}", task.GroupName)
-                    .WithCronSchedule(task.CronExpression)
-                    .ForJob(job);
+                    .WithIdentity($"trigger_{objectId}", task.GroupName);
+
+                triggerBuilder = string.IsNullOrEmpty(task.CronExpression)
+                    ? triggerBuilder.StartNow()
+                    : triggerBuilder.WithCronSchedule(task.CronExpression);
+                triggerBuilder = triggerBuilder.ForJob(job);
 
                 await scheduler.ScheduleJob(job, triggerBuilder.Build());
 
                 await _taskSchedule.GetAll()
                     .Update<TaskScheduling>(objectId)
                     .Set(item => item.StartTime, DateTime.Now)
-                    .Set(item => item.Status, true)
+                    .Set(item => item.Status, string.IsNullOrEmpty(task.CronExpression) ? 2 : 1)
                     .ExecuteAffrowsAsync();
             }
 
@@ -81,7 +84,7 @@ namespace Maruko.TaskScheduling
 
                 await _taskSchedule.GetAll()
                     .Update<TaskScheduling>(objectId)
-                    .Set(item => item.Status, false)
+                    .Set(item => item.Status, string.IsNullOrEmpty(task.CronExpression) ? 2 : 0)
                     .ExecuteAffrowsAsync();
             }
 

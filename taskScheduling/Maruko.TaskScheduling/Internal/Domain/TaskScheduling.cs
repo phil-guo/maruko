@@ -14,7 +14,7 @@ namespace Maruko.TaskScheduling
         [Column(Name = "groupName", StringLength = 100)]
         public string GroupName { get; set; }
         [Column(Name = "status")]
-        public bool Status { get; set; }
+        public int Status { get; set; }
         [Column(Name = "startTime")]
         public DateTime? StartTime { get; set; }
         [Column(Name = "overTime")]

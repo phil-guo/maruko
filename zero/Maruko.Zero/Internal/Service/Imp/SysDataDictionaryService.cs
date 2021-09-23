@@ -18,6 +18,7 @@ using Maruko.Core.FreeSql.Internal.Repos;
 using Maruko.Core.ObjectMapping;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
 
 namespace Maruko.Zero
 {
@@ -25,18 +26,23 @@ namespace Maruko.Zero
         ISysDataDictionaryService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly ILogger<SysDataDictionaryService> _logger;
 
-        public SysDataDictionaryService(IObjectMapper objectMapper, IFreeSqlRepository<SysDataDictionary> repository,
-            IHttpContextAccessor httpContextAccessor) :
+        public SysDataDictionaryService(IObjectMapper objectMapper,
+            IFreeSqlRepository<SysDataDictionary> repository,
+            IHttpContextAccessor httpContextAccessor,
+            ILogger<SysDataDictionaryService> logger) :
             base(objectMapper, repository)
         {
             _httpContextAccessor = httpContextAccessor;
+            _logger = logger;
         }
 
         protected override void BeforeEdit(SysDataDictionaryDTO request)
         {
             var claimsIdentity = _httpContextAccessor.HttpContext.User.Identity as ClaimsIdentity;
             var userId = Convert.ToInt64(claimsIdentity?.FindFirst(ClaimTypes.Sid)?.Value);
+            _logger.LogInformation($"用户Id为：{userId}");
             if (request.IsBasicData && userId != 1)
                 throw new Exception("非超级管理员不能修改基础数据");
         }
@@ -46,6 +52,7 @@ namespace Maruko.Zero
             var entity = FirstOrDefault(id);
             var claimsIdentity = _httpContextAccessor.HttpContext.User.Identity as ClaimsIdentity;
             var userId = Convert.ToInt64(claimsIdentity?.FindFirst(ClaimTypes.Sid)?.Value);
+            _logger.LogInformation($"用户Id为：{userId}");
             if (entity.IsBasicData && userId != 1)
                 throw new Exception("非超级管理员不能删除基础数据");
             base.Delete(id);
