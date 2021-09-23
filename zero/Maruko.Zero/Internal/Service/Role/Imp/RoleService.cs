@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Maruko.Core.Application;
 using Maruko.Core.FreeSql.Internal.AppService;
 using Maruko.Core.FreeSql.Internal.Repos;
 using Newtonsoft.Json;
@@ -13,6 +14,20 @@ namespace Maruko.Zero
         private readonly IFreeSqlRepository<SysMenu> _menu;
         private readonly IFreeSqlRepository<SysRoleMenu> _roleMenu;
 
+
+        public AjaxResponse<object> GetAllRoles()
+        {
+            var data = Table
+                .GetAll()
+                .Select<SysRole>()
+                .ToList(_ => new
+                {
+                    Key = _.Name,
+                    Value = _.Id
+                });
+
+            return new AjaxResponse<object>(data);
+        }
 
         public bool SetRolePermission(SetRolePermissionRequest request)
         {

@@ -18,6 +18,13 @@ namespace Maruko.Zero
             return new AjaxResponse<object>(_roleService.SetRolePermission(request), "ok");
         }
 
+        [HttpGet("getAllRoles")]
+        public AjaxResponse<object> GetAllRoles()
+        {
+            return _roleService.GetAllRoles();
+        }
+
+
         public SysRoleController(ICurdAppService<SysRole, RoleDTO> curd, IRoleService roleService) : base(curd)
         {
             _roleService = roleService;
