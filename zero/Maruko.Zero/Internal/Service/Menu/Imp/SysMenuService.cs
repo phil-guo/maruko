@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using AutoMapper;
 using Maruko.Core.FreeSql.Internal.AppService;
 using Maruko.Core.FreeSql.Internal.Repos;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using IObjectMapper = Maruko.Core.ObjectMapping.IObjectMapper;
 
@@ -14,14 +15,16 @@ namespace Maruko.Zero
     {
         private readonly IFreeSqlRepository<SysOperate> _operate;
         private readonly IFreeSqlRepository<SysRoleMenu> _roleMenu;
+        private readonly ILogger<SysMenuService> _logger;
 
         public SysMenuService(IObjectMapper objectMapper, IFreeSqlRepository<SysMenu> repository,
             IFreeSqlRepository<SysOperate> operate,
-            IFreeSqlRepository<SysRoleMenu> roleMenu)
+            IFreeSqlRepository<SysRoleMenu> roleMenu, ILogger<SysMenuService> logger)
             : base(objectMapper, repository)
         {
             _operate = operate;
             _roleMenu = roleMenu;
+            _logger = logger;
         }
 
         public List<MenusRoleResponse> GetMenusByRole(MenusRoleRequest request)
@@ -106,7 +109,7 @@ namespace Maruko.Zero
                         {
                             if (JsonConvert.DeserializeObject<List<long>>(child.Operates).Contains(op.Id))
                                 operateModel.Children.Add(new MenuModel
-                                    { Id = $"{child.Id}_{op.Id}", Lable = op.Name });
+                                { Id = $"{child.Id}_{op.Id}", Lable = op.Name });
                         });
                     });
                 else

@@ -1,10 +1,22 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="nlog.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="nlog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="3.10.0" />
@@ -29,6 +41,7 @@
     <ProjectReference Include="..\Maruko.CodeGeneration\Maruko.CodeGeneration.csproj" />
     <ProjectReference Include="..\Maruko.Core.Web\Maruko.Core.Web.csproj" />
     <ProjectReference Include="..\Maruko.FreeSql\Maruko.Core.FreeSql.csproj" />
+    <ProjectReference Include="..\Maruok.Core.NLog\Maruko.Core.NLog.csproj" />
   </ItemGroup>
 
   <ItemGroup>

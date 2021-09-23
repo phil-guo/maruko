@@ -9,6 +9,7 @@
       <ProjectReference Include="..\..\src\Maruko.Core.Web\Maruko.Core.Web.csproj" />
       <ProjectReference Include="..\..\src\Maruko.FreeSql\Maruko.Core.FreeSql.csproj" />
       <ProjectReference Include="..\..\src\Maruko\Maruko.Core.csproj" />
+      <ProjectReference Include="..\..\src\Maruok.Core.NLog\Maruko.Core.NLog.csproj" />
     </ItemGroup>
 
 </Project>

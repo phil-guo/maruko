@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Configuration;
+using NLog;
 using NLog.Extensions.Logging;
 
 namespace Maruko.Core.NLog
@@ -14,14 +15,14 @@ namespace Maruko.Core.NLog
     {
         public override void Initialize(ILifetimeScope scope, IApplicationBuilder app)
         {
-            //scope.Resolve<ILoggerFactory>().ConfigureNLog()
+            LogManager.LoadConfiguration("nlog.config");
         }
 
         public override void ConfigureServices(IServiceCollection service)
         {
             service.AddLogging(logger =>
             {
-                logger.AddConfiguration(ServiceLocator.Configuration.GetSection("Logging"));
+                logger.ClearProviders();
                 logger.AddNLog();
             });
         }
