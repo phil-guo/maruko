@@ -74,6 +74,13 @@ namespace Maruko.Zero
             return _roleMenu.BatchInsert(list);
         }
 
+        public override void Delete(long id)
+        {
+            if (id == 1)
+                throw new Exception("超级管理员不允许被删除！");
+            base.Delete(id);
+        }
+
         public RoleService(IObjectMapper objectMapper, IFreeSqlRepository<SysRole> repository,
             IFreeSqlRepository<SysMenu> menu, IFreeSqlRepository<SysRoleMenu> roleMenu) : base(objectMapper, repository)
         {

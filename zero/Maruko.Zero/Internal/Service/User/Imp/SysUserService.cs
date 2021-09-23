@@ -21,7 +21,7 @@ namespace Maruko.Zero
     {
         public override SysUserDTO CreateOrEdit(SysUserDTO request)
         {
-            if (request.Id == 1)
+            if (request.Id == 1 || request.UserName == "admin")
                 throw new Exception("admin管理员不允许被修改");
 
             SysUser data = null;
@@ -145,6 +145,15 @@ namespace Maruko.Zero
             entity = Repository.Update(entity);
 
             return entity == null ? new AjaxResponse<object>("系统错误", 500) : new AjaxResponse<object>(entity, "更新成功");
+        }
+
+        public override void Delete(long id)
+        {
+            var user = FirstOrDefault(id);
+            if (id == 1 || user.UserName == "admin")
+                throw new Exception("admin管理员不允许被删除");
+
+            base.Delete(id);
         }
 
         public SysUserService(IObjectMapper objectMapper, IFreeSqlRepository<SysUser> repository) : base(objectMapper, repository)

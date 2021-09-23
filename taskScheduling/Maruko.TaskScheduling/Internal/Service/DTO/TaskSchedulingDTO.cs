@@ -9,7 +9,7 @@ namespace Maruko.TaskScheduling
     {
         public string Name { get; set; }
         public string GroupName { get; set; }
-        public bool Status { get; set; }
+        public int Status { get; set; }
         public DateTime? StartTime { get; set; }
         public DateTime? OverTime { get; set; }
         public string CronExpression { get; set; }
