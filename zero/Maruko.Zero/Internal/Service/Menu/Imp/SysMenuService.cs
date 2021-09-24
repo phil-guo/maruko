@@ -16,15 +16,20 @@ namespace Maruko.Zero
         private readonly IFreeSqlRepository<SysOperate> _operate;
         private readonly IFreeSqlRepository<SysRoleMenu> _roleMenu;
         private readonly ILogger<SysMenuService> _logger;
+        private readonly IFreeSqlRepository<SysRole> _role;
+        private readonly IFreeSqlRepository<Page> _page;
 
         public SysMenuService(IObjectMapper objectMapper, IFreeSqlRepository<SysMenu> repository,
             IFreeSqlRepository<SysOperate> operate,
-            IFreeSqlRepository<SysRoleMenu> roleMenu, ILogger<SysMenuService> logger)
+            IFreeSqlRepository<SysRoleMenu> roleMenu, ILogger<SysMenuService> logger, IFreeSqlRepository<SysRole> role,
+            IFreeSqlRepository<Page> page)
             : base(objectMapper, repository)
         {
             _operate = operate;
             _roleMenu = roleMenu;
             _logger = logger;
+            _role = role;
+            _page = page;
         }
 
         public List<MenusRoleResponse> GetMenusByRole(MenusRoleRequest request)
@@ -47,8 +52,8 @@ namespace Maruko.Zero
                     Id = item.Id,
                     Title = item.Title,
                     Icon = item.Icon ?? "",
-                    Path = string.IsNullOrEmpty(item.Key) && item.Children.Count > 0 
-                        ? item.Path 
+                    Path = string.IsNullOrEmpty(item.Key) && item.Children.Count > 0
+                        ? item.Path
                         : $"{item.Path}?id={item.Id}&key={item.Key}",
                     Key = item.Key ?? ""
                 };
@@ -118,7 +123,7 @@ namespace Maruko.Zero
                         {
                             if (JsonConvert.DeserializeObject<List<long>>(child.Operates).Contains(op.Id))
                                 operateModel.Children.Add(new MenuModel
-                                { Id = $"{child.Id}_{op.Id}", Lable = op.Name });
+                                    { Id = $"{child.Id}_{op.Id}", Lable = op.Name });
                         });
                     });
                 else
@@ -174,6 +179,16 @@ namespace Maruko.Zero
             if (menu.Id > 0)
             {
                 var oldMenu = Table.FirstOrDefault(item => item.Id == menu.Id);
+                
+                if (oldMenu.Name != menu.Name || oldMenu.Key != menu.Key)
+                {
+                    var page = _page.FirstOrDefault(item => item.Key == oldMenu.Key);
+                    _page.GetAll().Update<Page>(page.Id)
+                        .Set(item => item.Name, menu.Name)
+                        .Set(item => item.Key, menu.Key)
+                        .ExecuteAffrows();
+                }
+                
                 oldMenu.Operates = menu.Operates;
                 oldMenu.ParentId = menu.ParentId;
                 oldMenu.Name = menu.Name;
@@ -192,6 +207,12 @@ namespace Maruko.Zero
 
                 menu.CreateTime = DateTime.Now;
                 menu = Repository.Insert(menu);
+
+                _page.Insert(new Page()
+                {
+                    Name = menu.Name,
+                    Key = menu.Key
+                });
             }
 
             return ObjectMapper.Map<SysMenuDTO>(menu);
@@ -200,8 +221,15 @@ namespace Maruko.Zero
         public override void Delete(long id)
         {
             //删除验证
-            if (_roleMenu.GetAll().Select<SysRoleMenu>().Any(item => item.MenuId == id))
-                throw new Exception("请先解除角色权限中的菜单关系，在删除菜单");
+            var roleMenus = _roleMenu.GetAll().Select<SysRoleMenu>().Where(item => item.MenuId == id).ToList();
+            if (roleMenus.Count > 0)
+            {
+                var roleIds = roleMenus.Select(_ => _.RoleId).ToList();
+                var roleNames = _role.GetAll().Select<SysRole>()
+                    .Where(item => roleIds.Contains(item.Id))
+                    .ToList(item => item.Name);
+                throw new Exception($"请先解除角色[{string.Join(",", roleNames)}]权限中的菜单关系，在删除菜单");
+            }
 
             base.Delete(id);
         }
