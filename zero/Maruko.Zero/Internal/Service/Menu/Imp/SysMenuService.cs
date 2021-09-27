@@ -179,7 +179,7 @@ namespace Maruko.Zero
             if (menu.Id > 0)
             {
                 var oldMenu = Table.FirstOrDefault(item => item.Id == menu.Id);
-                
+
                 if (oldMenu.Name != menu.Name || oldMenu.Key != menu.Key)
                 {
                     var page = _page.FirstOrDefault(item => item.Key == oldMenu.Key);
@@ -188,7 +188,7 @@ namespace Maruko.Zero
                         .Set(item => item.Key, menu.Key)
                         .ExecuteAffrows();
                 }
-                
+
                 oldMenu.Operates = menu.Operates;
                 oldMenu.ParentId = menu.ParentId;
                 oldMenu.Name = menu.Name;
@@ -240,12 +240,19 @@ namespace Maruko.Zero
 
             data.ForEach(item =>
             {
-                JsonConvert.DeserializeObject<List<int>>(item.Operates).ForEach(operateId =>
+                if (string.IsNullOrEmpty(item.Operates))
                 {
-                    var operate = _operate.FirstOrDefault(ope => ope.Id == operateId);
-                    if (operate == null) return;
-                    item.OperateModels.Add(new OperateModel { Id = operateId, Name = operate.Name });
-                });
+                    item.Operates = JsonConvert.SerializeObject(new List<int>());
+                }
+                else
+                {
+                    JsonConvert.DeserializeObject<List<int>>(item.Operates).ForEach(operateId =>
+                    {
+                        var operate = _operate.FirstOrDefault(ope => ope.Id == operateId);
+                        if (operate == null) return;
+                        item.OperateModels.Add(new OperateModel { Id = operateId, Name = operate.Name });
+                    });
+                }
             });
             return data;
         }
