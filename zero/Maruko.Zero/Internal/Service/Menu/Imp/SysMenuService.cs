@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using AutoMapper;
+using Maruko.Core.Application;
 using Maruko.Core.FreeSql.Internal.AppService;
 using Maruko.Core.FreeSql.Internal.Repos;
 using Microsoft.Extensions.Logging;
@@ -30,6 +31,21 @@ namespace Maruko.Zero
             _logger = logger;
             _role = role;
             _page = page;
+        }
+
+        public AjaxResponse<object> GetAllParentMenus()
+        {
+            var data = Table
+                .GetAll()
+                .Select<SysMenu>()
+                .Where(item => item.ParentId == 99999 && item.IsLeftShow)
+                .ToList(_ => new
+                {
+                    Key = _.Name,
+                    Value = _.Id
+                });
+
+            return new AjaxResponse<object>(data);
         }
 
         public List<MenusRoleResponse> GetMenusByRole(MenusRoleRequest request)
