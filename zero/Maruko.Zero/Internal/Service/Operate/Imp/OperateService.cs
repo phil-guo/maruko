@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Maruko.Core.FreeSql.Internal.AppService;
 using Maruko.Core.FreeSql.Internal.Repos;
 using Newtonsoft.Json;
@@ -25,7 +26,7 @@ namespace Maruko.Zero
                     request.Unique = 10001;
 
                 request.CreateTime = DateTime.Now;
-                
+
                 data = Repository.Insert(ObjectMapper.Map<SysOperate>(request));
             }
             else
@@ -44,8 +45,16 @@ namespace Maruko.Zero
         {
             var roleMenu =
                 _roleMenu.FirstOrDefault(item => item.RoleId == request.RoleId && item.MenuId == request.MenuId);
+
+            var menu = _menu.FirstOrDefault(roleMenu.MenuId);
+
+            //取交集
+            var operates = JsonConvert.DeserializeObject<List<int>>(menu.Operates)
+                .Intersect(JsonConvert.DeserializeObject<List<int>>(roleMenu.Operates))
+                .ToList();
+
             var idNos = new MenuOfOperateResponse();
-            JsonConvert.DeserializeObject<List<int>>(roleMenu?.Operates).ForEach(id =>
+            operates.ForEach(id =>
             {
                 var operate = Repository.FirstOrDefault(item => item.Id == id);
                 idNos.Datas.Add(operate?.Unique.ToString());
@@ -76,7 +85,8 @@ namespace Maruko.Zero
             return result;
         }
 
-        public OperateService(IObjectMapper objectMapper, IFreeSqlRepository<SysOperate> repository, IFreeSqlRepository<SysRoleMenu> roleMenu, IFreeSqlRepository<SysMenu> menu) : base(objectMapper, repository)
+        public OperateService(IObjectMapper objectMapper, IFreeSqlRepository<SysOperate> repository,
+            IFreeSqlRepository<SysRoleMenu> roleMenu, IFreeSqlRepository<SysMenu> menu) : base(objectMapper, repository)
         {
             _roleMenu = roleMenu;
             _menu = menu;
