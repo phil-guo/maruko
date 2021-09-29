@@ -68,9 +68,9 @@ namespace Maruko.Zero
                     Id = item.Id,
                     Title = item.Title,
                     Icon = item.Icon ?? "",
-                    Path = string.IsNullOrEmpty(item.Key) && item.Children.Count > 0
-                        ? item.Path
-                        : $"{item.Path}?id={item.Id}&key={item.Key}",
+                    Path = item.Path,//string.IsNullOrEmpty(item.Key) && item.Children.Count > 0
+                        //? item.Path
+                        //: $"{item.Path}?id={item.Id}&key={item.Key}",
                     Key = item.Key ?? ""
                 };
 
@@ -82,7 +82,7 @@ namespace Maruko.Zero
                         {
                             Id = child.Id,
                             Icon = child.Icon ?? "",
-                            Path = $"{child.Path}?id={child.Id}&key={child?.Key ?? ""}",
+                            Path = child.Path,//$"{child.Path}?id={child.Id}&key={child?.Key ?? ""}",
                             Title = child.Title,
                             Key = child.Key ?? ""
                         });
