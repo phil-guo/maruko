@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using Autofac;
@@ -15,8 +16,10 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.IdentityModel.Tokens;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 
 namespace Maruko.Core.Web
@@ -93,6 +96,8 @@ namespace Maruko.Core.Web
                     }
                 });
 
+                option.OperationFilter<SwaggerFileUploadFilter>();
+
                 XmlFiles.ForEach(file =>
                 {
                     var xmlPath = Path.Combine(AppContext.BaseDirectory, file);
@@ -140,4 +145,6 @@ namespace Maruko.Core.Web
             app.UseMaruko();
         }
     }
+
+    
 }
