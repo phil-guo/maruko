@@ -93,13 +93,19 @@ namespace Maruko.Zero
 
         public override PagedResultDto PageSearch(PageDto search)
         {
-            var searchRequest = search.DynamicFilters.FirstOrDefault(item => item.Field == "name");
-            var value = searchRequest?.Value.ToString();
+            var userName = search
+                .DynamicFilters
+                .FirstOrDefault(item => item.Field == "userName")?.Value.ToString();
+
+            var roleName = search
+                .DynamicFilters
+                .FirstOrDefault(item => item.Field == "roleName")?.Value.ToString();
 
             var query = Table.GetAll()
                 .Select<SysUser, SysRole>()
                 .InnerJoin((u, r) => u.RoleId == r.Id)
-                .WhereIf(!string.IsNullOrEmpty(value), (u, r) => u.UserName.Contains(value))
+                .WhereIf(!string.IsNullOrEmpty(userName), (u, r) => u.UserName.Contains(userName))
+                .WhereIf(!string.IsNullOrEmpty(roleName), (u, r) => r.Name.Contains(roleName))
                 .OrderByDescending((u, r) => u.Id);
 
             var result = query

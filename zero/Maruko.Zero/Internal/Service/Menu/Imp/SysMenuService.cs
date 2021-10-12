@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using AutoMapper;
 using Maruko.Core.Application;
 using Maruko.Core.FreeSql.Internal.AppService;
 using Maruko.Core.FreeSql.Internal.Repos;
@@ -68,9 +66,7 @@ namespace Maruko.Zero
                     Id = item.Id,
                     Title = item.Title,
                     Icon = item.Icon ?? "",
-                    Path = item.Path,//string.IsNullOrEmpty(item.Key) && item.Children.Count > 0
-                        //? item.Path
-                        //: $"{item.Path}?id={item.Id}&key={item.Key}",
+                    Path = item.Path,
                     Key = item.Key ?? ""
                 };
 
@@ -82,7 +78,7 @@ namespace Maruko.Zero
                         {
                             Id = child.Id,
                             Icon = child.Icon ?? "",
-                            Path = child.Path,//$"{child.Path}?id={child.Id}&key={child?.Key ?? ""}",
+                            Path = child.Path,
                             Title = child.Title,
                             Key = child.Key ?? ""
                         });
