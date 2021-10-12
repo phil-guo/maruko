@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.20</Version>
+    <Version>1.1.5</Version>
     <Authors>simple</Authors>
     <PackageId>Maruko.Dynamic.Config</PackageId>
     <PackageTags>maruko;.NET Core;动态配置模块</PackageTags>
@@ -23,7 +23,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>Maruko.Dynamic.Config.xml</DocumentationFile>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>

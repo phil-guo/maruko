@@ -44,7 +44,7 @@ namespace Maruko.Core.Web
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(app.Web.Secret)),
                     ValidateIssuer = true,
                     ValidateAudience = true,
-                    ValidateLifetime = true,    
+                    ValidateLifetime = true,
                     ValidIssuer = app.Web.Key,
                     ValidAudience = app.Web.Key,
                 };
@@ -52,7 +52,8 @@ namespace Maruko.Core.Web
 
             services.AddControllers(controller =>
                 {
-                    controller.Filters.Add(new AuthorizeFilter());
+                    if (app.Web.IsEnableAuth)
+                        controller.Filters.Add(new AuthorizeFilter());
                     controller.Filters.Add(typeof(GlobalExceptionFilter));
                 })
                 .AddNewtonsoftJson(opt => opt.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss");
@@ -60,8 +61,6 @@ namespace Maruko.Core.Web
 
             services.AddSwaggerGen(option =>
             {
-                var app = new AppConfig();
-
                 option.SwaggerDoc(app.Swagger.Version,
                     new OpenApiInfo { Title = app.Swagger.Title, Version = app.Swagger.Version });
 
