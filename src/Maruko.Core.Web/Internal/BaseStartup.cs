@@ -61,25 +61,25 @@ namespace Maruko.Core.Web
                 })
                 .AddNewtonsoftJson(opt => opt.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss");
 
-
-            services.AddSwaggerGen(option =>
-            {
-                option.SwaggerDoc(app.Swagger.Version,
-                    new OpenApiInfo { Title = app.Swagger.Title, Version = app.Swagger.Version });
-
-                option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            if (app.Swagger.IsEnableSwagger)
+                services.AddSwaggerGen(option =>
                 {
-                    Description = @"JWT Authorization header using the Bearer scheme. 
+                    option.SwaggerDoc(app.Swagger.Version,
+                        new OpenApiInfo { Title = app.Swagger.Title, Version = app.Swagger.Version });
+
+                    option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                    {
+                        Description = @"JWT Authorization header using the Bearer scheme. 
                       Enter 'Bearer' [space] and then your token in the text input below.
                       Example: 'Bearer 12345abcdef'",
-                    Name = "Authorization",
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.ApiKey,
-                    Scheme = "Bearer"
-                });
+                        Name = "Authorization",
+                        In = ParameterLocation.Header,
+                        Type = SecuritySchemeType.ApiKey,
+                        Scheme = "Bearer"
+                    });
 
-                option.AddSecurityRequirement(new OpenApiSecurityRequirement()
-                {
+                    option.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                    {
                     {
                         new OpenApiSecurityScheme
                         {
@@ -94,17 +94,17 @@ namespace Maruko.Core.Web
                         },
                         new List<string>()
                     }
-                });
+                    });
 
-                option.OperationFilter<SwaggerFileUploadFilter>();
+                    option.OperationFilter<SwaggerFileUploadFilter>();
 
-                XmlFiles.ForEach(file =>
-                {
-                    var xmlPath = Path.Combine(AppContext.BaseDirectory, file);
-                    //添加控制器层注释，true表示显示控制器注释
-                    option.IncludeXmlComments(xmlPath, true);
+                    XmlFiles.ForEach(file =>
+                    {
+                        var xmlPath = Path.Combine(AppContext.BaseDirectory, file);
+                        //添加控制器层注释，true表示显示控制器注释
+                        option.IncludeXmlComments(xmlPath, true);
+                    });
                 });
-            });
 
             services.AddCors(option =>
             {
@@ -123,6 +123,8 @@ namespace Maruko.Core.Web
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var config = new AppConfig();
+
             app.UseRouting();
 
             app.UseAuthentication();
@@ -139,12 +141,15 @@ namespace Maruko.Core.Web
                 RequestPath = "/uploads"
             });
 
-            app.UseSwagger();
-            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"); });
+            if (config.Swagger.IsEnableSwagger)
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", $"{config.Swagger.Title} {config.Swagger.Version} "); });
+            }
 
             app.UseMaruko();
         }
     }
 
-    
+
 }
