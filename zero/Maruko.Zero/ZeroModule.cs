@@ -23,8 +23,7 @@ namespace Maruko.Zero
                     typeof(SysMenu),
                     typeof(SysOperate),
                     typeof(SysRole),
-                    typeof(SysRoleMenu),
-                    typeof(SysDataDictionary)
+                    typeof(SysRoleMenu)
                     );
         }
 

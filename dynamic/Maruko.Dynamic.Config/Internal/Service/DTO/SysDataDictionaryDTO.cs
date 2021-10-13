@@ -4,7 +4,7 @@ using System.Text;
 using Maruko.Core.Application.Servers.Dto;
 using Maruko.Core.AutoMapper.AutoMapper;
 
-namespace Maruko.Zero
+namespace Maruko.Dynamic.Config
 {
     [AutoMap(typeof(SysDataDictionary))]
     public class SysDataDictionaryDTO : EntityDto

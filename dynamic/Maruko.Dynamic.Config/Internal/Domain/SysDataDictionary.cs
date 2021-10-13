@@ -4,7 +4,7 @@ using System.Text;
 using FreeSql.DataAnnotations;
 using Maruko.Core.FreeSql.Internal;
 
-namespace Maruko.Zero
+namespace Maruko.Dynamic.Config
 {
     [Table(Name = "sys_dataDictionary")]
     public class SysDataDictionary : FreeSqlEntity

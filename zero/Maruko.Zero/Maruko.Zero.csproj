@@ -42,4 +42,9 @@
     <ProjectReference Include="..\..\src\Maruok.Core.NLog\Maruko.Core.NLog.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Internal\Service\DTO\" />
+    <Folder Include="Internal\Service\Imp\" />
+  </ItemGroup>
+
 </Project>

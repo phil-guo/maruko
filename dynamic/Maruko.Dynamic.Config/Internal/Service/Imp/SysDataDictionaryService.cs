@@ -20,7 +20,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
-namespace Maruko.Zero
+namespace Maruko.Dynamic.Config
 {
     public class SysDataDictionaryService : CurdAppService<SysDataDictionary, SysDataDictionaryDTO>,
         ISysDataDictionaryService

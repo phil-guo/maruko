@@ -3,7 +3,6 @@ using Autofac;
 using Maruko.Core.FreeSql.Internal.Context;
 using Maruko.Core.Modules;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Maruko.Dynamic.Config
 {
@@ -14,7 +13,8 @@ namespace Maruko.Dynamic.Config
             if (AppConfig.Default.DynamicConfig.EnableDatabaseMigrate)
                 scope.Resolve<IFreeSqlContext>().GetSet().CodeFirst.SyncStructure(
                     typeof(Page),
-                    typeof(PageConfig)
+                    typeof(PageConfig),
+                    typeof(SysDataDictionary)
                 );
         }
     }
