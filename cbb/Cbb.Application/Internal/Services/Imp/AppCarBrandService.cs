@@ -16,7 +16,8 @@ namespace Cbb.Application
 {
     public class AppCarBrandService : CurdAppService<AppCarBrand, AppCarBrandDTO>, IAppCarBrandService
     {
-        public AppCarBrandService(IObjectMapper objectMapper, IFreeSqlRepository<AppCarBrand> repository) : base(objectMapper, repository)
+        public AppCarBrandService(IObjectMapper objectMapper, IFreeSqlRepository<AppCarBrand> repository) : base(
+            objectMapper, repository)
         {
         }
     }
