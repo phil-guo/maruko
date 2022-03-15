@@ -1,6 +1,6 @@
 {
   "FreeSql": {
-    "Connection": "Data Source=120.55.103.91;port=33306;userid=root;password=qwe123QWE;database=cbb;Charset=utf8mb4;"
+    "Connection": "Data Source=www.autoct.top;port=33306;userid=root;password=qwe123QWE;database=cbb;Charset=utf8mb4;"
   },
   "Zero": {
     "EnableDatabaseMigrate": false,
