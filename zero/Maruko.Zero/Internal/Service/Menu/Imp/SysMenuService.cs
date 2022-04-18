@@ -133,9 +133,9 @@ namespace Maruko.Zero
                         model.Children.Add(operateModel);
                         operates.ForEach(op =>
                         {
-                            if (JsonConvert.DeserializeObject<List<long>>(child.Operates).Contains(op.Id))
+                            if (JsonConvert.DeserializeObject<List<long>>(child?.Operates ?? "[]").Contains(op.Id))
                                 operateModel.Children.Add(new MenuModel
-                                    { Id = $"{child.Id}_{op.Id}", Lable = op.Name });
+                                { Id = $"{child.Id}_{op.Id}", Lable = op.Name });
                         });
                     });
                 else
