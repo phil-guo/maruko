@@ -10,6 +10,7 @@ namespace Maruko.Dynamic.Config
     public class PageConfigDTO : EntityDto
     {
         public long PageId { get; set; }
+        public string Key { get; set; }
         public string DataUrl { get; set; }
         public bool IsRow { get; set; }
         public bool IsMultiple { get; set; }

@@ -16,6 +16,7 @@ namespace Maruko.Zero
         public string Key { get; set; } = "";
         public bool IsLeftShow { get; set; }
         public List<OperateModel> OperateModels { get; set; } = new List<OperateModel>();
+        public List<SysMenuDTO> Children { get; set; } = new List<SysMenuDTO>();
     }
 
     public class OperateModel : EntityDto<int>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Maruko.Core.Application;
+using Maruko.Core.Application.Servers.Dto;
 using Maruko.Core.FreeSql.Internal.AppService;
 using Maruko.Core.FreeSql.Internal.Repos;
 using Microsoft.Extensions.Logging;
@@ -121,7 +122,7 @@ namespace Maruko.Zero
                     item.Unique
                 }).ToList();
 
-            tree.ForEach(item => { BuildMeunsRecursiveTree(listMenus, item); });
+            tree.ForEach(item => { BuildRoleMenusRecursiveTree(listMenus, item); });
             tree.ForEach(item =>
             {
                 var model = new MenuModel { Id = $"{item.Id}_0", Lable = item.Title };
@@ -246,6 +247,38 @@ namespace Maruko.Zero
             base.Delete(id);
         }
 
+
+        public override PagedResultDto PageSearch(PageDto search)
+        {
+            List<SysMenu> topNode;
+            var query = Table.GetAll().Select<SysMenu>();
+
+            if (search.DynamicFilters.Any())
+            {
+              var  queryWhere = query.Where(ConditionToLambda(search));
+                topNode = queryWhere.ToList();
+            }
+            else
+            {
+                topNode = Table.GetAll().Select<SysMenu>()
+                    .Where(item => item.ParentId == 99999)
+                    .OrderByDescending(item => item.CreateTime)
+                    .ToList();
+            }
+
+            var nodes = Table.GetAll().Select<SysMenu>()
+                .OrderByDescending(item => item.CreateTime)
+                .ToList();
+
+            var topNodes = ObjectMapper.Map<List<SysMenuDTO>>(topNode);
+            var nodesDTO = ObjectMapper.Map<List<SysMenuDTO>>(nodes);
+
+            topNodes.ForEach(item => BuildMenusRecursiveTree(nodesDTO, item));
+
+            return new PagedResultDto(topNode.Count, topNodes);
+        }
+
+
         protected override List<SysMenuDTO> ConvertToEntityDTOs(List<SysMenu> entities)
         {
             var data = ObjectMapper.Map<List<SysMenuDTO>>(entities);
@@ -266,7 +299,10 @@ namespace Maruko.Zero
                     });
                 }
             });
-            return data;
+
+            var result = FindTopNode(data);
+
+            return result;
         }
 
         private List<RoleMenuDTO> GetRoleOfMenus(int roleId, bool? isLeftShow = null)
@@ -290,7 +326,7 @@ namespace Maruko.Zero
 
             var tree = listMenus.Where(item => item.ParentId == 99999).ToList();
 
-            tree.ForEach(item => { BuildMeunsRecursiveTree(listMenus, item); });
+            tree.ForEach(item => { BuildRoleMenusRecursiveTree(listMenus, item); });
 
             return tree;
         }
@@ -323,12 +359,48 @@ namespace Maruko.Zero
             return menus;
         }
 
-        private void BuildMeunsRecursiveTree(List<RoleMenuDTO> list, RoleMenuDTO currentTree)
+        private void BuildRoleMenusRecursiveTree(List<RoleMenuDTO> list, RoleMenuDTO currentTree)
         {
             list.ForEach(item =>
             {
                 if (item.ParentId == currentTree.Id)
                     currentTree.Children.Add(item);
+            });
+        }
+
+        private List<SysMenuDTO> FindTopNode(List<SysMenuDTO> menus)
+        {
+            var topNodes = new List<SysMenuDTO>();
+
+            long id = 0;
+            SysMenuDTO menu;
+
+            menus.ForEach(item =>
+            {
+                menu = id == 0
+                    ? menus.FirstOrDefault(_ => _.Id == item.ParentId)
+                    : menus.FirstOrDefault(_ => _.Id == id);
+                if (menu != null)
+                {
+                    id = menu.Id;
+                    return;
+                }
+                else
+                {
+                    topNodes.Add(item);
+                }
+            });
+            topNodes.ForEach(item => BuildMenusRecursiveTree(menus, item));
+
+            return topNodes;
+        }
+
+        private void BuildMenusRecursiveTree(List<SysMenuDTO> menus, SysMenuDTO topNode)
+        {
+            menus.ForEach(item =>
+            {
+                if (item.ParentId == topNode.Id)
+                    topNode.Children.Add(item);
             });
         }
     }

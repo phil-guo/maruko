@@ -28,7 +28,7 @@ namespace Maruko.Dynamic.Config.Internal.Domain.DomainService.Imp
                 throw new Exception("page 不存在");
 
             var pageConfig = _pageConfig.FirstOrDefault(item => item.PageId == page.Id);
-
+            
             return new GetPageDetailDTO()
             {
                 PageConfigs = _objectMapper.Map<PageConfigDTO>(pageConfig)
