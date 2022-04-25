@@ -25,5 +25,7 @@ namespace Maruko.Dynamic.Config
         public string Buttons { get; set; }
         [Column(Name = "functions",DbType = "text")]
         public string Functions { get; set; }
+        [Column(Name = "isTableOperateRow")]
+        public bool IsTableOperateRow { get; set; }
     }
 }

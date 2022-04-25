@@ -60,8 +60,9 @@ namespace Maruko.Core.FreeSql.Internal.AppService
             else
             {
                 BeforeEdit(request);
-                data = Table.FirstOrDefault(item => item.Id == request.Id);
+                var oldData = Table.FirstOrDefault(item => item.Id == request.Id);
                 data = MapToEntity(request);
+                data.CreateTime = oldData.CreateTime;
                 data = Table.Update(data);
             }
 

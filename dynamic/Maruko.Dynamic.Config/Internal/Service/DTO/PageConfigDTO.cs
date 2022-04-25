@@ -18,5 +18,6 @@ namespace Maruko.Dynamic.Config
         public string Fields { get; set; } = "";
         public string Buttons { get; set; } = "";
         public string Functions { get; set; } = "";
+        public bool IsTableOperateRow { get; set; }
     }
 }

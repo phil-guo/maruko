@@ -23,4 +23,6 @@ namespace Maruko.Zero
     {
         public string Name { get; set; }
     }
+
+   
 }

@@ -32,6 +32,23 @@ namespace Maruko.Zero
             _page = page;
         }
 
+        public AjaxResponse<object> GetMenuOfOperate(long id)
+        {
+            var menu = FirstOrDefault(id);
+            if (string.IsNullOrEmpty(menu.Operates))
+                return new AjaxResponse<object>(new List<object>());
+
+            var operateIds = JsonConvert.DeserializeObject<List<long>>(menu.Operates);
+
+            var result = _operate.GetAllList(item => operateIds.Contains(item.Id)).Select(item => new
+            {
+                item.Name,
+                item.Unique
+            }).ToList();
+
+            return new AjaxResponse<object>(result);
+        }
+
         public AjaxResponse<object> GetAllParentMenus()
         {
             var data = Table
@@ -247,7 +264,6 @@ namespace Maruko.Zero
             base.Delete(id);
         }
 
-
         public override PagedResultDto PageSearch(PageDto search)
         {
             List<SysMenu> topNode;
@@ -255,7 +271,7 @@ namespace Maruko.Zero
 
             if (search.DynamicFilters.Any())
             {
-              var  queryWhere = query.Where(ConditionToLambda(search));
+                var queryWhere = query.Where(ConditionToLambda(search));
                 topNode = queryWhere.ToList();
             }
             else
@@ -277,7 +293,6 @@ namespace Maruko.Zero
 
             return new PagedResultDto(topNode.Count, topNodes);
         }
-
 
         protected override List<SysMenuDTO> ConvertToEntityDTOs(List<SysMenu> entities)
         {

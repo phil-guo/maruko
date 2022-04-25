@@ -12,6 +12,12 @@ namespace Maruko.Zero
     {
         private readonly ISysMenuService _menu;
 
+        [HttpGet("getMenuOfOperate")]
+        public AjaxResponse<object> GetMenuOfOperate(long id)
+        {
+            return _menu.GetMenuOfOperate(id);
+        }
+
         [HttpGet("getAllParentMenus")]
         public AjaxResponse<object> GetAllParentMenus()
         {

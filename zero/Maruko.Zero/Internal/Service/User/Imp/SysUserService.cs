@@ -101,11 +101,16 @@ namespace Maruko.Zero
                 .DynamicFilters
                 .FirstOrDefault(item => item.Field == "roleName")?.Value.ToString();
 
+            var roleId = search
+                .DynamicFilters
+                .FirstOrDefault(item => item.Field == "roleId")?.Value.ToString();
+
             var query = Table.GetAll()
                 .Select<SysUser, SysRole>()
                 .InnerJoin((u, r) => u.RoleId == r.Id)
                 .WhereIf(!string.IsNullOrEmpty(userName), (u, r) => u.UserName.Contains(userName))
                 .WhereIf(!string.IsNullOrEmpty(roleName), (u, r) => r.Name.Contains(roleName))
+                .WhereIf(!string.IsNullOrEmpty(roleId), (u, r) => u.RoleId == Convert.ToInt32(roleId))
                 .OrderByDescending((u, r) => u.Id);
 
             var result = query
