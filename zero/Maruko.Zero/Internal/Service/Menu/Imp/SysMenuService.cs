@@ -142,18 +142,18 @@ namespace Maruko.Zero
             tree.ForEach(item => { BuildRoleMenusRecursiveTree(listMenus, item); });
             tree.ForEach(item =>
             {
-                var model = new MenuModel { Id = $"{item.Id}_0", Lable = item.Title };
+                var model = new MenuModel { Id = $"{item.Id}_0", Label = item.Title };
 
                 if (item.Children.Count > 0)
                     item.Children.ForEach(child =>
                     {
-                        var operateModel = new MenuModel { Id = $"{child.Id}_0", Lable = child.Title };
+                        var operateModel = new MenuModel { Id = $"{child.Id}_0", Label = child.Title };
                         model.Children.Add(operateModel);
                         operates.ForEach(op =>
                         {
                             if (JsonConvert.DeserializeObject<List<long>>(child?.Operates ?? "[]").Contains(op.Id))
                                 operateModel.Children.Add(new MenuModel
-                                { Id = $"{child.Id}_{op.Id}", Lable = op.Name });
+                                { Id = $"{child.Id}_{op.Id}", Label = op.Name });
                         });
                     });
                 else
@@ -161,7 +161,7 @@ namespace Maruko.Zero
                     operates.ForEach(op =>
                     {
                         if (JsonConvert.DeserializeObject<List<long>>(item.Operates).Contains(op.Id))
-                            model.Children.Add(new MenuModel { Id = $"{item.Id}_{op.Id}", Lable = op.Name });
+                            model.Children.Add(new MenuModel { Id = $"{item.Id}_{op.Id}", Label = op.Name });
                     });
                 }
 

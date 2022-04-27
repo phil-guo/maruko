@@ -11,7 +11,7 @@ namespace Maruko.Zero
     public class MenuModel
     {
         public string Id { get; set; }
-        public string Lable { get; set; }
+        public string Label { get; set; }
         public List<MenuModel> Children { get; set; } = new List<MenuModel>();
     }
 }
