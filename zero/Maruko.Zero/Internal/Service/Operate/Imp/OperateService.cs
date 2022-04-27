@@ -78,7 +78,7 @@ namespace Maruko.Zero
                 var operate = Repository.FirstOrDefault(item => item.Id == id);
                 result.Datas.Add(new
                 {
-                    Unique = operate?.Unique.ToString(),
+                    Unique = operate?.Unique,
                     operate?.Name
                 });
             });
