@@ -236,8 +236,16 @@ namespace Maruko.Zero
                     menu.Sort = lastMenu.AddOperateSort();
 
                 menu.CreateTime = DateTime.Now;
-                menu = Repository.Insert(menu);
 
+                var key = menu?.Key ?? "";
+                var pageKey = _page.GetAll()
+                    .Select<Page>()
+                    .Any(item => item.Key == key);
+
+                if (pageKey)
+                    throw new Exception($"已经存在Key：【{key}】");
+
+                menu = Repository.Insert(menu);
                 _page.Insert(new Page()
                 {
                     Name = menu.Name,
