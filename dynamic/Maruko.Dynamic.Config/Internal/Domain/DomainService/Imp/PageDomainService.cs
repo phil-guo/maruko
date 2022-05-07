@@ -30,11 +30,12 @@ namespace Maruko.Dynamic.Config.Internal.Domain.DomainService.Imp
             var pageConfig = _pageConfig.FirstOrDefault(item => item.PageId == page.Id);
 
             var pageConfigDTO = _objectMapper.Map<PageConfigDTO>(pageConfig);
-            pageConfigDTO.Key = page.Key;
+            if (pageConfigDTO != null)
+                pageConfigDTO.Key = page.Key;
 
             return new GetPageDetailDTO()
             {
-                PageConfigs = pageConfigDTO
+                PageConfigs = pageConfigDTO ?? new PageConfigDTO()
             };
         }
     }
