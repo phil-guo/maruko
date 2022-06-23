@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Autofac;
+using Maruko.Core.Extensions;
 using Microsoft.Extensions.Configuration;
 
 namespace Maruko.Core.Config

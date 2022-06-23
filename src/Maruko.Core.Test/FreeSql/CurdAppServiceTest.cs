@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Autofac;
 using Maruko.Core.Application.Servers.Dto;
+using Maruko.Core.Enum;
 using Maruko.Core.Extensions;
 using Maruko.Core.FreeSql.Internal;
 using Maruko.Core.Test.FreeSql.AppService;

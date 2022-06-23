@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Maruko.Core.Application;
 using Maruko.Core.Application.Servers.Dto;
+using Maruko.Core.Extensions.Linq;
 using Maruko.Core.FreeSql.Internal.AppService;
 using Maruko.Core.FreeSql.Internal.Repos;
 using Microsoft.Extensions.Logging;
@@ -279,7 +280,7 @@ namespace Maruko.Zero
 
             if (search.DynamicFilters.Any())
             {
-                var queryWhere = query.Where(ConditionToLambda(search));
+                var queryWhere = query.Where(QueryableExtensions.ConditionToLambda<SysMenu>(search));
                 topNode = queryWhere.ToList();
             }
             else

@@ -8,9 +8,7 @@ namespace Maruko.Core.FreeSql.Config
     {
         public FreeSqlOption FreeSql { get; set; }
 
-        private IConfiguration configuration => ServiceLocator.Current.Resolve<IConfiguration>();
-
-        public AppConfig()
+        public AppConfig(IConfiguration configuration)
         {
             var section = configuration?.GetSection(nameof(FreeSql));
             FreeSql = section.Exists()

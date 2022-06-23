@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Maruko.Core.FreeSql.Internal
+﻿namespace Maruko.Core.Enum
 {
     public enum Condition
     {

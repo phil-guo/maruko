@@ -1,27 +1,28 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Config\" />
-    <Folder Include="Internal\Controllers\" />
-    <Folder Include="Internal\Service\Imp\" />
-    <Folder Include="Internal\Service\DTO\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Config\" />
+		<Folder Include="Internal\Controllers\" />
+		<Folder Include="Internal\Service\Imp\" />
+		<Folder Include="Internal\Service\DTO\" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Maruko.AutoMapper\Maruko.Core.AutoMapper.csproj" />
-    <ProjectReference Include="..\..\src\Maruko.Core.Web\Maruko.Core.Web.csproj" />
-    <ProjectReference Include="..\..\src\Maruko.FreeSql\Maruko.Core.FreeSql.csproj" />
-    <ProjectReference Include="..\..\src\Maruko\Maruko.Core.csproj" />
-    <ProjectReference Include="..\..\src\Maruok.Core.NLog\Maruko.Core.NLog.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\Maruko.AutoMapper\Maruko.Core.AutoMapper.csproj" />
+		<ProjectReference Include="..\..\src\Maruko.Core.Web\Maruko.Core.Web.csproj" />
+		<ProjectReference Include="..\..\src\Maruko.FreeSql\Maruko.Core.FreeSql.csproj" />
+		<ProjectReference Include="..\..\src\Maruko\Maruko.Core.csproj" />
+		<ProjectReference Include="..\..\src\Maruok.Core.NLog\Maruko.Core.NLog.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="AngleSharp" Version="0.16.0" />
-    <PackageReference Include="Quartz" Version="3.3.3" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="AngleSharp" Version="0.16.0" />
+		<PackageReference Include="Quartz" Version="3.3.3" />
+		<PackageReference Include="Quartz.Serialization.Json" Version="3.3.3" />
+	</ItemGroup>
 
 </Project>
