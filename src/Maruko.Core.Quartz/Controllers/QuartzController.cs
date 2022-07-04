@@ -37,7 +37,7 @@ namespace Maruko.Core.Quartz.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost("pageSearch")]
-        public async Task<AjaxResponse<PagedResultDto>> GetPageData(PageDto model)
+        public async Task<AjaxResponse<PagedResultDto>> GetPageData([FromBody]PageDto model)
         {
             var jobs = (await _scheduleProvider.GetAllJobAsync())
                 .OrderBy(item => item.AppId)
@@ -63,7 +63,7 @@ namespace Maruko.Core.Quartz.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost("createAsync")]
-        public async Task<AjaxResponse<object>> AddScheduleJobAsync(ScheduleModel model, long? runNumber = null)
+        public async Task<AjaxResponse<object>> AddScheduleJobAsync([FromBody]ScheduleModel model, long? runNumber = null)
         {
             var scheduler = await _schedulerFactoryProvider.GetScheduler();
 
@@ -81,7 +81,7 @@ namespace Maruko.Core.Quartz.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost("triggerExecuteAsync")]
-        public async Task<AjaxResponse<object>> TriggerExecuteAsync(JobKey jobKey)
+        public async Task<AjaxResponse<object>> TriggerExecuteAsync([FromBody]JobKey jobKey)
         {
             var schedule = await _schedulerFactoryProvider.GetScheduler();
             await schedule.ResumeJob(jobKey);
@@ -95,7 +95,7 @@ namespace Maruko.Core.Quartz.Controllers
         /// <param name="jobKey"></param>
         /// <returns></returns>
         [HttpPost("pauseJobAsync")]
-        public async Task<AjaxResponse<object>> PauseJobAsync(JobKey jobKey)
+        public async Task<AjaxResponse<object>> PauseJobAsync([FromBody] JobKey jobKey)
         {
             var schedule = await _schedulerFactoryProvider.GetScheduler();
             await schedule.PauseJob(jobKey);
@@ -134,7 +134,7 @@ namespace Maruko.Core.Quartz.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost, Route("editAsync")]
-        public async Task<AjaxResponse<object>> UpdateJob(ScheduleModel request)
+        public async Task<AjaxResponse<object>> UpdateJob([FromBody] ScheduleModel request)
         {
             var result = await _scheduleProvider.QueryJobAsync(request.JobGroup, request.JobName);
 

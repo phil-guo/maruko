@@ -20,6 +20,6 @@ namespace Maruko.Core.Application.Servers.Dto
         /// 一页数据总数
         /// </summary>
         [Range(1, 2147483647, ErrorMessage = "PageSize的值在1~2147483647之间")]
-        public int PageMax { get; set; } = 20;
+        public int PageMax { get; set; } = 10;
     }
 }

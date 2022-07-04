@@ -59,7 +59,7 @@ namespace Maruko.Core.Quartz.Internal.QuartzProvider
                 httpDir.Add(Constant.REQUESTURL, entity.RequestUrl);
                 httpDir.Add(Constant.HEADERS, entity.RequestHeader);
                 httpDir.Add(Constant.REQUESTPARAMETERS, entity.RequestParameters);
-                httpDir.Add(Constant.REQUESTTYPE, entity.RequestType.ToString());
+                httpDir.Add(Constant.REQUESTTYPE, ((int)entity.RequestType).ToString());
                 httpDir.Add(Constant.AppId, entity.AppId);
                 httpDir.Add(Constant.JobRequestStatus, "True");
             }

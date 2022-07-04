@@ -11,7 +11,9 @@ namespace Maruko.Core.Quartz.Jobs
     {
         public Task Execute(IJobExecutionContext context)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+
+            return Task.CompletedTask;
         }
     }
 }
