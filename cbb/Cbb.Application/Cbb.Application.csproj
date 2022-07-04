@@ -12,4 +12,7 @@
       <ProjectReference Include="..\..\src\Maruok.Core.NLog\Maruko.Core.NLog.csproj" />
     </ItemGroup>
 
+	<ItemGroup>
+		<PackageReference Include="AngleSharp" Version="0.16.0" />
+	</ItemGroup>
 </Project>

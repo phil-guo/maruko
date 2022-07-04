@@ -1,6 +1,7 @@
 ﻿using System;
 using Autofac;
 using Maruko.Core.Extensions;
+using Maruko.Core.Extensions.Http;
 using Maruko.Core.Modules;
 
 namespace Maruko.Core
@@ -13,6 +14,8 @@ namespace Maruko.Core
             {
                 ServiceLocator.Current = lifetimeScopes;
             });
+
+            builder.RegisterType<RestSharpMiddleClient>().As<IMiddleClient>();
         }
     }
 }

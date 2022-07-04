@@ -49,9 +49,12 @@ namespace Maruko.Core.Extensions.Http
             else
             {
                 var newClient = new HttpClient()
-                { BaseAddress = new Uri(_url), Timeout = TimeSpan.FromMilliseconds(_timeout) };
+                {
+                    BaseAddress = new Uri(_url), Timeout = TimeSpan.FromMilliseconds(_timeout)
+                };
                 //newClient.DefaultRequestHeaders.Add("User-Agent", $"{ConfiguraString.EQuality}");
                 newClient.DefaultRequestHeaders.Add("Connection", "keep-alive");
+                _clients.Push(newClient);
                 return newClient;
             }
         }

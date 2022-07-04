@@ -35,7 +35,7 @@ namespace Maruko.Core.Extensions.Http
         /// <summary>
         /// 内部服务默认true 系统自动添加token
         /// </summary>
-        bool DefalutEQualityService => true;
+        bool DefalutEQualityService => false;
         /// <summary>
         /// 所有的键值对对象实现最终数据请求在这里 SseviceMethodRequest 如果是Get 请完善键值对提交数据
         /// </summary>

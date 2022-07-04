@@ -2,7 +2,7 @@
 {
     public enum ServiceMethodRequest
     {
-        Post = 1,
-        Get = 2
+        Get = 1,
+        Post = 2
     }
 }
