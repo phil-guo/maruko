@@ -74,7 +74,6 @@ namespace Maruko.Core.Quartz.Jobs
                         RequestType = requestTypeEnum
                     });
 
-                    logModel.EndTime = DateTime.Now;
                     logModel.Body = response.Body;
                     if (!response.Success)
                     {
@@ -98,15 +97,14 @@ namespace Maruko.Core.Quartz.Jobs
                 logModel.IsError = true;
                 context.JobDetail.JobDataMap[Constant.JobRequestStatus] = "False";
                 if (string.IsNullOrEmpty(context.JobDetail.JobDataMap.GetString(Constant.NextRequestTime)))
-                    context.JobDetail.JobDataMap[Constant.NextRequestTime] =
-                        DateTime.Now.ToString(CultureInfo.InvariantCulture);
+                    context.JobDetail.JobDataMap[Constant.NextRequestTime] = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
             }
             finally
             {
                 Stopwatch.Stop(); //  停止监视
                 double seconds = Stopwatch.Elapsed.TotalSeconds; //总秒数           
                 logModel.UseTime = seconds;
-                logModel.EndTime = DateTime.Now;
+                logModel.EndTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
                 logs.Add(JsonConvert.SerializeObject(logModel));
                 context.JobDetail.JobDataMap[Constant.LOGS] = JsonConvert.SerializeObject(logs);
             }

@@ -26,5 +26,12 @@ namespace Cbb.Application.Internal.Services.Imp
 
             request.Sort = entity.Sort + 1;
         }
+
+        protected override void BeforeEdit(AppOilTimeDTO request)
+        {
+            var entity = FirstOrDefault(request.Id);
+            request.Sort = entity.Sort;
+            request.Year=entity.Year;
+        }
     }
 }

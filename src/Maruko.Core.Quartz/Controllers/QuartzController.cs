@@ -171,59 +171,5 @@ namespace Maruko.Core.Quartz.Controllers
             logs?.Reverse();
             return new AjaxResponse<object>(logs, "执行成功");
         }
-
-        //protected IList<ConditionInfo> FiltrationCondition(IList<ConditionInfo> conditions)
-        //{
-        //    if (conditions != null && conditions.Count > 0)
-        //    {
-        //        foreach (var item in conditions)
-        //        {
-
-        //            item.ColumnName = ConvertPropertyName(item.ColumnName);
-        //        }
-        //    }
-
-        //    return conditions;
-        //}
-
-        //private string ConvertPropertyName(string propertyName)
-        //{
-        //    return ConvertPropertyName<JobInfoModel>(propertyName);
-        //}
-
-        //private string ConvertPropertyName<T>(string propertyName)
-        //{
-        //    var currPropertyName = propertyName;
-        //    propertyName = propertyName.ToLower();
-        //    var tModelType = typeof(T);
-        //    Dictionary<string, string> keyValues = LocalCache.GetObject<Dictionary<string, string>>("Dal_Model_" + tModelType.FullName);
-        //    if (keyValues == null)
-        //    {
-        //        keyValues = new Dictionary<string, string>();
-        //        foreach (PropertyInfo p in tModelType.GetProperties())
-        //        {
-        //            var attributes = p.GetCustomAttributes(typeof(ColumnAttribute), false);
-        //            if (attributes.Length > 0)
-        //            {
-        //                ColumnAttribute attribute = (ColumnAttribute)attributes[0];
-        //                keyValues.Add(attribute.Name.ToLower(), p.Name);
-        //            }
-        //        }
-        //        LocalCache.AddObject("Dal_Model_" + tModelType.FullName, keyValues, -1);
-        //    }
-
-
-        //    if (keyValues.ContainsKey(propertyName))
-        //    {
-        //        currPropertyName = keyValues[propertyName];
-        //    }
-        //    else if (keyValues.Any(o => o.Value.ToLower() == propertyName)) //兼容大小写问题
-        //    {
-        //        currPropertyName = keyValues.Where(o => o.Value.ToLower() == propertyName).Select(o => o.Value).FirstOrDefault();
-        //    }
-
-        //    return currPropertyName;
-        //}
-
     }
 }

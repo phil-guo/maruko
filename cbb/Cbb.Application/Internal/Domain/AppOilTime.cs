@@ -20,5 +20,8 @@ namespace Cbb.Application.Internal.Domain
 
         [Column(Name = "sort")]
         public int Sort { get; set; }
+
+        [Column(Name = "isNextNotify")]
+        public bool IsNextNotify { get; set; }
     }
 }

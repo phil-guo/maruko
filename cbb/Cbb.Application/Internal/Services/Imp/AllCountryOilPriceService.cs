@@ -15,6 +15,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AngleSharp.Dom;
 using AngleSharp.Html.Parser;
+using Cbb.Application.Internal.Domain;
 using Maruko.Core.FreeSql.Internal.AppService;
 using Maruko.Core.FreeSql.Internal.Repos;
 using Maruko.Core.ObjectMapping;
@@ -27,16 +28,33 @@ namespace Cbb.Application
         IAllCountryOilPriceService
     {
         private readonly ILogger<AllCountryOilPriceService> _logger;
+        private readonly IFreeSqlRepository<AppOilTime> _oilTime;
 
         public AllCountryOilPriceService(IObjectMapper objectMapper,
-            IFreeSqlRepository<AppAllCountryOilPrice> repository, ILogger<AllCountryOilPriceService> logger) : base(objectMapper, repository)
+            IFreeSqlRepository<AppAllCountryOilPrice> repository,
+            ILogger<AllCountryOilPriceService> logger,
+            IFreeSqlRepository<AppOilTime> oilTime
+            ) : base(objectMapper, repository)
         {
             _logger = logger;
+            _oilTime = oilTime;
         }
 
 
         public async Task SpiderOil()
         {
+            var time = DateTime.Now;
+            var oilTimes = await _oilTime
+                .GetAll()
+                .Select<AppOilTime>()
+                .Where(item => item.Year == time.Year && item.IsNextNotify)
+                .OrderBy(item => item.Sort)
+                .ToListAsync();
+            var oilTime = oilTimes.FirstOrDefault();
+
+            if (time.ToString("yyyy-MM-dd") != oilTime?.Time.ToString("yyyy-MM-dd"))
+                return;
+
             var listOil = new List<OilDTO>();
             OilDTO dto = new OilDTO();
             var htmlParser = new HtmlParser();
@@ -44,9 +62,8 @@ namespace Cbb.Application
             //HTML 解析成 IDocument
             var dom = htmlParser.ParseDocument(htmlDoc);
 
-            var data = dom.All.FirstOrDefault(_ => _.Id == "left");
-
-            var oilText = data?.Children.FirstOrDefault()?.FirstChild?.Text();
+            //var data = dom.All.FirstOrDefault(_ => _.Id == "left");
+            //var oilText = data?.Children.FirstOrDefault()?.FirstChild?.Text();
             // dto.NextNotify = oilText;
             var oilData = dom.QuerySelectorAll("ul.ylist").FirstOrDefault();
             List<dynamic> oilPrice = new List<dynamic>();
@@ -57,7 +74,7 @@ namespace Cbb.Application
                 {
                     dto = new OilDTO
                     {
-                        NextNotify = oilText,
+                        NextNotify = $"{time:yyyy-MM-dd},0时调整",
                         CityName = oil.TextContent
                     };
                     i = 0;
@@ -103,6 +120,20 @@ namespace Cbb.Application
                 .GetAll()
                 .Insert(ObjectMapper.Map<List<AppAllCountryOilPrice>>(listOil))
                 .ExecuteAffrowsAsync();
+
+            var nextSort = oilTime.Sort + 1;
+            var nextOilTime = oilTimes.FirstOrDefault(_ => _.Sort == nextSort);
+            if (nextOilTime == null)
+                return;
+            nextOilTime.IsNextNotify = true;
+            oilTime.IsNextNotify = false;
+
+            var newOilTimes = new List<AppOilTime>()
+            {
+                oilTime,
+                nextOilTime
+            };
+            _oilTime.BatchUpdate(newOilTimes);
         }
 
         private string GetHtmlByUrl(string url)
