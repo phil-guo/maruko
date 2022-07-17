@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Maruko.Core.Application;
 using Maruko.Core.FreeSql.Internal.AppService;
 using Maruko.Core.Web;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,7 @@ namespace Cbb.Application
         }
 
         [HttpPost("spiderOilAsync")]
+        [AllowAnonymous]
         public async Task<AjaxResponse<object>> SpiderOilAsync()
         {
             await _allCountryOilPriceService.SpiderOil();

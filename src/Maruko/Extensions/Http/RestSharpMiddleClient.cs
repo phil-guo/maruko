@@ -77,7 +77,8 @@ namespace Maruko.Core.Extensions.Http
                             responseContent = await resultHttpPost.Content.ReadAsStringAsync();
                             _logger.LogInformation($"{InterfaceUrl}:接口返回结果：{resultHttpPost.StatusCode}" + responseContent);
                             rsp = JsonConvert.DeserializeObject<T>(responseContent);
-                            rsp.Body = responseContent;
+                            if (rsp != null)
+                                rsp.Body = responseContent;
                         }
                         catch (ArgumentNullException anEx)
                         {

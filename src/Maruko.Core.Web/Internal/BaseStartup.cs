@@ -128,6 +128,7 @@ namespace Maruko.Core.Web
             app.UseRouting();
 
             app.UseAuthentication();
+            app.UseAuthorization();
             app.UseCors("cors");
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
