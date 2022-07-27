@@ -47,12 +47,18 @@ namespace Cbb.Application
             var oilTimes = await _oilTime
                 .GetAll()
                 .Select<AppOilTime>()
-                .Where(item => item.Year == time.Year && item.IsNextNotify)
+                .Where(item => item.Year == time.Year)
                 .OrderBy(item => item.Sort)
                 .ToListAsync();
-            var oilTime = oilTimes.FirstOrDefault();
+            var oilTime = oilTimes.FirstOrDefault(item => item.IsNextNotify);
+
 
             if (time.ToString("yyyy-MM-dd") != oilTime?.Time.ToString("yyyy-MM-dd"))
+                return;
+
+            var nextSort = oilTime.Sort + 1;
+            var nextOilTime = oilTimes.FirstOrDefault(_ => _.Sort == nextSort);
+            if (nextOilTime == null)
                 return;
 
             var listOil = new List<OilDTO>();
@@ -74,7 +80,7 @@ namespace Cbb.Application
                 {
                     dto = new OilDTO
                     {
-                        NextNotify = $"{time:yyyy-MM-dd},0时调整",
+                        NextNotify = $"{nextOilTime.Time:yyyy-MM-dd},0时调整",
                         CityName = oil.TextContent
                     };
                     i = 0;
@@ -121,10 +127,7 @@ namespace Cbb.Application
                 .Insert(ObjectMapper.Map<List<AppAllCountryOilPrice>>(listOil))
                 .ExecuteAffrowsAsync();
 
-            var nextSort = oilTime.Sort + 1;
-            var nextOilTime = oilTimes.FirstOrDefault(_ => _.Sort == nextSort);
-            if (nextOilTime == null)
-                return;
+            
             nextOilTime.IsNextNotify = true;
             oilTime.IsNextNotify = false;
 

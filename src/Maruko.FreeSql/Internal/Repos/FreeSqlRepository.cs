@@ -88,7 +88,7 @@ namespace Maruko.Core.FreeSql.Internal.Repos
 
         public bool BatchUpdate(List<TEntity> entities)
         {
-            throw new NotImplementedException();
+            return GetAll().Update<TEntity>().SetSource(entities).ExecuteAffrows() > 0;
         }
 
         protected static Expression<Func<TEntity, bool>> CreateEqualityExpressionForId(long id)
