@@ -19,6 +19,13 @@ namespace Cbb.Application
             _allCountryOilPriceService = curd;
         }
 
+        [HttpGet("getCityOilPrice")]
+        [AllowAnonymous]
+        public async Task<object> GetCityOilPrice(string cityName)
+        {
+            return Ok(await _allCountryOilPriceService.GetCityOilPrice(cityName));
+        }
+
         [HttpPost("spiderOilAsync")]
         [AllowAnonymous]
         public async Task<AjaxResponse<object>> SpiderOilAsync()

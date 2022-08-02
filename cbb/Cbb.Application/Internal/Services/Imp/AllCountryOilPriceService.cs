@@ -40,6 +40,25 @@ namespace Cbb.Application
             _oilTime = oilTime;
         }
 
+        public async Task<Oil> GetCityOilPrice(string cityName)
+        {
+            var city = cityName.Substring(0, cityName.Length - 1);
+
+            var cityOil =await Table
+                .GetAll()
+                .Select<AppAllCountryOilPrice>()
+                .Where(item => item.CityName.Contains(city))
+                .OrderByDescending(item => item.CreateTime)
+                .ToOneAsync();
+
+           var prices= JsonConvert.DeserializeObject<List<OilPrice>>(cityOil?.PriceJson);
+
+            return new Oil()
+            {
+                ChangeTime = cityOil?.NextNotify.Split(',')[0],
+                OilPrices = prices
+            };
+        }
 
         public async Task SpiderOil()
         {
