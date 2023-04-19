@@ -1,0 +1,22 @@
+# Tomcat
+server:
+  port: 8088
+
+# Spring
+spring:
+  application:
+    # 应用名称
+    name: act-modules-zero
+  main:
+    allow-circular-references: true
+  profiles:
+    # 环境配置
+    active: dev
+  datasource:
+    url: "jdbc:mysql://www.autoct.top:33306/java_act?characterEncoding=utf-8"
+    username: "root"
+    password: "qwe123QWE"
+
+# mybatis-plus 配置
+#mybatis-plus:
+#  type-aliases-package: "com.act.modules.zero.domain"
