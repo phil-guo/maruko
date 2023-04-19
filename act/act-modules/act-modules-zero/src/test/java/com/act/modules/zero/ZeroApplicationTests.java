@@ -1,5 +1,7 @@
 package com.act.modules.zero;
 
+import com.act.core.application.DynamicFilter;
+import com.act.core.application.PageDto;
 import com.act.core.utils.JWTUtils;
 import com.act.core.utils.StringExtensions;
 import com.act.modules.zero.application.services.sysUser.SysUserService;
@@ -15,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = {ZeroApplication.class, ZeroApplicationTests.class})
@@ -35,6 +38,32 @@ class ZeroApplicationTests {
     public void GetAll() {
         SysUser users = _sysUserMapper.selectById(1);
         System.out.println(users.getUserName());
+    }
+
+    @Test
+    public void Delete_Test() {
+        _sysUserService.Delete(7L);
+    }
+
+    @Test
+    public void PageSearch_Test() {
+
+        var page = new PageDto();
+
+        var filter = new DynamicFilter();
+        filter.setField("id");
+        filter.setOperate("Equal");
+        filter.setValue(7);
+
+        var filters = new ArrayList<DynamicFilter>();
+        filters.add(filter);
+
+        page.setDynamicFilters(filters);
+
+        page.setPageIndex(1);
+        page.setPageSize(10);
+        var one = _sysUserService.PageSearch(page);
+        System.out.println(one.getDatas());
     }
 
     @Test

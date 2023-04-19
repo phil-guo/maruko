@@ -1,6 +1,8 @@
 package com.act.core.application;
 
 import com.act.core.domain.BaseEntity;
+import com.act.core.utils.BeanUtilsExtensions;
+import com.act.core.utils.WrapperExtensions;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -23,11 +25,13 @@ public class CurdAppService<TEntity extends BaseEntity<Long>, TEntityDto extends
         implements ICurdAppService<TEntity, TEntityDto> {
     @Resource
     private BaseMapper<TEntity> _repos;
-    private Class<TEntity> _entity;
+    private final Class<TEntity> _entity;
+    private final Class<TEntityDto> _dto;
 
     public CurdAppService() {
         var type = (ParameterizedType) this.getClass().getGenericSuperclass();
         _entity = (Class<TEntity>) type.getActualTypeArguments()[0];
+        _dto = (Class<TEntityDto>) type.getActualTypeArguments()[1];
     }
 
     /*
@@ -35,10 +39,16 @@ public class CurdAppService<TEntity extends BaseEntity<Long>, TEntityDto extends
      */
     public PagedResultDto PageSearch(PageDto search) {
         var page = new Page<TEntity>(search.getPageIndex(), search.getPageSize());
-        QueryWrapper<TEntity> queryWrapper = new QueryWrapper<>();
+
+        QueryWrapper<TEntity> queryWrapper = WrapperExtensions.ConvertToWrapper(search.getDynamicFilters());
         var result = _repos.selectPage(page, queryWrapper);
-        var datas = new ArrayList<TEntity>();
-        BeanUtils.copyProperties(page.getRecords(), datas);
+        var datas = BeanUtilsExtensions.copyListProperties(result.getRecords(), () -> {
+            try {
+                return _dto.newInstance();
+            } catch (InstantiationException | IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        });
         return new PagedResultDto(result.getTotal(), datas);
     }
 
@@ -84,5 +94,19 @@ public class CurdAppService<TEntity extends BaseEntity<Long>, TEntityDto extends
 
     protected void BeforeEdit(TEntityDto request) {
 
+    }
+
+    private QueryWrapper<TEntity> ConvertToWrapper(List<DynamicFilter> filters) {
+        QueryWrapper<TEntity> queryWrapper = new QueryWrapper<>();
+        if (filters.size() == 0)
+            return queryWrapper;
+
+        for (var item : filters) {
+            if (item.getOperate().equals("Like")) {
+
+            }
+        }
+
+        return queryWrapper;
     }
 }
