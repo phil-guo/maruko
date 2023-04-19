@@ -25,13 +25,6 @@ public class SysUserServiceImp extends CurdAppService<SysUser, SysUserDTO> imple
     }
 
     public AjaxResponse<Object> Login(LoginDTO request) throws InstantiationException, IllegalAccessException {
-
-        var sysUserDTO = new SysUserDTO();
-
-        sysUserDTO.setUserName("alangur");
-        sysUserDTO.setIcon("hello");
-        CreateOrEdit(sysUserDTO);
-
         var map = new Hashtable<String, Object>();
         map.put("userId", 1);
         var token = JWTUtils.getToken(map);

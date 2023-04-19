@@ -2,6 +2,7 @@ package com.act.modules.zero;
 
 import com.act.core.application.DynamicFilter;
 import com.act.core.application.PageDto;
+import com.act.core.utils.AjaxResponse;
 import com.act.core.utils.JWTUtils;
 import com.act.core.utils.StringExtensions;
 import com.act.modules.zero.application.services.sysUser.SysUserService;
@@ -71,7 +72,7 @@ class ZeroApplicationTests {
         var loginModel = new LoginDTO();
         loginModel.setName("admin");
         loginModel.setPassword("qwe213QWE");
-        var result = _sysUserService.Login(loginModel);
+        AjaxResponse<Object> result = _sysUserService.Login(loginModel);
         System.out.println(result.getData());
 
         var token = (String) result.getData();
