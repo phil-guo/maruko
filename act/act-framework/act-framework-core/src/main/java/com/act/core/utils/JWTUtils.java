@@ -10,9 +10,6 @@ import java.util.Date;
 import java.util.Hashtable;
 import java.util.Map;
 
-//import com.auth0.jwt.JWT;
-//import com.auth0.jwt.algorithms.Algorithm;
-
 public class JWTUtils {
 
     //过期时间

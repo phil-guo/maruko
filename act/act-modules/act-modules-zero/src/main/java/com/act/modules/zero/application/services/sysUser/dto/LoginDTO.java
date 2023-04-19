@@ -1,4 +1,4 @@
-package com.act.modules.zero.services.sysuser.dto;
+package com.act.modules.zero.application.services.sysUser.dto;
 
 import lombok.Getter;
 import lombok.Setter;
