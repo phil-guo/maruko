@@ -1,22 +1,28 @@
 package com.act.core.domain;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.*;
+import lombok.Data;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
 /**
  * @author phil.guo
  */
+@Data
 public abstract class BaseEntity<T> implements Serializable {
     @TableId(type = IdType.AUTO)
     private T id;
-    @TableField(value = "createTime",fill = FieldFill.INSERT)
-    private Date createTime;
-    @TableField("isDelete")
-    private int isDelete;
+    @TableField(value = "createTime", fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
+    @TableField(value = "isDelete", fill = FieldFill.INSERT)
+    @TableLogic
+    private Integer isDelete;
+
+    public BaseEntity(){
+        this.setIsDelete(0);
+        this.setCreateTime(LocalDateTime.now());
+    }
 }
