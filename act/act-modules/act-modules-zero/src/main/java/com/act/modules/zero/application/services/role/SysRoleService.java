@@ -1,4 +1,4 @@
-package com.act.modules.zero.application.services.user;
+package com.act.modules.zero.application.services.role;
 
 import com.act.core.application.ICurdAppService;
 import com.act.modules.zero.application.services.user.dto.SysRoleDTO;

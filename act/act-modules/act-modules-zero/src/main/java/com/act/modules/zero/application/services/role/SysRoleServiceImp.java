@@ -1,7 +1,6 @@
-package com.act.modules.zero.application.services.user.imp;
+package com.act.modules.zero.application.services.role;
 
 import com.act.core.application.CurdAppService;
-import com.act.modules.zero.application.services.user.SysRoleService;
 import com.act.modules.zero.application.services.user.dto.SysRoleDTO;
 import com.act.modules.zero.domain.SysRole;
 import com.act.modules.zero.mapper.SysRoleMapper;

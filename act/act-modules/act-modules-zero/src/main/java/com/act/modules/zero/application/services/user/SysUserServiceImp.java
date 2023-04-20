@@ -1,4 +1,4 @@
-package com.act.modules.zero.application.services.user.imp;
+package com.act.modules.zero.application.services.user;
 
 import com.act.core.application.CurdAppService;
 import com.act.core.application.PageDto;
