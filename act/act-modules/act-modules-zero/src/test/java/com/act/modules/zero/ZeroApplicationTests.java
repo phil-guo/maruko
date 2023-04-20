@@ -8,11 +8,11 @@ import com.act.core.utils.JWTUtils;
 import com.act.core.utils.StringExtensions;
 import com.act.modules.zero.application.services.sysUser.SysUserService;
 import com.act.modules.zero.application.services.sysUser.dto.LoginDTO;
+import com.act.modules.zero.application.services.sysUser.dto.ResetPasswordRequest;
 import com.act.modules.zero.application.services.sysUser.dto.SysUserDTO;
 import lombok.var;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -28,9 +28,16 @@ class ZeroApplicationTests {
     void contextLoads() {
     }
 
-
     @Resource
     private SysUserService userService;
+
+    @Test
+    public void resetPassword_Test() throws FriendlyException {
+        var request = new ResetPasswordRequest();
+        request.setUserId(7);
+        var one = userService.resetPassword(request);
+        System.out.println(one);
+    }
 
     @Test
     public void Delete_Test() {
@@ -63,7 +70,7 @@ class ZeroApplicationTests {
         var loginModel = new LoginDTO();
         loginModel.setName("admin");
         loginModel.setPassword("qwe213QWE");
-        AjaxResponse<Object> result = userService.Login(loginModel);
+        AjaxResponse<Object> result = userService.login(loginModel);
         System.out.println(result.getData());
 
         var token = (String) result.getData();

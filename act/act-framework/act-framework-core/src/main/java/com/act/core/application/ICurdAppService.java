@@ -22,5 +22,5 @@ public interface ICurdAppService<TEntity extends BaseEntity<Long>, TEntityDto> {
      *
      * @param id 主键
      */
-    void delete(Long id);
+    void delete(Long id) throws FriendlyException;
 }

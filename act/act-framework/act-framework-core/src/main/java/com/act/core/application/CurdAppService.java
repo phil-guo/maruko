@@ -80,7 +80,7 @@ public abstract class CurdAppService<TEntity extends BaseEntity<Long>, TEntityDt
     /*
     删除
      */
-    public void delete(Long id) {
+    public void delete(Long id) throws FriendlyException {
         _repos.deleteById(id);
     }
 

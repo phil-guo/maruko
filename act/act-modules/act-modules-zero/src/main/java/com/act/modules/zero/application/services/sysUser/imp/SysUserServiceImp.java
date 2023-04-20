@@ -7,11 +7,11 @@ import com.act.core.application.PagedResultDto;
 import com.act.core.utils.*;
 import com.act.modules.zero.application.services.sysUser.SysRoleService;
 import com.act.modules.zero.application.services.sysUser.SysUserService;
-import com.act.modules.zero.application.services.sysUser.dto.LoginDTO;
-import com.act.modules.zero.application.services.sysUser.dto.SysUserDTO;
+import com.act.modules.zero.application.services.sysUser.dto.*;
 import com.act.modules.zero.domain.SysRole;
 import com.act.modules.zero.domain.SysUser;
 import com.act.modules.zero.mapper.SysUserMapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -32,12 +32,6 @@ public class SysUserServiceImp
         extends CurdAppService<SysUser, SysUserDTO, SysUserMapper>
         implements SysUserService {
 
-    /**
-     * 分页查询
-     *
-     * @param search
-     * @return
-     */
     @Override
     public PagedResultDto pageSearch(PageDto search) {
 
@@ -55,17 +49,8 @@ public class SysUserServiceImp
         return new PagedResultDto(result.getTotal(), datas);
     }
 
-    /**
-     * 用户添加或者修改
-     *
-     * @param request
-     * @return
-     * @throws InstantiationException
-     * @throws IllegalAccessException
-     * @throws FriendlyException
-     */
     @Override
-    public SysUserDTO createOrEdit(SysUserDTO request) throws InstantiationException, IllegalAccessException, FriendlyException {
+    public SysUserDTO createOrEdit(SysUserDTO request) throws FriendlyException {
 
         if (request == null)
             return null;
@@ -99,11 +84,74 @@ public class SysUserServiceImp
         return request;
     }
 
-    public AjaxResponse<Object> Login(LoginDTO request) throws InstantiationException, IllegalAccessException {
-        var map = new Hashtable<String, Object>();
-        map.put("userId", 1);
-        var token = JWTUtils.getToken(map);
-        return new AjaxResponse<Object>(token);
+    @Override
+    public void delete(Long id) throws FriendlyException {
+
+        var user = Table().selectById(id);
+        if (user == null)
+            throw new FriendlyException("用户不存在！");
+
+        if (user.getId() == 1 || user.getUserName().equals("admin"))
+            throw new FriendlyException("admin管理员不允许被删除");
+
+        super.delete(id);
     }
 
+    public AjaxResponse<Object> login(LoginDTO request) throws FriendlyException {
+
+        if (StringUtils.isEmpty(request.getName()))
+            throw new FriendlyException("用户名不能为空");
+
+        if (StringUtils.isEmpty(request.getPassword()))
+            throw new FriendlyException("密码不能为空");
+
+        request.setPassword(StringExtensions.ToMd5(request.getPassword()).toUpperCase());
+
+        var user = Table().selectOne(new MPJLambdaWrapper<SysUser>()
+                .eq(SysUser::getUserName, request.getName())
+                .eq(SysUser::getPassword, request.getPassword()));
+        if (user == null)
+            throw new FriendlyException("用户名密码错误");
+
+        var map = new Hashtable<String, Object>();
+        map.put("userId", user.getId());
+        map.put("name", user.getUserName());
+        map.put("roleId", user.getRoleId());
+        map.put("userIcon", user.getIcon());
+        var token = JWTUtils.getToken(map);
+
+        var response = new LoginResponse();
+        response.setAccessToken(token);
+        return new AjaxResponse<>(response);
+    }
+
+    public AjaxResponse<Object> resetPassword(ResetPasswordRequest request) throws FriendlyException {
+
+        var user = Table().selectById(request.getUserId());
+        if (user == null)
+            throw new FriendlyException("系统错误,修改密码失败");
+
+        user.setPassword(StringExtensions.ToMd5("123456").toUpperCase());
+
+        Table().updateById(user);
+
+        return new AjaxResponse<>("重置密码成功");
+    }
+
+    public AjaxResponse<Object> updatePersonalInfo(UpdatePersonalInfoRequest request) throws FriendlyException {
+
+        var entity = Table().selectById(request.getUserId());
+        if (entity == null)
+            throw new FriendlyException("用户不存在");
+
+        if (StringUtils.isEmpty(request.getPassword()))
+            entity.setPassword(StringExtensions.ToMd5(request.getPassword()).toUpperCase());
+
+        entity.setUserName(request.getUserName());
+        entity.setIcon(request.getIcon());
+
+        Table().updateById(entity);
+
+        return new AjaxResponse<>("更新成功");
+    }
 }
