@@ -72,9 +72,7 @@ class ZeroApplicationTests {
         loginModel.setPassword("qwe213QWE");
         AjaxResponse<Object> result = userService.login(loginModel);
         System.out.println(result.getData());
-
         var token = (String) result.getData();
-
         JWTUtils.parseClaimsJws(token);
     }
 
