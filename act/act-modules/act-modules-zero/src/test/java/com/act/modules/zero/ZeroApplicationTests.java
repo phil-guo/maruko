@@ -40,7 +40,7 @@ class ZeroApplicationTests {
     }
 
     @Test
-    public void Delete_Test() {
+    public void Delete_Test() throws FriendlyException {
         userService.delete(7L);
     }
 
@@ -66,7 +66,7 @@ class ZeroApplicationTests {
     }
 
     @Test
-    public void Login_Test() throws InstantiationException, IllegalAccessException {
+    public void Login_Test() throws InstantiationException, IllegalAccessException, FriendlyException {
         var loginModel = new LoginDTO();
         loginModel.setName("admin");
         loginModel.setPassword("qwe213QWE");
