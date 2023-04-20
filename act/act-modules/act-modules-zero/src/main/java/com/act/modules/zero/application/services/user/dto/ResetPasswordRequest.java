@@ -1,4 +1,4 @@
-package com.act.modules.zero.application.services.sysUser.dto;
+package com.act.modules.zero.application.services.user.dto;
 
 import lombok.Data;
 

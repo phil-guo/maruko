@@ -1,17 +1,14 @@
-package com.act.modules.zero.application.services.sysUser.imp;
+package com.act.modules.zero.application.services.user.imp;
 
 import com.act.core.application.CurdAppService;
-import com.act.core.application.DynamicFilter;
 import com.act.core.application.PageDto;
 import com.act.core.application.PagedResultDto;
 import com.act.core.utils.*;
-import com.act.modules.zero.application.services.sysUser.SysRoleService;
-import com.act.modules.zero.application.services.sysUser.SysUserService;
-import com.act.modules.zero.application.services.sysUser.dto.*;
+import com.act.modules.zero.application.services.user.SysUserService;
+import com.act.modules.zero.application.services.user.dto.*;
 import com.act.modules.zero.domain.SysRole;
 import com.act.modules.zero.domain.SysUser;
 import com.act.modules.zero.mapper.SysUserMapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -19,13 +16,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import lombok.var;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.Hashtable;
-import java.util.Optional;
 
 @Service
 public class SysUserServiceImp

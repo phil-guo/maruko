@@ -1,14 +1,14 @@
-package com.act.modules.zero.application.services.sysUser;
+package com.act.modules.zero.application.services.user;
 
 import com.act.core.application.ICurdAppService;
 import com.act.core.application.PageDto;
 import com.act.core.application.PagedResultDto;
 import com.act.core.utils.AjaxResponse;
 import com.act.core.utils.FriendlyException;
-import com.act.modules.zero.application.services.sysUser.dto.LoginDTO;
-import com.act.modules.zero.application.services.sysUser.dto.ResetPasswordRequest;
-import com.act.modules.zero.application.services.sysUser.dto.SysUserDTO;
-import com.act.modules.zero.application.services.sysUser.dto.UpdatePersonalInfoRequest;
+import com.act.modules.zero.application.services.user.dto.LoginDTO;
+import com.act.modules.zero.application.services.user.dto.ResetPasswordRequest;
+import com.act.modules.zero.application.services.user.dto.SysUserDTO;
+import com.act.modules.zero.application.services.user.dto.UpdatePersonalInfoRequest;
 import com.act.modules.zero.domain.SysUser;
 
 public interface SysUserService extends ICurdAppService<SysUser, SysUserDTO> {
