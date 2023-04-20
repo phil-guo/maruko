@@ -1,12 +1,11 @@
 package com.act.modules.zero.application.services.sysUser.dto;
 
-import com.act.core.application.EntityDto;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
-public class SysRoleDTO extends EntityDto {
+public class SysRoleDTO{
 
     private Long id;
     private LocalDateTime createTime;
