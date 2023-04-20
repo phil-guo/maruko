@@ -3,13 +3,12 @@ package com.act.modules.zero;
 import com.act.core.application.DynamicFilter;
 import com.act.core.application.PageDto;
 import com.act.core.utils.AjaxResponse;
+import com.act.core.utils.FriendlyException;
 import com.act.core.utils.JWTUtils;
 import com.act.core.utils.StringExtensions;
 import com.act.modules.zero.application.services.sysUser.SysUserService;
 import com.act.modules.zero.application.services.sysUser.dto.LoginDTO;
 import com.act.modules.zero.application.services.sysUser.dto.SysUserDTO;
-import com.act.modules.zero.domain.SysUser;
-import com.act.modules.zero.mapper.SysUserMapper;
 import lombok.var;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -21,29 +20,21 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = {ZeroApplication.class, ZeroApplicationTests.class})
-@MapperScan({"com.act.modules.zero.mapper"})
+@SpringBootTest(classes = {ZeroApplication.class, ZeroApplicationTests.class,})
+//@MapperScan({"com.act.modules.zero.mapper"})
 class ZeroApplicationTests {
 
     @Test
     void contextLoads() {
     }
 
-    @Resource
-    private SysUserMapper _sysUserMapper;
 
     @Resource
-    private SysUserService _sysUserService;
-
-    @Test
-    public void GetAll() {
-        SysUser users = _sysUserMapper.selectById(1);
-        System.out.println(users.getUserName());
-    }
+    private SysUserService userService;
 
     @Test
     public void Delete_Test() {
-        _sysUserService.Delete(7L);
+        userService.delete(7L);
     }
 
     @Test
@@ -52,9 +43,9 @@ class ZeroApplicationTests {
         var page = new PageDto();
 
         var filter = new DynamicFilter();
-        filter.setField("id");
+        filter.setField("userName");
         filter.setOperate("Equal");
-        filter.setValue(7);
+        filter.setValue("phil");
 
         var filters = new ArrayList<DynamicFilter>();
         filters.add(filter);
@@ -63,7 +54,7 @@ class ZeroApplicationTests {
 
         page.setPageIndex(1);
         page.setPageSize(10);
-        var one = _sysUserService.PageSearch(page);
+        var one = userService.pageSearch(page);
         System.out.println(one.getDatas());
     }
 
@@ -72,7 +63,7 @@ class ZeroApplicationTests {
         var loginModel = new LoginDTO();
         loginModel.setName("admin");
         loginModel.setPassword("qwe213QWE");
-        AjaxResponse<Object> result = _sysUserService.Login(loginModel);
+        AjaxResponse<Object> result = userService.Login(loginModel);
         System.out.println(result.getData());
 
         var token = (String) result.getData();
@@ -81,14 +72,14 @@ class ZeroApplicationTests {
     }
 
     @Test
-    public void SysUser_CreateOrEdit() throws InstantiationException, IllegalAccessException {
+    public void SysUser_CreateOrEdit() throws InstantiationException, IllegalAccessException, FriendlyException {
 
         var request = new SysUserDTO();
         request.setId(7L);
         request.setUserName("phil");
         request.setRoleId(1L);
         request.setPassword(StringExtensions.ToMd5("123qwe").toUpperCase());
-        var one = _sysUserService.CreateOrEdit(request);
+        var one = userService.createOrEdit(request);
         System.out.println(one);
     }
 }

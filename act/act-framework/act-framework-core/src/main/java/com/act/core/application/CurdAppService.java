@@ -2,14 +2,18 @@ package com.act.core.application;
 
 import com.act.core.domain.BaseEntity;
 import com.act.core.utils.BeanUtilsExtensions;
+import com.act.core.utils.FriendlyException;
 import com.act.core.utils.WrapperExtensions;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.yulichang.base.MPJBaseMapper;
+import com.github.yulichang.wrapper.MPJLambdaWrapper;
+import lombok.Data;
 import lombok.var;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,11 +24,11 @@ import java.util.List;
 /**
  * @author phil.guo
  */
-@Service
-public class CurdAppService<TEntity extends BaseEntity<Long>, TEntityDto extends EntityDto>
+public abstract class CurdAppService<TEntity extends BaseEntity<Long>, TEntityDto, BP extends MPJBaseMapper<TEntity>>
         implements ICurdAppService<TEntity, TEntityDto> {
-    @Resource
-    private BaseMapper<TEntity> _repos;
+
+    @Autowired
+    private BP _repos;
     private final Class<TEntity> _entity;
     private final Class<TEntityDto> _dto;
 
@@ -34,13 +38,17 @@ public class CurdAppService<TEntity extends BaseEntity<Long>, TEntityDto extends
         _dto = (Class<TEntityDto>) type.getActualTypeArguments()[1];
     }
 
+    public BP Table(){
+        return _repos;
+    }
+
     /*
     分页查询
      */
-    public PagedResultDto PageSearch(PageDto search) {
+    public PagedResultDto pageSearch(PageDto search) {
         var page = new Page<TEntity>(search.getPageIndex(), search.getPageSize());
 
-        QueryWrapper<TEntity> queryWrapper = WrapperExtensions.ConvertToWrapper(search.getDynamicFilters());
+        MPJLambdaWrapper<TEntity> queryWrapper = WrapperExtensions.ConvertToWrapper(search.getDynamicFilters());
         var result = _repos.selectPage(page, queryWrapper);
         var datas = BeanUtilsExtensions.copyListProperties(result.getRecords(), () -> {
             try {
@@ -55,26 +63,14 @@ public class CurdAppService<TEntity extends BaseEntity<Long>, TEntityDto extends
     /*
     添加或者修改
      */
-    public TEntityDto CreateOrEdit(TEntityDto request) throws InstantiationException, IllegalAccessException {
+    public TEntityDto createOrEdit(TEntityDto request) throws InstantiationException, IllegalAccessException, FriendlyException {
 
         TEntity entity = null;
 
-        if (request.getId() == null) {
-            entity = _entity.newInstance();
-            BeanUtils.copyProperties(request, entity);
-            BeforeCreate(request);
-            _repos.insert(entity);
-        } else {
-            BeforeEdit(request);
-            var oldEntity = _repos.selectById(request.getId());
-            if (oldEntity == null)
-                return null;
-            BeanUtils.copyProperties(request, oldEntity);
-            QueryWrapper<TEntity> wrapper = Wrappers.query();
-            wrapper.eq("id", oldEntity.getId());
-            _repos.update(oldEntity, wrapper);
-            entity = oldEntity;
-        }
+        entity = _entity.newInstance();
+        BeanUtils.copyProperties(request, entity);
+        BeforeCreate(request);
+        _repos.insert(entity);
 
         var returnDto = request.getClass().newInstance();
         BeanUtils.copyProperties(entity, returnDto);
@@ -84,7 +80,7 @@ public class CurdAppService<TEntity extends BaseEntity<Long>, TEntityDto extends
     /*
     删除
      */
-    public void Delete(Long id) {
+    public void delete(Long id) {
         _repos.deleteById(id);
     }
 

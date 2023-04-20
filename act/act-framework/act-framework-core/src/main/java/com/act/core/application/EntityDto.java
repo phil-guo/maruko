@@ -1,10 +1,15 @@
 package com.act.core.application;
 
 import com.act.core.domain.BaseEntity;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
+import java.time.LocalDateTime;
+
 @Data
-public class EntityDto extends BaseEntity<Long> {
+public abstract class EntityDto {
+    private Long id;
+    private LocalDateTime createTime;
+    private Integer isDelete;
 }

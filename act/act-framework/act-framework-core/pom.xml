@@ -40,10 +40,11 @@
             <version>${mybatis-plus.version}</version>
         </dependency>
 
+        <!-- mybatis-plus-join -->
         <dependency>
-            <groupId>com.act.framework.core</groupId>
-            <artifactId>act-framework-core</artifactId>
-            <version>1.0.0</version>
+            <groupId>com.github.yulichang</groupId>
+            <artifactId>mybatis-plus-join-boot-starter</artifactId>
+            <version>${mybatis-plus-join.version}</version>
         </dependency>
 
         <dependency>

@@ -1,10 +1,16 @@
 package com.act.modules.zero.application.services.sysUser.dto;
 
-import com.act.core.application.EntityDto;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
-public class SysUserDTO extends EntityDto {
+public class SysUserDTO {
+
+    private Long id;
+    private LocalDateTime createTime;
+    private Integer isDelete;
+
     //角色Id
     private Long roleId;
 
@@ -16,4 +22,6 @@ public class SysUserDTO extends EntityDto {
 
     //头像
     private String icon;
+
+    private String roleName;
 }
