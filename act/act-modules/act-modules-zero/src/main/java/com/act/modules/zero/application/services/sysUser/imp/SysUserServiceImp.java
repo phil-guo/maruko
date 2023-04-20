@@ -40,14 +40,17 @@ public class SysUserServiceImp
      */
     @Override
     public PagedResultDto pageSearch(PageDto search) {
+
         var wrapper = WrapperExtensions.<SysUser>ConvertToWrapper(search.getDynamicFilters())
                 .selectAll(SysUser.class)
                 .selectAs(SysRole::getName, SysUserDTO::getRoleName)
                 .innerJoin(SysRole.class, SysRole::getId, SysUser::getRoleId);
 
-        var page = new Page<SysUserDTO>(search.getPageIndex(), search.getPageSize());
-        var result = Table().selectJoinPage(page, SysUserDTO.class, wrapper);
-        var datas = BeanUtilsExtensions.copyListProperties(result.getRecords(), SysUserDTO::new);
+        var result = Table()
+                .selectJoinPage(new Page<>(search.getPageIndex(), search.getPageSize()), SysUserDTO.class, wrapper);
+
+        var datas = BeanUtilsExtensions
+                .copyListProperties(result.getRecords(), SysUserDTO::new);
 
         return new PagedResultDto(result.getTotal(), datas);
     }
