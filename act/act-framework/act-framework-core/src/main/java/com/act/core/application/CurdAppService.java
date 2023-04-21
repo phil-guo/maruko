@@ -1,6 +1,7 @@
 package com.act.core.application;
 
 import com.act.core.domain.BaseEntity;
+import com.act.core.utils.AjaxResponse;
 import com.act.core.utils.BeanUtilsExtensions;
 import com.act.core.utils.FriendlyException;
 import com.act.core.utils.WrapperExtensions;

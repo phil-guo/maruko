@@ -12,6 +12,7 @@ import com.act.modules.zero.application.services.user.SysUserService;
 import com.act.modules.zero.application.services.user.dto.LoginDTO;
 import com.act.modules.zero.application.services.user.dto.ResetPasswordRequest;
 import com.act.modules.zero.application.services.user.dto.SysUserDTO;
+import com.alibaba.fastjson.JSON;
 import lombok.var;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -37,7 +38,7 @@ class ZeroApplicationTests {
     private SysRoleService roleService;
 
     @Test
-    public void  setRolePermission_Test(){
+    public void setRolePermission_Test() {
         var request = new SetRolePermissionRequest();
         var menuIds = new ArrayList<String>();
         menuIds.add("52_1");
@@ -48,6 +49,12 @@ class ZeroApplicationTests {
         request.setRoleId(1L);
         request.setMenuIds(menuIds);
         roleService.setRolePermission(request);
+    }
+
+    @Test
+    public void getAllRoles_Test() {
+        var one = roleService.getAllRoles();
+        System.out.println(JSON.toJSONString(one));
     }
 
     @Test

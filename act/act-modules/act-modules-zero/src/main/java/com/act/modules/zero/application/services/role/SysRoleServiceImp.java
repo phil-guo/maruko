@@ -1,6 +1,7 @@
 package com.act.modules.zero.application.services.role;
 
 import com.act.core.application.CurdAppService;
+import com.act.core.utils.AjaxResponse;
 import com.act.core.utils.FriendlyException;
 import com.act.modules.zero.application.services.menu.SysMenuService;
 import com.act.modules.zero.application.services.role.dto.RolePermissionDTO;
@@ -13,6 +14,8 @@ import com.act.modules.zero.mapper.SysRoleMapper;
 import com.act.modules.zero.mapper.SysRoleMenuMapper;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +32,15 @@ public class SysRoleServiceImp extends CurdAppService<SysRole, SysRoleDTO, SysRo
 
     @Autowired
     private SysMenuService _menu;
+
+    public AjaxResponse<Object> getAllRoles() {
+
+        var data = Table().selectMaps(new MPJLambdaWrapper<SysRole>()
+                .selectAs(SysRole::getName, "`key`")
+                .selectAs(SysRole::getId, "`value`")
+        );
+        return new AjaxResponse<>(data);
+    }
 
     public Boolean setRolePermission(SetRolePermissionRequest request) {
 
