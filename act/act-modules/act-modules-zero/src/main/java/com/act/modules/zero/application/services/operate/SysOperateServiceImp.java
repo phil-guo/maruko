@@ -4,9 +4,7 @@ import com.act.core.application.CurdAppService;
 import com.act.core.utils.BeanUtilsExtensions;
 import com.act.core.utils.FriendlyException;
 import com.act.modules.zero.application.services.menu.SysMenuService;
-import com.act.modules.zero.application.services.operate.dto.MenuOfOperateRequest;
-import com.act.modules.zero.application.services.operate.dto.MenuOfOperateResponse;
-import com.act.modules.zero.application.services.operate.dto.SysOperateDTO;
+import com.act.modules.zero.application.services.operate.dto.*;
 import com.act.modules.zero.application.services.role.SysRoleMenuService;
 import com.act.modules.zero.domain.SysMenu;
 import com.act.modules.zero.domain.SysOperate;
@@ -103,5 +101,29 @@ public class SysOperateServiceImp extends CurdAppService<SysOperate, SysOperateD
             idNos.getDatas().add(Integer.toString(operate.getUnique()));
         });
         return idNos;
+    }
+
+    public GetMenuOfOperateByRoleResponse getMenuOfOperateByRole(GetMenuOfOperateByRoleRequest request) throws FriendlyException {
+        var result = new GetMenuOfOperateByRoleResponse();
+        var menu = _menu.Table().selectOne(new LambdaQueryWrapper<SysMenu>()
+                .eq(SysMenu::getKey, request.getKey()));
+        if (menu == null)
+            throw new FriendlyException("key" + request.getKey() + "没有对应的菜单！");
+
+        var roleMenu = _roleMenu.Table()
+                .selectOne(new LambdaQueryWrapper<SysRoleMenu>()
+                        .eq(SysRoleMenu::getRoleId, request.getRoleId())
+                        .eq(SysRoleMenu::getMenuId, menu.getId()));
+        if (roleMenu == null)
+            throw new FriendlyException("你还没有配置该页面的功能权限！");
+
+        JSON.parseArray(roleMenu.getOperates()).toJavaList(Long.class).forEach(item -> {
+            var operate = Table().selectById(item);
+            var data = new GetMenuOfOperateByRoleResponseData();
+            data.setUnique(operate.getUnique());
+            data.setName(operate.getName());
+            result.getDatas().add(data);
+        });
+        return result;
     }
 }

@@ -4,9 +4,10 @@ import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Data
 public class GetMenuOfOperateByRoleResponse {
-    private List<Object> datas;
+    private List<GetMenuOfOperateByRoleResponseData> datas;
 
     public GetMenuOfOperateByRoleResponse() {
         datas = new ArrayList<>();

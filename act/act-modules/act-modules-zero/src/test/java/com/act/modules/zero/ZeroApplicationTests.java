@@ -7,6 +7,7 @@ import com.act.core.utils.FriendlyException;
 import com.act.core.utils.JWTUtils;
 import com.act.core.utils.StringExtensions;
 import com.act.modules.zero.application.services.operate.SysOperateService;
+import com.act.modules.zero.application.services.operate.dto.GetMenuOfOperateByRoleRequest;
 import com.act.modules.zero.application.services.operate.dto.MenuOfOperateRequest;
 import com.act.modules.zero.application.services.role.SysRoleService;
 import com.act.modules.zero.application.services.role.dto.SetRolePermissionRequest;
@@ -41,6 +42,15 @@ class ZeroApplicationTests {
 
     @Resource
     private SysOperateService operate;
+
+    @Test
+    public void getMenuOfOperateByRole_Test() throws FriendlyException {
+        var request = new GetMenuOfOperateByRoleRequest();
+        request.setKey("oils");
+        request.setRoleId(1L);
+        var one = operate.getMenuOfOperateByRole(request);
+        System.out.println(one);
+    }
 
     @Test
     public void getMenuOfOperate_Test() {
