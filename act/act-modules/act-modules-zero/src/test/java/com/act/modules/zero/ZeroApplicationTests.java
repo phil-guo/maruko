@@ -6,6 +6,8 @@ import com.act.core.utils.AjaxResponse;
 import com.act.core.utils.FriendlyException;
 import com.act.core.utils.JWTUtils;
 import com.act.core.utils.StringExtensions;
+import com.act.modules.zero.application.services.operate.SysOperateService;
+import com.act.modules.zero.application.services.operate.dto.MenuOfOperateRequest;
 import com.act.modules.zero.application.services.role.SysRoleService;
 import com.act.modules.zero.application.services.role.dto.SetRolePermissionRequest;
 import com.act.modules.zero.application.services.user.SysUserService;
@@ -36,6 +38,18 @@ class ZeroApplicationTests {
 
     @Resource
     private SysRoleService roleService;
+
+    @Resource
+    private SysOperateService operate;
+
+    @Test
+    public void getMenuOfOperate_Test() {
+        var request = new MenuOfOperateRequest();
+        request.setMenuId(11L);
+        request.setRoleId(1L);
+        var one = operate.getMenuOfOperate(request);
+        System.out.println(one);
+    }
 
     @Test
     public void setRolePermission_Test() {
