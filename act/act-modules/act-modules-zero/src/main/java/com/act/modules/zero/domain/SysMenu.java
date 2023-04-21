@@ -38,4 +38,9 @@ public class SysMenu extends BaseEntity<Long> {
 
     @TableField("isLeftShow")
     private int isLeftShow;
+
+    public int AddOperateSort() {
+        sort += 1;
+        return sort;
+    }
 }
