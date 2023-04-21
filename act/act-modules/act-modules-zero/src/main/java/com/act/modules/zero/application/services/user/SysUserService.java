@@ -10,8 +10,9 @@ import com.act.modules.zero.application.services.user.dto.ResetPasswordRequest;
 import com.act.modules.zero.application.services.user.dto.SysUserDTO;
 import com.act.modules.zero.application.services.user.dto.UpdatePersonalInfoRequest;
 import com.act.modules.zero.domain.SysUser;
+import com.act.modules.zero.mapper.SysUserMapper;
 
-public interface SysUserService extends ICurdAppService<SysUser, SysUserDTO> {
+public interface SysUserService extends ICurdAppService<SysUser, SysUserDTO, SysUserMapper> {
 
     /**
      * 分页查询

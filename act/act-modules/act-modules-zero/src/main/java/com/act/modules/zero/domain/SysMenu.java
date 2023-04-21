@@ -33,7 +33,7 @@ public class SysMenu extends BaseEntity<Long> {
     @TableField("icon")
     private String icon;
 
-    @TableField("key")
+    @TableField("`key`")
     private String key;
 
     @TableField("isLeftShow")

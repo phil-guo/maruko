@@ -4,7 +4,6 @@ import com.act.core.application.CurdAppService;
 import com.act.core.application.PageDto;
 import com.act.core.application.PagedResultDto;
 import com.act.core.utils.*;
-import com.act.modules.zero.application.services.user.SysUserService;
 import com.act.modules.zero.application.services.user.dto.*;
 import com.act.modules.zero.domain.SysRole;
 import com.act.modules.zero.domain.SysUser;

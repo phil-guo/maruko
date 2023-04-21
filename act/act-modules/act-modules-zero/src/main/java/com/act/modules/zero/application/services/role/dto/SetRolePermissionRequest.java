@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 @Data
 public class SetRolePermissionRequest {
-    private Integer roleId;
+    private Long roleId;
     private ArrayList<String> menuIds;
 
     public SetRolePermissionRequest() {

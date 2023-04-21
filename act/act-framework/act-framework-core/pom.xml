@@ -40,6 +40,12 @@
             <version>${mybatis-plus.version}</version>
         </dependency>
 
+        <!-- springboot整合的事务开启依赖，无论是mybatis或是mybatis-plus都适用 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
         <!-- mybatis-plus-join -->
         <dependency>
             <groupId>com.github.yulichang</groupId>

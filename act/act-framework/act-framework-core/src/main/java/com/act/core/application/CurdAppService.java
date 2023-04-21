@@ -5,27 +5,23 @@ import com.act.core.utils.BeanUtilsExtensions;
 import com.act.core.utils.FriendlyException;
 import com.act.core.utils.WrapperExtensions;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.yulichang.base.MPJBaseMapper;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
-import lombok.Data;
 import lombok.var;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.lang.reflect.ParameterizedType;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author phil.guo
  */
 public abstract class CurdAppService<TEntity extends BaseEntity<Long>, TEntityDto, BP extends MPJBaseMapper<TEntity>>
-        implements ICurdAppService<TEntity, TEntityDto> {
+        extends ServiceImpl<BP, TEntity>
+        implements ICurdAppService<TEntity, TEntityDto, BP> {
 
     @Autowired
     private BP _repos;
@@ -38,7 +34,7 @@ public abstract class CurdAppService<TEntity extends BaseEntity<Long>, TEntityDt
         _dto = (Class<TEntityDto>) type.getActualTypeArguments()[1];
     }
 
-    public BP Table(){
+    public BP Table() {
         return _repos;
     }
 

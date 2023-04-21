@@ -6,6 +6,8 @@ import com.act.core.utils.AjaxResponse;
 import com.act.core.utils.FriendlyException;
 import com.act.core.utils.JWTUtils;
 import com.act.core.utils.StringExtensions;
+import com.act.modules.zero.application.services.role.SysRoleService;
+import com.act.modules.zero.application.services.role.dto.SetRolePermissionRequest;
 import com.act.modules.zero.application.services.user.SysUserService;
 import com.act.modules.zero.application.services.user.dto.LoginDTO;
 import com.act.modules.zero.application.services.user.dto.ResetPasswordRequest;
@@ -30,6 +32,23 @@ class ZeroApplicationTests {
 
     @Resource
     private SysUserService userService;
+
+    @Resource
+    private SysRoleService roleService;
+
+    @Test
+    public void  setRolePermission_Test(){
+        var request = new SetRolePermissionRequest();
+        var menuIds = new ArrayList<String>();
+        menuIds.add("52_1");
+        menuIds.add("53_1");
+        menuIds.add("53_2");
+        menuIds.add("53_3");
+        menuIds.add("53_4");
+        request.setRoleId(1L);
+        request.setMenuIds(menuIds);
+        roleService.setRolePermission(request);
+    }
 
     @Test
     public void resetPassword_Test() throws FriendlyException {
