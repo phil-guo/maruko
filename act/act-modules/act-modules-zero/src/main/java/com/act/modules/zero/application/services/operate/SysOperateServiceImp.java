@@ -11,12 +11,7 @@ import com.act.modules.zero.domain.SysOperate;
 import com.act.modules.zero.domain.SysRoleMenu;
 import com.act.modules.zero.mapper.SysOperateMapper;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.BeanUtils;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.fasterxml.jackson.databind.util.BeanUtil;
-import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,7 +63,7 @@ public class SysOperateServiceImp extends CurdAppService<SysOperate, SysOperateD
     public MenuOfOperateResponse getMenuOfOperate(MenuOfOperateRequest request) {
 
         var idNos = new MenuOfOperateResponse();
-        var roleMenu = _roleMenu.Table()
+        var roleMenu = this._roleMenu.Table()
                 .selectOne(new LambdaQueryWrapper<SysRoleMenu>()
                         .eq(SysRoleMenu::getRoleId, request.getRoleId())
                         .eq(SysRoleMenu::getMenuId, request.getMenuId()));
@@ -81,7 +76,7 @@ public class SysOperateServiceImp extends CurdAppService<SysOperate, SysOperateD
             roleMenuOperates = JSON.parseArray(roleMenu.getOperates()).toJavaList(Long.class);
         }
 
-        var menu = _menu.Table().selectOne(new LambdaQueryWrapper<SysMenu>()
+        var menu = this._menu.Table().selectOne(new LambdaQueryWrapper<SysMenu>()
                 .eq(SysMenu::getId, request.getMenuId()));
 
         List<Long> menuOperates;
@@ -105,12 +100,12 @@ public class SysOperateServiceImp extends CurdAppService<SysOperate, SysOperateD
 
     public GetMenuOfOperateByRoleResponse getMenuOfOperateByRole(GetMenuOfOperateByRoleRequest request) throws FriendlyException {
         var result = new GetMenuOfOperateByRoleResponse();
-        var menu = _menu.Table().selectOne(new LambdaQueryWrapper<SysMenu>()
+        var menu = this._menu.Table().selectOne(new LambdaQueryWrapper<SysMenu>()
                 .eq(SysMenu::getKey, request.getKey()));
         if (menu == null)
             throw new FriendlyException("key" + request.getKey() + "没有对应的菜单！");
 
-        var roleMenu = _roleMenu.Table()
+        var roleMenu = this._roleMenu.Table()
                 .selectOne(new LambdaQueryWrapper<SysRoleMenu>()
                         .eq(SysRoleMenu::getRoleId, request.getRoleId())
                         .eq(SysRoleMenu::getMenuId, menu.getId()));

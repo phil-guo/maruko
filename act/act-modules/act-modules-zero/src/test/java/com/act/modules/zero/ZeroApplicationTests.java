@@ -6,6 +6,8 @@ import com.act.core.utils.AjaxResponse;
 import com.act.core.utils.FriendlyException;
 import com.act.core.utils.JWTUtils;
 import com.act.core.utils.StringExtensions;
+import com.act.modules.zero.application.services.menu.SysMenuService;
+import com.act.modules.zero.application.services.menu.dto.MenusRoleRequest;
 import com.act.modules.zero.application.services.operate.SysOperateService;
 import com.act.modules.zero.application.services.operate.dto.GetMenuOfOperateByRoleRequest;
 import com.act.modules.zero.application.services.operate.dto.MenuOfOperateRequest;
@@ -42,6 +44,30 @@ class ZeroApplicationTests {
 
     @Resource
     private SysOperateService operate;
+
+    @Resource
+    private SysMenuService menu;
+
+    @Test
+    public void getMenusByRole_Test() {
+        var request = new MenusRoleRequest();
+        request.setRoleId(1L);
+        var one = menu.getMenusByRole(request);
+        System.out.println(JSON.toJSONString(one));
+    }
+
+    @Test
+    public void getAllParentMenus_Test() {
+        var one = menu.getAllParentMenus();
+        System.out.println(JSON.toJSONString(one));
+    }
+
+    @Test
+    public void Menu_getMenuOfOperate_Test() throws FriendlyException {
+        var one = menu.getMenuOfOperate(52L);
+        System.out.println(JSON.toJSONString(one));
+
+    }
 
     @Test
     public void getMenuOfOperateByRole_Test() throws FriendlyException {

@@ -11,18 +11,14 @@ import com.act.modules.zero.domain.SysMenu;
 import com.act.modules.zero.domain.SysRole;
 import com.act.modules.zero.domain.SysRoleMenu;
 import com.act.modules.zero.mapper.SysRoleMapper;
-import com.act.modules.zero.mapper.SysRoleMenuMapper;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class SysRoleServiceImp extends CurdAppService<SysRole, SysRoleDTO, SysRoleMapper> implements SysRoleService {
@@ -89,7 +85,7 @@ public class SysRoleServiceImp extends CurdAppService<SysRole, SysRoleDTO, SysRo
         });
 
         models.forEach(item -> {
-            var menu = _menu.Table().selectOne(new LambdaQueryWrapper<SysMenu>().eq(SysMenu::getId, item.getMenuId()));
+            var menu = this._menu.Table().selectOne(new LambdaQueryWrapper<SysMenu>().eq(SysMenu::getId, item.getMenuId()));
             if (menu == null)
                 return;
             var roleMenu = new SysRoleMenu();
