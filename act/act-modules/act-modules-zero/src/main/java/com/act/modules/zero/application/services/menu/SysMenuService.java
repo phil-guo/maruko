@@ -5,6 +5,7 @@ import com.act.core.utils.AjaxResponse;
 import com.act.core.utils.FriendlyException;
 import com.act.modules.zero.application.services.menu.dto.MenusRoleRequest;
 import com.act.modules.zero.application.services.menu.dto.MenusRoleResponse;
+import com.act.modules.zero.application.services.menu.dto.RoleMenuResponse;
 import com.act.modules.zero.application.services.menu.dto.SysMenuDTO;
 import com.act.modules.zero.application.services.role.dto.SysRoleDTO;
 import com.act.modules.zero.domain.SysMenu;
@@ -15,6 +16,14 @@ import com.act.modules.zero.mapper.SysRoleMenuMapper;
 import java.util.List;
 
 public interface SysMenuService extends ICurdAppService<SysMenu, SysMenuDTO, SysMenuMapper> {
+
+    /**
+     * 获取设置角色的菜单数据
+     *
+     * @param request
+     * @return
+     */
+    RoleMenuResponse getMenusSetRole(MenusRoleRequest request);
 
     /**
      * 根据角色获取菜单

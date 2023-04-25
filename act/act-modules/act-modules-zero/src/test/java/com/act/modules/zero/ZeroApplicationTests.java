@@ -49,6 +49,14 @@ class ZeroApplicationTests {
     private SysMenuService menu;
 
     @Test
+    public void getMenusSetRole_Test() {
+        var request = new MenusRoleRequest();
+        request.setRoleId(1L);
+        var one = menu.getMenusSetRole(request);
+        System.out.println(JSON.toJSONString(one));
+    }
+
+    @Test
     public void getMenusByRole_Test() {
         var request = new MenusRoleRequest();
         request.setRoleId(1L);

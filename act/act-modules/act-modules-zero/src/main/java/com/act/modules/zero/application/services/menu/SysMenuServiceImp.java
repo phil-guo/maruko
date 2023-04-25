@@ -5,9 +5,7 @@ import com.act.core.application.CurdAppService;
 import com.act.core.utils.AjaxResponse;
 import com.act.core.utils.BeanUtilsExtensions;
 import com.act.core.utils.FriendlyException;
-import com.act.modules.zero.application.services.menu.dto.MenusRoleRequest;
-import com.act.modules.zero.application.services.menu.dto.MenusRoleResponse;
-import com.act.modules.zero.application.services.menu.dto.SysMenuDTO;
+import com.act.modules.zero.application.services.menu.dto.*;
 import com.act.modules.zero.application.services.operate.SysOperateService;
 import com.act.modules.zero.application.services.page.PageService;
 import com.act.modules.zero.application.services.role.SysRoleMenuService;
@@ -40,6 +38,97 @@ public class SysMenuServiceImp extends CurdAppService<SysMenu, SysMenuDTO, SysMe
     private SysOperateService _operate;
     @Autowired
     private SysRoleMenuService _roleMenu;
+
+    public RoleMenuResponse getMenusSetRole(MenusRoleRequest request) {
+        var result = new RoleMenuResponse();
+
+        var data = Table().selectList(new LambdaQueryWrapper<SysMenu>()
+                .orderByAsc(SysMenu::getId));
+
+        var listMenus = new ArrayList<RoleMenuDTO>();
+
+        data.forEach(item -> {
+            var menuModel = new RoleMenuDTO();
+            menuModel.setParentId(item.getParentId());
+            menuModel.setId(item.getId());
+            menuModel.setTitle(item.getName());
+            menuModel.setIcon(item.getIcon());
+            menuModel.setPath(item.getUrl());
+            menuModel.setOperates(item.getOperates());
+            listMenus.add(menuModel);
+        });
+
+        var tree = listMenus.stream().filter(item -> item.getParentId() == 99999).collect(Collectors.toList());
+
+        var operates = _operate.Table().selectList(new LambdaQueryWrapper<SysOperate>()
+                .select(SysOperate::getId, SysOperate::getUnique, SysOperate::getName));
+
+        tree.forEach(item -> BuildRoleMenusRecursiveTree(listMenus, item));
+        tree.forEach(item -> {
+            var model = new MenuModel();
+            model.setId(item.getId() + "_0");
+            model.setLabel(item.getTitle());
+
+            if (item.getChildren().size() > 0) {
+                item.getChildren().forEach(child -> {
+                    var operateModel = new MenuModel();
+                    operateModel.setId(child.getId() + "_0");
+                    operateModel.setLabel(child.getTitle());
+                    model.getChildren().add(operateModel);
+                    operates.forEach(op -> {
+                        var opIds = JSON.parseArray(child.getOperates()).toJavaList(Long.class);
+                        if (opIds.contains(op.getId())) {
+                            var opModel = new MenuModel();
+                            opModel.setId(child.getId() + "_" + op.getId());
+                            opModel.setLabel(op.getName());
+                            operateModel.getChildren().add(opModel);
+                        }
+                    });
+                });
+            } else {
+                operates.forEach(op -> {
+                    var opIds = JSON.parseArray(item.getOperates()).toJavaList(Long.class);
+                    if (opIds.contains(op.getId())) {
+                        var opModel = new MenuModel();
+                        opModel.setId(item.getId() + "_" + op.getId());
+                        opModel.setLabel(op.getName());
+                        model.getChildren().add(opModel);
+                    }
+                });
+            }
+
+            result.getList().add(model);
+        });
+
+        var roleMenus = GetRoleOfMenus(request.getRoleId(), null);
+        roleMenus.forEach(item -> {
+            result.getMenuIds().add(item.getId() + "_0");
+            if (item.getChildren().size() > 0) {
+                item.getChildren().forEach(child -> {
+                    result.getMenuIds().add(child.getId() + "_0");
+                    var opIds = JSON.parseArray(child.getOperates()).toJavaList(Long.class);
+                    opIds.forEach(operateId -> {
+                        operates.forEach(op -> {
+                            if (!op.getId().equals(operateId))
+                                return;
+                            result.getMenuIds().add(child.getId() + "_" + op.getId());
+                        });
+                    });
+                });
+            } else {
+                var opIds = JSON.parseArray(item.getOperates()).toJavaList(Long.class);
+                opIds.forEach(operateId->{
+                    operates.forEach(op -> {
+                        if (!op.getId().equals(operateId))
+                            return;
+                        result.getMenuIds().add(item.getId() + "_" + op.getId());
+                    });
+                });
+            }
+        });
+
+        return result;
+    }
 
     public List<MenusRoleResponse> getMenusByRole(MenusRoleRequest request) {
         var result = new ArrayList<MenusRoleResponse>();
