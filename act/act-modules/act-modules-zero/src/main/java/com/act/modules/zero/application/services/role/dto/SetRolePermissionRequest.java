@@ -7,9 +7,5 @@ import java.util.ArrayList;
 @Data
 public class SetRolePermissionRequest {
     private Long roleId;
-    private ArrayList<String> menuIds;
-
-    public SetRolePermissionRequest() {
-        menuIds = new ArrayList<>();
-    }
+    private ArrayList<String> menuIds = new ArrayList<>();
 }

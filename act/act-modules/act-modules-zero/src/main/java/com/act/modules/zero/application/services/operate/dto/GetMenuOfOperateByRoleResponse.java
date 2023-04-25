@@ -7,9 +7,5 @@ import java.util.List;
 
 @Data
 public class GetMenuOfOperateByRoleResponse {
-    private List<GetMenuOfOperateByRoleResponseData> datas;
-
-    public GetMenuOfOperateByRoleResponse() {
-        datas = new ArrayList<>();
-    }
+    private List<GetMenuOfOperateByRoleResponseData> datas = new ArrayList<>();
 }

@@ -1,14 +1,17 @@
 package com.act.modules.zero.application.services.menu.dto;
 
+import com.act.core.domain.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
-public class SysMenuDTO {
-    private Long id;
-    private LocalDateTime createTime;
+public class SysMenuDTO extends BaseEntity<Long> {
+    /*    private Long id;
+        private LocalDateTime createTime;*/
     private Long parentId;
 
     private String name;
@@ -26,4 +29,6 @@ public class SysMenuDTO {
     private String key;
 
     private int isLeftShow;
+
+    private List<SysMenuDTO> children = new ArrayList<>();
 }

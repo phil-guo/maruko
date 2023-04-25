@@ -9,9 +9,5 @@ import java.util.List;
 public class MenuModel {
     private String id;
     private String label;
-    private List<MenuModel> children;
-
-    public MenuModel(){
-        children = new ArrayList<>();
-    }
+    private List<MenuModel> children = new ArrayList<>();
 }

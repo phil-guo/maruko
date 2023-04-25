@@ -49,6 +49,13 @@ class ZeroApplicationTests {
     private SysMenuService menu;
 
     @Test
+    public void menu_pageSearch_Test() {
+        var page = new PageDto();
+        var one = menu.pageSearch(page);
+        System.out.println(one.getDatas());
+    }
+
+    @Test
     public void getMenusSetRole_Test() {
         var request = new MenusRoleRequest();
         request.setRoleId(1L);

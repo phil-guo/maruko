@@ -2,18 +2,20 @@ package com.act.modules.zero.application.services.menu;
 
 import com.act.core.application.ComBoxInfo;
 import com.act.core.application.CurdAppService;
+import com.act.core.application.PageDto;
+import com.act.core.application.PagedResultDto;
 import com.act.core.utils.AjaxResponse;
 import com.act.core.utils.BeanUtilsExtensions;
 import com.act.core.utils.FriendlyException;
+import com.act.core.utils.WrapperExtensions;
 import com.act.modules.zero.application.services.menu.dto.*;
 import com.act.modules.zero.application.services.operate.SysOperateService;
 import com.act.modules.zero.application.services.page.PageService;
 import com.act.modules.zero.application.services.role.SysRoleMenuService;
+import com.act.modules.zero.application.services.role.SysRoleService;
 import com.act.modules.zero.application.services.role.dto.RoleMenuDTO;
-import com.act.modules.zero.domain.Page;
-import com.act.modules.zero.domain.SysMenu;
-import com.act.modules.zero.domain.SysOperate;
-import com.act.modules.zero.domain.SysRoleMenu;
+import com.act.modules.zero.application.services.user.dto.SysUserDTO;
+import com.act.modules.zero.domain.*;
 import com.act.modules.zero.mapper.SysMenuMapper;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -38,6 +40,9 @@ public class SysMenuServiceImp extends CurdAppService<SysMenu, SysMenuDTO, SysMe
     private SysOperateService _operate;
     @Autowired
     private SysRoleMenuService _roleMenu;
+
+    @Autowired
+    private SysRoleService _role;
 
     public RoleMenuResponse getMenusSetRole(MenusRoleRequest request) {
         var result = new RoleMenuResponse();
@@ -117,7 +122,7 @@ public class SysMenuServiceImp extends CurdAppService<SysMenu, SysMenuDTO, SysMe
                 });
             } else {
                 var opIds = JSON.parseArray(item.getOperates()).toJavaList(Long.class);
-                opIds.forEach(operateId->{
+                opIds.forEach(operateId -> {
                     operates.forEach(op -> {
                         if (!op.getId().equals(operateId))
                             return;
@@ -238,6 +243,55 @@ public class SysMenuServiceImp extends CurdAppService<SysMenu, SysMenuDTO, SysMe
         var result = new SysMenuDTO();
         BeanUtilsExtensions.copyProperties(data, result);
         return result;
+    }
+
+    @Override
+    public void delete(Long id) throws FriendlyException {
+        //删除验证
+        var roleMenus = _roleMenu.Table()
+                .selectList(new LambdaQueryWrapper<SysRoleMenu>()
+                        .eq(SysRoleMenu::getMenuId, id));
+
+        if (roleMenus.size() > 0) {
+            var roleIds = roleMenus.stream().map(SysRoleMenu::getRoleId).collect(Collectors.toList());
+            var roles = _role.Table()
+                    .selectList(new LambdaQueryWrapper<SysRole>()
+                            .in(SysRole::getId, roleIds));
+            var roleNames = roles.stream().map(SysRole::getName).collect(Collectors.toList());
+            throw new FriendlyException("请先解除角色[" + String.join(",", roleNames) + "]权限中的菜单关系，在删除菜单");
+        }
+        super.delete(id);
+    }
+
+    @Override
+    public PagedResultDto pageSearch(PageDto search) {
+        List<SysMenu> topNode = new ArrayList<SysMenu>();
+        if (search.getDynamicFilters().size() > 0) {
+            var queryWrapper = WrapperExtensions.<SysMenu>ConvertToWrapper(search.getDynamicFilters());
+            topNode = Table().selectList(queryWrapper);
+        } else {
+            topNode = Table().selectList(new LambdaQueryWrapper<SysMenu>()
+                    .eq(SysMenu::getParentId, 99999)
+                    .orderByDesc(SysMenu::getCreateTime)
+            );
+        }
+
+        var nodes = Table().selectList(new LambdaQueryWrapper<SysMenu>()
+                .orderByDesc(SysMenu::getCreateTime));
+
+        var topNodes = BeanUtilsExtensions.copyListProperties(topNode, SysMenuDTO::new);
+        var nodesDTO = BeanUtilsExtensions.copyListProperties(nodes, SysMenuDTO::new);
+
+        topNodes.forEach(item -> BuildMenusRecursiveTree(nodesDTO, item));
+
+        return new PagedResultDto(topNodes.size(), topNodes);
+    }
+
+    private void BuildMenusRecursiveTree(List<SysMenuDTO> menus, SysMenuDTO topNode) {
+        menus.forEach(item -> {
+            if (item.getParentId().equals(topNode.getId()))
+                topNode.getChildren().add(item);
+        });
     }
 
     private List<RoleMenuDTO> GetRoleOfMenus(long roleId, Boolean isLeftShow) {

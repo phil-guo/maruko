@@ -9,9 +9,6 @@ import java.util.List;
 public class RolePermissionDTO {
 
     private Long menuId;
-    private ArrayList<Long> operates;
+    private ArrayList<Long> operates = new ArrayList<>();
 
-    public RolePermissionDTO() {
-        operates = new ArrayList<>();
-    }
 }

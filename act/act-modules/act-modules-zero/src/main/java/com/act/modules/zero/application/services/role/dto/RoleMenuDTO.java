@@ -13,10 +13,6 @@ public class RoleMenuDTO {
     private String icon;
     private String path;
     private String key;
-    private List<RoleMenuDTO> children;
+    private List<RoleMenuDTO> children= new ArrayList<>();
     private String operates;
-
-    public RoleMenuDTO() {
-        children = new ArrayList<>();
-    }
 }

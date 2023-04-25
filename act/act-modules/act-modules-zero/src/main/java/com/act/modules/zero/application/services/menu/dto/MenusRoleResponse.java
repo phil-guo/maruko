@@ -12,9 +12,5 @@ public class MenusRoleResponse {
     private String icon;
     private String path;
     private String key;
-    private List<MenusRoleResponse> children;
-
-    public MenusRoleResponse() {
-        children = new ArrayList<>();
-    }
+    private List<MenusRoleResponse> children = new ArrayList<>();
 }

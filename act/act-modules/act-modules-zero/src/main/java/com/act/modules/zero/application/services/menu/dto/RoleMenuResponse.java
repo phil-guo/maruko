@@ -7,11 +7,6 @@ import java.util.List;
 
 @Data
 public class RoleMenuResponse {
-    private List<String> menuIds;
-    private List<MenuModel> list;
-
-    public RoleMenuResponse() {
-        menuIds = new ArrayList<>();
-        list = new ArrayList<>();
-    }
+    private List<String> menuIds = new ArrayList<>();
+    private List<MenuModel> list = new ArrayList<>();
 }
