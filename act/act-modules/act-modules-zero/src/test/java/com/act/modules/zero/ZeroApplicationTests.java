@@ -21,6 +21,7 @@ import com.alibaba.fastjson.JSON;
 import lombok.var;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -29,7 +30,7 @@ import java.util.ArrayList;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = {ZeroApplication.class, ZeroApplicationTests.class,})
-//@MapperScan({"com.act.modules.zero.mapper"})
+@MapperScan({"com.act.modules.zero.mapper"})
 class ZeroApplicationTests {
 
     @Test
@@ -160,7 +161,7 @@ class ZeroApplicationTests {
     public void Login_Test() throws InstantiationException, IllegalAccessException, FriendlyException {
         var loginModel = new LoginDTO();
         loginModel.setName("admin");
-        loginModel.setPassword("qwe213QWE");
+        loginModel.setPassword("123qwe");
         AjaxResponse<Object> result = userService.login(loginModel);
         System.out.println(result.getData());
         var token = (String) result.getData();

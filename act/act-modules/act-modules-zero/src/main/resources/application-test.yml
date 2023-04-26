@@ -18,8 +18,6 @@ spring:
     password: "qwe123QWE"
 
 # mybatis-plus 配置
-#mybatis-plus:
-#  type-aliases-package: "com.act.modules.zero.domain"
 mybatis-plus:
   global-config:
     db-config:

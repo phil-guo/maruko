@@ -28,6 +28,6 @@ public class AjaxResponse<T> {
     }
 
     private int code;
-    private String msg;
+    private String msg = "";
     private T data;
 }

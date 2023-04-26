@@ -107,9 +107,9 @@ public class SysUserServiceImp
 
         var map = new Hashtable<String, Object>();
         map.put("userId", user.getId());
-        map.put("name", user.getUserName());
+        map.put("name", StringUtils.isEmpty(user.getUserName()) ? "" : user.getUserName());
         map.put("roleId", user.getRoleId());
-        map.put("userIcon", user.getIcon());
+        map.put("userIcon", StringUtils.isEmpty(user.getIcon()) ? "" : user.getIcon());
         var token = JWTUtils.getToken(map);
 
         var response = new LoginResponse();
