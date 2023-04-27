@@ -16,7 +16,10 @@ public class InterceptorConfig implements WebMvcConfigurer {
                         "/webjars/**",
                         "/swagger-resources/**",
                         "/v2/api-docs/**",
-                        "/error")
+                        "/error",
+                        "/2023/**",
+                        "/2024/**",
+                        "/2025/**")
                 .addPathPatterns("/**");
     }
 
