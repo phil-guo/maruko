@@ -1,0 +1,70 @@
+package com.act.core.handler;
+
+import com.act.core.utils.AjaxResponse;
+import com.act.core.utils.FriendlyException;
+import lombok.var;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindException;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ * 全局异常拦截器
+ */
+public class GlobalExceptionHandler {
+    @ExceptionHandler(value = Exception.class)
+    public AjaxResponse<Object> exceptionHandler(HttpServletRequest request, Exception e) {
+
+        FriendlyException friendlyException;
+        // 本地自定义异常处理
+        if (e instanceof FriendlyException) {
+            friendlyException = ((FriendlyException) e);
+        }
+        //绑定异常是需要明确提示给用户的
+        else if (e instanceof BindException) {
+            BindException exception = (BindException) e;
+            List<ObjectError> errors = exception.getAllErrors();
+            String msg = errors.get(0).getDefaultMessage();//获取自错误信息
+            friendlyException = new FriendlyException(msg);//将具体错误信息设置到msg中返回
+        }
+
+        friendlyException = new FriendlyException(Arrays.stream(e.getStackTrace()).findFirst().toString());
+        // 系统异常处理
+
+        return new AjaxResponse<>(friendlyException);//将具体错误信息设置到msg中返回
+    }
+
+    /**
+     * 空指针异常
+     *
+     * @param request
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(value = NullPointerException.class)
+    public AjaxResponse<Object> nullHandler(HttpServletRequest request, NullPointerException e) {
+        //将具体错误信息设置到msg中返回
+        var friendlyException = new FriendlyException(Arrays.stream(e.getStackTrace()).findFirst().toString());
+        return new AjaxResponse<>("NULL 指针异常[" + friendlyException.getMsg() + "]", friendlyException.getCode());
+    }
+
+    // <2> 处理 json 请求体调用接口校验失败抛出的异常
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public AjaxResponse<Object> methodArgumentNotValidExceptionHandler(HttpServletResponse httpServletResponse, MethodArgumentNotValidException e) {
+        List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();
+        List<String> collect = fieldErrors.stream()
+                .map(o -> o.getDefaultMessage())
+                .collect(Collectors.toList());
+        return new AjaxResponse<Object>(collect.toString(), HttpStatus.BAD_REQUEST.value());
+    }
+}
