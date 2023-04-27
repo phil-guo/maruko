@@ -20,7 +20,7 @@ public class AjaxResponse<T> {
 
     public AjaxResponse(T result) {
         data = result;
-        msg = "OK";
+        msg = "ok";
         code = 200;
     }
 

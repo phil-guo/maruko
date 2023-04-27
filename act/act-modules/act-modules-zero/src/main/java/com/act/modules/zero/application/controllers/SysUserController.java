@@ -15,11 +15,11 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@Api(tags = "系统用户模块")
+@Api(tags = "系统用户")
 @RestController
 @RequestMapping("/api/v1/sysUsers/")
 @SuppressWarnings("all")
-public class UserController extends BaseController<SysUser, SysUserDTO, SysUserMapper> {
+public class SysUserController extends BaseController<SysUser, SysUserDTO, SysUserMapper> {
 
     @Autowired
     private SysUserService _user;
