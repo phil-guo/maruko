@@ -7,6 +7,7 @@ import lombok.Data;
 
 @Data
 @TableName("sys_user")
+@SuppressWarnings("all")
 public class SysUser extends BaseEntity<Long> {
 
     //角色Id

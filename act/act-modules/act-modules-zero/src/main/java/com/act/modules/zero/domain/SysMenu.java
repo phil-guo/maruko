@@ -11,6 +11,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @TableName("sys_menu")
+@SuppressWarnings("all")
 public class SysMenu extends BaseEntity<Long> {
     @TableField("parentId")
     private Long parentId;

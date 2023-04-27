@@ -7,6 +7,7 @@ import lombok.Data;
 
 @Data
 @TableName("sys_rolemenu")
+@SuppressWarnings("all")
 public class SysRoleMenu extends BaseEntity<Long> {
 
     //角色Id

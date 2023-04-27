@@ -17,6 +17,7 @@ import java.util.Collections;
 
 @Configuration
 @EnableSwagger2WebMvc
+@SuppressWarnings("all")
 public class Knife4jConfiguration {
 
     @Bean(value = "dockerBean")

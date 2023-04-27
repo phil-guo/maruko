@@ -8,6 +8,7 @@ import lombok.Data;
 /*角色*/
 @Data
 @TableName("sys_role")
+@SuppressWarnings("all")
 public class SysRole extends BaseEntity<Long> {
 
     /*名称*/

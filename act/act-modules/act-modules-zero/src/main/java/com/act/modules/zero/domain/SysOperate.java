@@ -7,6 +7,7 @@ import lombok.Data;
 
 @Data
 @TableName("sys_operate")
+@SuppressWarnings("all")
 public class SysOperate extends BaseEntity<Long> {
     @TableField("name")
     private String name;
