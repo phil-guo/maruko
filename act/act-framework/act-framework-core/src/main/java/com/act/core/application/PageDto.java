@@ -9,8 +9,8 @@ import java.util.List;
 @Data
 public class PageDto {
     private List<DynamicFilter> dynamicFilters;
-    private Integer pageIndex;
-    private Integer pageSize;
+    private Integer pageIndex = 1;
+    private Integer pageSize = 20;
 
     public PageDto() {
         dynamicFilters = new ArrayList<>();

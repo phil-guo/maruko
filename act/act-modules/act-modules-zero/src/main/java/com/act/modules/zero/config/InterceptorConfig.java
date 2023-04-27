@@ -1,4 +1,4 @@
-package com.act.modules.zero.application;
+package com.act.modules.zero.config;
 
 import com.act.core.interceptor.JWTInterceptor;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +11,12 @@ public class InterceptorConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jwtInterceptor())
-                .excludePathPatterns("/api/v1/sysUsers/auth/token")
+                .excludePathPatterns("/api/v1/sysUsers/auth/token",
+                        "/doc.html/**",
+                        "/webjars/**",
+                        "/swagger-resources/**",
+                        "/v2/api-docs/**",
+                        "/error")
                 .addPathPatterns("/**");
     }
 
