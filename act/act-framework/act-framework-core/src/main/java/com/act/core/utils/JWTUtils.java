@@ -17,6 +17,8 @@ public class JWTUtils {
 
     private static final String JWT_KEY = "qwe123QWE";
 
+    public static Map<String, Object> payload;
+
     //获取Token
     public static String getToken(Map<String, Object> map) {
 

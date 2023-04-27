@@ -1,4 +1,4 @@
-package com.act.modules.zero;
+package com.act.modules.zero.config;
 
 import com.act.core.handler.GlobalExceptionHandler;
 import com.act.core.utils.AjaxResponse;

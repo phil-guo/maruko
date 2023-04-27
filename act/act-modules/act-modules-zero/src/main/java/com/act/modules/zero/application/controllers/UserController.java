@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(tags = "系统用户模块")
 @RestController
 @RequestMapping("/api/v1/sysUsers/")
+@SuppressWarnings("all")
 public class UserController {
 
     @Autowired
@@ -20,6 +21,6 @@ public class UserController {
     @ApiOperation(value = "登录")
     @PostMapping("auth/token")
     public AjaxResponse<Object> login(@RequestBody LoginDTO request) throws InstantiationException, IllegalAccessException, FriendlyException {
-        return  _user.login(request);
+        return _user.login(request);
     }
 }

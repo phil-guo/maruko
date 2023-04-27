@@ -12,6 +12,12 @@ public class FriendlyException extends RuntimeException {
         code = -1;
     }
 
+    public FriendlyException(String message, int state) {
+        msg = message;
+        code = state;
+    }
+
+
     public FriendlyException() {
 
     }

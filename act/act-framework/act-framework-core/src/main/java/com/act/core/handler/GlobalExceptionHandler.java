@@ -2,6 +2,7 @@ package com.act.core.handler;
 
 import com.act.core.utils.AjaxResponse;
 import com.act.core.utils.FriendlyException;
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.var;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
@@ -24,24 +25,22 @@ import java.util.stream.Collectors;
 public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public AjaxResponse<Object> exceptionHandler(HttpServletRequest request, Exception e) {
-
-        FriendlyException friendlyException;
         // 本地自定义异常处理
         if (e instanceof FriendlyException) {
-            friendlyException = ((FriendlyException) e);
+            var friendlyException = ((FriendlyException) e);
+            return new AjaxResponse<>(friendlyException.getMsg(), friendlyException.getCode());//将具体错误信息设置到msg中返回
+        } else if (e instanceof ExpiredJwtException) {
+            return new AjaxResponse<>("token 过期！", -1);
         }
         //绑定异常是需要明确提示给用户的
         else if (e instanceof BindException) {
             BindException exception = (BindException) e;
             List<ObjectError> errors = exception.getAllErrors();
             String msg = errors.get(0).getDefaultMessage();//获取自错误信息
-            friendlyException = new FriendlyException(msg);//将具体错误信息设置到msg中返回
+            return new AjaxResponse<>(msg, -1);//将具体错误信息设置到msg中返回
+        } else {
+            return new AjaxResponse<>(Arrays.stream(e.getStackTrace()).findFirst().toString(), -1);//将具体错误信息设置到msg中返回
         }
-
-        friendlyException = new FriendlyException(Arrays.stream(e.getStackTrace()).findFirst().toString());
-        // 系统异常处理
-
-        return new AjaxResponse<>(friendlyException);//将具体错误信息设置到msg中返回
     }
 
     /**
