@@ -16,6 +16,11 @@ spring:
     url: "jdbc:mysql://www.autoct.top:33306/java_act?characterEncoding=utf-8"
     username: "root"
     password: "qwe123QWE"
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 500MB
+      max-request-size: 500MB
 
 # mybatis-plus 配置
 mybatis-plus:

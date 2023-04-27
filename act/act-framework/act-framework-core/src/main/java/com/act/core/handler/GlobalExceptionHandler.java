@@ -12,6 +12,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,6 +32,8 @@ public class GlobalExceptionHandler {
             return new AjaxResponse<>(friendlyException.getMsg(), friendlyException.getCode());//将具体错误信息设置到msg中返回
         } else if (e instanceof ExpiredJwtException) {
             return new AjaxResponse<>("token 过期！", -1);
+        }else if(e instanceof MaxUploadSizeExceededException){
+            return new AjaxResponse<>("上传文件大小不能超过500M!", -1);
         }
         //绑定异常是需要明确提示给用户的
         else if (e instanceof BindException) {

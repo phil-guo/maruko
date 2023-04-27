@@ -1,6 +1,7 @@
 package com.act.modules.zero.controllers;
 
 import com.act.core.utils.AjaxResponse;
+import com.act.core.utils.FriendlyException;
 import com.alibaba.fastjson.JSON;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -51,7 +52,6 @@ public class SysUtilsController {
             //文件后缀
             var suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
             //上传文件名
-//            var strDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssfff"));
             var date = new Date();
             var formate = new SimpleDateFormat("yyyyMMddHHmmss");
             var strDateTime = formate.format(date);
