@@ -7,13 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiKey;
-import springfox.documentation.service.SecurityScheme;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
-
-import java.util.Collections;
 
 @Configuration
 @EnableSwagger2WebMvc
@@ -41,15 +37,7 @@ public class Knife4jConfiguration {
                 .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
                 .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 .paths(PathSelectors.any())
-                .build()
-                //默认添加请求头
-                .securitySchemes(Collections.singletonList(securityScheme()));
-
+                .build();
         return docket;
-    }
-
-    @Bean
-    SecurityScheme securityScheme() {
-        return new ApiKey("token", "token", "header");
     }
 }

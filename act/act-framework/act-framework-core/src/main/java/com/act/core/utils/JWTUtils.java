@@ -17,8 +17,6 @@ public class JWTUtils {
 
     private static final String JWT_KEY = "qwe123QWE";
 
-    public static Map<String, Object> payload;
-
     //获取Token
     public static String getToken(Map<String, Object> map) {
 
@@ -26,7 +24,7 @@ public class JWTUtils {
 
         return Jwts.builder()
                 //主题
-                .setSubject("token")
+                .setSubject("Authorization")
                 //设置jwt生成时间
                 .setIssuedAt(new Date())
                 .addClaims(map)

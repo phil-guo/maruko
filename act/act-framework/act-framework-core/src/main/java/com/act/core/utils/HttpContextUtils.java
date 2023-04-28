@@ -20,16 +20,16 @@ public class HttpContextUtils {
 
         var userContext = new UserInfoContext();
 
-        userContext.setUserId(Long.valueOf((Integer) map.get("userId")));
-        userContext.setName((String) map.get("name"));
-        userContext.setRoleId(Long.valueOf((Integer) map.get("roleId")));
-        userContext.setUserIcon((String) map.get("userIcon"));
+        userContext.setUserId(Long.valueOf((Integer) map.get(UserInfoContext.userIdPrex)));
+        userContext.setName((String) map.get(UserInfoContext.userNamePrex));
+        userContext.setRoleId(Long.valueOf((Integer) map.get(UserInfoContext.roleIdPrex)));
+        userContext.setUserIcon((String) map.get(UserInfoContext.userIconPrex));
         return userContext;
     }
 
     private static Map<String, Object> getHttpContext() {
         var context = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        var token = context.getHeader("token");
+        var token = context.getHeader("Authorization").replace("Bearer ", "");
         var result = JWTUtils.parseClaimsJws(token);
         return result;
     }

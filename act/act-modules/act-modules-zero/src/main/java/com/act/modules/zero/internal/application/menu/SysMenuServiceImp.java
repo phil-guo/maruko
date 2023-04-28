@@ -141,7 +141,7 @@ public class SysMenuServiceImp extends CurdAppService<SysMenu, SysMenuDTO, SysMe
         home.setIcon("el-icon-platform-eleme");
         home.setPath("/home");
         home.setTitle("首页");
-
+        result.add(home);
         tree.forEach(item -> {
             var model = new MenusRoleResponse();
             BeanUtilsExtensions.copyProperties(item, model);
@@ -153,7 +153,6 @@ public class SysMenuServiceImp extends CurdAppService<SysMenu, SysMenuDTO, SysMe
                 });
             result.add(model);
         });
-
         return result;
     }
 

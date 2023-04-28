@@ -3,6 +3,7 @@ package com.act.modules.zero.internal.application.user;
 import com.act.core.application.CurdAppService;
 import com.act.core.application.PageDto;
 import com.act.core.application.PagedResultDto;
+import com.act.core.domain.UserInfoContext;
 import com.act.core.utils.*;
 import com.act.modules.zero.internal.application.user.dto.*;
 import com.act.modules.zero.internal.domain.SysRole;
@@ -107,10 +108,10 @@ public class SysUserServiceImp
             throw new FriendlyException("用户名密码错误");
 
         var map = new Hashtable<String, Object>();
-        map.put("userId", user.getId());
-        map.put("name", StringUtils.isEmpty(user.getUserName()) ? "" : user.getUserName());
-        map.put("roleId", user.getRoleId());
-        map.put("userIcon", StringUtils.isEmpty(user.getIcon()) ? "" : user.getIcon());
+        map.put(UserInfoContext.userIdPrex, user.getId());
+        map.put(UserInfoContext.userNamePrex, StringUtils.isEmpty(user.getUserName()) ? "" : user.getUserName());
+        map.put(UserInfoContext.roleIdPrex, user.getRoleId());
+        map.put(UserInfoContext.userIconPrex, StringUtils.isEmpty(user.getIcon()) ? "" : user.getIcon());
         var token = JWTUtils.getToken(map);
 
         var response = new LoginResponse();
