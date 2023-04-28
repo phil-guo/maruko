@@ -5,7 +5,7 @@ import com.act.core.utils.FriendlyException;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.yulichang.base.MPJBaseMapper;
 
-public interface ICurdAppService<TEntity extends BaseEntity<Long>, TEntityDto, BP extends MPJBaseMapper<TEntity>> extends IService<TEntity> {
+public interface ICurdAppService<TEntity extends BaseEntity<Long>, TEntityDto extends BaseEntity<Long>, BP extends MPJBaseMapper<TEntity>> extends IService<TEntity> {
 
     /**
      * 获取仓储上下文

@@ -1,11 +1,11 @@
 package com.act.core.application;
 
 import com.act.core.domain.BaseEntity;
-import com.act.core.utils.AjaxResponse;
 import com.act.core.utils.BeanUtilsExtensions;
 import com.act.core.utils.FriendlyException;
 import com.act.core.utils.WrapperExtensions;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.yulichang.base.MPJBaseMapper;
@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * @author phil.guo
  */
-public abstract class CurdAppService<TEntity extends BaseEntity<Long>, TEntityDto, BP extends MPJBaseMapper<TEntity>>
+public abstract class CurdAppService<TEntity extends BaseEntity<Long>, TEntityDto extends BaseEntity<Long>, BP extends MPJBaseMapper<TEntity>>
         extends ServiceImpl<BP, TEntity>
         implements ICurdAppService<TEntity, TEntityDto, BP> {
 
@@ -64,10 +64,22 @@ public abstract class CurdAppService<TEntity extends BaseEntity<Long>, TEntityDt
 
         TEntity entity = null;
 
-        entity = _entity.newInstance();
-        BeanUtils.copyProperties(request, entity);
-        BeforeCreate(request);
-        _repos.insert(entity);
+        if (request.getId() == null) {
+            entity = _entity.newInstance();
+            BeanUtils.copyProperties(request, entity);
+            beforeCreate(request);
+            _repos.insert(entity);
+        } else {
+            beforeEdit(request);
+            var oldEntity = _repos.selectById(request.getId());
+            if (oldEntity == null)
+                return null;
+            BeanUtils.copyProperties(request, oldEntity);
+            QueryWrapper<TEntity> wrapper = Wrappers.query();
+            wrapper.eq("id", oldEntity.getId());
+            _repos.update(oldEntity, wrapper);
+            entity = oldEntity;
+        }
 
         var returnDto = request.getClass().newInstance();
         BeanUtils.copyProperties(entity, returnDto);
@@ -81,11 +93,11 @@ public abstract class CurdAppService<TEntity extends BaseEntity<Long>, TEntityDt
         _repos.deleteById(id);
     }
 
-    protected void BeforeCreate(TEntityDto request) {
+    protected void beforeCreate(TEntityDto request) {
 
     }
 
-    protected void BeforeEdit(TEntityDto request) {
+    protected void beforeEdit(TEntityDto request) {
 
     }
 

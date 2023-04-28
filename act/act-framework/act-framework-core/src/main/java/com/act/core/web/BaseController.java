@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 /**
  * @author phil.guo
  */
-public class BaseController<TEntity extends BaseEntity<Long>, TEntityDto, BP extends MPJBaseMapper<TEntity>> {
+public class BaseController<TEntity extends BaseEntity<Long>, TEntityDto extends BaseEntity<Long>, BP extends MPJBaseMapper<TEntity>> {
     @Autowired
     private ICurdAppService<TEntity, TEntityDto, BP> _curd;
 

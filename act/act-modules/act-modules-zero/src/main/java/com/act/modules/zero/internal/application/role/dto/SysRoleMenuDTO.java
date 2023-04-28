@@ -1,14 +1,14 @@
 package com.act.modules.zero.internal.application.role.dto;
 
+import com.act.core.domain.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
-public class SysRoleMenuDTO {
-
-    private Long id;
+@SuppressWarnings("all")
+public class SysRoleMenuDTO extends BaseEntity<Long> {
 
     //角色Id
     private Long roleId;

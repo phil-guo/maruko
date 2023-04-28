@@ -16,13 +16,8 @@ public abstract class BaseEntity<T> implements Serializable {
     @TableId(type = IdType.AUTO)
     private T id;
     @TableField(value = "createTime", fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
+    private LocalDateTime createTime = LocalDateTime.now();
     @TableField(value = "isDelete", fill = FieldFill.INSERT)
     @TableLogic
-    private Integer isDelete;
-
-    public BaseEntity(){
-        this.setIsDelete(0);
-        this.setCreateTime(LocalDateTime.now());
-    }
+    private Integer isDelete = 0;
 }
