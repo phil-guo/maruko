@@ -36,7 +36,7 @@ public class Knife4jConfiguration {
                 .groupName("Zero")
                 .select()
                 //这里指定Controller扫描包路径
-                .apis(RequestHandlerSelectors.basePackage("com.act.modules.zero.controllers"))
+                .apis(RequestHandlerSelectors.basePackage("com.act.modules.zero.internal.controllers"))
                 //加了RestController,ApiOperation注解的类，才生成接口文档
                 .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
                 .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
