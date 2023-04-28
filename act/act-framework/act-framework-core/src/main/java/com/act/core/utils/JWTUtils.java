@@ -13,7 +13,7 @@ import java.util.Map;
 public class JWTUtils {
 
     //过期时间
-    private static final long EXPIRE_TIME = 3600 * 1000;
+    private static final long EXPIRE_TIME = 86400 * 1000;
 
     private static final String JWT_KEY = "qwe123QWE";
 

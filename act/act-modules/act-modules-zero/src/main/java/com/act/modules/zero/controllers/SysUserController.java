@@ -12,6 +12,7 @@ import com.act.modules.zero.domain.SysUser;
 import com.act.modules.zero.mapper.SysUserMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
