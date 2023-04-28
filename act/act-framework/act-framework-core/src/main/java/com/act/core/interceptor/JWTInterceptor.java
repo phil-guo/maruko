@@ -32,6 +32,7 @@ public class JWTInterceptor implements HandlerInterceptor {
 
         //验证token
         JWTUtils.parseClaimsJws(token);
+
         return true;
     }
 }
