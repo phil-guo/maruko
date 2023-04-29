@@ -12,9 +12,9 @@ public class SysOperate extends BaseEntity<Long> {
     @TableField("name")
     private String name;
     @TableField("`unique`")
-    private int unique;
+    private int unique = 1001;
     @TableField("isBasicData")
-    private Boolean isBasicData;
+    private Boolean isBasicData = false;
     @TableField("remark")
     private String remark;
 }

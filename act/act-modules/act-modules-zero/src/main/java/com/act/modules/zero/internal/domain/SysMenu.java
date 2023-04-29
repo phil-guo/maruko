@@ -23,13 +23,13 @@ public class SysMenu extends BaseEntity<Long> {
     private String url;
 
     @TableField("level")
-    private int level;
+    private int level = 0;
 
     @TableField("operates")
     private String operates;
 
     @TableField("sort")
-    private int sort;
+    private int sort = 0;
 
     @TableField("icon")
     private String icon;
@@ -38,7 +38,7 @@ public class SysMenu extends BaseEntity<Long> {
     private String key;
 
     @TableField("isLeftShow")
-    private int isLeftShow;
+    private int isLeftShow = 0;
 
     public int AddOperateSort() {
         sort += 1;

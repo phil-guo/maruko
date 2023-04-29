@@ -6,6 +6,7 @@ import com.act.core.utils.AjaxResponse;
 import com.act.core.utils.FriendlyException;
 import com.act.core.utils.JWTUtils;
 import com.act.core.utils.StringExtensions;
+import com.act.modules.zero.internal.application.dictionary.SysDictionaryService;
 import com.act.modules.zero.internal.application.menu.SysMenuService;
 import com.act.modules.zero.internal.application.menu.dto.MenusRoleRequest;
 import com.act.modules.zero.internal.application.operate.SysOperateService;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = {ZeroApplication.class, ZeroApplicationTests.class,})
 @MapperScan({"com.act.modules.zero.mapper"})
+@SuppressWarnings("all")
 class ZeroApplicationTests {
 
     @Test
@@ -48,6 +50,15 @@ class ZeroApplicationTests {
 
     @Resource
     private SysMenuService menu;
+
+    @Resource
+    private SysDictionaryService datationary;
+
+    @Test
+    public void getDictionaryByGroup_Test() {
+        var one = datationary.getDictionaryByGroup("QuartzStatus");
+        System.out.println(JSON.toJSONString(one));
+    }
 
     @Test
     public void menu_pageSearch_Test() {
@@ -112,7 +123,7 @@ class ZeroApplicationTests {
         menuIds.add("53_2");
         menuIds.add("53_3");
         menuIds.add("53_4");
-        request.setRoleId(1L);
+        request.setRoleId(Long.valueOf(1L));
         request.setMenuIds(menuIds);
         roleService.setRolePermission(request);
     }
@@ -126,14 +137,14 @@ class ZeroApplicationTests {
     @Test
     public void resetPassword_Test() throws FriendlyException {
         var request = new ResetPasswordRequest();
-        request.setUserId(7);
+        request.setUserId(Integer.valueOf(7));
         var one = userService.resetPassword(request);
         System.out.println(one);
     }
 
     @Test
     public void Delete_Test() throws FriendlyException {
-        userService.delete(7L);
+        userService.delete(Long.valueOf(7L));
     }
 
     @Test
@@ -151,8 +162,8 @@ class ZeroApplicationTests {
 
         page.setDynamicFilters(filters);
 
-        page.setPageIndex(1);
-        page.setPageSize(10);
+        page.setPageIndex(Integer.valueOf(1));
+        page.setPageSize(Integer.valueOf(10));
         var one = userService.pageSearch(page);
         System.out.println(one.getDatas());
     }
@@ -172,9 +183,9 @@ class ZeroApplicationTests {
     public void SysUser_CreateOrEdit() throws InstantiationException, IllegalAccessException, FriendlyException {
 
         var request = new SysUserDTO();
-        request.setId(7L);
+        request.setId(Long.valueOf(7L));
         request.setUserName("phil");
-        request.setRoleId(1L);
+        request.setRoleId(Long.valueOf(1L));
         request.setPassword(StringExtensions.ToMd5("123qwe").toUpperCase());
         var one = userService.createOrEdit(request);
         System.out.println(one);

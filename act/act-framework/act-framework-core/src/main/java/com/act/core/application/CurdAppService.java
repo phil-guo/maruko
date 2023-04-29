@@ -20,6 +20,7 @@ import java.util.List;
 /**
  * @author phil.guo
  */
+@SuppressWarnings("all")
 public abstract class CurdAppService<TEntity extends BaseEntity<Long>, TEntityDto extends BaseEntity<Long>, BP extends MPJBaseMapper<TEntity>>
         extends ServiceImpl<BP, TEntity>
         implements ICurdAppService<TEntity, TEntityDto, BP> {
@@ -39,12 +40,15 @@ public abstract class CurdAppService<TEntity extends BaseEntity<Long>, TEntityDt
         return _repos;
     }
 
-    /*
-    分页查询
+    /**
+     * 分页查询
+     *
+     * @param search
+     * @return
      */
     public PagedResultDto pageSearch(PageDto search) {
-        var page = new Page<TEntity>(search.getPageIndex(), search.getPageSize());
 
+        Page<TEntity> page = Page.of(search.getPageIndex(), search.getPageSize());
         MPJLambdaWrapper<TEntity> queryWrapper = WrapperExtensions.ConvertToWrapper(search.getDynamicFilters());
         var result = _repos.selectPage(page, queryWrapper);
         var datas = BeanUtilsExtensions.copyListProperties(result.getRecords(), () -> {
@@ -57,28 +61,33 @@ public abstract class CurdAppService<TEntity extends BaseEntity<Long>, TEntityDt
         return new PagedResultDto(result.getTotal(), datas);
     }
 
-    /*
-    添加或者修改
+    /**
+     * 添加或者修改
+     *
+     * @param request
+     * @return
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws FriendlyException
      */
-    public TEntityDto createOrEdit(TEntityDto request) throws InstantiationException, IllegalAccessException, FriendlyException {
+    public TEntityDto createOrEdit(TEntityDto request)
+            throws InstantiationException, IllegalAccessException, FriendlyException {
 
         TEntity entity = null;
 
-        if (request.getId() == null) {
+        if (request.getId() == null || request.getId() == 0) {
             entity = _entity.newInstance();
             BeanUtils.copyProperties(request, entity);
             beforeCreate(request);
             _repos.insert(entity);
         } else {
             beforeEdit(request);
-            var oldEntity = _repos.selectById(request.getId());
-            if (oldEntity == null)
+            entity = _repos.selectById(request.getId());
+            if (entity == null)
                 return null;
-            BeanUtils.copyProperties(request, oldEntity);
-            QueryWrapper<TEntity> wrapper = Wrappers.query();
-            wrapper.eq("id", oldEntity.getId());
-            _repos.update(oldEntity, wrapper);
-            entity = oldEntity;
+            request.setCreateTime(null);
+            BeanUtils.copyProperties(request, entity);
+            _repos.updateById(entity);
         }
 
         var returnDto = request.getClass().newInstance();
@@ -86,32 +95,19 @@ public abstract class CurdAppService<TEntity extends BaseEntity<Long>, TEntityDt
         return entity == null ? null : (TEntityDto) returnDto;
     }
 
-    /*
-    删除
+    /**
+     * 删除
+     *
+     * @param id 主键
+     * @throws FriendlyException
      */
     public void delete(Long id) throws FriendlyException {
         _repos.deleteById(id);
     }
 
     protected void beforeCreate(TEntityDto request) {
-
     }
 
     protected void beforeEdit(TEntityDto request) {
-
-    }
-
-    private QueryWrapper<TEntity> ConvertToWrapper(List<DynamicFilter> filters) {
-        QueryWrapper<TEntity> queryWrapper = new QueryWrapper<>();
-        if (filters.size() == 0)
-            return queryWrapper;
-
-        for (var item : filters) {
-            if (item.getOperate().equals("Like")) {
-
-            }
-        }
-
-        return queryWrapper;
     }
 }

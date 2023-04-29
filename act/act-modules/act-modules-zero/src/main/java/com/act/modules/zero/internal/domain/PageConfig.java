@@ -11,14 +11,14 @@ import lombok.Data;
 public class PageConfig extends BaseEntity<Long> {
     @TableField("pageId")
     private long pageId;
-    @TableField("dataUrl")
+    @TableField("url")
     private String dataUrl;
     @TableField("isRow")
-    private Boolean isRow;
+    private Boolean isRow = false;
     @TableField("isMultiple")
-    private Boolean isMultiple;
+    private Boolean isMultiple = false;
     @TableField("rowWith")
-    private int rowWith;
+    private int rowWith = 0;
     @TableField("fields")
     private String fields;
     @TableField("buttons")
@@ -26,7 +26,7 @@ public class PageConfig extends BaseEntity<Long> {
     @TableField("functions")
     private String functions;
     @TableField("isTableOperateRow")
-    private Boolean isTableOperateRow;
+    private Boolean isTableOperateRow = false;
     @TableField("isTableCheckRow")
-    private Boolean isTableCheckRow;
+    private Boolean isTableCheckRow = false;
 }

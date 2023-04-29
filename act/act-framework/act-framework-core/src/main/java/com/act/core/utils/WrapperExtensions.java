@@ -15,26 +15,32 @@ public class WrapperExtensions {
             return queryWrapper;
 
         for (var item : filters) {
+
+            var oldVal = (String) item.getValue();
+            Object val = new Object();
+            if (oldVal.equals("true") || oldVal.equals("false"))
+                val = Boolean.parseBoolean(oldVal);
+
             if (item.getOperate().equals("Like")) {
-                queryWrapper.like(item.getField(), item.getValue());
+                queryWrapper.like(item.getField(), val);
             }
             if (item.getOperate().equals("Equal")) {
-                queryWrapper.eq(item.getField(), item.getValue());
+                queryWrapper.eq(item.getField(), val);
             }
             if (item.getOperate().equals("NotEqual")) {
-                queryWrapper.ne(item.getField(), item.getValue());
+                queryWrapper.ne(item.getField(), val);
             }
             if (item.getOperate().equals("GreaterThan")) {
-                queryWrapper.gt(item.getField(), item.getValue());
+                queryWrapper.gt(item.getField(), val);
             }
             if (item.getOperate().equals("GreaterThanOrEqual")) {
-                queryWrapper.ge(item.getField(), item.getValue());
+                queryWrapper.ge(item.getField(), val);
             }
             if (item.getOperate().equals("LessThan")) {
-                queryWrapper.lt(item.getField(), item.getValue());
+                queryWrapper.lt(item.getField(), val);
             }
             if (item.getOperate().equals("LessThanOrEqual")) {
-                queryWrapper.le(item.getField(), item.getValue());
+                queryWrapper.le(item.getField(), val);
             }
         }
         return queryWrapper;

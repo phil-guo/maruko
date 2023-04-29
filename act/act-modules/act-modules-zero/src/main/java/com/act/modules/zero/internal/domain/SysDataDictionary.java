@@ -13,8 +13,8 @@ public class SysDataDictionary extends BaseEntity<Long> {
     private String key;
     @TableField("`value`")
     private String value;
-    @TableField("group")
+    @TableField("`group`")
     private String group;
     @TableField("isBasicData")
-    private Boolean isBasicData;
+    private Boolean isBasicData = false;
 }

@@ -9,6 +9,7 @@ import com.act.modules.zero.internal.domain.Page;
 import com.act.modules.zero.internal.domain.PageConfig;
 import com.act.modules.zero.internal.mapper.PageConfigMapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,13 +23,11 @@ public class PageConfigServiceImp extends CurdAppService<PageConfig, PageConfigD
 
     @Override
     public PageConfigDTO createOrEdit(PageConfigDTO request) throws InstantiationException, IllegalAccessException, FriendlyException {
-        PageConfig data = null;
+
         var page = _page.getOne(new LambdaQueryWrapper<Page>()
                 .eq(Page::getKey, request.getKey()));
         request.setPageId(page.getId());
-        super.createOrEdit(request);
-        var pageConfigDto = new PageConfigDTO();
-        BeanUtilsExtensions.copyProperties(data, pageConfigDto);
+        var pageConfigDto = super.createOrEdit(request);
         return pageConfigDto;
     }
 }
