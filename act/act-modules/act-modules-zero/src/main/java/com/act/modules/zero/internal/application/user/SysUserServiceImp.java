@@ -68,9 +68,7 @@ public class SysUserServiceImp
             if (request.getPassword() != null)
                 oldEntity.setPassword(StringExtensions.ToMd5(request.getPassword()));
 
-            QueryWrapper<SysUser> wrapper = Wrappers.query();
-            wrapper.eq("id", oldEntity.getId());
-            Table().update(oldEntity, wrapper);
+            Table().updateById(oldEntity);
             data = oldEntity;
         }
 

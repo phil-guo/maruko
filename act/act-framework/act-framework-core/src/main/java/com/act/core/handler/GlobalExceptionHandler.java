@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 /**
  * 全局异常拦截器
  */
+@SuppressWarnings("all")
 public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public AjaxResponse<Object> exceptionHandler(HttpServletRequest request, Exception e) {
@@ -32,7 +33,7 @@ public class GlobalExceptionHandler {
             return new AjaxResponse<>(friendlyException.getMsg(), friendlyException.getCode());//将具体错误信息设置到msg中返回
         } else if (e instanceof ExpiredJwtException) {
             return new AjaxResponse<>("token 过期！", -1);
-        }else if(e instanceof MaxUploadSizeExceededException){
+        } else if (e instanceof MaxUploadSizeExceededException) {
             return new AjaxResponse<>("上传文件大小不能超过500M!", -1);
         }
         //绑定异常是需要明确提示给用户的

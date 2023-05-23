@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 @Data
 @SuppressWarnings("all")
 public class SysUserDTO extends BaseEntity<Long> {
-    private Integer isDelete;
 
     //角色Id
     private Long roleId;
