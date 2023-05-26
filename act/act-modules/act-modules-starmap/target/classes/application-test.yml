@@ -1,0 +1,53 @@
+# Tomcat
+server:
+  port: 8088
+
+# Spring
+spring:
+  application:
+    # 应用名称
+    name: act-modules-zero
+  main:
+    allow-circular-references: true
+  profiles:
+    # 环境配置
+    active: dev
+  datasource:
+    url: "jdbc:mysql://www.autoct.top:33306/java_act?characterEncoding=utf-8"
+    username: "root"
+    password: "qwe123QWE"
+
+# mybatis-plus 配置
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: isDelete # 全局逻辑删除的实体字段名(since 3.3.0,配置后可以忽略不配置步骤2)
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+
+## Redis 配置
+redis:
+  ## Redis数据库索引（默认为0）
+  database: 0
+  ## Redis服务器地址
+  host: 10.23.4.107
+  ## Redis服务器连接端口
+  port: 9000
+  ## Redis服务器连接密码（默认为空）
+  password: equality-redis
+  jedis:
+    pool:
+      ## 连接池最大连接数（使用负值表示没有限制）
+      #spring.redis.pool.max-active=8
+      max-active: 8
+      ## 连接池最大阻塞等待时间（使用负值表示没有限制）
+      #spring.redis.pool.max-wait=-1
+      max-wait: -1
+      ## 连接池中的最大空闲连接
+      #spring.redis.pool.max-idle=8
+      max-idle: 8
+      ## 连接池中的最小空闲连接
+      #spring.redis.pool.min-idle=0
+      min-idle: 0
+  ## 连接超时时间（毫秒）
+  timeout: 1200
