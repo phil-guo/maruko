@@ -17,6 +17,10 @@
         <java.version>1.8</java.version>
     </properties>
 
+    <modules>
+<!--        <module>act-framework</module>-->
+    </modules>
+
     <dependencies>
         <dependency>
             <groupId>com.github.xiaoymin</groupId>

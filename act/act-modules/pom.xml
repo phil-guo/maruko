@@ -17,6 +17,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>act-modules-zero</module>
+        <module>act-modules-starmap</module>
     </modules>
 
     <properties>

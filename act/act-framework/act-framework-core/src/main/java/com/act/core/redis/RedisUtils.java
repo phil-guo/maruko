@@ -1,8 +1,8 @@
-package com.act.core.utils;
+package com.act.core.redis;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Collection;
@@ -11,9 +11,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-@Component
+@Service
 @SuppressWarnings("all")
-public class RedisExtension {
+public class RedisUtils {
 
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
