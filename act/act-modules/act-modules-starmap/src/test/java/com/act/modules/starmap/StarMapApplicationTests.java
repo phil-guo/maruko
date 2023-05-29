@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = {StarMapApplication.class, StarMapApplicationTests.class})
-@ComponentScan(basePackages = {"com.act.modules.*", "com.act.core.*"})
+@ComponentScan(basePackages = {"com.act.modules.starmap.*", "com.act.core.*"})
 @MapperScan({"com.act.modules.starmap.mapper"})
 @SuppressWarnings("all")
 class StarMapApplicationTests {

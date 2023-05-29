@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.act.modules.*", "com.act.core.*"})
+@ComponentScan(basePackages = {"com.act.modules.starmap.*", "com.act.core.*"})
 public class StarMapApplication {
 
     public static void main(String[] args) {
