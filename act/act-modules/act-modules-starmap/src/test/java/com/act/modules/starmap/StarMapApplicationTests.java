@@ -21,14 +21,19 @@ class StarMapApplicationTests {
     @Autowired
     private RedisUtils _redis;
 
+    @Autowired
+    private StarMapConfig _config;
+
+
     @Test
     void contextLoads() {
     }
 
     @Test
     public void AddValueToRedis() {
-        var one = _redis.set(StarMapConfig.getKey("test1"), "123");
-        var two = _redis.set(StarMapConfig.getKey("test2"), "321");
+        var a = _config.getPrefix("test1");
+        var one = _redis.set(a, "123");
+        var two = _redis.set(_config.getPrefix("test2"), "321");
         System.out.println(one);
         System.out.println(two);
     }

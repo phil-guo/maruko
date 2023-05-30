@@ -64,3 +64,6 @@ knife4j:
     username: admin
     # Basic认证密码
     password: 123
+
+starMap:
+  prefix: starMap
